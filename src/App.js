@@ -1,15 +1,20 @@
+//React
 import './App.css';
 import React, {useState, useEffect} from 'react'
+
+//MUI
 import { Box, Divider, AppBar, Fab, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+//App
 import {Communities, InitiativesList, MainNav, Sidebar, TabNav} from './components'
-import {initiativeList} from './data/initiatives'
-import {groupList} from './data/groups'
-import {channelList} from './data/channels'
-import AddIcon from '@mui/icons-material/Add';
+import {initiativeList, groupList, channelList, communityList, userList} from './data'
 
 
 function App() {
+  
+  const [communities, setCommunities] = useState(communityList);
+  const [currentCommunity, setCurrentCommunity] = useState(communityList[0])
   
   const [groups, setGroup] = useState(groupList)
   const [currentGroup, setCurrentGroup] = useState(groupList[0])
@@ -19,6 +24,8 @@ function App() {
 
   const [initiatives, setInitiatives] = useState (initiativeList.filter(item => item.groupID === currentGroup.id))
   const [currentInitiative, setCurrentInitiative] = useState (null)
+
+  const [users, setUsers] = useState(userList)
   
   useEffect(() => {
     setInitiatives(initiativeList.filter(item => item.groupID === currentGroup.id))
@@ -27,7 +34,10 @@ function App() {
   return (
       <div id='grid'>
           <Box id='left-nav'>
-              <Communities />
+              <Communities 
+                communities={communities}
+                currentCommunity={currentCommunity}
+                />
               <Divider orientation="vertical" flexItem />
               <MainNav 
                 groups={groups}
@@ -50,9 +60,11 @@ function App() {
           </Box>
 
           
-          <Box id='sidebar'>
+          <Box id='sidebar' >
           
-            <Sidebar currentGroup={currentGroup}/>
+            <Sidebar 
+              currentGroup={currentGroup}
+              users={users}/>
           </Box>
 
 

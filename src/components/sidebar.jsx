@@ -8,9 +8,11 @@ import { useTheme } from '@mui/material/styles'
 
 const Sidebar = (props) => {
     const theme = useTheme();
+    const owner = props.users.filter(user => (
+        user.id === props.currentGroup.owner))
 
     return (
-        <div>
+        <div >
             <Stack spacing={2}>
                 <Typography variant="h5" >
                     {props.currentGroup.title}
@@ -38,7 +40,7 @@ const Sidebar = (props) => {
                 <Avatar
                     style={{border: `2px solid ${theme.palette.primary.light}`}}
                     alt="Remy Sharp"
-                    src="https://www.quizony.com/are-you-a-bad-person/are-you-a-bad-person-small.webp"
+                    src={owner[0].image}
                     sx={{ width: 48, height: 48 }}
                 />
             </Stack>
