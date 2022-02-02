@@ -1,13 +1,14 @@
 //React
 import './App.css';
 import React, {useState, useEffect} from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //MUI
 import { Box, Divider, AppBar, Fab, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 //App
-import {Communities, InitiativesList, MainNav, Sidebar, TabNav} from './components'
+import {Communities, InitiativesList, InitiativeDetails, MainNav, Sidebar, TabNav} from './components'
 import {initiativeList, groupList, channelList, communityList, userList} from './data'
 
 
@@ -23,7 +24,7 @@ function App() {
   const [currentChannel, setCurrentChannel] = useState(null)
 
   const [initiatives, setInitiatives] = useState (initiativeList.filter(item => item.groupID === currentGroup.id))
-  const [currentInitiative, setCurrentInitiative] = useState (null)
+  const [currentInitiative, setCurrentInitiative] = useState (initiativeList[0])
 
   const [users, setUsers] = useState(userList)
   
@@ -32,6 +33,7 @@ function App() {
   }, [currentGroup])
 
   return (
+
       <div id='grid'>
           <Box id='left-nav'>
               <Communities 
@@ -56,25 +58,25 @@ function App() {
             <TabNav />
           </AppBar>
           <Divider />
-          <InitiativesList initiatives={initiatives} currentGroup={currentGroup}/>
+            <Routes>
+              <Route 
+                path="/" 
+                element={<InitiativesList 
+                initiatives={initiatives} 
+                currentGroup={currentGroup}
+                setCurrentInitiative={setCurrentInitiative}/>} />
+              <Route 
+                path="/initiativedetails" 
+                element={<InitiativeDetails 
+                currentInitiative={currentInitiative} 
+                setCurrentInitiative={setCurrentInitiative}/>} />
+            </Routes>
           </Box>
-
-          
           <Box id='sidebar' >
-          
             <Sidebar 
               currentGroup={currentGroup}
               users={users}/>
           </Box>
-
-
-
-
-
-        
-        
-
-        
       </div>
   );
 }

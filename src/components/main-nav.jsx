@@ -1,18 +1,13 @@
 import React, {useState} from 'react'
 import {List, ListItemButton, ListItemText, ListSubheader, Divider, Toolbar} from '@mui/material'
+import { Link } from "react-router-dom";
 
 
 
 function MainNav(props) {
-    const [selectedIndex, setSelectedIndex] = useState();
-    const [initiatives, setInitiatives] = useState(['Improve marketplate', 'Feature requests', 'Process improvements', 'Hackathons'])
 
-    const [channels, setChannels] = useState(['# General', '# New Ideas', '# Improvements', '# Huddle'])
-
-
-    async function handleListItemClick (index) {
+    function handleListItemClick (index) {
             props.setCurrentGroup(props.groups[index])
-            props.updateInitiatives()
     };
 
     return (
@@ -25,6 +20,7 @@ function MainNav(props) {
           Groups
         </ListSubheader>
         {props.groups.map((group) => (
+          <Link to='/' style={{textDecoration: 'none', color: 'black'}} >
           <ListItemButton 
           button 
           key={group.id}
@@ -34,6 +30,8 @@ function MainNav(props) {
             }}>
             <ListItemText primary={group.title} />
           </ListItemButton>
+          </Link>
+          
         ))}
       </List>
       <Divider />
