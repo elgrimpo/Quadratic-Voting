@@ -1,19 +1,20 @@
-import React, {useState} from 'react'
+import React, { useContext } from 'react'
 import { Link } from "react-router-dom";
 import {Card, CardMedia, CardContent, CardActionArea, Typography, CardActions, Grid, Box, IconButton, Fab, Button} from '@mui/material'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ReactMarkdown from 'react-markdown'
 import AddIcon from '@mui/icons-material/Add';
 import { useTheme } from '@mui/material/styles'
-
+import {DataContext} from '../contexts/data-context'
 
 const InitiativesList = (props) => {
+    const {currentGroup, initiatives, setCurrentInitiative} = useContext(DataContext)
     const theme = useTheme();
 
 
     function handleListItemClick (index) {
         console.log('triggered')
-        props.setCurrentInitiative(props.initiatives[index])
+        setCurrentInitiative(initiatives[index])
 
 };
 
@@ -21,8 +22,8 @@ const InitiativesList = (props) => {
     return (
         <div style={{backgroundColor: theme.palette.background.default}}>
             <img
-            src={props.currentGroup.image}
-            alt={props.currentGroup.title}
+            src={currentGroup.image}
+            alt={currentGroup.title}
             style={{
                 width: '100%',
                 height: '300px',
@@ -34,13 +35,13 @@ const InitiativesList = (props) => {
                 padding: '20px',
                 }}>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center">
-                    {props.initiatives.map((initiative) => (
+                    {initiatives.map((initiative) => (
                         <Grid item>
                             <Link 
                                 to="/initiativedetails" 
                                 style={{textDecoration: 'none'}}
                                 onClick={() => {
-                                    handleListItemClick(props.initiatives.indexOf(initiative));
+                                    handleListItemClick(initiatives.indexOf(initiative));
                                   }}>
                                 <Card 
                                     sx={{ maxWidth: 300 }} 

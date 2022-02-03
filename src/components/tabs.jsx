@@ -1,7 +1,9 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import {DataContext} from '../contexts/data-context'
+
 
 function TabNav() {
   const [value, setValue] = React.useState(0);

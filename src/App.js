@@ -4,12 +4,13 @@ import React, {useState, useEffect} from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //MUI
-import { Box, Divider, AppBar, Fab, Typography } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Box, Divider, AppBar } from '@mui/material';
+//import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 //App
 import {Communities, InitiativesList, InitiativeDetails, MainNav, Sidebar, TabNav} from './components'
 import {initiativeList, groupList, channelList, communityList, userList} from './data'
+import {DataContext} from './contexts/data-context'
 
 
 function App() {
@@ -33,22 +34,13 @@ function App() {
   }, [currentGroup])
 
   return (
-
+      <DataContext.Provider value={{communities, setCommunities, currentCommunity, setCurrentCommunity, groups, setGroup, currentGroup, setCurrentGroup, channels, setChannels,currentChannel, setCurrentChannel, initiatives, setInitiatives, currentInitiative, setCurrentInitiative, users, setUsers}}>
       <div id='grid'>
           <Box id='left-nav'>
               <Communities 
-                communities={communities}
-                currentCommunity={currentCommunity}
                 />
               <Divider orientation="vertical" flexItem />
               <MainNav 
-                groups={groups}
-                setGroup={setGroup}
-                currentGroup={currentGroup}
-                setCurrentGroup={setCurrentGroup}
-                channels={channels}
-                currentChannel={currentChannel}
-                setCurrentChannel={setCurrentChannel}
                 />
               <Divider orientation="vertical" flexItem />
           </Box>
@@ -61,23 +53,17 @@ function App() {
             <Routes>
               <Route 
                 path="/" 
-                element={<InitiativesList 
-                initiatives={initiatives} 
-                currentGroup={currentGroup}
-                setCurrentInitiative={setCurrentInitiative}/>} />
+                element={<InitiativesList/>} />
               <Route 
                 path="/initiativedetails" 
-                element={<InitiativeDetails 
-                currentInitiative={currentInitiative} 
-                setCurrentInitiative={setCurrentInitiative}/>} />
+                element={<InitiativeDetails/>} />
             </Routes>
           </Box>
           <Box id='sidebar' >
-            <Sidebar 
-              currentGroup={currentGroup}
-              users={users}/>
+            <Sidebar/>
           </Box>
       </div>
+      </DataContext.Provider>
   );
 }
 

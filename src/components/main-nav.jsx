@@ -1,13 +1,16 @@
-import React, {useState} from 'react'
+import React, { useContext } from 'react'
 import {List, ListItemButton, ListItemText, ListSubheader, Divider, Toolbar} from '@mui/material'
 import { Link } from "react-router-dom";
+import {DataContext} from '../contexts/data-context'
 
 
 
 function MainNav(props) {
 
+    const {groups, currentGroup, setCurrentGroup, channels} = useContext(DataContext)
+
     function handleListItemClick (index) {
-            props.setCurrentGroup(props.groups[index])
+      setCurrentGroup(groups[index])
     };
 
     return (
@@ -19,14 +22,14 @@ function MainNav(props) {
             <ListSubheader component="div" >
           Groups
         </ListSubheader>
-        {props.groups.map((group) => (
+        {groups.map((group) => (
           <Link to='/' style={{textDecoration: 'none', color: 'black'}} >
           <ListItemButton 
           button 
           key={group.id}
-          selected={group.id === props.currentGroup.id}
+          selected={group.id === currentGroup.id}
           onClick={() => {
-              handleListItemClick(props.groups.indexOf(group));
+              handleListItemClick(groups.indexOf(group));
             }}>
             <ListItemText primary={group.title} />
           </ListItemButton>
@@ -41,7 +44,7 @@ function MainNav(props) {
             <ListSubheader component="div" >
           Channels
         </ListSubheader>
-        {props.channels.map((channel) => (
+        {channels.map((channel) => (
           <ListItemButton 
           button 
           key={channel.id}

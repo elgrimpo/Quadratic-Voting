@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Typography, Stack, Link, Divider, Avatar} from '@mui/material'
 import LanguageIcon from '@mui/icons-material/Language';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { useTheme } from '@mui/material/styles'
-
+import {DataContext} from '../contexts/data-context'
 
 const Sidebar = (props) => {
+    const {currentGroup, users} = useContext(DataContext)
     const theme = useTheme();
-    const owner = props.users.filter(user => (
-        user.id === props.currentGroup.owner))
+    const owner = users.filter(user => (
+        user.id === currentGroup.owner))
 
     return (
         <div >
             <Stack spacing={2}>
                 <Typography variant="h5" >
-                    {props.currentGroup.title}
+                    {currentGroup.title}
                 </Typography>
                 <Typography>
-                    {props.currentGroup.description}
+                    {currentGroup.description}
                 </Typography>
                 <Divider />
                 <Link href="#" underline="hover" > 

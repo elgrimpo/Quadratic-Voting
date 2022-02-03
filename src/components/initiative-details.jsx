@@ -1,19 +1,19 @@
-import React, {useState} from 'react'
+import React, { useContext } from 'react'
 import { Typography, Box } from '@mui/material';
 import { Link } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
+import {DataContext} from '../contexts/data-context'
 
 
 const InitiativeDetails = (props) => {
-
+    const {currentInitiative} = useContext(DataContext)
 
 
     return (
         <div id='initiative-details'>
             <img
-            src={props.currentInitiative.image}
-            alt={props.currentInitiative.title}
+            src={currentInitiative.image}
+            alt={currentInitiative.title}
             style={{
                 width: '100%',
                 height: '450px',
