@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Typography, Box, Divider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
@@ -17,7 +18,18 @@ import {
 /* ----------- COMPONENT -------------- */
 
 const InitiativeDetails = (props) => {
-  const { currentInitiative } = useContext(DataContext);
+const { currentInitiative } = useContext(DataContext);
+const markdown = `A paragraph with *emphasis* and **strong importance**. \n &nbsp;  
+> A block quote with ~strikethrough~ and a URL: https://reactjs.org. \n &nbsp;  
+* Lists \n &nbsp;  
+* [ ] todo \n &nbsp;  
+* [x] done \n &nbsp;  
+&nbsp;  
+A table:
+
+| a | b |
+| - | - |
+`;
 
   return (
     <div style={{
@@ -39,11 +51,15 @@ const InitiativeDetails = (props) => {
         }}
       />
 
-      <Box style={{ padding: 20 }}>
+      <Box style={{ padding: 30 }}>
         <Link to="/" style={{ textDecoration: "none", display: "flex" }}>
           <ArrowBackIcon style={{ marginRight: 12 }} />
           <Typography>Back to overview</Typography>
         </Link>
+      </Box>
+      
+      <Box style={{ paddingLeft: 30, paddingRight: 30 }}>
+      <Typography style={{marginBottom: '30px'}}>{currentInitiative.text()}</Typography>
       </Box>
 
       </Box>
