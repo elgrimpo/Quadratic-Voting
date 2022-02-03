@@ -2,40 +2,54 @@
 import React, { useContext } from "react";
 
 // MUI Imports
-import { Grid, Box, Fab } from "@mui/material";
+import { Grid, Box, Fab, AppBar, Divider } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useTheme } from "@mui/material/styles";
 
+
 //App Imports
 import { DataContext } from "../contexts/data-context";
-import { InitiativeCard } from "./index";
+import {
+  InitiativeCard,
+  Sidebar,
+  TabNav,
+} from "./index";
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
   const { currentGroup, initiatives, setCurrentInitiative } =
     useContext(DataContext);
-  const theme = useTheme();
+    const theme = useTheme();
 
   return (
-    <div style={{ backgroundColor: theme.palette.background.default }}>
-      <img
-        src={currentGroup.image}
-        alt={currentGroup.title}
-        style={{
-          width: "100%",
-          height: "300px",
-          objectFit: "cover",
-        }}
-      />
+    <div
+      style={{
+        height: '100vh',
+        display: "grid",
+        gridTemplateColumns: "1fr 1px 350px",
+      }}
+    >
+      <Box style={{
+            height: '100%',
+            overflow: 'scroll'}}>
+        <TabNav />
 
-      <Box
-        sx={{
-          flexGrow: 1,
-          padding: "20px",
-        }}
-      >
+        <img
+          src={currentGroup.image}
+          alt={currentGroup.title}
+          style={{
+            width: "100%",
+            height: "300px",
+            objectFit: "cover",
+          }}
+        />
+
         <Grid
+          sx={{
+            flexGrow: 1,
+            padding: "20px",
+          }}
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
@@ -45,6 +59,12 @@ const InitiativesList = (props) => {
             <InitiativeCard initiative={initiative} />
           ))}
         </Grid>
+        
+      </Box>
+      <Divider orientation="vertical" flexItem />
+      <Box id="sidebar" style={{display: 'flex'}}>
+      
+        <Sidebar />
       </Box>
       <Fab color="primary" style={{ position: "fixed", bottom: 40, right: 40 }}>
         <AddIcon />

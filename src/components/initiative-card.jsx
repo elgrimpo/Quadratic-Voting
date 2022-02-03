@@ -18,8 +18,6 @@ import {
 } from "@mui/material";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ReactMarkdown from "react-markdown";
-import AddIcon from "@mui/icons-material/Add";
-import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
@@ -29,7 +27,6 @@ import { DataContext } from "../contexts/data-context";
 const InitiativeCard = (props) => {
   const { currentGroup, initiatives, setCurrentInitiative } =
     useContext(DataContext);
-  const theme = useTheme();
 
   function handleListItemClick(index) {
     console.log("triggered");

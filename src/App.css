@@ -20,17 +20,6 @@ body {
   height: 100%;
 }
 
-#grid {
-  display: grid;
-	grid-template-columns: 330px 1fr 350px;
-	height: 100%;
-  	width: 100%;
-	overflow: scroll;
-}
-
-#left-nav {
-  display: flex;
-}
 
 #communities {
   width: 80px;
@@ -48,7 +37,6 @@ width: 250px;
 #main-content {
 	grid-column: 2;
 	border-right: 1px solid lightgray;
-	overflow: scroll;
 }
 
 #tab-nav {

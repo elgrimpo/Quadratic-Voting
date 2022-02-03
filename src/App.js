@@ -73,27 +73,25 @@ function App() {
         setUsers,
       }}
     >
-      <div id="grid">
-        <Box id="left-nav">
+      <div style={{  
+            display: 'grid',
+	          gridTemplateColumns: '330px 1fr',
+            height: '100%',
+            width: '100%'}}>
+
+        <Box style={{display: 'flex'}}>
           <Communities />
           <Divider orientation="vertical" flexItem />
           <MainNav />
           <Divider orientation="vertical" flexItem />
         </Box>
 
-        <Box id="main-content">
-          <AppBar style={{ position: "sticky", top: 0, width: "100%" }}>
-            <TabNav />
-          </AppBar>
-          <Divider />
+        
           <Routes>
             <Route path="/" element={<InitiativesList />} />
             <Route path="/initiativedetails" element={<InitiativeDetails />} />
           </Routes>
-        </Box>
-        <Box id="sidebar">
-          <Sidebar />
-        </Box>
+        
       </div>
     </DataContext.Provider>
   );

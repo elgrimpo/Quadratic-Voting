@@ -19,7 +19,8 @@ const Sidebar = (props) => {
   const owner = users.filter((user) => user.id === currentGroup.owner);
 
   return (
-    <div>
+    <div >
+        
       <Stack spacing={2}>
         <Typography variant="h5">{currentGroup.title}</Typography>
         <Typography>{currentGroup.description}</Typography>
