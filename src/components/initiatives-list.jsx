@@ -6,36 +6,32 @@ import { Grid, Box, Fab, AppBar, Divider } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useTheme } from "@mui/material/styles";
 
-
 //App Imports
 import { DataContext } from "../contexts/data-context";
-import {
-  InitiativeCard,
-  Sidebar,
-  TabNav,
-} from "./index";
+import { InitiativeCard, Sidebar, Chat } from "./index";
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
   const { currentGroup, initiatives, setCurrentInitiative, users } =
     useContext(DataContext);
-    const theme = useTheme();
-    const owner = users.filter((user) => user.id === currentGroup.owner);
+  const theme = useTheme();
+  const owner = users.filter((user) => user.id === currentGroup.owner);
 
   return (
     <div
       style={{
-        height: '100vh',
+        height: "100vh",
         display: "grid",
         gridTemplateColumns: "1fr 1px 350px",
       }}
     >
-      <Box style={{
-            height: '100%',
-            overflow: 'scroll'}}>
-        <TabNav />
-
+      <Box
+        style={{
+          height: "100%",
+          overflow: "scroll",
+        }}
+      >
         <img
           src={currentGroup.image}
           alt={currentGroup.title}
@@ -47,7 +43,7 @@ const InitiativesList = (props) => {
         />
 
         <Grid
-            sx={{
+          sx={{
             flexGrow: 1,
             padding: "20px",
           }}
@@ -60,15 +56,14 @@ const InitiativesList = (props) => {
             <InitiativeCard initiative={initiative} />
           ))}
         </Grid>
-        
       </Box>
       <Divider orientation="vertical" flexItem />
-      <Box id="sidebar" style={{display: 'flex'}}>
-      
-        <Sidebar 
+      <Box id="sidebar" style={{ display: "flex" }}>
+        <Sidebar
           title={currentGroup.title}
           description={currentGroup.description}
-          owner={owner[0].image}/>
+          owner={owner[0].image}
+        />
       </Box>
       <Fab color="primary" style={{ position: "fixed", bottom: 40, right: 40 }}>
         <AddIcon />

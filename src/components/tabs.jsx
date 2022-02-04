@@ -4,38 +4,36 @@ import React, { useContext } from "react";
 //MUI Imports
 import { Grid, Box, Fab, AppBar, Divider, Tab, Tabs } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import TabList from "@mui/lab/TabList";
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
 
 /* ----------- COMPONENT -------------- */
 
-function TabNav() {
-  const [value, setValue] = React.useState(0);
+function TabNav(props) {
+
   const theme = useTheme();
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    props.setValue(newValue);
   };
 
   return (
-    <Box sx={{ width: "100%", position: 'sticky', top:0, zIndex:'1'}}>
-      <AppBar
-        style={{
-          position: "sticky",
-          top: 0,
-          width: "100%",
-          backgroundColor: theme.palette.background.default,
-        }}
-      >
-        <Tabs value={value} onChange={handleChange} centered>
-          <Tab label="Overview" />
-          <Tab label="Comments" />
-          <Tab label="Bounties" />
-        </Tabs>
-      </AppBar>
-      <Divider />
-    </Box>
+    <AppBar
+    style={{
+      position: "sticky",
+      top: 0,
+      width: "100%",
+      backgroundColor: theme.palette.background.default,
+    }}
+  >
+    <TabList centered onChange={handleChange}>
+      <Tab label="Overview" value="Overview" />
+      <Tab label="Chat" value="Chat" />
+      <Tab label="Bounties" value="Bounties" />
+    </TabList>
+  </AppBar>
   );
 }
 

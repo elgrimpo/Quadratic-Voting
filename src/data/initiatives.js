@@ -21,14 +21,16 @@ export const initiativeList = [
     text() {
       return (
         <article>
-          <h1>Umbria</h1>
-          <h3>What is Umbria?</h3>
+          <h1>Build a castle at the beach</h1>
+          <h3>What's the point of this?</h3>
           <p>
             As a protocol, Umbra defines a simple set of standards, coupled with
             a singleton smart contract instance, to enable stealth addresses on
             Ethereum. With a stealth address, a payer can send Ether or ERC20
             tokens to an address controlled by the receiver, but no one except
-            the two parties know who that receiver is. On chain, the transaction
+            the two parties know who that receiver is. 
+            
+            On chain, the transaction
             looks like a simple transfer to an otherwise unused address on the
             Ethereum network. Off chain, the sender has used a public key
             published by the receiver using ENS to generate the new address. By

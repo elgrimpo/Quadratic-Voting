@@ -2,10 +2,7 @@
 import React, { useContext } from "react";
 
 //MUI Imports
-import { Typography, Stack, Link, Divider, Avatar } from "@mui/material";
-import LanguageIcon from "@mui/icons-material/Language";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import { Typography, Stack, Link, Divider, Avatar, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
@@ -13,21 +10,19 @@ import { DataContext } from "../contexts/data-context";
 
 /* ----------- COMPONENT -------------- */
 
-const Sidebar = (props) => {
-  const { currentGroup, users, currentInitiative } = useContext(DataContext);
-  const theme = useTheme();
+const Chat = (props) => {
 
   return (
-    <div>
-        <Typography>
-          Chat
+    <div style={{width:'80%', margin: 'auto', padding:200, textAlign:'center'}}>    
+        <Typography variant='h5'>
+          This will be become a chatroom for
         </Typography>
-        <Typography>
-          {currentGroup}
-        </Typography>
-        <Typography>
-          {currentInitiative}
+        <Typography variant='h4'>
+          {props.currentInitiative}
         </Typography>
     </div>
   )
 }
+
+
+export default Chat;
