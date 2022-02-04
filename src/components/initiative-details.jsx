@@ -18,18 +18,8 @@ import {
 /* ----------- COMPONENT -------------- */
 
 const InitiativeDetails = (props) => {
-const { currentInitiative } = useContext(DataContext);
-const markdown = `A paragraph with *emphasis* and **strong importance**. \n &nbsp;  
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org. \n &nbsp;  
-* Lists \n &nbsp;  
-* [ ] todo \n &nbsp;  
-* [x] done \n &nbsp;  
-&nbsp;  
-A table:
-
-| a | b |
-| - | - |
-`;
+const { currentInitiative, users } = useContext(DataContext);
+const owner = users.filter((user) => user.id === currentInitiative.owner)
 
   return (
     <div style={{
@@ -58,6 +48,7 @@ A table:
         </Link>
       </Box>
       
+  
       <Box style={{ paddingLeft: 30, paddingRight: 30 }}>
       <Typography style={{marginBottom: '30px'}}>{currentInitiative.text()}</Typography>
       </Box>
@@ -65,8 +56,11 @@ A table:
       </Box>
       <Divider orientation="vertical" flexItem />
       <Box id="sidebar" style={{display: 'flex'}}>
-      
-        <Sidebar />
+    
+        <Sidebar 
+          title={currentInitiative.title}
+          description={currentInitiative.description}
+          owner={owner[0].image}/>
       </Box>
     </div>
   );

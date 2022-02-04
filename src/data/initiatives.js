@@ -69,7 +69,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -86,7 +86,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -103,7 +103,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -120,7 +120,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -137,7 +137,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     /*----------Group: Feature Request-----------*/
@@ -156,7 +156,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -173,7 +173,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -190,7 +190,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -207,7 +207,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -224,7 +224,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
   {
     communityID: 1,
@@ -241,6 +241,6 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text: "",
+    text() {},
   },
 ];

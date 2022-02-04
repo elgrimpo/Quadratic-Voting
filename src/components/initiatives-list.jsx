@@ -18,9 +18,10 @@ import {
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
-  const { currentGroup, initiatives, setCurrentInitiative } =
+  const { currentGroup, initiatives, setCurrentInitiative, users } =
     useContext(DataContext);
     const theme = useTheme();
+    const owner = users.filter((user) => user.id === currentGroup.owner);
 
   return (
     <div
@@ -46,7 +47,7 @@ const InitiativesList = (props) => {
         />
 
         <Grid
-          sx={{
+            sx={{
             flexGrow: 1,
             padding: "20px",
           }}
@@ -64,7 +65,10 @@ const InitiativesList = (props) => {
       <Divider orientation="vertical" flexItem />
       <Box id="sidebar" style={{display: 'flex'}}>
       
-        <Sidebar />
+        <Sidebar 
+          title={currentGroup.title}
+          description={currentGroup.description}
+          owner={owner[0].image}/>
       </Box>
       <Fab color="primary" style={{ position: "fixed", bottom: 40, right: 40 }}>
         <AddIcon />

@@ -34,31 +34,44 @@ const InitiativeCard = (props) => {
   }
 
   return (
-    <Grid item>
+    <Grid item key={props.initiative.id}>
       <Link
+        key={props.initiative.id}
         to="/initiativedetails"
         style={{ textDecoration: "none" }}
         onClick={() => {
           handleListItemClick(initiatives.indexOf(props.initiative));
         }}
       >
-        <Card sx={{ maxWidth: 300 }} style={{ paddingBottom: 10 }}>
-          <CardActionArea>
+        <Card sx={{ maxWidth: 300 }} style={{ paddingBottom: 10 }} key={props.initiative.id} >
+          <CardActionArea key={props.initiative.id}>
             <CardMedia
+              key={props.initiative.id}
               component="img"
               alt="green iguana"
               height="140"
               image={props.initiative.image}
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+            <CardContent key={props.initiative.id}>
+              <Typography gutterBottom variant="h5" component="div" key={props.initiative.id}>
                 {props.initiative.title}
               </Typography>
-              <Typography>{props.initiative.description}</Typography>
+              <Typography
+                key={props.initiative.id}
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 5,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {props.initiative.description}
+              </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="outlined" startIcon={<ThumbUpOffAltIcon />}>
+          <CardActions key={props.initiative.id} style={{ display: "flex", justifyContent: "center" }}>
+            <Button key={props.initiative.id} variant="outlined" startIcon={<ThumbUpOffAltIcon />}>
               Vote
             </Button>
           </CardActions>

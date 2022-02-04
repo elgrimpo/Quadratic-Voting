@@ -24,6 +24,7 @@ const Communities = (props) => {
       >
         {communities.map((community) => (
           <Box
+            key={community.id}
             sx={{
               width: 64,
               height: 64,
@@ -38,12 +39,13 @@ const Communities = (props) => {
                 : {}
             }
           >
-            <Card sx={{ maxWidth: 50, maxHeight: 50 }}>
-              <CardActionArea>
+            <Card key={community.id} sx={{ maxWidth: 50, maxHeight: 50 }}>
+              <CardActionArea key={community.id}>
                 <CardMedia
                   component="img"
                   height="56"
                   image={community.image}
+                  key={community.id}
                 />
               </CardActionArea>
             </Card>

@@ -16,14 +16,13 @@ import { DataContext } from "../contexts/data-context";
 const Sidebar = (props) => {
   const { currentGroup, users } = useContext(DataContext);
   const theme = useTheme();
-  const owner = users.filter((user) => user.id === currentGroup.owner);
 
   return (
     <div >
         
       <Stack spacing={2}>
-        <Typography variant="h5">{currentGroup.title}</Typography>
-        <Typography>{currentGroup.description}</Typography>
+        <Typography variant="h5">{props.title}</Typography>
+        <Typography>{props.description}</Typography>
         <Divider />
         <Link href="#" underline="hover">
           <LanguageIcon style={{ marginRight: 8, verticalAlign: "bottom" }} />
@@ -42,7 +41,7 @@ const Sidebar = (props) => {
         <Avatar
           style={{ border: `2px solid ${theme.palette.primary.light}` }}
           alt="Remy Sharp"
-          src={owner[0].image}
+          src={props.owner}
           sx={{ width: 48, height: 48 }}
         />
       </Stack>

@@ -33,7 +33,7 @@ function MainNav(props) {
       <List>
         <ListSubheader component="div">Groups</ListSubheader>
         {groups.map((group) => (
-          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+          <Link key={group.id} to="/" style={{ textDecoration: "none", color: "black" }}>
             <ListItemButton
               button
               key={group.id}
@@ -42,7 +42,7 @@ function MainNav(props) {
                 handleListItemClick(groups.indexOf(group));
               }}
             >
-              <ListItemText primary={group.title} />
+              <ListItemText key={group.id} primary={group.title} />
             </ListItemButton>
           </Link>
         ))}
