@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 
 //MUI Imports
-import { Box, Card, CardMedia, Stack, CardActionArea } from "@mui/material";
+import { Box, Card, CardMedia, Stack, CardActionArea, Avatar } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
@@ -11,7 +11,7 @@ import { DataContext } from "../contexts/data-context";
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
-  const { communities, currentCommunity } = useContext(DataContext);
+  const { communities, currentCommunity, users } = useContext(DataContext);
   const theme = useTheme();
 
   return (
@@ -20,6 +20,13 @@ const Communities = (props) => {
       sx={{
         bgcolor: "background.paper",
         boxShadow: "inset -3px 0px 4px 0px rgba(0, 0, 0, 0.2)",
+        
+      }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: "center",
       }}
     >
       <Stack
@@ -60,6 +67,14 @@ const Communities = (props) => {
           </Box>
         ))}
       </Stack>
+
+      <Avatar 
+
+      style={{ border: `2px solid ${theme.palette.primary.light}` }}
+        alt={users[5]}
+        src={users[5].image}
+        sx={{ width: 54, height: 54, marginBottom:'16px' }}
+      />
     </Box>
   );
 };

@@ -16,7 +16,7 @@ const InitiativesList = (props) => {
 
   return (
     <div>
-      
+
       {/* ---> Image <--- */}
 
       <img
@@ -48,8 +48,9 @@ const InitiativesList = (props) => {
 
       {/* ---> Floating button <--- */}
 
-      <Fab color="primary" style={{ position: "fixed", bottom: 40, right: 40 }}>
+      <Fab color="primary" style={{ position: "absolute", bottom: 40, right: 40 }}>
         <AddIcon />
+      
       </Fab>
     </div>
   );

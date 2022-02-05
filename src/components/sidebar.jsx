@@ -46,7 +46,7 @@ const Sidebar = (props) => {
       <Typography variant="h7">Group admin</Typography>
       <Avatar
         style={{ border: `2px solid ${theme.palette.primary.light}` }}
-        alt="Remy Sharp"
+        alt={sidebarContent.owner}
         src={sidebarContent.owner.image}
         sx={{ width: 48, height: 48 }}
       />
