@@ -15,7 +15,8 @@ const Communities = (props) => {
   const theme = useTheme();
 
   return (
-    <div id="communities">
+    <Box id="communities"
+      sx={{bgcolor: 'background.paper', boxShadow:'inset -3px 0px 4px 0px rgba(0, 0, 0, 0.2)'}}>
       <Stack
         sdirection="column"
         justifyContent="center"
@@ -52,7 +53,7 @@ const Communities = (props) => {
           </Box>
         ))}
       </Stack>
-    </div>
+    </Box>
   );
 };
 

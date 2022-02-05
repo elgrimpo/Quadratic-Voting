@@ -9,7 +9,6 @@
 
 html {
 	height: 100%;
-	background: white
 }
 
 body {
@@ -27,12 +26,6 @@ body {
   justify-content: center;
   
 }
-
-#main-nav {
-width: 250px;
-
-}
-
 
 #main-content {
 	grid-column: 2;
@@ -58,7 +51,9 @@ width: 250px;
 }
 
 #main-nav {
-width: 250px;
+width: 300px;
+padding-left: 16px; 
+padding-right: 16px
 
 }
 

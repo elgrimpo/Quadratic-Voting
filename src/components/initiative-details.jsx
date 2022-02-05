@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 //MUI Imports
-import { Typography, Box, Divider, AppBar } from "@mui/material";
+import { Typography, Box, Divider, AppBar, Paper, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ReactMarkdown from "react-markdown";
 import Tab from "@mui/material/Tab";
@@ -20,31 +20,25 @@ import { Sidebar, TabNav, Chat } from "./index";
 
 const InitiativeDetails = (props) => {
   const theme = useTheme();
-  const { currentInitiative, users } = useContext(DataContext);
-  const owner = users.filter((user) => user.id === currentInitiative.owner);
+  const { currentInitiative, users, sidebarContent, setSidebarContent, currentGroup } = useContext(DataContext);
   const [value, setValue] = React.useState("Overview");
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
+  const handleClick = () => {
+    setSidebarContent(currentGroup)
+  }
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "grid",
-        gridTemplateColumns: "1fr 1px 350px",
-      }}
-    >
-      <Box
-        style={{
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        <TabContext value={value}>
-          <TabNav setValue={setValue} />
 
-          <TabPanel value="Overview" style={{ padding: 0 }}>
+      <TabContext value={value}>
+
+{/* ---> Tabs <--- */}
+
+        <TabNav setValue={setValue} />
+
+{/* ---> Initiative Overview <--- */}
+
+        <TabPanel value="Overview" style={{ padding: 0 }}>
+
+{/* Banner image */}
             <img
               src={currentInitiative.image}
               alt={currentInitiative.title}
@@ -55,36 +49,29 @@ const InitiativeDetails = (props) => {
               }}
             />
 
+{/* Back navigation */}
             <Box style={{ padding: 30 }}>
-              <Link to="/" style={{ textDecoration: "none", display: "flex" }}>
-                <ArrowBackIcon style={{ marginRight: 12 }} />
-                <Typography>Back to overview</Typography>
+              <Link to="/" style={{ textDecoration: "none", display: "flex"}}>
+                <Button variant="text" startIcon={<ArrowBackIcon />} onClick={handleClick}>
+                  Back to overview
+                </Button>
               </Link>
             </Box>
-
+            
             <Box style={{ paddingLeft: 30, paddingRight: 30 }}>
               <Typography style={{ marginBottom: "30px" }}>
                 {currentInitiative.text()}
               </Typography>
             </Box>
-          </TabPanel>
 
-          <TabPanel value="Chat" style={{ padding: 0 }}>
-            <Chat currentInitiative={currentInitiative.title} />
-          </TabPanel>
-        </TabContext>
-      </Box>
+{/* Initiative Content */}
+        </TabPanel>
 
-      <Divider orientation="vertical" flexItem />
-      
-      <Box id="sidebar" >
-        <Sidebar
-          title={currentInitiative.title}
-          description={currentInitiative.description}
-          owner={owner[0].image}
-        />
-      </Box>
-    </div>
+{/* ---> Chat <--- */}
+        <TabPanel value="Chat" style={{ padding: 0 }}>
+          <Chat currentInitiative={currentInitiative.title} />
+        </TabPanel>
+      </TabContext>
   );
 };
 

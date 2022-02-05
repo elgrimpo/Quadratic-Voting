@@ -4,61 +4,111 @@ import { Link } from "react-router-dom";
 
 //MUI Imports
 import {
+  Box,
   List,
   ListItemButton,
   ListItemText,
   ListSubheader,
   Divider,
-  Toolbar,
+  Paper,
+  Typography,
+  Menu,
+  MenuItem,
+  Button
 } from "@mui/material";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
+
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
+import {NavSection} from "./index"
 
 /* ----------- COMPONENT -------------- */
 
 function MainNav(props) {
-  const { groups, currentGroup, setCurrentGroup, channels } =
+  const { groups, currentGroup, setCurrentGroup, channels, currentChannel, setSidebarContent, currentCommunity } =
     useContext(DataContext);
 
-  function handleListItemClick(index) {
-    setCurrentGroup(groups[index]);
-  }
+  // Menu controls
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div id="main-nav">
-      <Toolbar variant="dense" />
-      <Divider />
+    <Box id='main-nav' sx={{paddingTop:'16px'}}>
 
-      <List>
-        <ListSubheader component="div">Groups</ListSubheader>
-        {groups.map((group) => (
-          <Link key={group.id} to="/" style={{ textDecoration: "none", color: "black" }}>
-            <ListItemButton
-              button
-              key={group.id}
-              selected={group.id === currentGroup.id}
-              onClick={() => {
-                handleListItemClick(groups.indexOf(group));
-              }}
-            >
-              <ListItemText key={group.id} primary={group.title} />
-            </ListItemButton>
-          </Link>
-        ))}
-      </List>
-      <Divider />
+{/* ---> Community Menu <=== */}
 
-      <List>
-        <ListSubheader component="div">Channels</ListSubheader>
-        {channels.map((channel) => (
-          <ListItemButton button key={channel.id}>
-            <ListItemText primary={channel.title} />
-          </ListItemButton>
-        ))}
-      </List>
+<div>
+      <Paper sx={{
+          mt:1, 
+          borderRadius:2, 
+          padding:1, 
+          bgcolor: 'background.paper',
+          mb:'20px' }}
+          elevation={3} >
+      <Button
+        id="community-menu"
+        sx={{
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between', 
+          width: '100%'
+        }}
+        onClick={handleClick}
+      >
+        {currentCommunity.name}
+        <ArrowDropDownIcon sx={{color: 'primary.main'}}/>
+      </Button>
+      
+      </Paper>
+      <Menu
+        id="community-dropdown"
+
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
     </div>
+ 
+{/* ---> Group Selection <--- */}
+
+    <NavSection 
+    items={groups} 
+    title='Groups'
+    currentItem={currentGroup}/>
+
+{/* ---> Channel Selection <--- */}
+
+    <NavSection 
+      items={channels} 
+      title='Channels' 
+      currentItem={currentChannel}/>
+
+
+
+    </Box>
   );
 }
 
 export default MainNav;
+
+

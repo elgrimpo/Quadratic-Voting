@@ -25,8 +25,8 @@ function TabNav(props) {
       position: "sticky",
       top: 0,
       width: "100%",
-      backgroundColor: theme.palette.background.default,
     }}
+    sx={{bgcolor: 'background.paper'}}
   >
     <TabList centered onChange={handleChange}>
       <Tab label="Overview" value="Overview" />

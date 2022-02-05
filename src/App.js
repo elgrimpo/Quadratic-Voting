@@ -4,8 +4,9 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //MUI Imports
-import { Box, Divider, AppBar } from "@mui/material";
-//import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Box, Divider, AppBar, Paper } from "@mui/material";
+import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles';
+
 
 //App Imports
 import {
@@ -24,6 +25,9 @@ import {
   userList,
 } from "./data";
 import { DataContext } from "./contexts/data-context";
+import { palette } from "@mui/system";
+import {darkTheme, lightTheme} from './styles/themeProvider'
+
 
 /* ----------- COMPONENT -------------- */
 
@@ -35,20 +39,30 @@ function App() {
   const [currentGroup, setCurrentGroup] = useState(groupList[0]);
 
   const [channels, setChannels] = useState(channelList);
-  const [currentChannel, setCurrentChannel] = useState(null);
+  const [currentChannel, setCurrentChannel] = useState(0);
 
   const [initiatives, setInitiatives] = useState(
-    initiativeList.filter((item) => item.groupID === currentGroup.id)
+  initiativeList.filter((item) => item.groupID === currentGroup.id)
   );
   const [currentInitiative, setCurrentInitiative] = useState(initiativeList[0]);
 
   const [users, setUsers] = useState(userList);
 
+  const [sidebarContent, setSidebarContent] = useState(currentGroup);
+
   useEffect(() => {
     setInitiatives(
       initiativeList.filter((item) => item.groupID === currentGroup.id)
-    );
+    )}, [currentGroup]);
+
+
+  useEffect(() => {
+    setSidebarContent(currentGroup)
   }, [currentGroup]);
+
+  useEffect(() => {
+    setSidebarContent(currentInitiative)
+  }, [currentInitiative]);
 
   return (
     <DataContext.Provider
@@ -71,27 +85,50 @@ function App() {
         setCurrentInitiative,
         users,
         setUsers,
+        sidebarContent,
+        setSidebarContent,
       }}
     >
-      <div style={{  
+      <div 
+      style={{  
             display: 'grid',
-	          gridTemplateColumns: '330px 1fr',
+	          gridTemplateColumns: '380px 1fr 320px',
             height: '100%',
-            width: '100%'}}>
+            width: '100%',
+            background: 'linear-gradient(175deg, #2C7772 30%, #264F60 90%)'}}>
+               
+{/* ---> Navigation <--- */}
 
         <Box style={{display: 'flex'}}>
           <Communities />
-          <Divider orientation="vertical" flexItem />
           <MainNav />
-          <Divider orientation="vertical" flexItem />
         </Box>
 
-        
+{/* ---> Main Content <--- */}
+
+
+      <ThemeProvider theme={lightTheme}>
+      <Paper
+      elevation={5}
+      style={{
+        height:'100%',
+        overflow: "scroll",
+        background: 'white',
+        borderRadius:0
+      }}>
           <Routes>
             <Route path="/" element={<InitiativesList />} />
             <Route path="/initiativedetails" element={<InitiativeDetails />} />
           </Routes>
+          </Paper>
+      </ThemeProvider>
         
+{/* ---> Sidebar <--- */}
+
+          <Box id="sidebar"> 
+          <Sidebar
+        />
+        </Box>
       </div>
     </DataContext.Provider>
   );

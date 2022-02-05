@@ -25,12 +25,12 @@ import { DataContext } from "../contexts/data-context";
 /* ----------- COMPONENT -------------- */
 
 const InitiativeCard = (props) => {
-  const { currentGroup, initiatives, setCurrentInitiative } =
+  const { currentGroup, initiatives, setCurrentInitiative, currentInitiative, setSidebarContent } =
     useContext(DataContext);
 
   function handleListItemClick(index) {
-    console.log("triggered");
     setCurrentInitiative(initiatives[index]);
+    setSidebarContent(currentInitiative)
   }
 
   return (
@@ -43,7 +43,7 @@ const InitiativeCard = (props) => {
           handleListItemClick(initiatives.indexOf(props.initiative));
         }}
       >
-        <Card sx={{ maxWidth: 300 }} style={{ paddingBottom: 10 }} key={props.initiative.id} >
+        <Card sx={{ maxWidth: 300}} style={{ paddingBottom: 10 }} key={props.initiative.id} >
           <CardActionArea key={props.initiative.id}>
             <CardMedia
               key={props.initiative.id}
@@ -71,7 +71,7 @@ const InitiativeCard = (props) => {
             </CardContent>
           </CardActionArea>
           <CardActions key={props.initiative.id} style={{ display: "flex", justifyContent: "center" }}>
-            <Button key={props.initiative.id} variant="outlined" startIcon={<ThumbUpOffAltIcon />}>
+            <Button key={props.initiative.id} variant="contained" startIcon={<ThumbUpOffAltIcon />}>
               Vote
             </Button>
           </CardActions>

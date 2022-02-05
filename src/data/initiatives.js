@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {userList} from './users'
 
 export const initiativeList = [
   {
@@ -13,7 +14,7 @@ export const initiativeList = [
       "As a protocol, Umbra defines a simple set of standards, coupled with a singleton smart contract instance, to enable stealth addresses on Ethereum. With a stealth address, a payer can send Ether or ERC20 tokens to an address controlled by the receiver, but no one except the two parties know who that receiver is. ",
     status: "",
     votes: "",
-    owner: 1,
+    owner: userList[2],
     contributors: "",
     website: "",
     instagram: "",
@@ -21,9 +22,9 @@ export const initiativeList = [
     text() {
       return (
         <article>
-          <h1>Build a castle at the beach</h1>
-          <h3>What's the point of this?</h3>
-          <p>
+          <h1 style={{marginBottom:12}}>Build a castle at the beach</h1>
+          <h3 style={{marginBottom:12}}>What's the point of this?</h3>
+          <p style={{marginBottom:12}}>
             As a protocol, Umbra defines a simple set of standards, coupled with
             a singleton smart contract instance, to enable stealth addresses on
             Ethereum. With a stealth address, a payer can send Ether or ERC20
@@ -42,7 +43,7 @@ export const initiativeList = [
             relayers for gas using the tokens theyve received. This avoids the
             need to fund stealth addresses with Ether before withdrawing.
           </p>
-          <h3>What is the projects status?</h3>
+          <h3 style={{marginBottom:12}}>What is the projects status?</h3>
           <p>
             The Umbra MVP went live on mainnet in June 2021. You can visit
             https://app.umbra.cash to send and receive stealth payments using
@@ -66,7 +67,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 3,
+    owner: userList[3],
     contributors: "",
     website: "",
     instagram: "",
@@ -83,7 +84,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 2,
+    owner: userList[4],
     contributors: "",
     website: "",
     instagram: "",
@@ -100,7 +101,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 4,
+    owner: userList[4],
     contributors: "",
     website: "",
     instagram: "",
@@ -117,7 +118,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 5,
+    owner: userList[5],
     contributors: "",
     website: "",
     instagram: "",
@@ -134,7 +135,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 6,
+    owner: userList[6],
     contributors: "",
     website: "",
     instagram: "",
@@ -153,7 +154,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 7,
+    owner: userList[7],
     contributors: "",
     website: "",
     instagram: "",
@@ -170,7 +171,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 8,
+    owner: userList[0],
     contributors: "",
     website: "",
     instagram: "",
@@ -187,7 +188,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 2,
+    owner: userList[1],
     contributors: "",
     website: "",
     instagram: "",
@@ -204,7 +205,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 1,
+    owner: userList[2],
     contributors: "",
     website: "",
     instagram: "",
@@ -221,7 +222,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 3,
+    owner: userList[3],
     contributors: "",
     website: "",
     instagram: "",
@@ -238,7 +239,7 @@ export const initiativeList = [
       "Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.",
     status: "",
     votes: "",
-    owner: 5,
+    owner: userList[4],
     contributors: "",
     website: "",
     instagram: "",
