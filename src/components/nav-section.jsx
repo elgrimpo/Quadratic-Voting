@@ -1,6 +1,7 @@
 //React Imports
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import "../App.css";
 
 //MUI Imports
 import {
@@ -8,16 +9,11 @@ import {
   List,
   ListItemButton,
   ListItemText,
-  ListSubheader,
-  Divider,
-  Toolbar,
   Paper,
   Typography,
-  Button,
-  IconButton
+  IconButton,
 } from "@mui/material";
-import { palette } from "@mui/system";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
@@ -25,41 +21,60 @@ import { DataContext } from "../contexts/data-context";
 /* ----------- COMPONENT -------------- */
 
 function NavSection(props) {
-  const { groups, currentGroup, setCurrentGroup, channels, setSidebarContent } =
+  const { groups, currentGroup, setCurrentGroup, setSidebarContent } =
     useContext(DataContext);
 
   function handleListItemClick(index) {
-    if(props.currentItem === currentGroup) {
-    setCurrentGroup(groups[index]);
-    setSidebarContent(currentGroup)
-  }}
+    if (props.currentItem === currentGroup) {
+      setCurrentGroup(groups[index]);
+      setSidebarContent(currentGroup);
+    }
+  }
 
   return (
-    <Box >
+    <Box>
+      {/* ---> Header and Add Button <--- */}
 
-
-{/* ---> Header and Add Button <--- */}
-
-     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <Typography
           variant="h7"
-          sx={{ bgcolor: "transparent", color: "primary.main", verticalAlign:'middle', paddingLeft:1}}
+          sx={{
+            bgcolor: "transparent",
+            color: "primary.main",
+            verticalAlign: "middle",
+            paddingLeft: 1,
+          }}
         >
           {props.title}
         </Typography>
-        <IconButton sx={{color: 'primary.main'}}>
-            <AddIcon/>
+        <IconButton sx={{ color: "primary.main" }}>
+          <AddIcon />
         </IconButton>
-     </Box>
+      </Box>
 
-{/* ---> Navigational Sections <--- */}
+      {/* ---> Navigational Sections <--- */}
 
-        <List sx={{paddingTop:0, mb:'20px'}} dense={true}>
-        <Paper elevation={3} sx={{mt:1, boxShadow:'inset -1px 1px 2px 2px rgba(0, 0, 0, 0.1)', borderRadius:2, padding:1 }}>
+      <List sx={{ paddingTop: 0, mb: "20px" }}>
+        <Paper
+          elevation={3}
+          sx={{
+            mt: 1,
+            boxShadow: "inset -1px 1px 2px 2px rgba(0, 0, 0, 0.1)",
+            borderRadius: 2,
+            padding: 1,
+          }}
+        >
           {props.items.map((item) => (
             <Link key={item.id} to="/" style={{ textDecoration: "none" }}>
               <ListItemButton
                 button
+                id="listitem"
                 key={item.id}
                 selected={item.id === props.currentItem.id}
                 onClick={() => {
@@ -76,14 +91,8 @@ function NavSection(props) {
           ))}
         </Paper>
       </List>
-
-
-
     </Box>
   );
 }
 
 export default NavSection;
-
-
-

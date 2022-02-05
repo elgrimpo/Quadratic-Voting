@@ -1,6 +1,6 @@
 
-import { red } from '@mui/material/colors';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+
+import { createTheme } from '@mui/material/styles';
 
 
 
@@ -23,6 +23,9 @@ export const darkTheme = createTheme({
     },
     divider: 'rgba(206,206,206,0.12)',
   },
+  typography: {
+    fontFamily: 'Merriweather'
+  }
   })
 
   export const lightTheme = createTheme({  

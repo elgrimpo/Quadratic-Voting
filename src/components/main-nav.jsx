@@ -1,33 +1,18 @@
 //React Imports
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 
 //MUI Imports
-import {
-  Box,
-  List,
-  ListItemButton,
-  ListItemText,
-  ListSubheader,
-  Divider,
-  Paper,
-  Typography,
-  Menu,
-  MenuItem,
-  Button
-} from "@mui/material";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-
+import { Box, Paper, Menu, MenuItem, Button } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
-import {NavSection} from "./index"
+import { NavSection } from "./index";
 
 /* ----------- COMPONENT -------------- */
 
 function MainNav(props) {
-  const { groups, currentGroup, setCurrentGroup, channels, currentChannel, setSidebarContent, currentCommunity } =
+  const { groups, currentGroup, channels, currentChannel, currentCommunity } =
     useContext(DataContext);
 
   // Menu controls
@@ -41,74 +26,70 @@ function MainNav(props) {
   };
 
   return (
-    <Box id='main-nav' sx={{paddingTop:'16px'}}>
+    <Box id="main-nav" sx={{ paddingTop: "16px" }}>
+      {/* ---> Community Menu <---*/}
 
-{/* ---> Community Menu <=== */}
+      <div>
+        <Paper
+          sx={{
+            mt: 1,
+            borderRadius: 2,
+            padding: 1,
+            bgcolor: "background.paper",
+            mb: "20px",
+          }}
+          elevation={3}
+        >
+          {/* Dropdown Button */}
+          <Button
+            id="community-menu"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+            onClick={handleClick}
+          >
+            {currentCommunity.name}
+            <ArrowDropDownIcon sx={{ color: "primary.main" }} />
+          </Button>
 
-<div>
-      <Paper sx={{
-          mt:1, 
-          borderRadius:2, 
-          padding:1, 
-          bgcolor: 'background.paper',
-          mb:'20px' }}
-          elevation={3} >
-      <Button
-        id="community-menu"
-        sx={{
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between', 
-          width: '100%'
-        }}
-        onClick={handleClick}
-      >
-        {currentCommunity.name}
-        <ArrowDropDownIcon sx={{color: 'primary.main'}}/>
-      </Button>
-      
-      </Paper>
-      <Menu
-        id="community-dropdown"
+          {/* Menu items */}
+        </Paper>
+        <Menu
+          id="community-dropdown"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Menu>
+      </div>
 
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
-    </div>
- 
-{/* ---> Group Selection <--- */}
+      {/* ---> Group Selection <--- */}
 
-    <NavSection 
-    items={groups} 
-    title='Groups'
-    currentItem={currentGroup}/>
+      <NavSection items={groups} title="Groups" currentItem={currentGroup} />
 
-{/* ---> Channel Selection <--- */}
+      {/* ---> Channel Selection <--- */}
 
-    <NavSection 
-      items={channels} 
-      title='Channels' 
-      currentItem={currentChannel}/>
-
-
-
+      <NavSection
+        items={channels}
+        title="Channels"
+        currentItem={currentChannel}
+      />
     </Box>
   );
 }
 
 export default MainNav;
-
-

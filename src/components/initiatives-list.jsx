@@ -2,25 +2,23 @@
 import React, { useContext } from "react";
 
 // MUI Imports
-import { Grid, Box, Fab, AppBar, Divider, Paper } from "@mui/material";
+import { Grid, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
-import { InitiativeCard, Sidebar, Chat } from "./index";
-
-import { ThemeProvider } from "@mui/material/styles";
-import { darkTheme, lightTheme } from "../styles/themeProvider";
+import { InitiativeCard } from "./index";
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
-  const { currentGroup, initiatives, setCurrentInitiative, users } =
-    useContext(DataContext);
+  const { currentGroup, initiatives } = useContext(DataContext);
 
   return (
     <div>
+      
+      {/* ---> Image <--- */}
+
       <img
         src={currentGroup.image}
         alt={currentGroup.title}
@@ -30,6 +28,8 @@ const InitiativesList = (props) => {
           objectFit: "cover",
         }}
       />
+
+      {/* ---> Initiative tiles <--- */}
 
       <Grid
         sx={{
@@ -45,6 +45,8 @@ const InitiativesList = (props) => {
           <InitiativeCard initiative={initiative} />
         ))}
       </Grid>
+
+      {/* ---> Floating button <--- */}
 
       <Fab color="primary" style={{ position: "fixed", bottom: 40, right: 40 }}>
         <AddIcon />

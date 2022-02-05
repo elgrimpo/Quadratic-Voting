@@ -15,14 +15,21 @@ const Communities = (props) => {
   const theme = useTheme();
 
   return (
-    <Box id="communities"
-      sx={{bgcolor: 'background.paper', boxShadow:'inset -3px 0px 4px 0px rgba(0, 0, 0, 0.2)'}}>
+    <Box
+      id="communities"
+      sx={{
+        bgcolor: "background.paper",
+        boxShadow: "inset -3px 0px 4px 0px rgba(0, 0, 0, 0.2)",
+      }}
+    >
       <Stack
         sdirection="column"
         justifyContent="center"
         alignItems="center"
         spacing={1}
       >
+        {/* ---> Community Tiles <--- */}
+
         {communities.map((community) => (
           <Box
             key={community.id}
