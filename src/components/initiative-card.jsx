@@ -44,7 +44,6 @@ const InitiativeCard = (props) => {
         }}
       >
         <Card
-          sx={{ maxWidth: 300 }}
           style={{ paddingBottom: 10 }}
           key={props.initiative.id}
         >

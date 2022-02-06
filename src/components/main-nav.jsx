@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 
 //MUI Imports
-import { Box, Paper, Menu, MenuItem, Button } from "@mui/material";
+import { Box, Menu, MenuItem, Button } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //App Imports
@@ -40,7 +40,6 @@ function MainNav(props) {
             width: "100%",
             mt: 1,
             borderRadius: 2,
-            padding: 1,
             bgcolor: "background.paper",
             mb: "20px",
             padding: 2,

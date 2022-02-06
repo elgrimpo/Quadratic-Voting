@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 
 //MUI Imports
-import { Box, Button, Card, CardMedia, Stack, CardActionArea, Avatar, Menu, MenuItem } from "@mui/material";
+import { Box, Card, CardMedia, Stack, CardActionArea, Avatar, Menu, MenuItem } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports

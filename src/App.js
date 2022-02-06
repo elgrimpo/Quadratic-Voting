@@ -7,15 +7,10 @@ import { Routes, Route } from "react-router-dom";
 import {
   Box,
   Paper,
-  AppBar,
-  Toolbar,
   Drawer,
-  Typography,
-  IconButton,
-  Fab,
+
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import MenuIcon from "@mui/icons-material/Menu";
 
 //App Imports
 import {
@@ -33,17 +28,14 @@ import { lightTheme } from "./styles/themeProvider";
 
 function App(props) {
   // Drawer functions
-  const drawerWidth = 380;
   const drawer = (
     <Box style={{ display: "flex", height: "100%", width: "100%" }}>
       <Communities />
       <MainNav />
     </Box>
   );
-
   const { window } = props;
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -70,6 +62,8 @@ function App(props) {
       >
         {/* ---> Navigation <--- */}
 
+
+
         <Drawer
           container={container}
           variant="temporary"
@@ -92,7 +86,7 @@ function App(props) {
             display: { xs: "none", sm: "none", md: "none", lg: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
+
               backgroundColor: "transparent",
             },
           }}

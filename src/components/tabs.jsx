@@ -2,7 +2,7 @@
 import React from "react";
 
 //MUI Imports
-import { AppBar, Tab, IconButton, Toolbar, Box } from "@mui/material";
+import { AppBar, Tab, IconButton } from "@mui/material";
 import TabList from "@mui/lab/TabList";
 import MenuIcon from "@mui/icons-material/Menu";
 

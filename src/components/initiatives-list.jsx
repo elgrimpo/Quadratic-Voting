@@ -28,6 +28,7 @@ const InitiativesList = (props) => {
           position: "fixed",
           top: "16px",
           left: "16px",
+          zIndex: 1
         }}
       >
         <MenuIcon />
@@ -51,10 +52,12 @@ const InitiativesList = (props) => {
         sx={{
           flexGrow: 1,
           padding: "20px",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
         }}
         container
         spacing={{ xs: 2, md: 2 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+
         justifyContent="center"
       >
         {initiatives.map((initiative) => (
