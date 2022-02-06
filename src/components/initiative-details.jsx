@@ -8,6 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 
+
 //App Imports
 import { DataContext } from "../contexts/data-context";
 import { TabNav, Chat } from "./index";
@@ -26,7 +27,7 @@ const InitiativeDetails = (props) => {
     <TabContext value={value}>
       {/* ---> Tabs <--- */}
 
-      <TabNav setValue={setValue} />
+      <TabNav setValue={setValue} handleDrawerToggle={props.handleDrawerToggle}/>
 
       {/* ---> Initiative Overview <--- */}
 

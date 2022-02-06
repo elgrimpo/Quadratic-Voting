@@ -4,8 +4,18 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 //MUI Imports
-import { Box, Paper } from "@mui/material";
+import {
+  Box,
+  Paper,
+  AppBar,
+  Toolbar,
+  Drawer,
+  Typography,
+  IconButton,
+  Fab,
+} from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
 
 //App Imports
 import {
@@ -21,26 +31,75 @@ import { lightTheme } from "./styles/themeProvider";
 
 /* ----------- COMPONENT -------------- */
 
-function App() {
+function App(props) {
+  // Drawer functions
+  const drawerWidth = 380;
+  const drawer = (
+    <Box style={{ display: "flex", height: "100%", width: "100%" }}>
+      <Communities />
+      <MainNav />
+    </Box>
+  );
+
+  const { window } = props;
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <DataProvider
-    >
-      <div
+    <DataProvider>
+      <Box
         style={{
-          display: "grid",
-          gridTemplateColumns: "380px 1fr 320px",
           height: "100%",
           width: "100%",
           background: "linear-gradient(175deg, #2C7772 30%, #264F60 90%)",
         }}
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            lg: "380px 1fr 320px",
+            md: "1fr 320px",
+            sm: "1fr",
+          },
+        }}
       >
         {/* ---> Navigation <--- */}
 
-        <Box style={{ display: "flex" }}>
-          <Communities />
-          <MainNav />
-        </Box>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={drawerOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            height: "100%",
+            "& .MuiDrawer-paper": { backgroundColor: "#2C7772" },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            height: "100%",
+            display: { xs: "none", sm: "none", md: "none", lg: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+              backgroundColor: "transparent",
+            },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
 
         {/* ---> Main Content <--- */}
 
@@ -49,16 +108,22 @@ function App() {
             elevation={5}
             style={{
               height: "100%",
-              overflow: "scroll",
               background: "white",
               borderRadius: 0,
             }}
+            sx={{ overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
           >
+            
             <Routes>
-              <Route path="/" element={<InitiativesList />} />
+              <Route
+                path="/"
+                element={
+                  <InitiativesList handleDrawerToggle={handleDrawerToggle} />
+                }
+              />
               <Route
                 path="/initiativedetails"
-                element={<InitiativeDetails />}
+                element={<InitiativeDetails handleDrawerToggle={handleDrawerToggle} />}
               />
             </Routes>
           </Paper>
@@ -66,10 +131,10 @@ function App() {
 
         {/* ---> Sidebar <--- */}
 
-        <Box id="sidebar">
+        <Box>
           <Sidebar />
         </Box>
-      </div>
+      </Box>
     </DataProvider>
   );
 }

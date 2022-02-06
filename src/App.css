@@ -28,7 +28,6 @@ body {
 }
 
 #main-content {
-	grid-column: 2;
 	border-right: 1px solid lightgray;
 }
 
@@ -51,7 +50,6 @@ body {
 }
 
 #main-nav {
-width: 300px;
 padding-left: 16px; 
 padding-right: 16px
 

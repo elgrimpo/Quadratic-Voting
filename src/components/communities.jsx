@@ -30,7 +30,7 @@ const Communities = (props) => {
       sx={{
         bgcolor: "background.paper",
         boxShadow: "inset -3px 0px 4px 0px rgba(0, 0, 0, 0.2)",
-        
+        width: '80px',
       }}
       style={{
         display: 'flex',

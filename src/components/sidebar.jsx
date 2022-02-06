@@ -18,7 +18,17 @@ const Sidebar = (props) => {
   const theme = useTheme();
 
   return (
-    <Stack spacing={2}>
+    <Stack
+      id="sidebar"
+      spacing={2}
+      sx={{
+        bgcolor: {
+          xs: "background.paper",
+          sm: "background.paper",
+          md: "transparent",
+        },
+      }}
+    >
       {/* ---> Title and Description <--- */}
 
       <Typography variant="h5">{sidebarContent.title}</Typography>

@@ -26,7 +26,7 @@ function MainNav(props) {
   };
 
   return (
-    <Box id="main-nav" sx={{ paddingTop: "16px" }}>
+    <Box id="main-nav" sx={{ paddingTop: "16px", width:'300px' }}>
       {/* ---> Community Menu <---*/}
 
       <div>

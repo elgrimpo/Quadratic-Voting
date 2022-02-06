@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 // MUI Imports
 import { Grid, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import MenuIcon from "@mui/icons-material/Menu";
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
@@ -16,6 +17,21 @@ const InitiativesList = (props) => {
 
   return (
     <div>
+      <Fab
+        color="inherit"
+        aria-label="open drawer"
+        edge="start"
+        onClick={props.handleDrawerToggle}
+        sx={{
+          mr: 2,
+          display: { lg: "none" },
+          position: "fixed",
+          top: "16px",
+          left: "16px",
+        }}
+      >
+        <MenuIcon />
+      </Fab>
 
       {/* ---> Image <--- */}
 
@@ -48,9 +64,11 @@ const InitiativesList = (props) => {
 
       {/* ---> Floating button <--- */}
 
-      <Fab color="primary" style={{ position: "absolute", bottom: 40, right: 40 }}>
+      <Fab
+        color="primary"
+        style={{ position: "absolute", bottom: 40, right: 40 }}
+      >
         <AddIcon />
-      
       </Fab>
     </div>
   );

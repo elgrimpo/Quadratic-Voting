@@ -23,9 +23,7 @@ export const darkTheme = createTheme({
     fontWeightBold: 900,
   },
   components: {
-    
     MuiButton: {
-
       styleOverrides: {
         root: {
           borderRadius: 20,
@@ -34,9 +32,8 @@ export const darkTheme = createTheme({
     },
     MuiListItemButton: {
       styleOverrides: {
-        // Name of the slot
         root: {
-          color: 'white',
+          color: "white",
           "&.Mui-selected": {
             backgroundColor: "#FAFF80",
             boxShadow: " 0px 1px 0px 2px rgba(0, 0, 0, 0.1)",
@@ -47,12 +44,18 @@ export const darkTheme = createTheme({
               backgroundColor: "#FAFF80",
             },
           },
-          
         },
       },
     },
-
-  
+    MuiDrawer: {
+      styleOverrides: {
+        docked: {
+          paper: {
+            
+          },
+        },
+      },
+    },
   },
 });
 
@@ -79,14 +82,12 @@ export const lightTheme = createTheme({
     fontWeightBold: 900,
   },
   components: {
-    
     MuiButton: {
-
       styleOverrides: {
         root: {
           borderRadius: 20,
         },
       },
-    }
-  }
+    },
+  },
 });
