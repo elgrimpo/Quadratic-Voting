@@ -30,33 +30,30 @@ function MainNav(props) {
       {/* ---> Community Menu <---*/}
 
       <div>
-        <Paper
+        {/* Dropdown Button */}
+        <Button
+          id="community-menu"
           sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
             mt: 1,
             borderRadius: 2,
             padding: 1,
             bgcolor: "background.paper",
             mb: "20px",
+            padding: 2,
+            boxShadow: "0px 1px 0px 2px rgba(0, 0, 0, 0.1)",
           }}
-          elevation={3}
+          onClick={handleClick}
         >
-          {/* Dropdown Button */}
-          <Button
-            id="community-menu"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-            onClick={handleClick}
-          >
-            {currentCommunity.name}
-            <ArrowDropDownIcon sx={{ color: "primary.main" }} />
-          </Button>
+          {currentCommunity.name}
+          <ArrowDropDownIcon sx={{ color: "primary.main" }} />
+        </Button>
 
-          {/* Menu items */}
-        </Paper>
+        {/* Menu items */}
+
         <Menu
           id="community-dropdown"
           anchorEl={anchorEl}
@@ -71,9 +68,9 @@ function MainNav(props) {
             horizontal: "left",
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={handleClose}>Community Overview</MenuItem>
+          <MenuItem onClick={handleClose}>Community Rules</MenuItem>
+          <MenuItem onClick={handleClose}>Configurations</MenuItem>
         </Menu>
       </div>
 

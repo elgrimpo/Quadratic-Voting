@@ -60,7 +60,7 @@ function NavSection(props) {
 
       {/* ---> Navigational Sections <--- */}
 
-      <List sx={{ paddingTop: 0, mb: "20px" }}>
+      <List sx={{ paddingTop: 0, mb: "20px" }} dense={true}>
         <Paper
           elevation={3}
           sx={{
@@ -73,8 +73,7 @@ function NavSection(props) {
           {props.items.map((item) => (
             <Link key={item.id} to="/" style={{ textDecoration: "none" }}>
               <ListItemButton
-                button
-                id="listitem"
+                
                 key={item.id}
                 selected={item.id === props.currentItem.id}
                 onClick={() => {
@@ -84,7 +83,6 @@ function NavSection(props) {
                 <ListItemText
                   key={item.id}
                   primary={item.title}
-                  sx={{ color: "text.primary" }}
                 />
               </ListItemButton>
             </Link>

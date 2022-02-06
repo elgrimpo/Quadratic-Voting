@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 
 //MUI Imports
-import { Box, Card, CardMedia, Stack, CardActionArea, Avatar } from "@mui/material";
+import { Box, Button, Card, CardMedia, Stack, CardActionArea, Avatar, Menu, MenuItem } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
@@ -13,6 +13,16 @@ import { DataContext } from "../contexts/data-context";
 const Communities = (props) => {
   const { communities, currentCommunity, users } = useContext(DataContext);
   const theme = useTheme();
+
+// Menu controls
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Box
@@ -68,13 +78,37 @@ const Communities = (props) => {
         ))}
       </Stack>
 
+<div>
+
       <Avatar 
 
       style={{ border: `2px solid ${theme.palette.primary.light}` }}
         alt={users[5]}
         src={users[5].image}
         sx={{ width: 54, height: 54, marginBottom:'16px' }}
+        onClick={handleClick}
       />
+
+
+<Menu
+          id="community-dropdown"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Menu>
+</div>
     </Box>
   );
 };
