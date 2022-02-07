@@ -11,7 +11,7 @@ import { DataContext } from "../contexts/data-context";
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
-  const { communities, currentCommunity, users } = useContext(DataContext);
+  const { communities, currentCommunity, users, currentUser } = useContext(DataContext);
   const theme = useTheme();
 
 // Menu controls
@@ -78,13 +78,14 @@ const Communities = (props) => {
         ))}
       </Stack>
 
-<div>
+{/* ---> User profile <--- */}
 
+<div>
       <Avatar 
 
       style={{ border: `2px solid ${theme.palette.primary.light}` }}
-        alt={users[5]}
-        src={users[5].image}
+        alt={currentUser.name}
+        src={currentUser.image}
         sx={{ width: 54, height: 54, marginBottom:'16px' }}
         onClick={handleClick}
       />

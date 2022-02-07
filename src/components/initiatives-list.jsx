@@ -2,18 +2,24 @@
 import React, { useContext } from "react";
 
 // MUI Imports
-import { Grid, Fab } from "@mui/material";
+import { Grid, Fab, Modal, Dialog } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import MenuIcon from "@mui/icons-material/Menu";
 
 //App Imports
 import { DataContext } from "../contexts/data-context";
-import { InitiativeCard } from "./index";
+import { InitiativeCard, FormCreateInitiative } from "./index";
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
   const { currentGroup, initiatives } = useContext(DataContext);
+
+  // Functions - Create initiative Button
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {setOpen(true) };
+    const handleClose = () => {setOpen(false) };
+  
 
   return (
     <div>
@@ -65,14 +71,21 @@ const InitiativesList = (props) => {
         ))}
       </Grid>
 
-      {/* ---> Floating button <--- */}
+      {/* ---> Button - Create new Initiative <--- */}
 
       <Fab
         color="primary"
-        style={{ position: "absolute", bottom: 40, right: 40 }}
+        style={{ position: "fixed", bottom: 40, right: 40 }}
+        onClick={handleOpen}
       >
         <AddIcon />
       </Fab>
+
+      <Dialog open={open} onClose={handleClose}>
+        <FormCreateInitiative setOpen={setOpen}/>
+      </Dialog>
+
+      
     </div>
   );
 };

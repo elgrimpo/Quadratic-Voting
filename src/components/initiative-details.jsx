@@ -57,13 +57,15 @@ const InitiativeDetails = (props) => {
           </Link>
         </Box>
 
+
+        {/* Initiative Content */}
         <Box style={{ paddingLeft: 30, paddingRight: 30 }}>
           <Typography style={{ marginBottom: "30px" }}>
-            {currentInitiative.text()}
+            {currentInitiative.text}
           </Typography>
         </Box>
 
-        {/* Initiative Content */}
+        
       </TabPanel>
 
       {/* ---> Chat <--- */}

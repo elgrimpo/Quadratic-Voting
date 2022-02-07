@@ -8,7 +8,9 @@ import {
   Box,
   Paper,
   Drawer,
-
+  FormControl,
+  OutlinedInput,
+  FormHelperText
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
@@ -19,6 +21,7 @@ import {
   InitiativeDetails,
   MainNav,
   Sidebar,
+  FormCreateInitiative
 } from "./components";
 
 import { DataProvider } from "./contexts/data-context";
@@ -126,7 +129,7 @@ function App(props) {
         {/* ---> Sidebar <--- */}
 
         <Box>
-          <Sidebar />
+           <Sidebar />
         </Box>
       </Box>
     </DataProvider>

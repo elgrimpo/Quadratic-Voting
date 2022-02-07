@@ -19,43 +19,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {
-      return (
-        <article>
-          <h1 style={{marginBottom:12}}>Build a castle at the beach</h1>
-          <h3 style={{marginBottom:12}}>What's the point of this?</h3>
-          <p style={{marginBottom:12}}>
-            As a protocol, Umbra defines a simple set of standards, coupled with
-            a singleton smart contract instance, to enable stealth addresses on
-            Ethereum. With a stealth address, a payer can send Ether or ERC20
-            tokens to an address controlled by the receiver, but no one except
-            the two parties know who that receiver is. 
-            
-            On chain, the transaction
-            looks like a simple transfer to an otherwise unused address on the
-            Ethereum network. Off chain, the sender has used a public key
-            published by the receiver using ENS to generate the new address. By
-            encrypting the data used to generate the address, and announcing it
-            via the Umbra smart contract, the sender can let the receiver know
-            theyve sent them a payment to a new stealth address. Only the
-            receiver can generate the private key needed to withdraw the funds.
-            By leveraging meta-transactions Umbra enables withdrawers to pay
-            relayers for gas using the tokens theyve received. This avoids the
-            need to fund stealth addresses with Ether before withdrawing.
-          </p>
-          <h3 style={{marginBottom:12}}>What is the projects status?</h3>
-          <p>
-            The Umbra MVP went live on mainnet in June 2021. You can visit
-            https://app.umbra.cash to send and receive stealth payments using
-            Umbra. Since our launch, weve made iterative improvements based on
-            user feedback. These included better mobile responsiveness and other
-            UX enhancements. Weve also laid the groundwork for bigger changes
-            that are just on the horizon, including a newer, easier to user
-            stealth key registry system, and multi-network deployments.
-          </p>
-        </article>
-      );
-    },
+    text: 'As a protocol, Umbra defines a simple set of standards, coupled with a singleton smart contract instance, to enable stealth addresses on Ethereum. With a stealth address, a payer can send Ether or ERC20 tokens to an address controlled by the receiver, but no one except the two parties know who that receiver is.  On chain, the transaction looks like a simple transfer to an otherwise unused address on the Ethereum network. Off chain, the sender has used a public key  published by the receiver using ENS to generate the new address. By encrypting the data used to generate the address, and announcing it via the Umbra smart contract, the sender can let the receiver know theyve sent them a payment to a new stealth address. Only the receiver can generate the private key needed to withdraw the funds. By leveraging meta-transactions Umbra enables withdrawers to pay relayers for gas using the tokens theyve received. This avoids the need to fund stealth addresses with Ether before withdrawing.'
   },
   {
     communityID: 1,
@@ -72,7 +36,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -89,7 +53,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -106,7 +70,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -123,7 +87,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -140,7 +104,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     /*----------Group: Feature Request-----------*/
@@ -159,7 +123,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -176,7 +140,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -193,7 +157,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -210,7 +174,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -227,7 +191,7 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
   {
     communityID: 1,
@@ -244,6 +208,6 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
-    text() {},
+    text: '',
   },
 ];
