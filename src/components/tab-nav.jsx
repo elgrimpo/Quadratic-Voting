@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 /* ----------- COMPONENT -------------- */
 
+// Manage tab change 
 function TabNav(props) {
   const handleChange = (event, newValue) => {
     props.setValue(newValue);

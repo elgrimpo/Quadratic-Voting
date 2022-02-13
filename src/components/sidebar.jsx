@@ -37,15 +37,15 @@ const Sidebar = (props) => {
 
       {/* --->Links <--- */}
 
-      <Link href="#" underline="hover">
+      <Link href={sidebarContent.website} underline="hover">
         <LanguageIcon style={{ marginRight: 8, verticalAlign: "bottom" }} />
         {"Website"}
       </Link>
-      <Link href="#" underline="hover">
+      <Link href={sidebarContent.twitter} underline="hover">
         <TwitterIcon style={{ marginRight: 8, verticalAlign: "bottom" }} />
         {"Twitter"}
       </Link>
-      <Link href="#" underline="hover">
+      <Link href={sidebarContent.instagram} underline="hover">
         <InstagramIcon style={{ marginRight: 8, verticalAlign: "bottom" }} />
         {"Instagram"}
       </Link>

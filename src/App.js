@@ -10,7 +10,7 @@ import {
   Drawer,
   FormControl,
   OutlinedInput,
-  FormHelperText
+  FormHelperText,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
@@ -21,7 +21,7 @@ import {
   InitiativeDetails,
   MainNav,
   Sidebar,
-  FormCreateInitiative
+  FormCreateInitiative,
 } from "./components";
 
 import { DataProvider } from "./contexts/data-context";
@@ -64,8 +64,6 @@ function App(props) {
         }}
       >
         {/* ---> Navigation <--- */}
-
-
 
         <Drawer
           container={container}
@@ -110,7 +108,6 @@ function App(props) {
             }}
             sx={{ overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
           >
-            
             <Routes>
               <Route
                 path="/"
@@ -120,7 +117,9 @@ function App(props) {
               />
               <Route
                 path="/initiativedetails"
-                element={<InitiativeDetails handleDrawerToggle={handleDrawerToggle} />}
+                element={
+                  <InitiativeDetails handleDrawerToggle={handleDrawerToggle} />
+                }
               />
             </Routes>
           </Paper>
@@ -129,7 +128,7 @@ function App(props) {
         {/* ---> Sidebar <--- */}
 
         <Box>
-           <Sidebar />
+          <Sidebar />
         </Box>
       </Box>
     </DataProvider>

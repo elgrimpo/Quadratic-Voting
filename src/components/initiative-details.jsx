@@ -28,6 +28,7 @@ const InitiativeDetails = (props) => {
       {/* ---> Tabs <--- */}
 
       <TabNav setValue={setValue} handleDrawerToggle={props.handleDrawerToggle}/>
+      
 
       {/* ---> Initiative Overview <--- */}
 
