@@ -1,5 +1,6 @@
 //React Imports
 import React, { useState, useContext } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
 //MUI Imports
 import { AppBar, Tab, IconButton, TextField, Button, Box, DialogContent, DialogTitle, FormControl } from "@mui/material";
@@ -7,7 +8,9 @@ import TabList from "@mui/lab/TabList";
 import MenuIcon from "@mui/icons-material/Menu";
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
+import { DataContext } from "../../contexts/data-context";
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative, removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
+import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
 
 /* ----------- COMPONENT -------------- */
 
@@ -15,12 +18,11 @@ function FormCreateInitiative(props) {
   const {
     currentCommunity,
     currentUser,
-    currentGroup,
-    setInitiatives,
-    initiatives,
-    initiativeList2,
-    setInitiativeList2,
   } = useContext(DataContext);
+  
+
+  const currentGroup = useSelector(selectCurrentGroup)
+  const dispatch = useDispatch()
 
   const [formValues, setFormValues] = useState({
     communityID: "",
@@ -47,10 +49,7 @@ function FormCreateInitiative(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formValues);
-    setInitiatives([...initiatives, formValues]);
-    setInitiativeList2([...initiativeList2, formValues]);
-    console.log("initiatives: " + initiatives);
-    console.log(initiativeList2);
+    dispatch(createInitiative(formValues))
     props.setOpen(false)
   };
 

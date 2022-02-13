@@ -1,19 +1,26 @@
 //React Imports
 import React, { useContext } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
 //MUI Imports
 import { Box, Menu, MenuItem, Button } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
-import { NavSection } from "./index";
+import { DataContext } from "../../contexts/data-context";
+import { NavSection } from "../index";
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative } from '../../store/initiatives/initiativesSlice'
+import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
+
 
 /* ----------- COMPONENT -------------- */
 
 function MainNav(props) {
-  const { groups, currentGroup, channels, currentChannel, currentCommunity } =
+  const { channels, currentChannel, currentCommunity } =
     useContext(DataContext);
+  
+  const groups = useSelector(selectGroups)
+  const currentGroup = useSelector(selectCurrentGroup)
 
   // Menu controls
   const [anchorEl, setAnchorEl] = React.useState(null);

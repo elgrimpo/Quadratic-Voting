@@ -1,5 +1,5 @@
 //React Imports
-import "./App.css";
+import "../styles/App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -22,10 +22,10 @@ import {
   MainNav,
   Sidebar,
   FormCreateInitiative,
-} from "./components";
+} from "../components";
 
-import { DataProvider } from "./contexts/data-context";
-import { lightTheme } from "./styles/themeProvider";
+import { DataProvider } from "../contexts/data-context";
+import { lightTheme } from "../styles/themeProvider";
 
 /* ----------- COMPONENT -------------- */
 

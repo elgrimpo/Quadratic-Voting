@@ -1,6 +1,8 @@
 //React Imports
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 //MUI Imports
 import {
@@ -16,21 +18,26 @@ import {
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
+import { DataContext } from "../../contexts/data-context";
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative } from '../../store/initiatives/initiativesSlice'
+import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativeCard = (props) => {
   const {
-    initiatives,
-    setCurrentInitiative,
-    currentInitiative,
     setSidebarContent,
   } = useContext(DataContext);
 
-  function handleListItemClick(index) {
-    setCurrentInitiative(initiatives[index]);
-    setSidebarContent(currentInitiative);
+  const groupInitiatives = useSelector(selectGroupInitiatives);
+  const currentInitiative = useSelector(selectCurrentInitiative)
+  const dispatch = useDispatch()
+
+
+
+  function handleListItemClick(id) {
+    dispatch(setCurrentInitiative(id));
+    //setSidebarContent(currentInitiative);
   }
 
   return (
@@ -40,7 +47,7 @@ const InitiativeCard = (props) => {
         to="/initiativedetails"
         style={{ textDecoration: "none" }}
         onClick={() => {
-          handleListItemClick(initiatives.indexOf(props.initiative));
+          handleListItemClick(props.initiative.id);
         }}
       >
         <Card

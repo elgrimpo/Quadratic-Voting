@@ -1,7 +1,7 @@
 //React Imports
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "../App.css";
+import { useSelector, useDispatch } from 'react-redux';
 
 //MUI Imports
 import {
@@ -16,19 +16,25 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
+import { DataContext } from "../../contexts/data-context";
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative, removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
+import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
 
 /* ----------- COMPONENT -------------- */
 
 function NavSection(props) {
-  const { groups, currentGroup, setCurrentGroup, setSidebarContent } =
+  const { setSidebarContent } =
     useContext(DataContext);
+  
+  const groups = useSelector(selectGroups)
+  const currentGroup = useSelector(selectCurrentGroup)
+  const dispatch = useDispatch();
 
-  function handleListItemClick(index) {
-    if (props.currentItem === currentGroup) {
-      setCurrentGroup(groups[index]);
-      setSidebarContent(currentGroup);
-    }
+
+
+  function handleListItemClick(id) {
+      dispatch(setCurrentGroup(id));
+      dispatch(removeCurrentInitiativeSelection());
   }
 
   return (
@@ -75,9 +81,9 @@ function NavSection(props) {
               <ListItemButton
                 
                 key={item.id}
-                selected={item.id === props.currentItem.id}
+                selected={item.current === true}
                 onClick={() => {
-                  handleListItemClick(props.items.indexOf(item));
+                  handleListItemClick(item.id);
                 }}
               >
                 <ListItemText

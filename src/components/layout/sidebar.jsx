@@ -1,5 +1,6 @@
 //React Imports
 import React, { useContext } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
 //MUI Imports
 import { Typography, Stack, Link, Divider, Avatar } from "@mui/material";
@@ -9,13 +10,23 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
+import { DataContext } from "../../contexts/data-context";
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative, removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
+import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
 
 /* ----------- COMPONENT -------------- */
 
 const Sidebar = (props) => {
-  const { sidebarContent } = useContext(DataContext);
   const theme = useTheme();
+
+  const currentInitiative = useSelector(selectCurrentInitiative)
+  const currentGroup = useSelector(selectCurrentGroup)
+
+
+  const sidebarContent = currentInitiative ? currentInitiative :
+    currentGroup
+
+
 
   return (
     <Stack

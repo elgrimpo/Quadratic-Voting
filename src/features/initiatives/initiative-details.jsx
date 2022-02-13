@@ -1,6 +1,8 @@
 //React Imports
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 //MUI Imports
 import { Typography, Box, Button } from "@mui/material";
@@ -10,18 +12,27 @@ import TabPanel from "@mui/lab/TabPanel";
 
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
-import { TabNav, Chat } from "./index";
+import { DataContext } from "../../contexts/data-context";
+import { TabNav, Chat } from "../../components/index";
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, removeCurrentInitiativeSelection, createInitiative } from '../../store/initiatives/initiativesSlice'
+import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
+
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativeDetails = (props) => {
-  const { currentInitiative, setSidebarContent, currentGroup } =
+  const { setSidebarContent, currentGroup } =
     useContext(DataContext);
+
+  const currentInitiative = useSelector(selectCurrentInitiative)
+  const dispatch = useDispatch()
+
+
+
   const [value, setValue] = React.useState("Overview");
 
   const handleClick = () => {
-    setSidebarContent(currentGroup);
+    dispatch(removeCurrentInitiativeSelection());
   };
   return (
     <TabContext value={value}>

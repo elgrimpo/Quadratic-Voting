@@ -1,5 +1,7 @@
-//React Imports
+//React/Redux Imports
 import React, { useContext } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 // MUI Imports
 import { Grid, Fab, Modal, Dialog } from "@mui/material";
@@ -7,13 +9,20 @@ import AddIcon from "@mui/icons-material/Add";
 import MenuIcon from "@mui/icons-material/Menu";
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
-import { InitiativeCard, FormCreateInitiative } from "./index";
+import { DataContext } from "../../contexts/data-context";
+import { InitiativeCard, FormCreateInitiative } from "../../components/index";
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative } from '../../store/initiatives/initiativesSlice'
+import {selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
-  const { currentGroup, initiatives } = useContext(DataContext);
+
+  const currentInitiative = useSelector(selectCurrentInitiative);
+  const groupInitiatives = useSelector(selectGroupInitiatives);
+  const currentGroup = useSelector(selectCurrentGroup);
+
+
 
   // Functions - Create initiative Button
     const [open, setOpen] = React.useState(false);
@@ -66,7 +75,7 @@ const InitiativesList = (props) => {
 
         justifyContent="center"
       >
-        {initiatives.map((initiative) => (
+        {groupInitiatives.map((initiative) => (
           <InitiativeCard initiative={initiative} />
         ))}
       </Grid>

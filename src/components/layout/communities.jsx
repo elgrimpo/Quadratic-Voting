@@ -6,7 +6,7 @@ import { Box, Card, CardMedia, Stack, CardActionArea, Avatar, Menu, MenuItem } f
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { DataContext } from "../contexts/data-context";
+import { DataContext } from "../../contexts/data-context";
 
 /* ----------- COMPONENT -------------- */
 
