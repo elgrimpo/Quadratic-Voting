@@ -8,9 +8,6 @@ import {
   Box,
   Paper,
   Drawer,
-  FormControl,
-  OutlinedInput,
-  FormHelperText,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
@@ -21,10 +18,8 @@ import {
   InitiativeDetails,
   MainNav,
   Sidebar,
-  FormCreateInitiative,
 } from "../components";
 
-import { DataProvider } from "../contexts/data-context";
 import { lightTheme } from "../styles/themeProvider";
 
 /* ----------- COMPONENT -------------- */
@@ -47,7 +42,6 @@ function App(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <DataProvider>
       <Box
         style={{
           height: "100%",
@@ -131,7 +125,7 @@ function App(props) {
           <Sidebar />
         </Box>
       </Box>
-    </DataProvider>
+
   );
 }
 

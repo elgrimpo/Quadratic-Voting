@@ -1,15 +1,15 @@
 
 export const channelList = [{
-    id: 1,
+    id: 0,
     title: '# General'
 }, {
-    id: 2,
+    id: 1,
     title: '# New Ideas'
 }, {
-    id: 3,
+    id: 2,
     title: '# Improvements'
 }, {
-    id: 4,
+    id: 3,
     title: '# Huddle'
 }
 ]

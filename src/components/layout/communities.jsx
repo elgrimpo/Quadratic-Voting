@@ -1,18 +1,26 @@
 //React Imports
-import React, { useContext } from "react";
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+
 
 //MUI Imports
 import { Box, Card, CardMedia, Stack, CardActionArea, Avatar, Menu, MenuItem } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { DataContext } from "../../contexts/data-context";
+import {selectCurrentUser} from '../../store/users/usersSlice'
+import {selectCommunities, selectCurrentCommunity} from '../../store/communities/communitiesSlice'
+
+
 
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
-  const { communities, currentCommunity, users, currentUser } = useContext(DataContext);
   const theme = useTheme();
+
+  const currentUser = useSelector(selectCurrentUser)
+  const communities = useSelector(selectCommunities)
+  const currentCommunity = useSelector(selectCurrentCommunity)
 
 // Menu controls
   const [anchorEl, setAnchorEl] = React.useState(null);

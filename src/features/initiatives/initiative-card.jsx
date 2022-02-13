@@ -18,26 +18,20 @@ import {
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 //App Imports
-import { DataContext } from "../../contexts/data-context";
-import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative } from '../../store/initiatives/initiativesSlice'
-import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative  } from '../../store/initiatives/initiativesSlice'
+
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativeCard = (props) => {
-  const {
-    setSidebarContent,
-  } = useContext(DataContext);
 
   const groupInitiatives = useSelector(selectGroupInitiatives);
   const currentInitiative = useSelector(selectCurrentInitiative)
   const dispatch = useDispatch()
 
 
-
   function handleListItemClick(id) {
     dispatch(setCurrentInitiative(id));
-    //setSidebarContent(currentInitiative);
   }
 
   return (

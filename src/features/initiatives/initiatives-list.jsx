@@ -1,18 +1,18 @@
 //React/Redux Imports
-import React, { useContext } from "react";
+import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
 
 // MUI Imports
-import { Grid, Fab, Modal, Dialog } from "@mui/material";
+import { Grid, Fab, Dialog } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import MenuIcon from "@mui/icons-material/Menu";
 
 //App Imports
-import { DataContext } from "../../contexts/data-context";
 import { InitiativeCard, FormCreateInitiative } from "../../components/index";
-import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative } from '../../store/initiatives/initiativesSlice'
-import {selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
+import { selectCurrentInitiative, selectGroupInitiatives } from '../../store/initiatives/initiativesSlice'
+import {selectCurrentGroup} from '../../store/groups/groupsSlice'
+
 
 /* ----------- COMPONENT -------------- */
 

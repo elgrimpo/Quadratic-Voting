@@ -1,27 +1,24 @@
 //React Imports
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
 //MUI Imports
-import { AppBar, Tab, IconButton, TextField, Button, Box, DialogContent, DialogTitle, FormControl } from "@mui/material";
-import TabList from "@mui/lab/TabList";
-import MenuIcon from "@mui/icons-material/Menu";
+import { TextField, Button, Box, DialogContent, DialogTitle } from "@mui/material";
 
 //App Imports
-import { DataContext } from "../../contexts/data-context";
-import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative, removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
-import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
+import { createInitiative } from '../../store/initiatives/initiativesSlice'
+import { selectCurrentGroup } from '../../store/groups/groupsSlice'
+import {selectCurrentUser} from '../../store/users/usersSlice'
+import { selectCurrentCommunity} from '../../store/communities/communitiesSlice'
+
 
 /* ----------- COMPONENT -------------- */
 
 function FormCreateInitiative(props) {
-  const {
-    currentCommunity,
-    currentUser,
-  } = useContext(DataContext);
-  
 
   const currentGroup = useSelector(selectCurrentGroup)
+  const currentUser = useSelector(selectCurrentUser)
+  const currentCommunity = useSelector(selectCurrentCommunity)
   const dispatch = useDispatch()
 
   const [formValues, setFormValues] = useState({
@@ -30,7 +27,7 @@ function FormCreateInitiative(props) {
     title: "",
     image: "",
     description: "",
-    owner: currentUser,
+    userID: currentUser.id,
     website: "",
     instagram: "",
     twitter: "",

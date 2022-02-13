@@ -1,5 +1,4 @@
 //React Imports
-import React, { useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
 //MUI Imports
@@ -10,21 +9,23 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { DataContext } from "../../contexts/data-context";
-import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative, createInitiative, removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
-import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
+import { selectCurrentInitiative } from '../../store/initiatives/initiativesSlice'
+import { selectCurrentGroup } from '../../store/groups/groupsSlice'
+import {selectUsers} from '../../store/users/usersSlice'
 
 /* ----------- COMPONENT -------------- */
 
 const Sidebar = (props) => {
   const theme = useTheme();
 
-  const currentInitiative = useSelector(selectCurrentInitiative)
-  const currentGroup = useSelector(selectCurrentGroup)
-
+  const currentInitiative = useSelector(selectCurrentInitiative);
+  const currentGroup = useSelector(selectCurrentGroup);
+  const users = useSelector(selectUsers);
 
   const sidebarContent = currentInitiative ? currentInitiative :
-    currentGroup
+    currentGroup;
+
+  const owner = users.find(user => user.id === sidebarContent.userID)
 
 
 
@@ -67,8 +68,8 @@ const Sidebar = (props) => {
       <Typography variant="h7">Group admin</Typography>
       <Avatar
         style={{ border: `2px solid ${theme.palette.primary.light}` }}
-        alt={sidebarContent.owner}
-        src={sidebarContent.owner.image}
+        alt={owner}
+        src={owner.image}
         sx={{ width: 48, height: 48 }}
       />
     </Stack>
