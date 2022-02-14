@@ -1,25 +1,30 @@
 //React Imports
 import React, { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
-import { TextField, Button, Box, DialogContent, DialogTitle } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+} from "@mui/material";
 
 //App Imports
-import { createInitiative } from '../../store/initiatives/initiativesSlice'
-import { selectCurrentGroup } from '../../store/groups/groupsSlice'
-import {selectCurrentUser} from '../../store/users/usersSlice'
-import { selectCurrentCommunity} from '../../store/communities/communitiesSlice'
-
+import { createInitiative } from "../../store/initiatives/initiativesSlice";
+import { selectCurrentGroup } from "../../store/groups/groupsSlice";
+import { selectCurrentUser } from "../../store/users/usersSlice";
+import { selectCurrentCommunity } from "../../store/communities/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 
 function FormCreateInitiative(props) {
-
-  const currentGroup = useSelector(selectCurrentGroup)
-  const currentUser = useSelector(selectCurrentUser)
-  const currentCommunity = useSelector(selectCurrentCommunity)
-  const dispatch = useDispatch()
+  const currentGroup = useSelector(selectCurrentGroup);
+  const currentUser = useSelector(selectCurrentUser);
+  const currentCommunity = useSelector(selectCurrentCommunity);
+  const dispatch = useDispatch();
 
   const [formValues, setFormValues] = useState({
     communityID: "",
@@ -31,6 +36,7 @@ function FormCreateInitiative(props) {
     website: "",
     instagram: "",
     twitter: "",
+    text: ""
   });
 
   const handleInputChange = (e) => {
@@ -46,103 +52,125 @@ function FormCreateInitiative(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formValues);
-    dispatch(createInitiative(formValues))
-    props.setOpen(false)
+    dispatch(createInitiative(formValues));
+    props.setOpen(false);
   };
 
   return (
-    <Box
-    sx={{display:'block',
-      width:'500px'}}>
-    <DialogTitle>New Initiative</DialogTitle>
-    <DialogContent>
-
-
-      <form onSubmit={handleSubmit}
-      style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <TextField
-          id="title-input"
-          name="title"
-          label="Title"
-          type="stromg"
-          value={formValues.title}
-          onChange={handleInputChange}
-          sx={{
-            width: '400px',
-            margin: 1,
+    <Box >
+      <DialogTitle>New Initiative</DialogTitle>
+      <DialogContent>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "grid",
+            gridTemplateColumns: '1fr, 1fr, 1fr',
+            alignItems: "center",
           }}
-        />
+        >
+          <TextField
+            id="title-input"
+            name="title"
+            label="Title"
+            type="string"
+            value={formValues.title}
+            onChange={handleInputChange}
+            sx={{
+              gridColumn: 'span 1',
+              margin: 1,
+            }}
+          />
 
-        <TextField
-          id="image-input"
-          name="image"
-          label="Image"
-          type="stromg"
-          value={formValues.image}
-          onChange={handleInputChange}
-          sx={{
-            width: '400px',
-            margin: 1,
-          }}
-        />
+          <TextField
+            id="image-input"
+            name="image"
+            label="Image"
+            type="string"
+            value={formValues.image}
+            onChange={handleInputChange}
+            sx={{
+              gridColumn: 'span 1',
+              margin: 1,
+            }}
+          />
 
-        <TextField
-          id="website-input"
-          name="website"
-          label="Website"
-          type="stromg"
-          value={formValues.website}
-          onChange={handleInputChange}
-          sx={{
-            width: '400px',
-            margin: 1,
-          }}
-        />
+          <TextField
+            id="website-input"
+            name="website"
+            label="Website"
+            type="string"
+            value={formValues.website}
+            onChange={handleInputChange}
+            sx={{
+              gridColumn: 'span 1',
+              margin: 1,
+            }}
+          />
 
-        <TextField
-          id="instagram-input"
-          name="instagram"
-          label="Instagram"
-          type="stromg"
-          value={formValues.instagram}
-          onChange={handleInputChange}
-          sx={{
-            width: '400px',
-            margin: 1,
-          }}
-        />
+          <TextField
+            id="instagram-input"
+            name="instagram"
+            label="Instagram"
+            type="string"
+            value={formValues.instagram}
+            onChange={handleInputChange}
+            sx={{
+              gridColumn: 'span 1',
+              margin: 1,
+            }}
+          />
 
-        <TextField
-          id="twitter-input"
-          name="twitter"
-          label="Twitter"
-          type="stromg"
-          value={formValues.twitter}
-          onChange={handleInputChange}
-          sx={{
-            width: '400px',
-            margin: 1,
-          }}
-        />
+          <TextField
+            id="twitter-input"
+            name="twitter"
+            label="Twitter"
+            type="string"
+            value={formValues.twitter}
+            onChange={handleInputChange}
+            sx={{
+              gridColumn: 'span 1',
+              margin: 1,
+            }}
+          />
 
-        <TextField
-          id="description-input"
-          name="description"
-          label="Blurp"
-          type="stromg"
-          value={formValues.description}
-          onChange={handleInputChange}
-          sx={{
-            width: '400px',
-            margin: 1,
-          }}
-        />
+          <TextField
+            id="description-input"
+            name="description"
+            label="Short summary"
+            type="string"
+            value={formValues.description}
+            onChange={handleInputChange}
+            multiline
+            rows={4}
+            sx={{
+              gridColumn: 'span 3',
+              margin: 1,
+            }}
+          />
 
-        <Button variant="contained" type="submit" sx={{mt:2}}>
-          Submit
-        </Button>
-      </form>
-    </DialogContent>
+          <TextField
+            id="text-input"
+            name="text"
+            label="Content"
+            type="string"
+            value={formValues.description}
+            onChange={handleInputChange}
+            multiline
+            rows={8}
+            sx={{
+              margin: 1,
+              gridColumn: 'span 3'
+            }}
+          />
+          <DialogActions sx={{
+              gridColumn: 'span 3',
+            }}>
+            <Button variant="contained" type="submit">
+              Submit
+            </Button>
+          </DialogActions>
+        </form>
+      </DialogContent>
     </Box>
   );
 }

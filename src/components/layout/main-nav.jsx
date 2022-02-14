@@ -19,6 +19,7 @@ import {selectChannels, selectCurrentChannel} from '../../store/channels/channel
 
 function MainNav(props) {
   
+  //state variables
   const groups = useSelector(selectGroups)
   const currentGroup = useSelector(selectCurrentGroup)
   const currentCommunity = useSelector(selectCurrentCommunity)

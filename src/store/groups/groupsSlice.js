@@ -11,9 +11,9 @@ const groupsSlice = createSlice({
         setCurrentGroup: (state, action) => {
             state.map(group => {
                 if (group.id === action.payload) {
-                    group.current = true
+                    return group.current = true
                 } else {
-                    group.current = false
+                    return group.current = false
                 }
             })
         },
