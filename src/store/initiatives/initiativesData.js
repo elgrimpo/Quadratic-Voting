@@ -20,6 +20,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 1236,
+    userVotes: 0,
     text: 'As a protocol, Umbra defines a simple set of standards, coupled with a singleton smart contract instance, to enable stealth addresses on Ethereum. With a stealth address, a payer can send Ether or ERC20 tokens to an address controlled by the receiver, but no one except the two parties know who that receiver is.  On chain, the transaction looks like a simple transfer to an otherwise unused address on the Ethereum network. Off chain, the sender has used a public key  published by the receiver using ENS to generate the new address. By encrypting the data used to generate the address, and announcing it via the Umbra smart contract, the sender can let the receiver know theyve sent them a payment to a new stealth address. Only the receiver can generate the private key needed to withdraw the funds. By leveraging meta-transactions Umbra enables withdrawers to pay relayers for gas using the tokens theyve received. This avoids the need to fund stealth addresses with Ether before withdrawing.'
   },
   {
@@ -38,6 +40,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 233,
+    userVotes: 0,
     text: '',
   },
   {
@@ -56,6 +60,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 336,
+    userVotes: 0,
     text: '',
   },
   {
@@ -74,6 +80,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 3469,
+    userVotes: 0,
     text: '',
   },
   {
@@ -92,6 +100,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 8890,
+    userVotes: 0,
     text: '',
   },
   {
@@ -110,6 +120,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 236,
+    userVotes: 0,
     text: '',
   },
   {
@@ -130,6 +142,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 342,
+    userVotes: 0,
     text: '',
   },
   {
@@ -148,6 +162,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 36,
+    userVotes: 0,
     text: '',
   },
   {
@@ -166,6 +182,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 853,
+    userVotes: 0,
     text: '',
   },
   {
@@ -184,6 +202,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 3245,
+    userVotes: 0,
     text: '',
   },
   {
@@ -202,6 +222,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 2345,
+    userVotes: 0,
     text: '',
   },
   {
@@ -220,6 +242,8 @@ export const initiativeList = [
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 180,
+    userVotes: 0,
     text: '',
   },
 ];

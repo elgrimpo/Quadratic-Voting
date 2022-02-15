@@ -1,17 +1,29 @@
 //React Imports
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
-import { Typography, Stack, Link, Divider, Avatar } from "@mui/material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Stack,
+  Link,
+  Divider,
+  Avatar,
+  Chip,
+} from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { selectCurrentInitiative } from '../../store/initiatives/initiativesSlice'
-import { selectCurrentGroup } from '../../store/groups/groupsSlice'
-import {selectUsers} from '../../store/users/usersSlice'
+import {VoteControl} from '../index'
+import { selectCurrentInitiative } from "../../store/initiatives/initiativesSlice";
+import { selectCurrentGroup } from "../../store/groups/groupsSlice";
+import { selectUsers } from "../../store/users/usersSlice";
 
 /* ----------- COMPONENT -------------- */
 
@@ -22,17 +34,14 @@ const Sidebar = (props) => {
   const currentGroup = useSelector(selectCurrentGroup);
   const users = useSelector(selectUsers);
 
-  const sidebarContent = currentInitiative ? currentInitiative :
-    currentGroup;
+  const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
 
-  const owner = users.find(user => user.id === sidebarContent.userID)
-
-
+  const owner = users.find((user) => user.id === sidebarContent.userID);
 
   return (
     <Stack
       id="sidebar"
-      spacing={2}
+      spacing={1}
       sx={{
         bgcolor: {
           xs: "background.paper",
@@ -45,7 +54,7 @@ const Sidebar = (props) => {
 
       <Typography variant="h5">{sidebarContent.title}</Typography>
       <Typography>{sidebarContent.description}</Typography>
-      <Divider />
+      <Divider sx={{mt:"16px", mb:"16px"}}/>
 
       {/* --->Links <--- */}
 
@@ -72,6 +81,34 @@ const Sidebar = (props) => {
         src={owner.image}
         sx={{ width: 48, height: 48 }}
       />
+      <Divider />
+
+      {/* ---> Votes <--- */}
+
+      <Typography variant="h7" >
+        Available vote credits
+      </Typography>
+      <Typography color="primary" variant="h5" >
+      {currentGroup.remainingVotes}
+          </Typography>
+
+      {sidebarContent === currentInitiative ? (
+        <Box>
+          <Typography variant="h7" sx={{ display: "block", mb: 1 }}>
+            Received votes:
+          </Typography>
+          <Typography color="primary" variant="h5" >
+      {currentInitiative.totalVotes}
+          </Typography>
+
+          <Typography variant="h7" sx={{ display: "block" }}>
+            Cast vote
+          </Typography>
+          <VoteControl initiative={currentInitiative}/>
+        </Box>
+      ) : (
+        ""
+      )}
     </Stack>
   );
 };

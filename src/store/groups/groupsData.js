@@ -6,6 +6,8 @@ export const groupList = [{
     image: 'https://images.unsplash.com/photo-1641757625075-d018760a4fb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
     description: 'Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon. Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. ',
     userID: 0,
+    totalVotes: 100,
+    remainingVotes: 100,
     current: true,
 }, {
     id: 1,
@@ -13,6 +15,8 @@ export const groupList = [{
     image: 'https://images.unsplash.com/photo-1586892478025-2b5472316f22?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
     description: 'Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon. Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon.',
     userID: 4,
+    totalVotes: 100,
+    remainingVotes: 100,
     current: false,
 }, {
     id: 2,
@@ -20,6 +24,8 @@ export const groupList = [{
     image: 'https://images.unsplash.com/photo-1613645695025-20e3f38de4a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
     description: 'Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon. Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. ', 
     userID: 2,
+    totalVotes: 100,
+    remainingVotes: 100,
     current: false,
 }, {
     id: 3,
@@ -27,6 +33,8 @@ export const groupList = [{
     image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
     description: 'Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon. Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. Chuck spare ribs tongue  chuck cupim meatloaf. Short ribs flank ball tip ham tenderloin drumstick pork loin chislic bacon. Bacon ipsum dolor amet capicola tri-tip t-bone shoulder. ',
     userID: 3,
+    totalVotes: 100,
+    remainingVotes: 100,
     current: false,
 }
 ]

@@ -18,6 +18,7 @@ import {
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 //App Imports
+import {VoteControl} from '../../components/index'
 import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative  } from '../../store/initiatives/initiativesSlice'
 
 
@@ -83,13 +84,7 @@ const InitiativeCard = (props) => {
             key={props.initiative.id}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            <Button
-              key={props.initiative.id}
-              variant="contained"
-              startIcon={<ThumbUpOffAltIcon />}
-            >
-              Vote
-            </Button>
+            <VoteControl initiative={props.initiative}/>
           </CardActions>
         </Card>
       </Link>

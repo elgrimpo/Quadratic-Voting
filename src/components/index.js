@@ -8,4 +8,4 @@ export {default as InitiativeCard} from '../features/initiatives/initiative-card
 export {default as Chat} from '../features/chat/chat'
 export {default as NavSection} from './layout/nav-section'
 export {default as FormCreateInitiative} from '../features/initiatives/form-initiative-create'
-
+export {default as VoteControl} from './vote'
