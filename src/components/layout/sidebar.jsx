@@ -16,11 +16,11 @@ import LanguageIcon from "@mui/icons-material/Language";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import {VoteControl} from '../index'
+import { VoteControl } from "../index";
 import { selectCurrentInitiative } from "../../store/initiatives/initiativesSlice";
 import { selectCurrentGroup } from "../../store/groups/groupsSlice";
 import { selectUsers } from "../../store/users/usersSlice";
@@ -41,7 +41,7 @@ const Sidebar = (props) => {
   return (
     <Stack
       id="sidebar"
-      spacing={1}
+      spacing={2}
       sx={{
         bgcolor: {
           xs: "background.paper",
@@ -54,7 +54,7 @@ const Sidebar = (props) => {
 
       <Typography variant="h5">{sidebarContent.title}</Typography>
       <Typography>{sidebarContent.description}</Typography>
-      <Divider sx={{mt:"16px", mb:"16px"}}/>
+      <Divider sx={{ mt: "16px", mb: "16px" }} />
 
       {/* --->Links <--- */}
 
@@ -85,26 +85,31 @@ const Sidebar = (props) => {
 
       {/* ---> Votes <--- */}
 
-      <Typography variant="h7" >
-        Available vote credits
-      </Typography>
-      <Typography color="primary" variant="h5" >
-      {currentGroup.remainingVotes}
-          </Typography>
+      <Box>
+        <Typography variant="h7">Remaining vote credits</Typography>
+        <Typography color="primary" variant="h5">
+          {currentGroup.remainingVotes}
+        </Typography>
+      </Box>
 
       {sidebarContent === currentInitiative ? (
         <Box>
-          <Typography variant="h7" sx={{ display: "block", mb: 1 }}>
+          <Typography variant="h7" sx={{ display: "block" }}>
             Received votes:
           </Typography>
-          <Typography color="primary" variant="h5" >
-      {currentInitiative.totalVotes}
+          <Typography color="primary" variant="h5">
+            {currentInitiative.totalVotes}
           </Typography>
-
+        </Box>
+      ) : (
+        ""
+      )}
+      {sidebarContent === currentInitiative ? (
+        <Box>
           <Typography variant="h7" sx={{ display: "block" }}>
             Cast vote
           </Typography>
-          <VoteControl initiative={currentInitiative}/>
+          <VoteControl initiative={currentInitiative} />
         </Box>
       ) : (
         ""

@@ -1,21 +1,14 @@
 //React Imports
 import { useSelector, useDispatch } from "react-redux";
-import {useState, useEffect} from 'react'
 
 //MUI Imports
 import {
   Box,
   Typography,
   IconButton,
-  Stack,
-  Link,
-  Divider,
-  Avatar,
-  Chip,
+
 } from "@mui/material";
-import LanguageIcon from "@mui/icons-material/Language";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useTheme } from "@mui/material/styles";
@@ -24,7 +17,6 @@ import { useTheme } from "@mui/material/styles";
 
 import { selectCurrentInitiative, selectGroupInitiatives, changeUserVote } from "../store/initiatives/initiativesSlice";
 import { selectCurrentGroup, updateVoteCredits } from "../store/groups/groupsSlice";
-import { selectUsers } from "../store/users/usersSlice";
 
 /* ----------- COMPONENT -------------- */
 
