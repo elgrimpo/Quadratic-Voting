@@ -36,6 +36,8 @@ function FormCreateInitiative(props) {
     website: "",
     instagram: "",
     twitter: "",
+    totalVotes: 0,
+    userVotes: 0,
     text: ""
   });
 
@@ -153,7 +155,7 @@ function FormCreateInitiative(props) {
             name="text"
             label="Content"
             type="string"
-            value={formValues.description}
+            value={formValues.text}
             onChange={handleInputChange}
             multiline
             rows={8}

@@ -37,18 +37,19 @@ const InitiativeCard = (props) => {
 
   return (
     <Grid item key={props.initiative.id}>
-      <Link
-        key={props.initiative.id}
-        to="/initiativedetails"
-        style={{ textDecoration: "none" }}
-        onClick={() => {
-          handleListItemClick(props.initiative.id);
-        }}
-      >
+      
         <Card
           style={{ paddingBottom: 10 }}
           key={props.initiative.id}
         >
+          <Link
+        key={props.initiative.id}
+        to="/initiativedetails"
+        style={{ textDecoration: "none", color: 'inherit' }}
+        onClick={() => {
+          handleListItemClick(props.initiative.id);
+        }}
+      >
           <CardActionArea key={props.initiative.id}>
             <CardMedia
               key={props.initiative.id}
@@ -80,6 +81,7 @@ const InitiativeCard = (props) => {
               </Typography>
             </CardContent>
           </CardActionArea>
+          </Link>
           <CardActions
             key={props.initiative.id}
             style={{ display: "flex", justifyContent: "center" }}
@@ -87,7 +89,7 @@ const InitiativeCard = (props) => {
             <VoteControl initiative={props.initiative}/>
           </CardActions>
         </Card>
-      </Link>
+      
     </Grid>
   );
 };

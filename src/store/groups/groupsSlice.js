@@ -20,11 +20,8 @@ const groupsSlice = createSlice({
         },
         updateVoteCredits: (state, action) => {
             const index = state.findIndex((obj => obj.id === action.payload.id));
-            const array = action.payload.array;
-            const poweredArray = array.map(vote => Math.pow(vote,2));
-            state[index].remainingVotes =state[index].totalVotes - poweredArray.reduce((partialSum, a) => partialSum + a, 0)
-         
- 
+            const usedVotes = action.payload.usedVotes;
+            state[index].remainingVotes =state[index].totalVotes - usedVotes
         }
     }
 })

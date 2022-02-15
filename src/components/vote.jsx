@@ -40,16 +40,20 @@ const VoteControl = (props) => {
 
 
   const handleVote = (number) => {
-    dispatch(changeUserVote({id: props.initiative.id, number: number}))
-    const voteCount = groupInitiatives.map(initiative => {
+    
+    
+    const votesSquared = groupInitiatives.map(initiative => {
       if (initiative.id === props.initiative.id) {
-        return initiative.userVotes + number
+        return Math.pow(initiative.userVotes + number, 2)
       } else {
-        return initiative.userVotes
+        return Math.pow(initiative.userVotes, 2)
       }
     })
-    console.log(voteCount)
-    dispatch(updateVoteCredits({id: currentGroup.id, array:voteCount}))
+    const usedVotes = votesSquared.reduce((partialSum, a) => partialSum + a, 0)
+
+    if (currentGroup.totalVotes - usedVotes >= 0) {
+    dispatch(changeUserVote({id: props.initiative.id, number: number}))
+    dispatch(updateVoteCredits({id: currentGroup.id, usedVotes:usedVotes}))}
   };
 
 
