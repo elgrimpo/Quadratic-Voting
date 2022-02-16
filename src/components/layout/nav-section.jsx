@@ -75,15 +75,12 @@ function NavSection(props) {
           {props.items.map((item) => (
             <Link key={item.id} to="/" style={{ textDecoration: "none" }}>
               <ListItemButton
-                
-                key={item.id}
                 selected={item.current === true}
                 onClick={() => {
                   handleListItemClick(item.id);
                 }}
               >
                 <ListItemText
-                  key={item.id}
                   primary={item.title}
                 />
               </ListItemButton>

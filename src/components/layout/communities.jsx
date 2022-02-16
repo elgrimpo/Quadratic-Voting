@@ -72,13 +72,12 @@ const Communities = (props) => {
                 : {}
             }
           >
-            <Card key={community.id} sx={{ maxWidth: 50, maxHeight: 50 }}>
-              <CardActionArea key={community.id}>
+            <Card sx={{ maxWidth: 50, maxHeight: 50 }}>
+              <CardActionArea >
                 <CardMedia
                   component="img"
                   height="56"
                   image={community.image}
-                  key={community.id}
                 />
               </CardActionArea>
             </Card>
@@ -92,7 +91,7 @@ const Communities = (props) => {
       <Avatar 
 
       style={{ border: `2px solid ${theme.palette.primary.light}` }}
-        alt={currentUser.name}
+        alt={currentUser.id.toString()}
         src={currentUser.image}
         sx={{ width: 54, height: 54, marginBottom:'16px' }}
         onClick={handleClick}

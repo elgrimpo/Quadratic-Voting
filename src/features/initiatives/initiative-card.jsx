@@ -36,39 +36,36 @@ const InitiativeCard = (props) => {
   }
 
   return (
-    <Grid item key={props.initiative.id}>
+    <Grid item key={props.initiative.id} 
+ 
+  >
       
         <Card
-          style={{ paddingBottom: 10 }}
-          key={props.initiative.id}
+          style={{ paddingBottom: 10}}
+          
         >
           <Link
-        key={props.initiative.id}
         to="/initiativedetails"
         style={{ textDecoration: "none", color: 'inherit' }}
         onClick={() => {
           handleListItemClick(props.initiative.id);
         }}
       >
-          <CardActionArea key={props.initiative.id}>
+          <CardActionArea >
             <CardMedia
-              key={props.initiative.id}
               component="img"
-              alt="green iguana"
               height="140"
               image={props.initiative.image}
             />
-            <CardContent key={props.initiative.id}>
+            <CardContent >
               <Typography
                 gutterBottom
                 variant="h5"
                 component="div"
-                key={props.initiative.id}
               >
                 {props.initiative.title}
               </Typography>
               <Typography
-                key={props.initiative.id}
                 style={{
                   display: "-webkit-box",
                   WebkitBoxOrient: "vertical",
@@ -83,7 +80,6 @@ const InitiativeCard = (props) => {
           </CardActionArea>
           </Link>
           <CardActions
-            key={props.initiative.id}
             style={{ display: "flex", justifyContent: "center" }}
           >
             <VoteControl initiative={props.initiative}/>

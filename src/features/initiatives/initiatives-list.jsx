@@ -35,6 +35,7 @@ const InitiativesList = (props) => {
 
   return (
     <div>
+   
       <Fab
         color="inherit"
         aria-label="open drawer"
@@ -56,7 +57,7 @@ const InitiativesList = (props) => {
 
       <img
         src={currentGroup.image}
-        alt={currentGroup.title}
+        alt={currentGroup.title.toString()}
         style={{
           width: "100%",
           height: "300px",
@@ -69,17 +70,20 @@ const InitiativesList = (props) => {
       <Grid
         sx={{
           flexGrow: 1,
-          padding: "20px",
+          padding: "20px",          
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
-        }}
-        container
-        spacing={{ xs: 2, md: 2 }}
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
 
-        justifyContent="center"
+
+          
+        }}
+   
+        container
+        spacing={{ xs: 2, md: 2, lg: 2, xl:2 }}
+        justifyContent= "center"
       >
-        {groupInitiatives.map((initiative) => (
-          <InitiativeCard initiative={initiative} />
+        {groupInitiatives.map((initiative, index) => (
+          <InitiativeCard key={index+initiative.id} initiative={initiative} />
         ))}
       </Grid>
 

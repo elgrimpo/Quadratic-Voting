@@ -44,7 +44,7 @@ const InitiativeDetails = (props) => {
         {/* Banner image */}
         <img
           src={currentInitiative.image}
-          alt={currentInitiative.title}
+          alt={currentInitiative.title.toString()}
           style={{
             width: "100%",
             height: "450px",
