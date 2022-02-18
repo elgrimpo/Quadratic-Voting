@@ -44,7 +44,7 @@ function MainNav(props) {
       <div>
         {/* Dropdown Button */}
         <Button
-          id="community-menu"
+          id="community-menu-dropdown"
           sx={{
             display: "flex",
             alignItems: "center",

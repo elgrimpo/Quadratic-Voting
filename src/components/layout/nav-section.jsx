@@ -1,6 +1,6 @@
 //React Imports
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
 import {
@@ -15,22 +15,25 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
-import { removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
-import {selectGroups, selectCurrentGroup, setCurrentGroup} from '../../store/groups/groupsSlice'
+import { removeCurrentInitiativeSelection } from "../../store/initiatives/initiativesSlice";
+import {
+  selectGroups,
+  selectCurrentGroup,
+  setCurrentGroup,
+} from "../../store/groups/groupsSlice";
 
 /* ----------- COMPONENT -------------- */
 
 function NavSection(props) {
-  
-  const groups = useSelector(selectGroups)
-  const currentGroup = useSelector(selectCurrentGroup)
+  const groups = useSelector(selectGroups);
+  const currentGroup = useSelector(selectCurrentGroup);
   const dispatch = useDispatch();
 
-
   function handleListItemClick(id) {
-    if (props.title === 'Groups') {
+    if (props.title === "Groups") {
       dispatch(setCurrentGroup(id));
-      dispatch(removeCurrentInitiativeSelection())}
+      dispatch(removeCurrentInitiativeSelection());
+    }
   }
 
   return (
@@ -73,16 +76,14 @@ function NavSection(props) {
           }}
         >
           {props.items.map((item) => (
-            <Link key={item.id} to="/" style={{ textDecoration: "none" }}>
+            <Link key={item.id} to={"/groups/" + item.id} style={{ textDecoration: "none" }}>
               <ListItemButton
                 selected={item.current === true}
                 onClick={() => {
                   handleListItemClick(item.id);
                 }}
               >
-                <ListItemText
-                  primary={item.title}
-                />
+                <ListItemText primary={item.title} />
               </ListItemButton>
             </Link>
           ))}

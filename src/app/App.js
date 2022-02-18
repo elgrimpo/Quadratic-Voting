@@ -1,7 +1,7 @@
 //React Imports
 import "../styles/App.css";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 //MUI Imports
 import {
@@ -103,14 +103,23 @@ function App(props) {
             sx={{ overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
           >
             <Routes>
-              <Route
+            <Route
+                exact
                 path="/"
+                render={() => {
+                    return (
+                      <Navigate to="/groups/0" /> 
+                    )
+                }}
+              />
+              <Route
+                path="/groups/:groupId"
                 element={
                   <InitiativesList handleDrawerToggle={handleDrawerToggle} />
                 }
               />
               <Route
-                path="/initiativedetails"
+                path="/initiatives/:initiativeId"
                 element={
                   <InitiativeDetails handleDrawerToggle={handleDrawerToggle} />
                 }

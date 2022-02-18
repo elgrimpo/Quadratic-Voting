@@ -45,7 +45,7 @@ const InitiativeCard = (props) => {
           
         >
           <Link
-        to="/initiativedetails"
+        to={"/initiatives/" + props.initiative.id}
         style={{ textDecoration: "none", color: 'inherit' }}
         onClick={() => {
           handleListItemClick(props.initiative.id);
