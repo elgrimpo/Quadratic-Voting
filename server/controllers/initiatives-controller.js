@@ -1,5 +1,5 @@
 // App imports
-import InitiativeMessage from '../models/initiatives.js'
+import InitiativeMessage from '../models/initiatives-model.js'
 
 
 export const getInitiatives = async (req, res) => {

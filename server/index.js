@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 
 // App imports
-import initiativeRoutes from './routes/initiatives.js'
+import initiativeRoutes from './routes/initiatives-routes.js'
 
 const app = express()
 app.use(express.json())

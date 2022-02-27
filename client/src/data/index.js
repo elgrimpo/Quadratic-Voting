@@ -1,5 +1,0 @@
-export {channelList} from '../store/channels/channelsData'
-export {communityList} from '../store/communities/communitiesData'
-export {groupList} from '../store/groups/groupsData'
-export {initiativeList} from '../store/initiatives/initiativesData'
-export {userList} from '../store/users/usersData.js'
