@@ -6,6 +6,6 @@ import {getInitiatives, createInitiative} from '../controllers/initiatives.js'
 const router = express.Router();
 
 router.get('/', getInitiatives);
-router.post('/createinitiative', createInitiative)
+router.post('/', createInitiative)
 
 export default router

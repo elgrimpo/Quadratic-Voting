@@ -5,6 +5,7 @@ import InitiativeMessage from '../models/initiatives.js'
 export const getInitiatives = async (req, res) => {
     try {
         const initiativeMessages = await InitiativeMessage.find()
+        console.log(initiativeMessages)
         res.status(200).json(initiativeMessages)
     } catch (error) {
         res.status(404).json({message: error.message})

@@ -1,7 +1,9 @@
 //React Imports
 import "../styles/App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 //MUI Imports
 import {
@@ -19,6 +21,7 @@ import {
   MainNav,
   Sidebar,
 } from "../components";
+import { fetchInitiatives } from "../store/initiatives/initiativesSlice";
 
 import { lightTheme } from "../styles/themeProvider";
 
@@ -37,6 +40,12 @@ function App(props) {
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchInitiatives())
+  }, [dispatch])
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
