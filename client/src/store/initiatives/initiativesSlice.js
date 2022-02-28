@@ -52,7 +52,7 @@ const initiativesSlice = createSlice({
       state.list.push(newInitiative);
     }, */
     changeUserVote: (state, action) => {
-      const Index = state.list.findIndex((obj) => obj.id === action.payload.id);
+      const Index = state.list.findIndex((obj) => obj._id === action.payload.id);
       state.list[Index].userVotes += action.payload.number;
       state.list[Index].totalVotes += action.payload.number;
     },
