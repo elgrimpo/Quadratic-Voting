@@ -23,7 +23,7 @@ const InitiativesList = (props) => {
   const currentInitiative = useSelector(selectCurrentInitiative);
   const groupInitiatives = useSelector(selectGroupInitiatives);
   const currentGroup = useSelector(selectCurrentGroup);
-
+  console.log(groupInitiatives)
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -83,7 +83,7 @@ const InitiativesList = (props) => {
         justifyContent= "center"
       >
         {groupInitiatives.map((initiative, index) => (
-          <InitiativeCard key={index+initiative.id} initiative={initiative} />
+          <InitiativeCard key={index+initiative._id} initiative={initiative} />
         ))}
       </Grid>
 

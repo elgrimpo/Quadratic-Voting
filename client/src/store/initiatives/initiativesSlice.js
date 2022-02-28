@@ -34,7 +34,7 @@ const initiativesSlice = createSlice({
   reducers: {
     setCurrentInitiative: (state, action) => {
       state.list.map((initiative) => {
-        if (initiative.id === action.payload) {
+        if (initiative._id === action.payload) {
           initiative.current = true;
         } else {
           initiative.current = false;
@@ -48,7 +48,7 @@ const initiativesSlice = createSlice({
     }, /*
     createInitiative: (state, action) => {
       const newInitiative = action.payload;
-      newInitiative.id = state.length;
+      newInitiative._id = state.length;
       state.list.push(newInitiative);
     }, */
     changeUserVote: (state, action) => {
@@ -63,7 +63,6 @@ const initiativesSlice = createSlice({
     },
     [fetchInitiatives.fulfilled]: (state, action) => {
       state.list = action.payload
-      console.log(action.payload)
       state.status = 'success'
     },
     [fetchInitiatives.rejected]: (state, payload) => {
@@ -74,7 +73,6 @@ const initiativesSlice = createSlice({
     },
     [createInitiative.fulfilled]: (state, action) => {
       state.list.push(action.payload)
-      console.log(action.payload)
       state.status = 'success'
     },
     [createInitiative.rejected]: (state, payload) => {

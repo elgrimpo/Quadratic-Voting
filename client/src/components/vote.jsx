@@ -31,7 +31,7 @@ const VoteControl = (props) => {
 
   const handleVote = (number) => {
     const votesSquared = groupInitiatives.map((initiative) => {
-      if (initiative.id === props.initiative.id) {
+      if (initiative._id === props.initiative._id) {
         return Math.pow(initiative.userVotes + number, 2); // update selected initiative and power^2
       } else {
         return Math.pow(initiative.userVotes, 2); // power^2 all other votes for initiatives within the same group
@@ -40,7 +40,7 @@ const VoteControl = (props) => {
     const usedVotes = votesSquared.reduce((partialSum, a) => partialSum + a, 0);
 
     if (currentGroup.totalVotes - usedVotes >= 0) {
-      dispatch(changeUserVote({ id: props.initiative.id, number: number }));
+      dispatch(changeUserVote({ id: props.initiative._id, number: number }));
       dispatch(
         updateVoteCredits({ id: currentGroup.id, usedVotes: usedVotes })
       );

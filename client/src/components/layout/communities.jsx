@@ -17,7 +17,6 @@ import {selectCommunities, selectCurrentCommunity} from '../../store/communities
 
 const Communities = (props) => {
   const theme = useTheme();
-
   const currentUser = useSelector(selectCurrentUser)
   const communities = useSelector(selectCommunities)
   const currentCommunity = useSelector(selectCurrentCommunity)

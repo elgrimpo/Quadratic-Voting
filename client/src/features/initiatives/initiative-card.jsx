@@ -36,7 +36,7 @@ const InitiativeCard = (props) => {
   }
 
   return (
-    <Grid item key={props.initiative.id} 
+    <Grid item key={props.initiative._id} 
  
   >
       
@@ -45,10 +45,10 @@ const InitiativeCard = (props) => {
           
         >
           <Link
-        to={"/initiatives/" + props.initiative.id}
+        to={"/initiatives/" + props.initiative._id}
         style={{ textDecoration: "none", color: 'inherit' }}
         onClick={() => {
-          handleListItemClick(props.initiative.id);
+          handleListItemClick(props.initiative._id);
         }}
       >
           <CardActionArea >

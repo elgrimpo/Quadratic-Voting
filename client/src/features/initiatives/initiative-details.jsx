@@ -13,7 +13,7 @@ import TabPanel from "@mui/lab/TabPanel";
 
 //App Imports
 import { TabNav, Chat } from "../../components/index";
-import { selectGroupInitiatives, removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
+import { selectGroupInitiatives, selectInitiatives, removeCurrentInitiativeSelection } from '../../store/initiatives/initiativesSlice'
 import {selectGroups} from '../../store/groups/groupsSlice'
 
 
@@ -23,14 +23,12 @@ import {selectGroups} from '../../store/groups/groupsSlice'
 const InitiativeDetails = (props) => {
 
   const initiativeId = useParams().initiativeId
-  const initiatives = useSelector(selectGroupInitiatives)
+  const initiatives = useSelector(selectInitiatives)
+
   const groups = useSelector(selectGroups)
-  const currentInitiative = initiatives.find((initiative) => initiative.id === parseInt(initiativeId))
+  const currentInitiative = initiatives.find((initiative) => initiative._id === initiativeId)
   const currentGroup = groups.find((group) => group.id === currentInitiative.groupID);
   const dispatch = useDispatch()
-
-  console.log(initiatives)
-  console.log(initiativeId)
 
   const [value, setValue] = React.useState("Overview");
 
