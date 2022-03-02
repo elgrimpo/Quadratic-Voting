@@ -6,6 +6,7 @@ const initiativeSchema = new mongoose.Schema({
     groupID: Number,
     title: { type: String, required: true },
     image: String,
+    description: String,
     status: String,
     votes: {
         type: Number,
@@ -24,6 +25,6 @@ const initiativeSchema = new mongoose.Schema({
 })
 
 
-const InitiativeMessage = mongoose.model('InitiativeMessage', initiativeSchema);
+const InitiativeSchema = mongoose.model('InitiativeSchema', initiativeSchema);
 
-export default InitiativeMessage
+export default InitiativeSchema

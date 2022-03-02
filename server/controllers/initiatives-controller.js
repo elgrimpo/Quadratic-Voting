@@ -1,12 +1,11 @@
 // App imports
-import InitiativeMessage from '../models/initiatives-model.js'
+import InitiativeSchema from '../models/initiatives-model.js'
 
 
 export const getInitiatives = async (req, res) => {
     try {
-        const initiativeMessages = await InitiativeMessage.find()
-        console.log(initiativeMessages)
-        res.status(200).json(initiativeMessages)
+        const initiativeSchemas = await InitiativeSchema.find()
+        res.status(200).json(initiativeSchemas)
     } catch (error) {
         res.status(404).json({message: error.message})
     }
@@ -14,7 +13,7 @@ export const getInitiatives = async (req, res) => {
 
 export const createInitiative = async (req, res) => {
     const initiative = req.body
-    const newInitiative = new InitiativeMessage(initiative)
+    const newInitiative = new InitiativeSchema(initiative)
     try {
         await newInitiative.save()
         res.status(201).json(newInitiative)
