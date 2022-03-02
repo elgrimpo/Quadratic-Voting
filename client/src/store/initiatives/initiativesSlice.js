@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { initiativeList } from "./initiativesData";
 import { selectCurrentGroup } from "../groups/groupsSlice.js";
 import * as api from "../../api";
+
 const initialInitiatives = {
   status: null,
   list: []
@@ -91,6 +92,8 @@ export const selectGroupInitiatives = (state) => {
 };
 export const selectCurrentInitiative = (state) =>
   state.initiatives.list.find((initiative) => initiative.current === true);
+
+  export const selectInitiativeLoadingStatus = (state) => state.initiatives.status 
 
 
 /*-------- Exports ---------- */

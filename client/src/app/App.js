@@ -22,7 +22,7 @@ import {
   Sidebar,
 } from "../components";
 import { fetchInitiatives } from "../store/initiatives/initiativesSlice";
-
+import { selectGroupInitiatives, selectInitiativeLoadingStatus, removeCurrentInitiativeSelection } from '../store/initiatives/initiativesSlice'
 import { lightTheme } from "../styles/themeProvider";
 
 /* ----------- COMPONENT -------------- */
@@ -41,16 +41,30 @@ function App(props) {
     setDrawerOpen(!drawerOpen);
   };
 
+  const container =
+  window !== undefined ? () => window().document.body : undefined;
+  
   const dispatch = useDispatch()
-
+  const initiativeStatus = useSelector(selectInitiativeLoadingStatus)  
+  
   useEffect(() => {
     dispatch(fetchInitiatives())
   }, [dispatch])
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  // Check if data is fetched from database
+  let isLoading = true
+  if (initiativeStatus !== 'success') {
+    isLoading = true
+  } else {
+    isLoading = false
+  }
 
+
+
+  
   return (
+  isLoading ? ( <Box></Box> ) :
+    (
       <Box
         style={{
           height: "100%",
@@ -66,6 +80,7 @@ function App(props) {
           },
         }}
       >
+        
         {/* ---> Navigation <--- */}
 
         <Drawer
@@ -143,8 +158,8 @@ function App(props) {
           <Sidebar />
         </Box>
       </Box>
-
-  );
+      )
+  )
 }
 
 export default App;

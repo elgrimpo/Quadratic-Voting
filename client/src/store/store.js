@@ -4,10 +4,10 @@ import groupsReducer from './groups/groupsSlice'
 import usersReducer from './users/usersSlice'
 import communitiesReducer from './communities/communitiesSlice'
 import channelsReducer from './channels/channelsSlice'
+import {fetchInitiatives} from './initiatives/initiativesSlice'
 
 
-
-export default configureStore({
+export const store = configureStore({
   reducer: {
     initiatives: initiativesReducer,
     groups: groupsReducer,
@@ -16,3 +16,5 @@ export default configureStore({
     channels: channelsReducer,
   }
 });
+
+store.dispatch(fetchInitiatives());
