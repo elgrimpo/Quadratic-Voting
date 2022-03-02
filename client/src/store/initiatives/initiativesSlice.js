@@ -46,12 +46,7 @@ const initiativesSlice = createSlice({
       state.list.map((initiative) => {
         initiative.current = false;
       });
-    }, /*
-    createInitiative: (state, action) => {
-      const newInitiative = action.payload;
-      newInitiative._id = state.length;
-      state.list.push(newInitiative);
-    }, */
+    }, 
     changeUserVote: (state, action) => {
       const Index = state.list.findIndex((obj) => obj._id === action.payload.id);
       state.list[Index].userVotes += action.payload.number;
@@ -87,7 +82,7 @@ export const selectInitiatives = (state) => state.initiatives.list;
 export const selectGroupInitiatives = (state) => {
   const currentGroup = selectCurrentGroup(state);
   return state.initiatives.list.filter(
-    (initiative) => initiative.groupID === currentGroup.id
+    (initiative) => initiative.groupID === currentGroup._id
   );
 };
 export const selectCurrentInitiative = (state) =>

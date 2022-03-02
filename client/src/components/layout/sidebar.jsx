@@ -36,7 +36,7 @@ const Sidebar = (props) => {
 
   const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
 
-  const owner = users.find((user) => user.id === sidebarContent.userID);
+  const owner = users.find((user) => user.id === sidebarContent.ownerID);
 
   return (
     <Stack

@@ -32,7 +32,7 @@ function FormCreateInitiative(props) {
     title: "",
     image: "",
     description: "",
-    userID: currentUser.id,
+    ownerID: currentUser.id,
     website: "",
     instagram: "",
     twitter: "",
@@ -46,14 +46,13 @@ function FormCreateInitiative(props) {
     setFormValues({
       ...formValues,
       communityID: currentCommunity.id,
-      groupID: currentGroup.id,
+      groupID: currentGroup._id,
       [name]: value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formValues);
     dispatch(createInitiative(formValues));
     props.setOpen(false);
   };

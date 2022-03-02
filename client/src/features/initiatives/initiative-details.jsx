@@ -24,10 +24,9 @@ const InitiativeDetails = (props) => {
 
   const initiativeId = useParams().initiativeId
   const initiatives = useSelector(selectInitiatives)
-
   const groups = useSelector(selectGroups)
   const currentInitiative = initiatives.find((initiative) => initiative._id === initiativeId)
-  const currentGroup = groups.find((group) => group.id === currentInitiative.groupID);
+  const currentGroup = groups.find((group) => group._id === currentInitiative.groupID);
   const dispatch = useDispatch()
 
   const [value, setValue] = React.useState("Overview");
@@ -60,7 +59,7 @@ const InitiativeDetails = (props) => {
 
         {/* Back navigation */}
         <Box style={{ paddingLeft: 30, paddingTop: 12, paddingBottom: 12 }}>
-          <Link to={"/groups/" + currentGroup.id} style={{ textDecoration: "none", display: "flex" }}>
+          <Link to={"/groups/" + currentGroup._id} style={{ textDecoration: "none", display: "flex" }}>
             <Button
               variant="text"
               startIcon={<ArrowBackIcon />}

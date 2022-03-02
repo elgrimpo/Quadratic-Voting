@@ -23,7 +23,6 @@ const InitiativesList = (props) => {
   const currentInitiative = useSelector(selectCurrentInitiative);
   const groupInitiatives = useSelector(selectGroupInitiatives);
   const currentGroup = useSelector(selectCurrentGroup);
-  console.log(groupInitiatives)
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 

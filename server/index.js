@@ -4,13 +4,14 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 
 // App imports
-import initiativeRoutes from './routes/initiatives-routes.js'
+import {InitiativeRouter, GroupRouter} from './routes/routes.js'
 
 const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/initiatives', initiativeRoutes)
+app.use('/initiatives', InitiativeRouter)
+app.use('/groups', GroupRouter)
 
 
 //app.use(bodyParser.json({limit: '30mb', extended: true}))

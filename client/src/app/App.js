@@ -2,15 +2,10 @@
 import "../styles/App.css";
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
-import {
-  Box,
-  Paper,
-  Drawer,
-} from "@mui/material";
+import { Box, Paper, Drawer } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 //App Imports
@@ -22,8 +17,13 @@ import {
   Sidebar,
 } from "../components";
 import { fetchInitiatives } from "../store/initiatives/initiativesSlice";
-import { selectGroupInitiatives, selectInitiativeLoadingStatus, removeCurrentInitiativeSelection } from '../store/initiatives/initiativesSlice'
+import {
+  selectGroupInitiatives,
+  selectInitiativeLoadingStatus,
+  removeCurrentInitiativeSelection,
+} from "../store/initiatives/initiativesSlice";
 import { lightTheme } from "../styles/themeProvider";
+import { selectGroupLoadingStatus } from "../store/groups/groupsSlice";
 
 /* ----------- COMPONENT -------------- */
 
@@ -42,124 +42,118 @@ function App(props) {
   };
 
   const container =
-  window !== undefined ? () => window().document.body : undefined;
-  
-  const dispatch = useDispatch()
-  const initiativeStatus = useSelector(selectInitiativeLoadingStatus)  
-  
+    window !== undefined ? () => window().document.body : undefined;
+
+  const dispatch = useDispatch();
+  const initiativeStatus = useSelector(selectInitiativeLoadingStatus);
+  const groupStatus = useSelector(selectGroupLoadingStatus);
+
   useEffect(() => {
-    dispatch(fetchInitiatives())
-  }, [dispatch])
+    dispatch(fetchInitiatives());
+  }, [dispatch]);
 
   // Check if data is fetched from database
-  let isLoading = true
-  if (initiativeStatus !== 'success') {
-    isLoading = true
+  let isLoading = true;
+  if (initiativeStatus === "success" && groupStatus === "success") {
+    isLoading = false;
   } else {
-    isLoading = false
+    isLoading = true;
   }
 
+  return isLoading ? (
+    <Box></Box>
+  ) : (
+    <Box
+      style={{
+        height: "100%",
+        width: "100%",
+        background: "linear-gradient(175deg, #2C7772 30%, #264F60 90%)",
+      }}
+      sx={{
+        display: "grid",
+        gridTemplateColumns: {
+          lg: "380px 1fr 320px",
+          md: "1fr 320px",
+          sm: "1fr",
+        },
+      }}
+    >
+      {/* ---> Navigation <--- */}
 
-
-  
-  return (
-  isLoading ? ( <Box></Box> ) :
-    (
-      <Box
-        style={{
-          height: "100%",
-          width: "100%",
-          background: "linear-gradient(175deg, #2C7772 30%, #264F60 90%)",
+      <Drawer
+        container={container}
+        variant="temporary"
+        open={drawerOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: "grid",
-          gridTemplateColumns: {
-            lg: "380px 1fr 320px",
-            md: "1fr 320px",
-            sm: "1fr",
-          },
+          height: "100%",
+          "& .MuiDrawer-paper": { backgroundColor: "#2C7772" },
         }}
       >
-        
-        {/* ---> Navigation <--- */}
+        {drawer}
+      </Drawer>
+      <Drawer
+        variant="permanent"
+        sx={{
+          height: "100%",
+          display: { xs: "none", sm: "none", md: "none", lg: "block" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
 
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={drawerOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
+            backgroundColor: "transparent",
+          },
+        }}
+        open
+      >
+        {drawer}
+      </Drawer>
+
+      {/* ---> Main Content <--- */}
+
+      <ThemeProvider theme={lightTheme}>
+        <Paper
+          elevation={5}
+          style={{
             height: "100%",
-            "& .MuiDrawer-paper": { backgroundColor: "#2C7772" },
+            background: "white",
+            borderRadius: 0,
           }}
+          sx={{ overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
         >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            height: "100%",
-            display: { xs: "none", sm: "none", md: "none", lg: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-
-              backgroundColor: "transparent",
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-
-        {/* ---> Main Content <--- */}
-
-        <ThemeProvider theme={lightTheme}>
-          <Paper
-            elevation={5}
-            style={{
-              height: "100%",
-              background: "white",
-              borderRadius: 0,
-            }}
-            sx={{ overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
-          >
-            <Routes>
+          <Routes>
             <Route
-                exact
-                path="/"
-                render={() => {
-                    return (
-                      <Navigate to="/groups/0" /> 
-                    )
-                }}
-              />
-              <Route
-                path="/groups/:groupId"
-                element={
-                  <InitiativesList handleDrawerToggle={handleDrawerToggle} />
-                }
-              />
-              <Route
-                path="/initiatives/:initiativeId"
-                element={
-                  <InitiativeDetails handleDrawerToggle={handleDrawerToggle} />
-                }
-              />
-            </Routes>
-          </Paper>
-        </ThemeProvider>
+              exact
+              path="/"
+              render={() => {
+                return <Navigate to="/groups/0" />;
+              }}
+            />
+            <Route
+              path="/groups/:groupId"
+              element={
+                <InitiativesList handleDrawerToggle={handleDrawerToggle} />
+              }
+            />
+            <Route
+              path="/initiatives/:initiativeId"
+              element={
+                <InitiativeDetails handleDrawerToggle={handleDrawerToggle} />
+              }
+            />
+          </Routes>
+        </Paper>
+      </ThemeProvider>
 
-        {/* ---> Sidebar <--- */}
+      {/* ---> Sidebar <--- */}
 
-        <Box>
-          <Sidebar />
-        </Box>
+      <Box>
+        <Sidebar />
       </Box>
-      )
-  )
+    </Box>
+  );
 }
 
 export default App;

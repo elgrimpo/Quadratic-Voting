@@ -1,9 +1,8 @@
 import mongoose from 'mongoose'
 
 const initiativeSchema = new mongoose.Schema({
-    id: Number,
-    communityID: Number,
-    groupID: Number,
+    communityID: String,
+    groupID: String,
     title: { type: String, required: true },
     image: String,
     description: String,
@@ -11,7 +10,6 @@ const initiativeSchema = new mongoose.Schema({
     votes: {
         type: Number,
         default: 0},
-    userID: Number,
     contributors: String,
     website: String,
     instagram: String,

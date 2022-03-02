@@ -42,7 +42,7 @@ const VoteControl = (props) => {
     if (currentGroup.totalVotes - usedVotes >= 0) {
       dispatch(changeUserVote({ id: props.initiative._id, number: number }));
       dispatch(
-        updateVoteCredits({ id: currentGroup.id, usedVotes: usedVotes })
+        updateVoteCredits({ id: currentGroup._id, usedVotes: usedVotes })
       );
     }
   };
