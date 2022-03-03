@@ -36,18 +36,12 @@ const InitiativesList = (props) => {
     <div>
    
       <Fab
+        className= 'menu-button'
         color="inherit"
         aria-label="open drawer"
         edge="start"
         onClick={props.handleDrawerToggle}
-        sx={{
-          mr: 2,
-          display: { lg: "none" },
-          position: "fixed",
-          top: "16px",
-          left: "16px",
-          zIndex: 1
-        }}
+        sx={{ display: { lg: "none" } }}
       >
         <MenuIcon />
       </Fab>
@@ -55,31 +49,17 @@ const InitiativesList = (props) => {
       {/* ---> Image <--- */}
 
       <img
+        className = 'banner-image'
         src={currentGroup.image}
         alt={currentGroup.title.toString()}
-        style={{
-          width: "100%",
-          height: "300px",
-          objectFit: "cover",
-        }}
       />
 
       {/* ---> Initiative tiles <--- */}
 
       <Grid
-        sx={{
-          flexGrow: 1,
-          padding: "20px",          
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-
-
-          
-        }}
-   
+        id = 'initiatives-grid'
         container
-        spacing={{ xs: 2, md: 2, lg: 2, xl:2 }}
-        justifyContent= "center"
+        spacing = {2}
       >
         {groupInitiatives.map((initiative, index) => (
           <InitiativeCard key={index+initiative._id} initiative={initiative} />
@@ -89,8 +69,8 @@ const InitiativesList = (props) => {
       {/* ---> Button - Create new Initiative <--- */}
 
       <Fab
+        id = 'action-button'
         color="primary"
-        style={{ position: "fixed", bottom: 40, right: 40 }}
         onClick={handleOpen}
       >
         <AddIcon />

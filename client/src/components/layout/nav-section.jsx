@@ -40,21 +40,11 @@ function NavSection(props) {
     <Box>
       {/* ---> Header and Add Button <--- */}
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+      <Box id="navsection-header">
         <Typography
+          id="navsection-title"
           variant="h7"
-          sx={{
-            bgcolor: "transparent",
-            color: "primary.main",
-            verticalAlign: "middle",
-            paddingLeft: 1,
-          }}
+          sx={{ color: "primary.main" }}
         >
           {props.title}
         </Typography>
@@ -66,17 +56,13 @@ function NavSection(props) {
       {/* ---> Navigational Sections <--- */}
 
       <List sx={{ paddingTop: 0, mb: "20px" }} dense={true}>
-        <Paper
-          elevation={3}
-          sx={{
-            mt: 1,
-            boxShadow: "inset -1px 1px 2px 2px rgba(0, 0, 0, 0.1)",
-            borderRadius: 2,
-            padding: 1,
-          }}
-        >
+        <Paper id='navsection-backgroud' elevation={3}>
           {props.items.map((item) => (
-            <Link key={item._id} to={"/groups/" + item._id} style={{ textDecoration: "none" }}>
+            <Link
+              key={item._id}
+              to={"/groups/" + item._id}
+              style={{ textDecoration: "none" }}
+            >
               <ListItemButton
                 selected={item.current === true}
                 onClick={() => {

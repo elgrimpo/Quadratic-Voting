@@ -10,47 +10,33 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 /* ----------- COMPONENT -------------- */
 
-// Manage tab change 
+// Manage tab change
 function TabNav(props) {
   const handleChange = (event, newValue) => {
     props.setValue(newValue);
   };
 
   return (
- 
-
-
     <AppBar
-      style={{
-        position: "sticky",
-        top: 0,
-        width: "100%",
-        zIndex: 2,
-      }}
-      sx={{ display: "flex", bgcolor: "background.paper" }}
+      id='app-bar'
+      sx={{ bgcolor: "background.paper" }}
     >
-     
-     <IconButton
-    size="large"
-    aria-label="menu"
-    sx={{ mr: 2, display: { lg: "none" },
-  position: 'fixed',
-top: '0px',
-left: '16px', 
-zIndex: 1}}
-    onClick={props.handleDrawerToggle}
-  >
-    <MenuIcon />
-  </IconButton>
+      <IconButton
+        id='menu-icon'
+        size="large"
+        aria-label="menu"
+        sx={{ display: { lg: "none" } }}
+        onClick={props.handleDrawerToggle}
+      >
+        <MenuIcon />
+      </IconButton>
 
-        <TabList centered onChange={handleChange} sx={{justifySelf: 'center'}}>
-          <Tab label="Overview" value="Overview" />
-          <Tab label="Chat" value="Chat" />
-          <Tab label="Bounties" value="Bounties" />
-        </TabList>
-
+      <TabList centered onChange={handleChange} sx={{ justifySelf: "center" }}>
+        <Tab label="Overview" value="Overview" />
+        <Tab label="Chat" value="Chat" />
+        <Tab label="Bounties" value="Bounties" />
+      </TabList>
     </AppBar>
-
   );
 }
 

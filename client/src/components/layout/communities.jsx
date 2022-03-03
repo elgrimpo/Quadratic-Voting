@@ -33,18 +33,8 @@ const Communities = (props) => {
 
   return (
     <Box
-      id="communities"
-      sx={{
-        bgcolor: "background.paper",
-        boxShadow: "inset -3px 0px 4px 0px rgba(0, 0, 0, 0.2)",
-        width: '80px',
-      }}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: "center",
-      }}
+      id="communities-panel"
+      sx={{bgcolor: "background.paper" }}
     >
       <Stack
         sdirection="column"
@@ -56,15 +46,8 @@ const Communities = (props) => {
 
         {communities.map((community) => (
           <Box
+            id = "community-tile"
             key={community.id}
-            sx={{
-              width: 64,
-              height: 64,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "8px",
-            }}
             style={
               community.id === currentCommunity.id
                 ? { border: `4px solid ${theme.palette.primary.light}` }
@@ -88,11 +71,10 @@ const Communities = (props) => {
 
 <div>
       <Avatar 
-
+      id='avatar'
       style={{ border: `2px solid ${theme.palette.primary.light}` }}
         alt={currentUser.id.toString()}
         src={currentUser.image}
-        sx={{ width: 54, height: 54, marginBottom:'16px' }}
         onClick={handleClick}
       />
 

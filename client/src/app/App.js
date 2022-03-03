@@ -28,9 +28,10 @@ import { selectGroupLoadingStatus } from "../store/groups/groupsSlice";
 /* ----------- COMPONENT -------------- */
 
 function App(props) {
+
   // Drawer functions
   const drawer = (
-    <Box style={{ display: "flex", height: "100%", width: "100%" }}>
+    <Box id="drawer">
       <Communities />
       <MainNav />
     </Box>
@@ -64,13 +65,8 @@ function App(props) {
     <Box></Box>
   ) : (
     <Box
-      style={{
-        height: "100%",
-        width: "100%",
-        background: "linear-gradient(175deg, #2C7772 30%, #264F60 90%)",
-      }}
+      id = 'main-grid'
       sx={{
-        display: "grid",
         gridTemplateColumns: {
           lg: "380px 1fr 320px",
           md: "1fr 320px",
@@ -89,7 +85,6 @@ function App(props) {
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          height: "100%",
           "& .MuiDrawer-paper": { backgroundColor: "#2C7772" },
         }}
       >
@@ -98,11 +93,8 @@ function App(props) {
       <Drawer
         variant="permanent"
         sx={{
-          height: "100%",
           display: { xs: "none", sm: "none", md: "none", lg: "block" },
           "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-
             backgroundColor: "transparent",
           },
         }}
@@ -116,12 +108,7 @@ function App(props) {
       <ThemeProvider theme={lightTheme}>
         <Paper
           elevation={5}
-          style={{
-            height: "100%",
-            background: "white",
-            borderRadius: 0,
-          }}
-          sx={{ overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
+          sx={{ borderRadius: 0, overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
         >
           <Routes>
             <Route

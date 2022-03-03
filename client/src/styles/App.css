@@ -19,16 +19,50 @@ body {
   height: 100%;
 }
 
+/*------- App -------*/
 
-#communities {
-  width: 80px;
-  padding-top: 20px;
-  justify-content: center;
-  
+#main-grid {
+	height: 100%;
+    width: 100%;
+    background: linear-gradient(175deg, #2C7772 30%, #264F60 90%);
+	display: grid;
 }
 
-#main-content {
-	border-right: 1px solid lightgray;
+#drawer {
+	display: flex; 
+	height: 100%; 
+	width: 100%
+}
+
+
+/*------- Navigation -------*/
+
+/* Communities */
+
+#communities-panel {
+  width: 80px;
+  padding-top: 20px;
+  justify-content: space-between;
+  box-shadow: inset -3px 0px 4px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#community-tile {
+	width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+#avatar {
+	width: 54px; 
+	height: 54px; 
+	margin-bottom: 16px;
 }
 
 #tab-nav {
@@ -42,19 +76,111 @@ body {
 	border-radius: 10px 10px 0px 0px;
 }
 
-#communities {
-  width: 80px;
-  padding-top: 20px;
-  justify-content: center;
-  
+/* Main Nav */
+
+#community-menu-dropdown {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 8px;
+	border-radius: 8px;
+	margin-bottom: 16px;
+	padding: 16px;
+	box-shadow: 0px 1px 0px 2px rgba(0, 0, 0, 0.1);
 }
 
-#main-nav {
-padding-left: 16px; 
-padding-right: 16px
-
+#main-nav-panel {
+	padding-left: 16px; 
+	padding-right: 16px;
+	padding-top: 16px;
+	width: 300px;
 }
+
+
+/* Nav Section */
+
+#navsection-header {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#navsection-title {
+	background-color: transparent;
+	vertical-align: middle;
+	padding-left: 8px;
+}
+
+#navsection-backgroud {
+	margin-top: 8px;
+    box-shadow: inset -1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+
+/*------- Main Content -------*/
+
+/* Tab Nav */
+
+#app-bar {
+	position: sticky;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
+	display: flex;
+}
+
+#menu-icon {
+	margin-right: 16px;
+	position: fixed;
+	top: 0px;
+	left: 16px;
+	z-index: 1;
+}
+
+/* Initiatives List */
+
+#menu-button {
+	margin-right: 16px;
+	position: fixed;
+	top: 16px;
+	left: 16px;
+	z-index: 1;
+}
+
+.banner-image {
+	width: 100%;
+	height: 300px;
+    object-fit: cover;
+}
+
+#initiatives-grid {
+	flex-grow: 1;
+    padding: 20px;          
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	justify-content: center;
+}
+
+#action-button {
+	position: fixed; 
+	bottom: 40px;
+	right: 40px;
+}
+
+/* Initiative cards */
+
+
+
+/*------- Sidebar -------*/
 
 #sidebar {
-  padding: 30px;
+	padding: 30px;
+  }
+
+.link-icon {
+	margin-right: 8px; 
+	vertical-align: bottom;
 }

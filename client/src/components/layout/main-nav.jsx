@@ -38,25 +38,14 @@ function MainNav(props) {
   };
 
   return (
-    <Box id="main-nav" sx={{ paddingTop: "16px", width:'300px' }}>
+    <Box id="main-nav-panel">
       {/* ---> Community Menu <---*/}
 
       <div>
         {/* Dropdown Button */}
         <Button
           id="community-menu-dropdown"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            mt: 1,
-            borderRadius: 2,
-            bgcolor: "background.paper",
-            mb: "20px",
-            padding: 2,
-            boxShadow: "0px 1px 0px 2px rgba(0, 0, 0, 0.1)",
-          }}
+          sx={{bgcolor: "background.paper"}}
           onClick={handleClick}
         >
           {currentCommunity.name}
