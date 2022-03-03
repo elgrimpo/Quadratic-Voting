@@ -6,6 +6,7 @@ import communitiesReducer from './communities/communitiesSlice'
 import channelsReducer from './channels/channelsSlice'
 import {fetchInitiatives} from './initiatives/initiativesSlice'
 import {fetchGroups} from './groups/groupsSlice'
+import {fetchUsers} from './users/usersSlice'
 
 
 
@@ -22,3 +23,4 @@ export const store = configureStore({
 
 store.dispatch(fetchGroups());
 store.dispatch(fetchInitiatives());
+store.dispatch(fetchUsers());

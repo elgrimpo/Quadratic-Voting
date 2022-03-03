@@ -3,6 +3,7 @@ import express from 'express'
 //App imports
 import {getInitiatives, createInitiative} from '../controllers/initiatives-controller.js'
 import {getGroups, createGroup} from '../controllers/groups-controller.js'
+import {getUsers, createUser} from '../controllers/users-controller.js'
 
 
 
@@ -20,5 +21,8 @@ InitiativeRouter.get('/', getInitiatives);
 InitiativeRouter.post('/', createInitiative)
 
 
+// initiatives
+export const UserRouter = express.Router();
 
-
+UserRouter.get('/', getUsers);
+UserRouter.post('/', createUser) // frontend NOT YET IMPLEMENTED
