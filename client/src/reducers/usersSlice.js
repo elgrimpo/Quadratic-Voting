@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {userList} from './usersData'
-import * as api from "../../api";
+import * as api from "../api";
 
 const initialUsers = {
     status: null,

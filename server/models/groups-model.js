@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const groupSchema = new mongoose.Schema({
-    communityID: Number,
+    communityID: String,
     title: { type: String, required: true },
     image: String,
     description: String,

@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material';
 import {darkTheme, lightTheme} from './styles/themeProvider'
 import { Provider } from 'react-redux';
-import {store} from './store/store'
+import {store} from './app/store'
 
 
 ReactDOM.render(

@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {communityList} from './communitiesData'
-import * as api from "../../api";
+import * as api from "../api";
 
 const initialCommunities = {
     status: null,

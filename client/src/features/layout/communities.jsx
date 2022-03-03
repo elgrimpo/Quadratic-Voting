@@ -16,11 +16,11 @@ import {
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { selectCurrentUser } from "../../store/users/usersSlice";
+import { selectCurrentUser } from "../../reducers/usersSlice";
 import {
   selectCommunities,
   selectCurrentCommunity,
-} from "../../store/communities/communitiesSlice";
+} from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 

@@ -11,9 +11,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from '@mui/material/styles';
 
 // App Imports
-import { InitiativeCard, FormCreateInitiative } from "../../components/index";
-import { selectCurrentInitiative, selectGroupInitiatives } from '../../store/initiatives/initiativesSlice'
-import {selectCurrentGroup} from '../../store/groups/groupsSlice'
+import { InitiativeCard, FormCreateInitiative } from "../index.js";
+import { selectCurrentInitiative, selectGroupInitiatives } from '../../reducers/initiativesSlice'
+import {selectCurrentGroup} from '../../reducers/groupsSlice'
 
 
 /* ----------- COMPONENT -------------- */
@@ -36,7 +36,7 @@ const InitiativesList = (props) => {
     <div>
    
       <Fab
-        className= 'menu-button'
+        id= 'menu-button'
         color="inherit"
         aria-label="open drawer"
         edge="start"

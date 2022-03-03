@@ -7,11 +7,11 @@ import { Box, Menu, MenuItem, Button } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //App Imports
-import { NavSection } from "../index";
+import { NavSection } from "../index.js";
 
-import {selectGroups, selectCurrentGroup} from '../../store/groups/groupsSlice'
-import { selectCurrentCommunity} from '../../store/communities/communitiesSlice'
-import {selectChannels, selectCurrentChannel} from '../../store/channels/channelsSlice'
+import {selectGroups, selectCurrentGroup} from '../../reducers/groupsSlice'
+import { selectCurrentCommunity} from '../../reducers/communitiesSlice'
+import {selectChannels, selectCurrentChannel} from '../../reducers/channelsSlice'
 
 
 

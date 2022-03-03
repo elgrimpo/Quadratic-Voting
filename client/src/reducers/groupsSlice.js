@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {groupList} from './groupsData'
-import {selectInitiatives} from '../initiatives/initiativesSlice'
-import * as api from "../../api";
+import {selectInitiatives} from './initiativesSlice'
+import * as api from "../api";
 
 const initialGroups = {
     status: null,

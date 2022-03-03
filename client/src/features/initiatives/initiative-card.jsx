@@ -18,8 +18,8 @@ import {
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 //App Imports
-import {VoteControl} from '../../components/index'
-import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative  } from '../../store/initiatives/initiativesSlice'
+import {VoteControl} from '../index'
+import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative  } from '../../reducers/initiativesSlice'
 
 
 /* ----------- COMPONENT -------------- */

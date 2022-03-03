@@ -10,13 +10,13 @@ import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 
 //App Imports
-import { TabNav, Chat } from "../../components/index";
+import { TabNav, Chat } from "../index";
 import {
   selectGroupInitiatives,
   selectInitiatives,
   removeCurrentInitiativeSelection,
-} from "../../store/initiatives/initiativesSlice";
-import { selectGroups } from "../../store/groups/groupsSlice";
+} from "../../reducers/initiativesSlice";
+import { selectGroups } from "../../reducers/groupsSlice";
 
 /* ----------- COMPONENT -------------- */
 

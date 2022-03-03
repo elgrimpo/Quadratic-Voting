@@ -15,12 +15,12 @@ import {
   InitiativeDetails,
   MainNav,
   Sidebar,
-} from "../components";
-import { fetchInitiatives } from "../store/initiatives/initiativesSlice";
-import {selectInitiativeLoadingStatus } from "../store/initiatives/initiativesSlice";
-import {selectUserLoadingStatus} from "../store/users/usersSlice";
-import {selectCommunityLoadingStatus} from "../store/communities/communitiesSlice";
-import { selectGroupLoadingStatus } from "../store/groups/groupsSlice";
+} from "../features";
+import { fetchInitiatives } from "../reducers/initiativesSlice";
+import {selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
+import {selectUserLoadingStatus} from "../reducers/usersSlice";
+import {selectCommunityLoadingStatus} from "../reducers/communitiesSlice";
+import { selectGroupLoadingStatus } from "../reducers/groupsSlice";
 import { lightTheme } from "../styles/themeProvider";
 /* ----------- COMPONENT -------------- */
 

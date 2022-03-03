@@ -15,12 +15,12 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
-import { removeCurrentInitiativeSelection } from "../../store/initiatives/initiativesSlice";
+import { removeCurrentInitiativeSelection } from "../../reducers/initiativesSlice";
 import {
   selectGroups,
   selectCurrentGroup,
   setCurrentGroup,
-} from "../../store/groups/groupsSlice";
+} from "../../reducers/groupsSlice";
 
 /* ----------- COMPONENT -------------- */
 

@@ -13,10 +13,10 @@ import {
 } from "@mui/material";
 
 //App Imports
-import { createInitiative } from "../../store/initiatives/initiativesSlice";
-import { selectCurrentGroup } from "../../store/groups/groupsSlice";
-import { selectCurrentUser } from "../../store/users/usersSlice";
-import { selectCurrentCommunity } from "../../store/communities/communitiesSlice";
+import { createInitiative } from "../../reducers/initiativesSlice";
+import { selectCurrentGroup } from "../../reducers/groupsSlice";
+import { selectCurrentUser } from "../../reducers/usersSlice";
+import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 

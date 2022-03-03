@@ -21,9 +21,9 @@ import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import { VoteControl } from "../index";
-import { selectCurrentInitiative } from "../../store/initiatives/initiativesSlice";
-import { selectCurrentGroup } from "../../store/groups/groupsSlice";
-import { selectUsers } from "../../store/users/usersSlice";
+import { selectCurrentInitiative } from "../../reducers/initiativesSlice";
+import { selectCurrentGroup } from "../../reducers/groupsSlice";
+import { selectUsers } from "../../reducers/usersSlice";
 
 /* ----------- COMPONENT -------------- */
 
