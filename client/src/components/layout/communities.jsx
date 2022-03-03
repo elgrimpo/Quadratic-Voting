@@ -53,9 +53,9 @@ const Communities = (props) => {
         {communities.map((community) => (
           <Box
             id="community-tile"
-            key={community.id}
+            key={community._id}
             style={
-              community.id === currentCommunity.id
+              community._id === currentCommunity._id
                 ? { border: `4px solid ${theme.palette.primary.light}` }
                 : {}
             }
@@ -79,7 +79,7 @@ const Communities = (props) => {
         <Avatar
           id="avatar"
           style={{ border: `2px solid ${theme.palette.primary.light}` }}
-          alt={currentUser.id}
+          alt={currentUser._id}
           src={currentUser.image}
           onClick={handleClick}
         />

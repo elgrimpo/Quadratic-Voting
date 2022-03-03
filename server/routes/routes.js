@@ -4,7 +4,14 @@ import express from 'express'
 import {getInitiatives, createInitiative} from '../controllers/initiatives-controller.js'
 import {getGroups, createGroup} from '../controllers/groups-controller.js'
 import {getUsers, createUser} from '../controllers/users-controller.js'
+import {getCommunities, createCommunity} from '../controllers/communities-controller.js'
 
+
+// groups
+export const CommunityRouter = express.Router();
+
+CommunityRouter.get('/', getCommunities);
+CommunityRouter.post('/', createCommunity)  // frontend NOT YET IMPLEMENTED
 
 
 // groups
@@ -21,7 +28,7 @@ InitiativeRouter.get('/', getInitiatives);
 InitiativeRouter.post('/', createInitiative)
 
 
-// initiatives
+// users
 export const UserRouter = express.Router();
 
 UserRouter.get('/', getUsers);

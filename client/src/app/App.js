@@ -17,15 +17,11 @@ import {
   Sidebar,
 } from "../components";
 import { fetchInitiatives } from "../store/initiatives/initiativesSlice";
-import {
-  selectGroupInitiatives,
-  selectInitiativeLoadingStatus,
-  removeCurrentInitiativeSelection,
-} from "../store/initiatives/initiativesSlice";
+import {selectInitiativeLoadingStatus } from "../store/initiatives/initiativesSlice";
 import {selectUserLoadingStatus} from "../store/users/usersSlice";
-import { lightTheme } from "../styles/themeProvider";
+import {selectCommunityLoadingStatus} from "../store/communities/communitiesSlice";
 import { selectGroupLoadingStatus } from "../store/groups/groupsSlice";
-
+import { lightTheme } from "../styles/themeProvider";
 /* ----------- COMPONENT -------------- */
 
 function App(props) {
@@ -50,6 +46,7 @@ function App(props) {
   const initiativeStatus = useSelector(selectInitiativeLoadingStatus);
   const groupStatus = useSelector(selectGroupLoadingStatus);
   const userStatus = useSelector(selectUserLoadingStatus);
+  const communityStatus = useSelector(selectCommunityLoadingStatus);
 
   useEffect(() => {
     dispatch(fetchInitiatives());
@@ -57,7 +54,7 @@ function App(props) {
 
   // Check if data is fetched from database
   let isLoading = true;
-  if (initiativeStatus === "success" && groupStatus === "success" && userStatus === "success") {
+  if (initiativeStatus === "success" && groupStatus === "success" && userStatus === "success" && communityStatus === "success") {
     isLoading = false;
   } else {
     isLoading = true;

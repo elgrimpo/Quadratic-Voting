@@ -4,6 +4,9 @@ const url = 'http://localhost:5000'
 
 
 
+export const fetchCommunities = () => axios.get(`${url}/communities`)
+export const createCommunity = (community) => axios.post(`${url}/communities`, community) // frontend NOT YET IMPLEMENTED
+
 export const fetchInitiatives = () => axios.get(`${url}/initiatives`)
 export const createInitiative = (initiative) => axios.post(`${url}/initiatives`, initiative)
 

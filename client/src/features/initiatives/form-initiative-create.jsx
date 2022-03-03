@@ -32,7 +32,7 @@ function FormCreateInitiative(props) {
     title: "",
     image: "",
     description: "",
-    ownerID: currentUser.id,
+    ownerID: currentUser._id,
     website: "",
     instagram: "",
     twitter: "",
@@ -45,7 +45,7 @@ function FormCreateInitiative(props) {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      communityID: currentCommunity.id,
+      communityID: currentCommunity._id,
       groupID: currentGroup._id,
       [name]: value,
     });

@@ -11,7 +11,7 @@ const groupSchema = new mongoose.Schema({
     remainingVotes: {
         type: Number,
         default: 100},
-    ownerID: Number,
+    ownerID: String,
 })
 
 const GroupSchema = mongoose.model('GroupSchema', groupSchema);

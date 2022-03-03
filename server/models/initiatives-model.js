@@ -15,7 +15,7 @@ const initiativeSchema = new mongoose.Schema({
     instagram: String,
     twitter: String,
     totalVotes: Number,
-    ownerID: Number,
+    ownerID: String,
     userVotes: {
         type: Number,
         default: 0},

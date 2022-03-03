@@ -4,12 +4,13 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 
 // App imports
-import {InitiativeRouter, GroupRouter, UserRouter} from './routes/routes.js'
+import {CommunityRouter, InitiativeRouter, GroupRouter, UserRouter} from './routes/routes.js'
 
 const app = express()
 app.use(express.json())
 app.use(cors())
 
+app.use('/communities', CommunityRouter)
 app.use('/initiatives', InitiativeRouter)
 app.use('/groups', GroupRouter)
 app.use('/users', UserRouter)

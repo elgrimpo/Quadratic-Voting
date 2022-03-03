@@ -36,7 +36,7 @@ const Sidebar = (props) => {
 
   const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
 
-  const owner = users.find((user) => user.id === sidebarContent.ownerID);
+  const owner = users.find((user) => user._id === sidebarContent.ownerID);
 
   return (
     <Stack
@@ -77,7 +77,7 @@ const Sidebar = (props) => {
       <Typography variant="h7">Group admin</Typography>
       <Avatar
         style={{ border: `2px solid ${theme.palette.primary.light}` }}
-        alt={owner.toString()}
+        alt={owner._id}
         src={owner.image}
         sx={{ width: 48, height: 48 }}
       />
