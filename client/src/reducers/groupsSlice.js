@@ -33,15 +33,6 @@ const groupsSlice = createSlice({
     name: 'groups',
     initialState: initialGroups,
     reducers: {
-        setCurrentGroup: (state, action) => {
-            state.list.map(group => {
-                if (group._id === action.payload) {
-                    return group.current = true
-                } else {
-                    return group.current = false
-                }
-            })
-        },
         updateVoteCredits: (state, action) => {
             const index = state.list.findIndex((obj => obj._id === action.payload.id));
             const usedVotes = action.payload.usedVotes;
@@ -74,8 +65,6 @@ const groupsSlice = createSlice({
 
 /*-------- Selectors ---------- */
 export const selectGroups = (state) => state.groups.list
-export const selectCurrentGroup = (state) => state.groups.list.find((group) => group.current === true)
-
 export const selectGroupLoadingStatus = (state) => state.groups.status 
 
 

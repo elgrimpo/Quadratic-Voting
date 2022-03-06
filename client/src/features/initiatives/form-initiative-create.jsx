@@ -1,6 +1,7 @@
 //React Imports
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
 //MUI Imports
 import {
@@ -14,16 +15,20 @@ import {
 
 //App Imports
 import { createInitiative } from "../../reducers/initiativesSlice";
-import { selectCurrentGroup } from "../../reducers/groupsSlice";
+import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
-import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
+import { selectCommunities } from "../../reducers/communitiesSlice";
+import {findById} from "../../utils/find-by-id"
 
 /* ----------- COMPONENT -------------- */
 
 function FormCreateInitiative(props) {
-  const currentGroup = useSelector(selectCurrentGroup);
+  let { groupId, communityName } = useParams();
+  const groups = useSelector(selectGroups)
+  const currentGroup = findById(groups, groupId)
   const currentUser = useSelector(selectCurrentUser);
-  const currentCommunity = useSelector(selectCurrentCommunity);
+  const communities = useSelector(selectCommunities) 
+  const currentCommunity = communities.find((community) => community.name === communityName )
   const dispatch = useDispatch();
 
   const [formValues, setFormValues] = useState({

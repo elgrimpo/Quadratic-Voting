@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { selectCurrentGroup } from "./groupsSlice.js";
 import * as api from "../api";
 
 const initialInitiatives = {
@@ -32,20 +31,6 @@ const initiativesSlice = createSlice({
   name: "initiatives",
   initialState: initialInitiatives,
   reducers: {
-    setCurrentInitiative: (state, action) => {
-      state.list.map((initiative) => {
-        if (initiative._id === action.payload) {
-          initiative.current = true;
-        } else {
-          initiative.current = false;
-        }
-      });
-    },
-    removeCurrentInitiativeSelection: (state) => {
-      state.list.map((initiative) => {
-        initiative.current = false;
-      });
-    }, 
     changeUserVote: (state, action) => {
       const Index = state.list.findIndex((obj) => obj._id === action.payload.id);
       state.list[Index].userVotes += action.payload.number;
@@ -78,14 +63,6 @@ const initiativesSlice = createSlice({
 
 /*-------- Selectors ---------- */
 export const selectInitiatives = (state) => state.initiatives.list;
-export const selectGroupInitiatives = (state) => {
-  const currentGroup = selectCurrentGroup(state);
-  return state.initiatives.list.filter(
-    (initiative) => initiative.groupID === currentGroup._id
-  );
-};
-export const selectCurrentInitiative = (state) =>
-  state.initiatives.list.find((initiative) => initiative.current === true);
 
   export const selectInitiativeLoadingStatus = (state) => state.initiatives.status 
 

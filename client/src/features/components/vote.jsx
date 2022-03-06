@@ -1,5 +1,6 @@
 //React Imports
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
 //MUI Imports
 import { Box, Typography, IconButton } from "@mui/material";
@@ -14,19 +15,24 @@ import {
   selectCurrentInitiative,
   selectGroupInitiatives,
   changeUserVote,
+  selectInitiatives
 } from "../../reducers/initiativesSlice";
 import {
   selectCurrentGroup,
   updateVoteCredits,
+  selectGroups
 } from "../../reducers/groupsSlice";
+import {findById} from "../../utils/find-by-id"
 
 /* ----------- COMPONENT -------------- */
 
 const VoteControl = (props) => {
-  const theme = useTheme();
-
-  const groupInitiatives = useSelector(selectGroupInitiatives);
-  const currentGroup = useSelector(selectCurrentGroup);
+  let { groupId } = useParams();
+  const groups = useSelector(selectGroups)
+  const initiatives = useSelector(selectInitiatives)
+  const groupInitiatives = initiatives.filter((initiative) => 
+    initiative.groupID === groupId);
+  const currentGroup = findById(groups, groupId)
   const dispatch = useDispatch();
 
   const handleVote = (number) => {

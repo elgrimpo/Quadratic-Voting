@@ -1,8 +1,7 @@
 //React Imports
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-
+import { Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
 import {
@@ -18,52 +17,33 @@ import {
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 //App Imports
-import {VoteControl} from '../index'
-import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative  } from '../../reducers/initiativesSlice'
-
+import { VoteControl } from "../index";
+import {
+  selectGroupInitiatives,
+  setCurrentInitiative,
+} from "../../reducers/initiativesSlice";
 
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativeCard = (props) => {
-
-  const groupInitiatives = useSelector(selectGroupInitiatives);
-  const currentInitiative = useSelector(selectCurrentInitiative)
-  const dispatch = useDispatch()
-
-
-  function handleListItemClick(id) {
-    dispatch(setCurrentInitiative(id));
-  }
+  let { groupId, communityName } = useParams();
 
   return (
-    <Grid item key={props.initiative._id} 
- 
-  >
-      
-        <Card
-          style={{ paddingBottom: 10}}
-          
+    <Grid item key={props.initiative._id}>
+      <Card style={{ paddingBottom: 10 }}>
+        <Link
+          to={`/${communityName}/group/${groupId}/initiative/${props.initiative._id}`}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
-          <Link
-        to={`/phoenix/group/621f01df4fb8bd2e064e14f0/initiative/${props.initiative._id}`} //to be updated
-        style={{ textDecoration: "none", color: 'inherit' }}
-        onClick={() => {
-          handleListItemClick(props.initiative._id);
-        }}
-      >
-          <CardActionArea >
+          <CardActionArea>
             <CardMedia
               component="img"
               height="140"
               image={props.initiative.image}
             />
-            <CardContent >
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-              >
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
                 {props.initiative.title}
               </Typography>
               <Typography
@@ -79,14 +59,11 @@ const InitiativeCard = (props) => {
               </Typography>
             </CardContent>
           </CardActionArea>
-          </Link>
-          <CardActions
-            style={{ display: "flex", justifyContent: "center" }}
-          >
-            <VoteControl initiative={props.initiative}/>
-          </CardActions>
-        </Card>
-      
+        </Link>
+        <CardActions style={{ display: "flex", justifyContent: "center" }}>
+          <VoteControl initiative={props.initiative} />
+        </CardActions>
+      </Card>
     </Grid>
   );
 };

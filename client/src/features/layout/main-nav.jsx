@@ -10,9 +10,10 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 //App Imports
 import { NavSection } from "../index.js";
 
-import {selectGroups, selectCurrentGroup} from '../../reducers/groupsSlice'
-import { selectCurrentCommunity} from '../../reducers/communitiesSlice'
+import {selectGroups} from '../../reducers/groupsSlice'
+import { selectCommunities} from '../../reducers/communitiesSlice'
 import {selectChannels, selectCurrentChannel} from '../../reducers/channelsSlice'
+import {findById} from "../../utils/find-by-id"
 
 
 
@@ -22,8 +23,11 @@ function MainNav(props) {
   
   //state variables
   const groups = useSelector(selectGroups)
-  const currentGroup = useSelector(selectCurrentGroup)
-  const currentCommunity = useSelector(selectCurrentCommunity)
+  let { groupId, communityName } = useParams();
+  const currentGroup = findById(groups, groupId)
+  const communities = useSelector(selectCommunities) 
+  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName )
+
   const channels = useSelector(selectChannels)
   const currentChannel = useSelector(selectCurrentChannel)
 

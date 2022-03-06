@@ -1,6 +1,7 @@
 //React Imports
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
 //MUI Imports
 import {
@@ -26,9 +27,11 @@ import {
 
 const Communities = (props) => {
   const theme = useTheme();
+  let { communityName } = useParams();
   const currentUser = useSelector(selectCurrentUser);
-  const communities = useSelector(selectCommunities);
-  const currentCommunity = useSelector(selectCurrentCommunity);
+  const communities = useSelector(selectCommunities) 
+  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName )
+ 
 
   // Menu controls
   const [anchorEl, setAnchorEl] = React.useState(null);

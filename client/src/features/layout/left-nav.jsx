@@ -1,6 +1,14 @@
 //React Imports
 import React, { useEffect, useContext } from "react";
-import { Routes, Route, Navigate, useMatch, matchPath, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useMatch,
+  matchPath,
+  useLocation,
+  Outlet,
+} from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -16,9 +24,6 @@ import {
   MainNav,
   Sidebar,
 } from "../../features";
-
-
-
 
 /* ----------- COMPONENT -------------- */
 
@@ -36,39 +41,50 @@ function LeftNav(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-
   return (
-    <Box>
-      {/* ---> Navigation <--- */}
+    <Box
+      id="main-grid"
+      sx={{
+        gridTemplateColumns: {
+          lg: "380px 1fr",
+          md: "1fr",
+          sm: "1fr",
+        },
+      }}
+    >
+      <Box>
+        {/* ---> Navigation <--- */}
 
-      <Drawer
-        container={container}
-        variant="temporary"
-        open={props.drawerOpen}
-        onClose={props.handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          "& .MuiDrawer-paper": { backgroundColor: "#2C7772" },
-        }}
-      >
-        {drawer}
-      </Drawer>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", sm: "none", md: "none", lg: "block" },
-          "& .MuiDrawer-paper": {
-            backgroundColor: "transparent",
-          },
-        }}
-        open
-      >
-        {drawer}
-      </Drawer>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={props.drawerOpen}
+          onClose={props.handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            "& .MuiDrawer-paper": { backgroundColor: "#2C7772" },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", sm: "none", md: "none", lg: "block" },
+            "& .MuiDrawer-paper": {
+              backgroundColor: "transparent",
+            },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      <Outlet />
     </Box>
-      )
-      }
+  );
+}
 
-      export default LeftNav;
+export default LeftNav;

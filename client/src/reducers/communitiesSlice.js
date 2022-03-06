@@ -37,8 +37,6 @@ const communitiesSlice = createSlice({
 
 /*-------- Selectors ---------- */
 export const selectCommunities = (state) => state.communities.list;
-export const selectCurrentCommunity = (state) => state.communities.list.find((community) => community.current === true)
-
 export const selectCommunityLoadingStatus = (state) => state.communities.status 
 
 /*-------- Exports ---------- */

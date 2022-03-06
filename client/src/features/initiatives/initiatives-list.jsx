@@ -12,19 +12,21 @@ import { useTheme, ThemeProvider } from "@mui/material/styles";
 
 // App Imports
 import { InitiativeCard, FormCreateInitiative, Sidebar } from "../index.js";
-import {
-  selectCurrentInitiative,
-  selectGroupInitiatives,
-} from "../../reducers/initiativesSlice";
-import { selectCurrentGroup } from "../../reducers/groupsSlice";
+import { selectInitiatives } from "../../reducers/initiativesSlice";
+import { selectGroups } from "../../reducers/groupsSlice";
 import { lightTheme } from "../../styles/themeProvider";
+import { findById } from "../../utils/find-by-id"
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
-  const currentInitiative = useSelector(selectCurrentInitiative);
-  const groupInitiatives = useSelector(selectGroupInitiatives);
-  const currentGroup = useSelector(selectCurrentGroup);
+  const groupId = useParams().groupId;
+  const initiatives = useSelector(selectInitiatives)
+  const groupInitiatives = initiatives.filter((initiative) => 
+    initiative.groupID === groupId);
+  const groups = useSelector(selectGroups)
+  const currentGroup = findById(groups, groupId)
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -72,8 +74,8 @@ const InitiativesList = (props) => {
 
             <img
               className="banner-image"
-              src={currentGroup.image}
-              alt={currentGroup.title.toString()}
+              src={currentGroup.image} //to be updated
+              alt={currentGroup.title} //to be updated
             />
 
             {/* ---> Initiative tiles <--- */}
@@ -104,7 +106,9 @@ const InitiativesList = (props) => {
           </Box>
         </Paper>
       </ThemeProvider>
-      <Box>
+
+      {/* ---> Sidebar <--- */}
+      <Box >
         <Sidebar />
       </Box>
     </Box>

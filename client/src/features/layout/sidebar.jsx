@@ -22,18 +22,22 @@ import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import { VoteControl } from "../index";
-import { selectCurrentInitiative } from "../../reducers/initiativesSlice";
-import { selectCurrentGroup } from "../../reducers/groupsSlice";
+import { selectGroupInitiatives, selectInitiatives } from "../../reducers/initiativesSlice";
+import { selectGroups } from "../../reducers/groupsSlice";
 import { selectUsers } from "../../reducers/usersSlice";
+import {findById} from "../../utils/find-by-id"
 
 /* ----------- COMPONENT -------------- */
 
 const Sidebar = (props) => {
   const theme = useTheme();
-
-  const currentInitiative = useSelector(selectCurrentInitiative);
-  const currentGroup = useSelector(selectCurrentGroup);
+  const {initiativeId, groupId} = useParams();
+  const initiatives = useSelector(selectInitiatives)
+  const groups = useSelector(selectGroups)
   const users = useSelector(selectUsers);
+  const currentInitiative = findById(initiatives, initiativeId)
+  const currentGroup = findById(groups, groupId)
+ 
 
   const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
 

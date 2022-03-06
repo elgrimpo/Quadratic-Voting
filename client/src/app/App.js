@@ -1,7 +1,14 @@
 //React Imports
 import "../styles/App.css";
 import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useMatch, matchPath, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useMatch,
+  matchPath,
+  useLocation,
+} from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -16,22 +23,25 @@ import {
   InitiativeDetails,
   MainNav,
   Sidebar,
-  LeftNav
+  LeftNav,
 } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
 import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
-import {selectUserLoadingStatus} from "../reducers/usersSlice";
-import {selectCommunityLoadingStatus, selectCommunities} from "../reducers/communitiesSlice";
+import { selectUserLoadingStatus } from "../reducers/usersSlice";
+import {
+  selectCommunityLoadingStatus,
+  selectCommunities,
+} from "../reducers/communitiesSlice";
 import { selectGroupLoadingStatus } from "../reducers/groupsSlice";
 import { lightTheme } from "../styles/themeProvider";
-
 
 /* ----------- COMPONENT -------------- */
 
 function App(props) {
   const dispatch = useDispatch();
+
   
-  // Drawer functions 
+  // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -50,7 +60,12 @@ function App(props) {
 
   // Check if data is fetched from database
   let isLoading = true;
-  if (initiativeStatus === "success" && groupStatus === "success" && userStatus === "success" && communityStatus === "success") {
+  if (
+    initiativeStatus === "success" &&
+    groupStatus === "success" &&
+    userStatus === "success" &&
+    communityStatus === "success"
+  ) {
     isLoading = false;
   } else {
     isLoading = true;
@@ -59,43 +74,38 @@ function App(props) {
   return isLoading ? (
     <Box></Box>
   ) : (
-    <Box
-      id = 'main-grid'
-      sx={{
-        gridTemplateColumns: {
-          lg: "380px 1fr",
-          md: "1fr",
-          sm: "1fr",
-        },
-      }}
-    >
-      {/* ---> Navigation <--- */}
+    <Box sx={{height:'100 vh'}} >
+      <Routes>
 
-      <LeftNav props={props} drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>
+        {/* ---> Navigation <--- */}
 
-      {/* ---> Main Content <--- */}
-
-      
-          <Routes>
-
-            <Route
-              path="/:communityId/group/:groupId"
-              element={
-                <InitiativesList handleDrawerToggle={handleDrawerToggle} />
-              }
+        <Route
+          path=":communityName"
+          element={
+            <LeftNav
+              props={props}
+              drawerOpen={drawerOpen}
+              handleDrawerToggle={handleDrawerToggle}
             />
-            <Route
-              path="/:communityId/group/:groupId/initiative/:initiativeId"
-              element={
-                <InitiativeDetails handleDrawerToggle={handleDrawerToggle} />
-              }
-            />
-          </Routes>
-        
+          }
+        >
+          {/* ---> Main Content: Initiative List <--- */}
+          <Route
+            path="group/:groupId"
+            element={
+              <InitiativesList handleDrawerToggle={handleDrawerToggle} />
+            }
+          />
 
-      {/* ---> Sidebar <--- */}
-
-      
+          {/* ---> Main Content: Initiative Details <--- */}
+          <Route
+            path="group/:groupId/initiative/:initiativeId"
+            element={
+              <InitiativeDetails handleDrawerToggle={handleDrawerToggle} />
+            }
+          />
+        </Route>
+      </Routes>
     </Box>
   );
 }

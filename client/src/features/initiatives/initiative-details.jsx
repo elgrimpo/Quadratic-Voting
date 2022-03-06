@@ -19,26 +19,20 @@ import {
   removeCurrentInitiativeSelection,
 } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
+import {findById} from "../../utils/find-by-id"
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativeDetails = (props) => {
-  const initiativeId = useParams().initiativeId;
+
+  let {groupId, communityName, initiativeId} = useParams() 
   const initiatives = useSelector(selectInitiatives);
   const groups = useSelector(selectGroups);
-  const currentInitiative = initiatives.find(
-    (initiative) => initiative._id === initiativeId
-  );
-  const currentGroup = groups.find(
-    (group) => group._id === currentInitiative.groupID
-  );
+  const currentInitiative = findById(initiatives, initiativeId)
   const dispatch = useDispatch();
 
   const [value, setValue] = React.useState("Overview");
 
-  const handleClick = () => {
-    dispatch(removeCurrentInitiativeSelection());
-  };
   return (
     <Box
     sx={{
@@ -76,13 +70,12 @@ const InitiativeDetails = (props) => {
         {/* Back navigation */}
         <Box style={{ paddingLeft: 30, paddingTop: 12, paddingBottom: 12 }}>
           <Link
-            to={"/groups/" + currentGroup._id}
+            to={`/${communityName}/group/${groupId}`}
             style={{ textDecoration: "none", display: "flex" }}
           >
             <Button
               variant="text"
               startIcon={<ArrowBackIcon />}
-              onClick={handleClick}
             >
               Back to overview
             </Button>
