@@ -31,20 +31,11 @@ import { lightTheme } from "../styles/themeProvider";
 function App(props) {
   const dispatch = useDispatch();
   
-  // Drawer functions
-  const drawer = (
-    <Box id="drawer">
-      <Communities />
-      <MainNav />
-    </Box>
-  );
-  const { window } = props;
+  // Drawer functions 
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   // Data fetching variables
   const initiativeStatus = useSelector(selectInitiativeLoadingStatus);
@@ -72,8 +63,8 @@ function App(props) {
       id = 'main-grid'
       sx={{
         gridTemplateColumns: {
-          lg: "380px 1fr 320px",
-          md: "1fr 320px",
+          lg: "380px 1fr",
+          md: "1fr",
           sm: "1fr",
         },
       }}
@@ -84,11 +75,7 @@ function App(props) {
 
       {/* ---> Main Content <--- */}
 
-      <ThemeProvider theme={lightTheme}>
-        <Paper
-          elevation={5}
-          sx={{ borderRadius: 0, overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
-        >
+      
           <Routes>
 
             <Route
@@ -104,14 +91,11 @@ function App(props) {
               }
             />
           </Routes>
-        </Paper>
-      </ThemeProvider>
+        
 
       {/* ---> Sidebar <--- */}
 
-      <Box>
-        <Sidebar />
-      </Box>
+      
     </Box>
   );
 }

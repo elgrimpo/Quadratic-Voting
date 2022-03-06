@@ -4,13 +4,15 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Button, Paper } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
+import {  ThemeProvider } from "@mui/material/styles";
+import { lightTheme } from "../../styles/themeProvider";
 
 //App Imports
-import { TabNav, Chat } from "../index";
+import { TabNav, Chat, Sidebar } from "../index";
 import {
   selectGroupInitiatives,
   selectInitiatives,
@@ -38,6 +40,21 @@ const InitiativeDetails = (props) => {
     dispatch(removeCurrentInitiativeSelection());
   };
   return (
+    <Box
+    sx={{
+      display: 'grid',
+      gridTemplateColumns: {
+        lg: "1fr 320px",
+        md: "1fr 320px",
+        sm: "1fr",
+      },
+    }} >
+    
+    <ThemeProvider theme={lightTheme}>
+        <Paper
+          elevation={5}
+          sx={{ borderRadius: 0, overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
+        >
     <TabContext value={value}>
       {/* ---> Tabs <--- */}
 
@@ -85,6 +102,12 @@ const InitiativeDetails = (props) => {
         <Chat currentInitiative={currentInitiative.title} />
       </TabPanel>
     </TabContext>
+    </Paper>
+      </ThemeProvider>
+      <Box>
+        <Sidebar />
+      </Box>
+    </Box>
   );
 };
 
