@@ -34,14 +34,7 @@ import { selectGroups } from "../reducers/groupsSlice";
 function App(props) {
   const dispatch = useDispatch();
 
-  const communities = useSelector(selectCommunities);
-  const groups = useSelector(selectGroups);
-  const communityName = useMatch(":communityName/*").params.communityName;
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase());
-  const communityGroups = groups.filter(
-    (group) => group.communityID === currentCommunity._id);
-  const firstGroupId = communityGroups[0]._id
+
 
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -54,6 +47,16 @@ function App(props) {
   const groupStatus = useSelector(selectGroupLoadingStatus);
   const userStatus = useSelector(selectUserLoadingStatus);
   const communityStatus = useSelector(selectCommunityLoadingStatus);
+
+  // Identify initial Group for redirecting
+  const communities = useSelector(selectCommunities);
+  const groups = useSelector(selectGroups);
+  const communityName = useMatch(":communityName/*").params.communityName;
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase());
+  const communityGroups = groups.filter(
+    (group) => group.communityID === currentCommunity._id);
+
 
   //to be checked if actually needed??
   useEffect(() => {
@@ -71,6 +74,11 @@ function App(props) {
     isLoading = false;
   } else {
     isLoading = true;
+  }
+
+  let firstGroupId = null
+  if (!isLoading) {
+    firstGroupId = communityGroups[0]._id
   }
 
   return isLoading ? (
