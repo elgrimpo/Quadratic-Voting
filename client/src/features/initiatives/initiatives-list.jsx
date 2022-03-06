@@ -2,6 +2,7 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { Link, useParams } from "react-router-dom";
 
 
 // MUI Imports

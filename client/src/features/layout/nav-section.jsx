@@ -1,6 +1,8 @@
 //React Imports
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import React, { useContext } from "react";
+
 
 //MUI Imports
 import {
@@ -26,8 +28,12 @@ import {
 
 function NavSection(props) {
   const groups = useSelector(selectGroups);
-  const currentGroup = useSelector(selectCurrentGroup);
+  //const currentGroup = useSelector(selectCurrentGroup);
   const dispatch = useDispatch();
+
+  let {groupId} = useParams()
+
+ 
 
   function handleListItemClick(id) {
     if (props.title === "Groups") {
@@ -35,6 +41,7 @@ function NavSection(props) {
       dispatch(removeCurrentInitiativeSelection());
     }
   }
+
 
   return (
     <Box>
@@ -60,7 +67,7 @@ function NavSection(props) {
           {props.items.map((item) => (
             <Link
               key={item._id}
-              to={"/groups/" + item._id}
+              to={`/${groupId}/group/${item._id}`} //to be updated
               style={{ textDecoration: "none" }}
             >
               <ListItemButton

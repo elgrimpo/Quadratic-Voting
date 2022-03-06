@@ -22,6 +22,7 @@ import {VoteControl} from '../index'
 import { selectCurrentInitiative, selectGroupInitiatives, setCurrentInitiative  } from '../../reducers/initiativesSlice'
 
 
+
 /* ----------- COMPONENT -------------- */
 
 const InitiativeCard = (props) => {
@@ -45,7 +46,7 @@ const InitiativeCard = (props) => {
           
         >
           <Link
-        to={"/initiatives/" + props.initiative._id}
+        to={`/phoenix/group/621f01df4fb8bd2e064e14f0/initiative/${props.initiative._id}`} //to be updated
         style={{ textDecoration: "none", color: 'inherit' }}
         onClick={() => {
           handleListItemClick(props.initiative._id);

@@ -1,11 +1,12 @@
 //React Imports
 import "../styles/App.css";
 import React, { useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useMatch, matchPath, useLocation } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
-import { Box, Paper, Drawer } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
 //App Imports
@@ -15,17 +16,21 @@ import {
   InitiativeDetails,
   MainNav,
   Sidebar,
+  LeftNav
 } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
-import {selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
+import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
 import {selectUserLoadingStatus} from "../reducers/usersSlice";
-import {selectCommunityLoadingStatus} from "../reducers/communitiesSlice";
+import {selectCommunityLoadingStatus, selectCommunities} from "../reducers/communitiesSlice";
 import { selectGroupLoadingStatus } from "../reducers/groupsSlice";
 import { lightTheme } from "../styles/themeProvider";
+
+
 /* ----------- COMPONENT -------------- */
 
 function App(props) {
-
+  const dispatch = useDispatch();
+  
   // Drawer functions
   const drawer = (
     <Box id="drawer">
@@ -38,16 +43,16 @@ function App(props) {
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const dispatch = useDispatch();
+  // Data fetching variables
   const initiativeStatus = useSelector(selectInitiativeLoadingStatus);
   const groupStatus = useSelector(selectGroupLoadingStatus);
   const userStatus = useSelector(selectUserLoadingStatus);
   const communityStatus = useSelector(selectCommunityLoadingStatus);
 
+  //to be checked if actually needed??
   useEffect(() => {
     dispatch(fetchInitiatives());
   }, [dispatch]);
@@ -75,32 +80,7 @@ function App(props) {
     >
       {/* ---> Navigation <--- */}
 
-      <Drawer
-        container={container}
-        variant="temporary"
-        open={drawerOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          "& .MuiDrawer-paper": { backgroundColor: "#2C7772" },
-        }}
-      >
-        {drawer}
-      </Drawer>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", sm: "none", md: "none", lg: "block" },
-          "& .MuiDrawer-paper": {
-            backgroundColor: "transparent",
-          },
-        }}
-        open
-      >
-        {drawer}
-      </Drawer>
+      <LeftNav props={props} drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>
 
       {/* ---> Main Content <--- */}
 
@@ -110,21 +90,15 @@ function App(props) {
           sx={{ borderRadius: 0, overflow: { sm: "visible", md: "scroll", lg: "scroll" } }}
         >
           <Routes>
+
             <Route
-              exact
-              path="/"
-              render={() => {
-                return <Navigate to="/groups/0" />;
-              }}
-            />
-            <Route
-              path="/groups/:groupId"
+              path="/:communityId/group/:groupId"
               element={
                 <InitiativesList handleDrawerToggle={handleDrawerToggle} />
               }
             />
             <Route
-              path="/initiatives/:initiativeId"
+              path="/:communityId/group/:groupId/initiative/:initiativeId"
               element={
                 <InitiativeDetails handleDrawerToggle={handleDrawerToggle} />
               }
