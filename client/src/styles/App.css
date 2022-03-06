@@ -22,7 +22,7 @@ body {
 /*------- App -------*/
 
 #main-grid {
-	height: 100%;
+	height: 100vh;
     width: 100%;
     background: linear-gradient(175deg, #2C7772 30%, #264F60 90%);
 	display: grid;
@@ -100,19 +100,19 @@ body {
 
 /* Nav Section */
 
-#navsection-header {
+#groupsection-header {
 	display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#navsection-title {
+#groupsection-title {
 	background-color: transparent;
 	vertical-align: middle;
 	padding-left: 8px;
 }
 
-#navsection-backgroud {
+#groupsection-backgroud {
 	margin-top: 8px;
     box-shadow: inset -1px 1px 2px 2px rgba(0, 0, 0, 0.1);
     border-radius: 8px;

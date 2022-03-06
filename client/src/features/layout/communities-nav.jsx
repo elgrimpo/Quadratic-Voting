@@ -22,6 +22,7 @@ import {
   selectCommunities,
   selectCurrentCommunity,
 } from "../../reducers/communitiesSlice";
+import {selectGroups} from '../../reducers/groupsSlice'
 
 /* ----------- COMPONENT -------------- */
 
@@ -30,7 +31,7 @@ const Communities = (props) => {
   let { communityName } = useParams();
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities) 
-  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName )
+  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName.toLowerCase() )
  
 
   // Menu controls
@@ -63,6 +64,11 @@ const Communities = (props) => {
                 : {}
             }
           >
+            <Link
+              key={community._id}
+              to={`/${community.name}`} //to be updated
+              style={{ textDecoration: "none" }}
+            >
             <Card sx={{ maxWidth: 50, maxHeight: 50 }}>
               <CardActionArea>
                 <CardMedia
@@ -72,6 +78,7 @@ const Communities = (props) => {
                 />
               </CardActionArea>
             </Card>
+            </Link>
           </Box>
         ))}
       </Stack>

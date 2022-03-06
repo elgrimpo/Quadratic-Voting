@@ -26,7 +26,7 @@ import {
 
 /* ----------- COMPONENT -------------- */
 
-function NavSection(props) {
+function GroupsSection(props) {
 
   let { communityName, groupId } = useParams() 
 
@@ -34,9 +34,9 @@ function NavSection(props) {
     <Box>
       {/* ---> Header and Add Button <--- */}
 
-      <Box id="navsection-header">
+      <Box id="groupsection-header">
         <Typography
-          id="navsection-title"
+          id="groupsection-title"
           variant="h7"
           sx={{ color: "primary.main" }}
         >
@@ -50,7 +50,7 @@ function NavSection(props) {
       {/* ---> Navigational Sections <--- */}
 
       <List sx={{ paddingTop: 0, mb: "20px" }} dense={true}>
-        <Paper id='navsection-backgroud' elevation={3}>
+        <Paper id='groupsection-backgroud' elevation={3}>
           {props.items.map((item) => (
             <Link
               key={item._id}
@@ -70,4 +70,4 @@ function NavSection(props) {
   );
 }
 
-export default NavSection;
+export default GroupsSection;

@@ -6,24 +6,18 @@ import {
   Route,
   Navigate,
   useMatch,
-  matchPath,
-  useLocation,
 } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
 import { Box, Paper } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
 
 //App Imports
 import {
-  Communities,
   InitiativesList,
   InitiativeDetails,
-  MainNav,
-  Sidebar,
-  LeftNav,
+  Layout,
 } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
 import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
@@ -33,14 +27,22 @@ import {
   selectCommunities,
 } from "../reducers/communitiesSlice";
 import { selectGroupLoadingStatus } from "../reducers/groupsSlice";
-import { lightTheme } from "../styles/themeProvider";
+import { selectGroups } from "../reducers/groupsSlice";
 
 /* ----------- COMPONENT -------------- */
 
 function App(props) {
   const dispatch = useDispatch();
 
-  
+  const communities = useSelector(selectCommunities);
+  const groups = useSelector(selectGroups);
+  const communityName = useMatch(":communityName/*").params.communityName;
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase());
+  const communityGroups = groups.filter(
+    (group) => group.communityID === currentCommunity._id);
+  const firstGroupId = communityGroups[0]._id
+
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -74,22 +76,27 @@ function App(props) {
   return isLoading ? (
     <Box></Box>
   ) : (
-    <Box sx={{height:'100 vh'}} >
+    <Box sx={{ height: "100 vh" }}>
       <Routes>
-
         {/* ---> Navigation <--- */}
 
         <Route
           path=":communityName"
           element={
-            <LeftNav
+            <Layout
               props={props}
               drawerOpen={drawerOpen}
               handleDrawerToggle={handleDrawerToggle}
             />
           }
         >
+          <Route
+            path=""
+            element={<Navigate to={`group/${firstGroupId}`} />}
+          />
+
           {/* ---> Main Content: Initiative List <--- */}
+
           <Route
             path="group/:groupId"
             element={

@@ -21,20 +21,20 @@ import {
   Communities,
   InitiativesList,
   InitiativeDetails,
-  MainNav,
+  GroupsNav,
   Sidebar,
-} from "../../features";
+} from "..";
 
 /* ----------- COMPONENT -------------- */
 
-function LeftNav(props) {
+function Layout(props) {
   const dispatch = useDispatch();
 
   // Drawer functions
   const drawer = (
     <Box id="drawer">
       <Communities />
-      <MainNav />
+      <GroupsNav />
     </Box>
   );
   const { window } = props;
@@ -50,6 +50,7 @@ function LeftNav(props) {
           md: "1fr",
           sm: "1fr",
         },
+        height: '100 vh'
       }}
     >
       <Box>
@@ -87,4 +88,4 @@ function LeftNav(props) {
   );
 }
 
-export default LeftNav;
+export default Layout;

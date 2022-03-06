@@ -8,7 +8,7 @@ import { Box, Menu, MenuItem, Button } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 //App Imports
-import { NavSection } from "../index.js";
+import { GroupsSection } from "../index.js";
 
 import {selectGroups} from '../../reducers/groupsSlice'
 import { selectCommunities} from '../../reducers/communitiesSlice'
@@ -19,15 +19,15 @@ import {findById} from "../../utils/find-by-id"
 
 /* ----------- COMPONENT -------------- */
 
-function MainNav(props) {
+function GroupsNav(props) {
   
   //state variables
   const groups = useSelector(selectGroups)
   let { groupId, communityName } = useParams();
   const currentGroup = findById(groups, groupId)
   const communities = useSelector(selectCommunities) 
-  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName )
-
+  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName.toLowerCase() )
+  const communityGroups = groups.filter((group) => group.communityID === currentCommunity._id)
   const channels = useSelector(selectChannels)
   const currentChannel = useSelector(selectCurrentChannel)
 
@@ -81,14 +81,14 @@ function MainNav(props) {
 
       {/* ---> Group Selection <--- */}
 
-      <NavSection 
-        items={groups} 
+      <GroupsSection 
+        items={communityGroups} 
         title="Groups" 
         currentItem={currentGroup} />
 
       {/* ---> Channel Selection <--- */}
 
-      <NavSection
+      <GroupsSection
         items={channels}
         title="Channels"
         currentItem={currentChannel}
@@ -97,4 +97,4 @@ function MainNav(props) {
   );
 }
 
-export default MainNav;
+export default GroupsNav;
