@@ -1,24 +1,15 @@
 //React Imports
 import "../styles/App.css";
 import React, { useEffect } from "react";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useMatch,
-} from "react-router-dom";
+import { Routes, Route, Navigate, useMatch } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 
 //App Imports
-import {
-  InitiativesList,
-  InitiativeDetails,
-  Layout,
-} from "../features";
+import { InitiativesList, InitiativeDetails, Layout, Login } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
 import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
 import { selectUserLoadingStatus } from "../reducers/usersSlice";
@@ -34,8 +25,6 @@ import { selectGroups } from "../reducers/groupsSlice";
 function App(props) {
   const dispatch = useDispatch();
 
-
-
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -50,12 +39,15 @@ function App(props) {
 
   // Identify initial Group for redirecting
   const communities = useSelector(selectCommunities);
+
   const groups = useSelector(selectGroups);
-  const communityName = useMatch(":communityName/*").params.communityName;
+  const communityName = useMatch(":communityName/*")?.params.communityName;
   const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase());
+    (community) => community.name.toLowerCase() === communityName.toLowerCase()
+  );
   const communityGroups = groups.filter(
-    (group) => group.communityID === currentCommunity._id);
+    (group) => group.communityID === currentCommunity?._id
+  );
 
 
   //to be checked if actually needed??
@@ -76,18 +68,20 @@ function App(props) {
     isLoading = true;
   }
 
-  let firstGroupId = null
+  let firstGroupId = null;
   if (!isLoading) {
-    firstGroupId = communityGroups[0]._id
+    firstGroupId = communityGroups[0]?._id;
   }
+
 
   return isLoading ? (
     <Box></Box>
   ) : (
     <Box sx={{ height: "100 vh" }}>
       <Routes>
-        {/* ---> Navigation <--- */}
 
+        {/* ---> Navigation <--- */}
+        <Route path="login" element={<Login />} />
         <Route
           path=":communityName"
           element={
@@ -98,10 +92,7 @@ function App(props) {
             />
           }
         >
-          <Route
-            path=""
-            element={<Navigate to={`group/${firstGroupId}`} />}
-          />
+          <Route path="" element={<Navigate to={`group/${firstGroupId}`} />} />
 
           {/* ---> Main Content: Initiative List <--- */}
 

@@ -10,4 +10,4 @@ export {default as Chat} from './chat/chat'
 export {default as GroupsSection} from './layout/groups-section'
 export {default as FormCreateInitiative} from './initiatives/form-initiative-create'
 export {default as VoteControl} from './components/vote'
-
+export {default as Login} from './users/login'
