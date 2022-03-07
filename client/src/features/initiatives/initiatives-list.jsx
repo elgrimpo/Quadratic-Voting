@@ -48,6 +48,7 @@ const InitiativesList = (props) => {
           md: "1fr 320px",
           sm: "1fr",
         },
+        overflow: 'scroll',
       }}
     >
       <ThemeProvider theme={lightTheme}>
