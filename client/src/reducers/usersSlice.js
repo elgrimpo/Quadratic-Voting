@@ -14,6 +14,15 @@ export const fetchUsers = createAsyncThunk(
     }
   )
 
+  export const fetchCurrentUser = createAsyncThunk(
+    'users/getCurrentUser',
+    async () => {
+      const response = await api.fetchCurrentUser()
+      return response.data
+      console.log(response.data)
+    }
+  )
+
 
 /*-------- Slice object ---------- */
 const usersSlice = createSlice({

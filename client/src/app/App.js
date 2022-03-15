@@ -24,6 +24,7 @@ import { selectGroups } from "../reducers/groupsSlice";
 
 function App(props) {
   const dispatch = useDispatch();
+  const random = 'random' // TODO: TO BE DELETED
 
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -95,7 +96,6 @@ function App(props) {
           <Route path="" element={<Navigate to={`group/${firstGroupId}`} />} />
 
           {/* ---> Main Content: Initiative List <--- */}
-
           <Route
             path="group/:groupId"
             element={
