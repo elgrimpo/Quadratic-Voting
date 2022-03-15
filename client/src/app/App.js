@@ -12,7 +12,7 @@ import { Box } from "@mui/material";
 import { InitiativesList, InitiativeDetails, Layout, Login } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
 import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
-import { selectUserLoadingStatus } from "../reducers/usersSlice";
+import { fetchCurrentUser, selectUserLoadingStatus } from "../reducers/usersSlice";
 import {
   selectCommunityLoadingStatus,
   selectCommunities,
@@ -24,7 +24,6 @@ import { selectGroups } from "../reducers/groupsSlice";
 
 function App(props) {
   const dispatch = useDispatch();
-  const random = 'random' // TODO: TO BE DELETED
 
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -53,7 +52,7 @@ function App(props) {
 
   //to be checked if actually needed??
   useEffect(() => {
-    dispatch(fetchInitiatives());
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   // Check if data is fetched from database
@@ -83,6 +82,7 @@ function App(props) {
 
         {/* ---> Navigation <--- */}
         <Route path="login" element={<Login />} />
+        
         <Route
           path=":communityName"
           element={

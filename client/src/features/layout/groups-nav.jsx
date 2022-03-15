@@ -32,6 +32,8 @@ function GroupsNav(props) {
   const currentChannel = useSelector(selectCurrentChannel)
 
 
+
+
   // Menu controls
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

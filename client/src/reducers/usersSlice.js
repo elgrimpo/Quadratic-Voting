@@ -3,7 +3,8 @@ import * as api from "../api";
 
 const initialUsers = {
     status: null,
-    list: []
+    list: [],
+    currentUser: []
   };
 
 export const fetchUsers = createAsyncThunk(
@@ -18,8 +19,9 @@ export const fetchUsers = createAsyncThunk(
     'users/getCurrentUser',
     async () => {
       const response = await api.fetchCurrentUser()
-      return response.data
-      console.log(response.data)
+      console.log(response)
+      return response
+      
     }
   )
 
@@ -40,6 +42,10 @@ const usersSlice = createSlice({
         },
         [fetchUsers.rejected]: (state, payload) => {
           state.status = 'failed'
+        },
+        [fetchCurrentUser.fulfilled]: (state, action) => {
+          state.currentUser = action.payload
+          state.status = 'success'
         },
     }
 })

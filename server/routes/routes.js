@@ -22,6 +22,7 @@ const CLIENT_URL = "http://localhost:3000/phoenix";
 
 export const AuthRouter = express.Router();
 AuthRouter.get("/login/success", (req, res) => {
+    console.log(req.user)
     if (req.user) {
       res.status(200).json({
         success: true,
@@ -29,6 +30,8 @@ AuthRouter.get("/login/success", (req, res) => {
         user: req.user,
         //   cookies: req.cookies
       });
+    } else {
+        res.status(404).send()
     }
   });
   
