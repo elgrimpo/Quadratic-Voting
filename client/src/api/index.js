@@ -14,3 +14,4 @@ export const createGroup = (group) => axios.post(`${url}/groups`, group) // TODO
 export const fetchCurrentUser = () => axios.get(`${url}/auth/login/success`, { withCredentials: true })
 export const fetchUsers = () => axios.get(`${url}/users`)
 export const createUser = (user) => axios.post(`${url}/users`, user) // TODO: frontend NOT YET IMPLEMENTED
+export const logout = () => axios.get(`${url}/auth/logout`, { withCredentials: true })

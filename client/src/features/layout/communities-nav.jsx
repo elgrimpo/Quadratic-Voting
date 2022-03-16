@@ -13,26 +13,31 @@ import {
   Avatar,
   Menu,
   MenuItem,
+  IconButton,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import LoginIcon from "@mui/icons-material/Login";
 
 //App Imports
-import { selectCurrentUser } from "../../reducers/usersSlice";
+import { logout, selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
 import {
   selectCommunities,
   selectCurrentCommunity,
 } from "../../reducers/communitiesSlice";
-import {selectGroups} from '../../reducers/groupsSlice'
+import { selectGroups } from "../../reducers/groupsSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
   const theme = useTheme();
+  const dispatch = useDispatch()
   let { communityName } = useParams();
   const currentUser = useSelector(selectCurrentUser);
-  const communities = useSelector(selectCommunities) 
-  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName.toLowerCase() )
- 
+  const communities = useSelector(selectCommunities);
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase()
+  );
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   // Menu controls
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,6 +46,14 @@ const Communities = (props) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogin = () => {
+    window.open("http://localhost:5000/auth/google", "_self")
+  }
+  const handleLogout= () => {
+    window.open("http://localhost:5000/auth/logout", "_self")
     setAnchorEl(null);
   };
 
@@ -69,15 +82,15 @@ const Communities = (props) => {
               to={`/${community.name}`} //to be updated
               style={{ textDecoration: "none" }}
             >
-            <Card sx={{ maxWidth: 50, maxHeight: 50 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="56"
-                  image={community.image}
-                />
-              </CardActionArea>
-            </Card>
+              <Card sx={{ maxWidth: 50, maxHeight: 50 }}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="56"
+                    image={community.image}
+                  />
+                </CardActionArea>
+              </Card>
             </Link>
           </Box>
         ))}
@@ -85,34 +98,42 @@ const Communities = (props) => {
 
       {/* ---> User profile <--- */}
 
-      <div>
-        <Avatar
-          id="avatar"
-          style={{ border: `2px solid ${theme.palette.primary.light}` }}
-          alt={currentUser._id}
-          src={currentUser.image}
-          onClick={handleClick}
-        />
+      {isLoggedIn ? (
+        <div>
+          <Avatar
+            id="avatar"
+            style={{ border: `2px solid ${theme.palette.primary.light}` }}
+            alt={currentUser._id}
+            src={currentUser.image}
+            onClick={handleClick}
+          />
 
-        <Menu
-          id="community-dropdown"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
-        </Menu>
-      </div>
+          <Menu
+            id="community-dropdown"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
+        </div>
+      ) : (
+        <div>
+          <IconButton aria-label="login" color="primary" sx={{marginBottom:'16px'}} size="large" onClick={handleLogin}>
+            <LoginIcon fontSize="inherit" />
+          </IconButton>
+        </div>
+      )}
     </Box>
   );
 };

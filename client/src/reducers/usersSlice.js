@@ -4,6 +4,7 @@ import * as api from "../api";
 const initialUsers = {
     status: null,
     list: [],
+    isLoggedIn: false, // TODO: add to reducers
     currentUser: []
   };
 
@@ -19,9 +20,15 @@ export const fetchUsers = createAsyncThunk(
     'users/getCurrentUser',
     async () => {
       const response = await api.fetchCurrentUser()
-      console.log(response)
+      return response.data.user
+    }
+  )
+
+  export const logout = createAsyncThunk(
+    'users/logout',
+    async () => {
+      const response = await api.logout()
       return response
-      
     }
   )
 
@@ -46,13 +53,21 @@ const usersSlice = createSlice({
         [fetchCurrentUser.fulfilled]: (state, action) => {
           state.currentUser = action.payload
           state.status = 'success'
+          state.isLoggedIn = true
+        },
+        [logout.fulfilled]: (state, action) => {
+          state.currentUser = []
+          state.status = 'success'
+          state.isLoggedIn = false
         },
     }
 })
 
 /*-------- Selectors ---------- */
 export const selectUsers = (state) => state.users.list
-export const selectCurrentUser = (state) => state.users.list.find(user => user._id === '622044679ca9947c1ac22ee4') //PLACEHOLDER
+export const selectCurrentUser = (state) => state.users.currentUser
+
+export const selectIsLoggedIn = (state) => state.users.isLoggedIn
 
 export const selectUserLoadingStatus = (state) => state.users.status 
 

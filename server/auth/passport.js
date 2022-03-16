@@ -11,12 +11,12 @@ const GOOGLE_CLIENT_SECRET = "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";
 
 //Serialize and Deserialize Users
 passport.serializeUser((user, done) => {
-    done(null, user);
-  });
-  
-  passport.deserializeUser((user, done) => {
-    done(null, user);
-  });
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 // Set up Strategies
 passport.use(
@@ -26,14 +26,22 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
     },
-    function (accessToken, refreshToken, profile, cb) {
-      cb(null, profile)
+    async function (accessToken, refreshToken, profile, cb) {
+      const user = await UserSchema.findOne({ googleId: profile.id });
+      if (!user) {
+        const newUser = await new UserSchema({
+          googleId: profile.id,
+          displayName: profile.displayName,
+          image: profile._json.picture,
+        }).save();
+        cb(null, newUser);
+      } else {
+        cb(null, user);
+      }
+
       /* User.findOrCreate({ googleId: profile.id }, function (err, user) {
         return done(err, user);
       }); */
     }
   )
 );
-
-
-
