@@ -4,7 +4,7 @@ import * as api from "../api";
 const initialUsers = {
     status: null,
     list: [],
-    isLoggedIn: false, // TODO: add to reducers
+    isLoggedIn: false, 
     currentUser: []
   };
 

@@ -28,7 +28,7 @@ function FormCreateInitiative(props) {
   const currentGroup = findById(groups, groupId)
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities) 
-  const currentCommunity = communities.find((community) => community.name === communityName )
+  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName.toLowerCase() )
   const dispatch = useDispatch();
 
   const [formValues, setFormValues] = useState({
