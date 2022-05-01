@@ -47,8 +47,6 @@ function FormCreateInitiative(props) {
     website: props.content.webiste,
     instagram: props.content.instagram,
     twitter: props.content.twitter,
-    totalVotes: 0,
-    userVotes: 0,
     text: props.content.text,
   });
 

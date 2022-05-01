@@ -7,6 +7,7 @@ const initiativeSchema = new mongoose.Schema({
     image: String,
     description: String,
     status: String,
+    //TODO: remove votes
     votes: {
         type: Number,
         default: 0},
@@ -14,11 +15,10 @@ const initiativeSchema = new mongoose.Schema({
     website: String,
     instagram: String,
     twitter: String,
+    //TODO: remove totalVotes ???
     totalVotes: Number,
     ownerID: String,
-    userVotes: {
-        type: Number,
-        default: 0},
+    receivedVotes: Array,
     text: String
 })
 

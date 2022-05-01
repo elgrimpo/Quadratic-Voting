@@ -55,12 +55,24 @@ const initiativesSlice = createSlice({
   name: "initiatives",
   initialState: initialInitiatives,
   reducers: {
-    changeUserVote: (state, action) => {
-      const Index = state.list.findIndex(
-        (obj) => obj._id === action.payload.id
+    changeReceivedVote: (state, action) => {
+      const initiativeIndex = state.list.findIndex(
+        (obj) => obj._id === action.payload.InitiativeId
       );
-      state.list[Index].userVotes += action.payload.number;
-      state.list[Index].totalVotes += action.payload.number;
+      const initiative = state.list[initiativeIndex];
+      const userIndex = initiative.receivedVotes.findIndex(
+        (vote) => vote.userId === action.payload.userId
+      );
+      if (userIndex != -1) {
+        state.list[initiativeIndex].receivedVotes[userIndex].votes +=
+          action.payload.number;
+      } else {
+        state.list[initiativeIndex].receivedVotes.push({
+          userId: action.payload.userId,
+          votes: action.payload.number,
+        });
+      }
+      //state.list[Index].totalVotes += action.payload.number;
     },
   },
   extraReducers: {
@@ -102,8 +114,10 @@ const initiativesSlice = createSlice({
       state.status = "loading";
     },
     [updateInitiative.fulfilled]: (state, action) => {
-      const index = state.list.findIndex(initiative => initiative._id === action.payload._id)
-      state.list[index] = action.payload
+      const index = state.list.findIndex(
+        (initiative) => initiative._id === action.payload._id
+      );
+      state.list[index] = action.payload;
       state.status = "success";
     },
     [updateInitiative.rejected]: (state, payload) => {
@@ -123,7 +137,7 @@ export const selectInitiativeLoadingStatus = (state) =>
 export const {
   setCurrentInitiative,
   removeCurrentInitiativeSelection,
-  changeUserVote,
+  changeReceivedVote,
 } = initiativesSlice.actions;
 
 export default initiativesSlice.reducer;

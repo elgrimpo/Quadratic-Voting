@@ -24,7 +24,7 @@ import { useTheme } from "@mui/material/styles";
 import { VoteControl } from "../index";
 import { selectGroupInitiatives, selectInitiatives } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
-import { selectUsers } from "../../reducers/usersSlice";
+import { selectUsers, selectCurrentUser } from "../../reducers/usersSlice";
 import {findById} from "../../utils/find-by-id"
 
 /* ----------- COMPONENT -------------- */
@@ -35,6 +35,7 @@ const Sidebar = (props) => {
   const initiatives = useSelector(selectInitiatives)
   const groups = useSelector(selectGroups)
   const users = useSelector(selectUsers);
+  const currentUser = useSelector(selectCurrentUser)
   const currentInitiative = findById(initiatives, initiativeId)
   const currentGroup = findById(groups, groupId)
  
@@ -42,6 +43,15 @@ const Sidebar = (props) => {
   const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
 
   const owner = users.find((user) => user._id === sidebarContent.ownerID);
+
+  //Remaining Group Votes
+  const groupIndex = currentGroup.remainingVotes.findIndex(vote => vote.userId === currentUser._id)
+  const remainingGroupVotes = groupIndex === -1 ? currentGroup.totalVotes : currentGroup.remainingVotes[groupIndex].votes
+  
+  // Initiative Received User Votes
+  const InitiativeIndex = currentInitiative?.receivedVotes.findIndex(vote => vote.userId === currentUser._id)
+  const InitiativeReceivedVotes = InitiativeIndex === -1 ? 0 : currentInitiative?.receivedVotes[InitiativeIndex].votes
+
 
   return (
     <Stack
@@ -93,7 +103,7 @@ const Sidebar = (props) => {
       <Box>
         <Typography variant="h7">Remaining vote credits</Typography>
         <Typography color="primary" variant="h5">
-          {currentGroup.remainingVotes}
+          {remainingGroupVotes}
         </Typography>
       </Box>
 
@@ -103,7 +113,7 @@ const Sidebar = (props) => {
             Received votes:
           </Typography>
           <Typography color="primary" variant="h5">
-            {currentInitiative.totalVotes}
+            {InitiativeReceivedVotes}
           </Typography>
         </Box>
       ) : (

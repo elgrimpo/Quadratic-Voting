@@ -8,9 +8,7 @@ const groupSchema = new mongoose.Schema({
     totalVotes: {
         type: Number,
         default: 100},
-    remainingVotes: {
-        type: Number,
-        default: 100},
+    remainingVotes: Array,
     ownerID: String,
 })
 

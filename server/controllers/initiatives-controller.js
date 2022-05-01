@@ -23,9 +23,14 @@ export const createInitiative = async (req, res) => {
 
 export const updateInitiative = async (req, res) => {
   const initiative = req.body;
+  const options = { new: true };
   try {
-    await InitiativeSchema.findByIdAndUpdate({_id: req.params.id}, initiative);
-    res.status(201).json(initiative);
+    const initiativeSchemas = await InitiativeSchema.findByIdAndUpdate(
+      { _id: req.params.id },
+      initiative,
+      options
+    );
+    res.status(201).json(initiativeSchemas);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
