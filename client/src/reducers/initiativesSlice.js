@@ -26,6 +26,21 @@ export const createInitiative = createAsyncThunk(
   }
 )
 
+
+export const deleteInitiative = createAsyncThunk(
+  'initiatives/deleteInitiative',
+  async (initiative, thunkAPI) => {
+    try {
+      const response = await api.deleteInitiative(initiative)
+      return response.data
+    } catch(error) {
+      return thunkAPI.rejectWithValue(error.message)
+    }
+  }
+)
+
+
+
 /*-------- Slice object ---------- */
 const initiativesSlice = createSlice({
   name: "initiatives",
@@ -56,6 +71,18 @@ const initiativesSlice = createSlice({
       state.status = 'success'
     },
     [createInitiative.rejected]: (state, payload) => {
+      state.status = 'failed'
+    },
+    [deleteInitiative.pending]: (state, action) => {
+      state.status = 'loading'
+    },
+    [deleteInitiative.fulfilled]: (state, action) => {
+      state.list = state.list.filter(initiative => {
+        return initiative._id != action.payload
+      })
+      state.status = 'success'
+    },
+    [deleteInitiative.rejected]: (state, payload) => {
       state.status = 'failed'
     },
   }
