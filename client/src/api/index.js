@@ -7,6 +7,7 @@ export const createCommunity = (community) => axios.post(`${url}/communities`, c
 
 export const fetchInitiatives = () => axios.get(`${url}/initiatives`)
 export const createInitiative = (initiative) => axios.post(`${url}/initiatives`, initiative)
+export const updateInitiative = (initiative) => axios.post(`${url}/initiatives/${initiative._id}`, initiative)
 export const deleteInitiative = (initiative) => axios.delete(`${url}/initiatives/${initiative._id}`, initiative)
 
 

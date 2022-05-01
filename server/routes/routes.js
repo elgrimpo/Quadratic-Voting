@@ -4,6 +4,7 @@ import express from "express";
 import {
   getInitiatives,
   createInitiative,
+  updateInitiative,
   deleteInitiative,
 } from "../controllers/initiatives-controller.js";
 import { getGroups, createGroup } from "../controllers/groups-controller.js";
@@ -79,6 +80,7 @@ export const InitiativeRouter = express.Router();
 
 InitiativeRouter.get("/", getInitiatives);
 InitiativeRouter.post("/", createInitiative);
+InitiativeRouter.post("/:id", updateInitiative);
 InitiativeRouter.delete("/:id", deleteInitiative)
 
 // users

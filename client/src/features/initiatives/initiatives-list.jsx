@@ -102,7 +102,7 @@ const InitiativesList = (props) => {
               fullScreen={fullScreen}
               maxWidth="lg"
             >
-              <FormCreateInitiative setOpen={setOpen} />
+              <FormCreateInitiative setOpen={setOpen} type="create" content=""/>
             </Dialog>
           </Box>
         </Paper>

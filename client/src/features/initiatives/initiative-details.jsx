@@ -2,6 +2,7 @@
 import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 //MUI Imports
 import {
@@ -19,12 +20,13 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 
 //App Imports
-import { TabNav, Chat, Sidebar } from "../index";
+import { TabNav, Chat, Sidebar, FormCreateInitiative } from "../index";
 import {
   selectGroupInitiatives,
   selectInitiatives,
@@ -46,19 +48,31 @@ const InitiativeDetails = (props) => {
 
   const [value, setValue] = React.useState("Overview");
 
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   /* Delete Initiative logic */
   let navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
+  const [updateOpen, setUpdateOpen] = React.useState(false);
+  const handleDeleteOpen = () => {
+    setDeleteOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleDeleteClose = () => {
+    setDeleteOpen(false);
   };
   const handleDelete = () => {
     dispatch(deleteInitiative(currentInitiative));
-    handleClose();
+    handleDeleteClose();
     navigate(`/${communityName}/group/${groupId}`);
+  };
+
+  /* Delete Initiative logic */
+  const handleUpdateOpen = () => {
+    setUpdateOpen(true);
+  };
+  const handleUpdateClose = () => {
+    setUpdateOpen(false);
   };
 
   return (
@@ -113,24 +127,35 @@ const InitiativeDetails = (props) => {
               </Box>
 
               {/* ---- Initiative title and actions* ---- */}
-              <Box style={{ paddingLeft: 30, paddingRight: 30, marginBottom: "10px" }}>
-                <Typography variant="h4" >
-                  {currentInitiative.title}
-                </Typography>
+              <Box
+                style={{
+                  paddingLeft: 30,
+                  paddingRight: 30,
+                  marginBottom: "10px",
+                }}
+              >
+                <Typography variant="h4">{currentInitiative.title}</Typography>
               </Box>
 
               {/* Delete Initiative */}
-              <Box style={{ paddingLeft: 30, paddingRight: 30, marginBottom: "30px" }}>
-              <Button
+              <Box
+                style={{
+                  paddingLeft: 30,
+                  paddingRight: 30,
+                  marginBottom: "30px",
+                }}
+              >
+                <Button
                   variant="outlined"
                   startIcon={<DeleteForeverIcon />}
-                  onClick={handleClickOpen}
+                  onClick={handleDeleteOpen}
+                  style={{ marginRight: "10px" }}
                 >
-                  Delete Initiative
+                  Delete
                 </Button>
                 <Dialog
-                  open={open}
-                  onClose={handleClose}
+                  open={deleteOpen}
+                  onClose={handleDeleteClose}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
@@ -144,15 +169,34 @@ const InitiativeDetails = (props) => {
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleDeleteClose}>Cancel</Button>
                     <Button onClick={handleDelete} autoFocus>
                       Delete
                     </Button>
                   </DialogActions>
                 </Dialog>
-              </Box>
-              
 
+                {/* Update Initiative*/}
+                <Button
+                  variant="outlined"
+                  startIcon={<EditIcon />}
+                  onClick={handleUpdateOpen}
+                >
+                  Update
+                </Button>
+                <Dialog
+                  open={updateOpen}
+                  onClose={handleUpdateClose}
+                  fullScreen={fullScreen}
+                  maxWidth="lg"
+                >
+                  <FormCreateInitiative
+                    setOpen={setUpdateOpen}
+                    type="update"
+                    content={currentInitiative}
+                  />
+                </Dialog>
+              </Box>
               {/* Initiative Content */}
               <Box style={{ paddingLeft: 30, paddingRight: 30 }}>
                 <Typography style={{ marginBottom: "30px" }}>

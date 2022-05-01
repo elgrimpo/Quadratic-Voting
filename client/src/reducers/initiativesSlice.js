@@ -3,43 +3,52 @@ import * as api from "../api";
 
 const initialInitiatives = {
   status: null,
-  list: []
+  list: [],
 };
 
 export const fetchInitiatives = createAsyncThunk(
-  'initiatives/getInitiatives',
+  "initiatives/getInitiatives",
   async () => {
-    const response = await api.fetchInitiatives()
-    return response.data
+    const response = await api.fetchInitiatives();
+    return response.data;
   }
-)
+);
 
 export const createInitiative = createAsyncThunk(
-  'initiatives/createInitiative',
+  "initiatives/createInitiative",
   async (initiative, thunkAPI) => {
     try {
-      const response = await api.createInitiative(initiative)
-      return response.data
-    } catch(error) {
-      return thunkAPI.rejectWithValue(error.message)
+      const response = await api.createInitiative(initiative);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);
 
+export const updateInitiative = createAsyncThunk(
+  "initiatives/updateInitiative",
+  async (initiative, thunkAPI) => {
+    try {
+      const response = await api.updateInitiative(initiative);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 export const deleteInitiative = createAsyncThunk(
-  'initiatives/deleteInitiative',
+  "initiatives/deleteInitiative",
   async (initiative, thunkAPI) => {
     try {
-      const response = await api.deleteInitiative(initiative)
-      return response.data
-    } catch(error) {
-      return thunkAPI.rejectWithValue(error.message)
+      const response = await api.deleteInitiative(initiative);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
-
-
+);
 
 /*-------- Slice object ---------- */
 const initiativesSlice = createSlice({
@@ -47,52 +56,67 @@ const initiativesSlice = createSlice({
   initialState: initialInitiatives,
   reducers: {
     changeUserVote: (state, action) => {
-      const Index = state.list.findIndex((obj) => obj._id === action.payload.id);
+      const Index = state.list.findIndex(
+        (obj) => obj._id === action.payload.id
+      );
       state.list[Index].userVotes += action.payload.number;
       state.list[Index].totalVotes += action.payload.number;
     },
   },
   extraReducers: {
     [fetchInitiatives.pending]: (state, action) => {
-      state.status = 'loading'
+      state.status = "loading";
     },
     [fetchInitiatives.fulfilled]: (state, action) => {
-      state.list = action.payload
-      state.status = 'success'
+      state.list = action.payload;
+      state.status = "success";
     },
     [fetchInitiatives.rejected]: (state, payload) => {
-      state.status = 'failed'
+      state.status = "failed";
     },
     [createInitiative.pending]: (state, action) => {
-      state.status = 'loading'
+      state.status = "loading";
     },
     [createInitiative.fulfilled]: (state, action) => {
-      state.list.push(action.payload)
-      state.status = 'success'
+      state.list.push(action.payload);
+      state.status = "success";
     },
     [createInitiative.rejected]: (state, payload) => {
-      state.status = 'failed'
+      state.status = "failed";
     },
+
     [deleteInitiative.pending]: (state, action) => {
-      state.status = 'loading'
+      state.status = "loading";
     },
     [deleteInitiative.fulfilled]: (state, action) => {
-      state.list = state.list.filter(initiative => {
-        return initiative._id != action.payload
-      })
-      state.status = 'success'
+      state.list = state.list.filter((initiative) => {
+        return initiative._id != action.payload;
+      });
+      state.status = "success";
     },
     [deleteInitiative.rejected]: (state, payload) => {
-      state.status = 'failed'
+      state.status = "failed";
     },
-  }
+
+    [updateInitiative.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [updateInitiative.fulfilled]: (state, action) => {
+      const index = state.list.findIndex(initiative => initiative._id === action.payload._id)
+      state.list[index] = action.payload
+      state.status = "success";
+    },
+    [updateInitiative.rejected]: (state, payload) => {
+      state.status = "failed";
+    },
+  },
 });
 
 /*-------- Selectors ---------- */
 export const selectInitiatives = (state) => state.initiatives.list;
 
-  export const selectInitiativeLoadingStatus = (state) => state.initiatives.status 
-
+export const selectInitiativeLoadingStatus = (state) =>
+  state.initiatives.status;
 
 /*-------- Exports ---------- */
 

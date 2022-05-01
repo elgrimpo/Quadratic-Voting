@@ -14,63 +14,72 @@ import {
 } from "@mui/material";
 
 //App Imports
-import { createInitiative } from "../../reducers/initiativesSlice";
+import {
+  createInitiative,
+  updateInitiative,
+} from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import { selectCommunities } from "../../reducers/communitiesSlice";
-import {findById} from "../../utils/find-by-id"
+import { findById } from "../../utils/find-by-id";
 
 /* ----------- COMPONENT -------------- */
 
 function FormCreateInitiative(props) {
   let { groupId, communityName } = useParams();
-  const groups = useSelector(selectGroups)
-  const currentGroup = findById(groups, groupId)
+  const groups = useSelector(selectGroups);
+  const currentGroup = findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
-  const communities = useSelector(selectCommunities) 
-  const currentCommunity = communities.find((community) => community.name.toLowerCase() === communityName.toLowerCase() )
+  const communities = useSelector(selectCommunities);
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase()
+  );
   const dispatch = useDispatch();
 
   const [formValues, setFormValues] = useState({
-    communityID: "",
-    groupID: "",
-    title: "",
-    image: "",
-    description: "",
+    _id: props.content._id,
+    communityID: currentCommunity._id,
+    groupID: currentGroup._id,
+    title: props.content.title,
+    image: props.content.image,
+    description: props.content.description,
     ownerID: currentUser._id,
-    website: "",
-    instagram: "",
-    twitter: "",
+    website: props.content.webiste,
+    instagram: props.content.instagram,
+    twitter: props.content.twitter,
     totalVotes: 0,
     userVotes: 0,
-    text: ""
+    text: props.content.text,
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      communityID: currentCommunity._id,
-      groupID: currentGroup._id,
       [name]: value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createInitiative(formValues));
+
+    if (props.type === "create") {
+      dispatch(createInitiative(formValues));
+    } else if (props.type === "update") {
+      dispatch(updateInitiative(formValues));
+    }
     props.setOpen(false);
   };
 
   return (
-    <Box >
+    <Box>
       <DialogTitle>New Initiative</DialogTitle>
       <DialogContent>
         <form
           onSubmit={handleSubmit}
           style={{
             display: "grid",
-            gridTemplateColumns: '1fr, 1fr, 1fr',
+            gridTemplateColumns: "1fr, 1fr, 1fr",
             alignItems: "center",
           }}
         >
@@ -82,7 +91,7 @@ function FormCreateInitiative(props) {
             value={formValues.title}
             onChange={handleInputChange}
             sx={{
-              gridColumn: 'span 1',
+              gridColumn: "span 1",
               margin: 1,
             }}
           />
@@ -95,7 +104,7 @@ function FormCreateInitiative(props) {
             value={formValues.image}
             onChange={handleInputChange}
             sx={{
-              gridColumn: 'span 1',
+              gridColumn: "span 1",
               margin: 1,
             }}
           />
@@ -108,7 +117,7 @@ function FormCreateInitiative(props) {
             value={formValues.website}
             onChange={handleInputChange}
             sx={{
-              gridColumn: 'span 1',
+              gridColumn: "span 1",
               margin: 1,
             }}
           />
@@ -121,7 +130,7 @@ function FormCreateInitiative(props) {
             value={formValues.instagram}
             onChange={handleInputChange}
             sx={{
-              gridColumn: 'span 1',
+              gridColumn: "span 1",
               margin: 1,
             }}
           />
@@ -134,7 +143,7 @@ function FormCreateInitiative(props) {
             value={formValues.twitter}
             onChange={handleInputChange}
             sx={{
-              gridColumn: 'span 1',
+              gridColumn: "span 1",
               margin: 1,
             }}
           />
@@ -149,7 +158,7 @@ function FormCreateInitiative(props) {
             multiline
             rows={4}
             sx={{
-              gridColumn: 'span 3',
+              gridColumn: "span 3",
               margin: 1,
             }}
           />
@@ -165,14 +174,16 @@ function FormCreateInitiative(props) {
             rows={8}
             sx={{
               margin: 1,
-              gridColumn: 'span 3'
+              gridColumn: "span 3",
             }}
           />
-          <DialogActions sx={{
-              gridColumn: 'span 3',
-            }}>
+          <DialogActions
+            sx={{
+              gridColumn: "span 3",
+            }}
+          >
             <Button variant="contained" type="submit">
-              Submit
+              {props.type === "create" ? "Submit" : "Update"}
             </Button>
           </DialogActions>
         </form>

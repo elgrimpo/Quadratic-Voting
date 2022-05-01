@@ -21,6 +21,16 @@ export const createInitiative = async (req, res) => {
   }
 };
 
+export const updateInitiative = async (req, res) => {
+  const initiative = req.body;
+  try {
+    await InitiativeSchema.findByIdAndUpdate({_id: req.params.id}, initiative);
+    res.status(201).json(initiative);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
 export const deleteInitiative = async (req, res) => {
   InitiativeSchema.findByIdAndRemove(req.params.id)
     .then((initiative) => {
