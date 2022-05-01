@@ -31,15 +31,8 @@ function App(props) {
     setDrawerOpen(!drawerOpen);
   };
 
-  // Data fetching variables
-  const initiativeStatus = useSelector(selectInitiativeLoadingStatus);
-  const groupStatus = useSelector(selectGroupLoadingStatus);
-  const userStatus = useSelector(selectUserLoadingStatus);
-  const communityStatus = useSelector(selectCommunityLoadingStatus);
-
   // Identify initial Group for redirecting
   const communities = useSelector(selectCommunities);
-
   const groups = useSelector(selectGroups);
   const communityName = useMatch(":communityName/*")?.params.communityName;
   const currentCommunity = communities.find(
@@ -50,33 +43,15 @@ function App(props) {
   );
 
 
-  //to be checked if actually needed??
+  //TODO: be checked if actually needed??
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 
-  // Check if data is fetched from database
-  let isLoading = true;
-  if (
-    initiativeStatus === "success" &&
-    groupStatus === "success" &&
-    userStatus === "success" &&
-    communityStatus === "success"
-  ) {
-    isLoading = false;
-  } else {
-    isLoading = true;
-  }
-
-  let firstGroupId = null;
-  if (!isLoading) {
-    firstGroupId = communityGroups[0]?._id;
-  }
+  let firstGroupId = communityGroups[0]?._id;
 
 
-  return isLoading ? (
-    <Box></Box>
-  ) : (
+  return (
     <Box sx={{ height: "100 vh" }}>
       <Routes>
 
@@ -113,7 +88,7 @@ function App(props) {
         </Route>
       </Routes>
     </Box>
-  );
+  )
 }
 
 export default App;

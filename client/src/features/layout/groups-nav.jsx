@@ -55,7 +55,7 @@ function GroupsNav(props) {
           sx={{bgcolor: "background.paper"}}
           onClick={handleClick}
         >
-          {currentCommunity.name}
+          {currentCommunity?.name}
           <ArrowDropDownIcon sx={{ color: "primary.main" }} />
         </Button>
 

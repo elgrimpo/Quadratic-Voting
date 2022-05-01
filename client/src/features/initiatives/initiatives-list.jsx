@@ -75,8 +75,8 @@ const InitiativesList = (props) => {
 
             <img
               className="banner-image"
-              src={currentGroup.image} //to be updated
-              alt={currentGroup.title} //to be updated
+              src={currentGroup?.image} //to be updated
+              alt={currentGroup?.title} //to be updated
             />
 
             {/* ---> Initiative tiles <--- */}

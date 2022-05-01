@@ -45,8 +45,8 @@ const Sidebar = (props) => {
   const owner = users.find((user) => user._id === sidebarContent.ownerID);
 
   //Remaining Group Votes
-  const groupIndex = currentGroup.remainingVotes.findIndex(vote => vote.userId === currentUser._id)
-  const remainingGroupVotes = groupIndex === -1 ? currentGroup.totalVotes : currentGroup.remainingVotes[groupIndex].votes
+  const groupIndex = currentGroup?.remainingVotes.findIndex(vote => vote.userId === currentUser._id)
+  const remainingGroupVotes = groupIndex === -1 ? currentGroup?.totalVotes : currentGroup?.remainingVotes[groupIndex].votes
   
   // Initiative Received User Votes
   const InitiativeIndex = currentInitiative?.receivedVotes.findIndex(vote => vote.userId === currentUser._id)
@@ -67,21 +67,21 @@ const Sidebar = (props) => {
     >
       {/* ---> Title and Description <--- */}
 
-      <Typography variant="h5">{sidebarContent.title}</Typography>
-      <Typography>{sidebarContent.description}</Typography>
+      <Typography variant="h5">{sidebarContent?.title}</Typography>
+      <Typography>{sidebarContent?.description}</Typography>
       <Divider sx={{ mt: "16px", mb: "16px" }} />
 
       {/* --->Links <--- */}
 
-      <Link href={sidebarContent.website} underline="hover">
+      <Link href={sidebarContent?.website} underline="hover">
         <LanguageIcon className="link-icon" />
         {"Website"}
       </Link>
-      <Link href={sidebarContent.twitter} underline="hover">
+      <Link href={sidebarContent?.twitter} underline="hover">
         <TwitterIcon className="link-icon" />
         {"Twitter"}
       </Link>
-      <Link href={sidebarContent.instagram} underline="hover">
+      <Link href={sidebarContent?.instagram} underline="hover">
         <InstagramIcon className="link-icon" />
         {"Instagram"}
       </Link>

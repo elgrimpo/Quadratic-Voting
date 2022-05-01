@@ -39,18 +39,18 @@ const VoteControl = (props) => {
   const dispatch = useDispatch();
 
   // Initiative Received User Votes
-  const initiativeIndex = props.initiative.receivedVotes.findIndex(
+  const initiativeIndex = props.initiative?.receivedVotes.findIndex(
     (vote) => vote.userId === currentUser._id
   );
   const InitiativeReceivedVotes =
     initiativeIndex === -1
       ? 0
-      : props.initiative.receivedVotes[initiativeIndex].votes;
+      : props.initiative?.receivedVotes[initiativeIndex].votes;
 
   // Manage Voting
   const handleVote = (number) => {
     const userVotes = groupInitiatives.map((initiative) => {
-      let index = initiative.receivedVotes.findIndex(
+      let index = initiative?.receivedVotes.findIndex(
         (vote) => vote.userId === currentUser._id
       );
       if (index != -1) {
