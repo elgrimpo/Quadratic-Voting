@@ -54,27 +54,7 @@ export const deleteInitiative = createAsyncThunk(
 const initiativesSlice = createSlice({
   name: "initiatives",
   initialState: initialInitiatives,
-  reducers: {
-    changeReceivedVote: (state, action) => {
-      const initiativeIndex = state.list.findIndex(
-        (obj) => obj._id === action.payload.InitiativeId
-      );
-      const initiative = state.list[initiativeIndex];
-      const userIndex = initiative.receivedVotes.findIndex(
-        (vote) => vote.userId === action.payload.userId
-      );
-      if (userIndex != -1) {
-        state.list[initiativeIndex].receivedVotes[userIndex].votes +=
-          action.payload.number;
-      } else {
-        state.list[initiativeIndex].receivedVotes.push({
-          userId: action.payload.userId,
-          votes: action.payload.number,
-        });
-      }
-      //state.list[Index].totalVotes += action.payload.number;
-    },
-  },
+  reducers: { },
   extraReducers: {
     [fetchInitiatives.pending]: (state, action) => {
       state.status = "loading";
@@ -137,7 +117,6 @@ export const selectInitiativeLoadingStatus = (state) =>
 export const {
   setCurrentInitiative,
   removeCurrentInitiativeSelection,
-  changeReceivedVote,
 } = initiativesSlice.actions;
 
 export default initiativesSlice.reducer;

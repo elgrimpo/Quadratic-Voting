@@ -14,7 +14,6 @@ import { selectCurrentUser } from "../../reducers/usersSlice";
 import {
   selectCurrentInitiative,
   selectGroupInitiatives,
-  changeReceivedVote,
   selectInitiatives,
   updateInitiative,
 } from "../../reducers/initiativesSlice";
