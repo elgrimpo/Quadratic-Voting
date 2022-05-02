@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 //App Imports
 import { InitiativesList, InitiativeDetails, Layout, Login } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
+//TODO: remove loading statuses from redux store
 import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
 import { fetchCurrentUser, selectUserLoadingStatus } from "../reducers/usersSlice";
 import {

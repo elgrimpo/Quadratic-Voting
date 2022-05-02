@@ -42,7 +42,7 @@ const Sidebar = (props) => {
 
   const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
 
-  const owner = users.find((user) => user._id === sidebarContent.ownerID);
+  const owner = users.find((user) => user._id === sidebarContent?.ownerID);
 
   //Remaining Group Votes
   const groupIndex = currentGroup?.remainingVotes.findIndex(vote => vote.userId === currentUser._id)

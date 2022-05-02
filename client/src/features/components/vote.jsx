@@ -16,12 +16,12 @@ import {
   selectGroupInitiatives,
   changeReceivedVote,
   selectInitiatives,
-  updateInitiative
+  updateInitiative,
 } from "../../reducers/initiativesSlice";
 import {
   selectCurrentGroup,
-  updateVoteCredits,
   selectGroups,
+  updateGroup
 } from "../../reducers/groupsSlice";
 import { findById } from "../../utils/find-by-id";
 
@@ -49,53 +49,73 @@ const VoteControl = (props) => {
 
   // Manage Voting
   const handleVote = (number) => {
+    // --- calculate sum of votes^2 of current User ---
     const userVotes = groupInitiatives.map((initiative) => {
       let index = initiative?.receivedVotes.findIndex(
         (vote) => vote.userId === currentUser._id
-      );
+      ); // identifies index of initiative vote record for current user
       if (index != -1) {
         if (initiative._id === props.initiative._id) {
           const newCount = initiative.receivedVotes[index].votes + number;
-          console.log(`current initiative new count: ${newCount}`);
-          return newCount; // update selected initiative a
+          return newCount; // update selected initiative with +1 or -1
         } else {
-          console.log(
-            `other initiative count: ${initiative.receivedVotes[index]?.votes}`
-          );
-          return initiative.receivedVotes[index]?.votes; // all other votes for initiatives within the same group
+          return initiative.receivedVotes[index]?.votes; // return other votes for initiatives within the same group
         }
       } else {
         return 0;
       }
     });
+
     const usedVotes = userVotes.reduce(
       (partialSum, a) => partialSum + Math.pow(a, 2),
       0
-    );
-    console.log(`used Votes: ${usedVotes}`);
+    ); // Adds all group Initiatives votes^2 (from current user)
 
+    // --- Update initiative voting record --- //
     if (currentGroup.totalVotes - usedVotes >= 0) {
-      console.log(props.initiative.receivedVotes)
-      const receivedVotes = props.initiative.receivedVotes.map(vote => {return {userId: vote.userId, votes: vote.votes}})
-      let newInitiative = {_id:props.initiative._id, receivedVotes: receivedVotes}
-      
+      const receivedVotes = props.initiative.receivedVotes.map((vote) => {
+        return { userId: vote.userId, votes: vote.votes };
+      });
+      let newInitiative = {
+        _id: props.initiative._id,
+        receivedVotes: receivedVotes,
+      }; // payload object
+
       if (initiativeIndex === -1) {
         newInitiative.receivedVotes.push({
           userId: currentUser._id,
           votes: number,
-        });
-        console.log(newInitiative);
+        }); // creates new entry in payload for current user, if it doesn't exist yet
       } else {
-        newInitiative.receivedVotes[initiativeIndex].votes += number;
-        console.log(newInitiative);
-      } 
+        newInitiative.receivedVotes[initiativeIndex].votes += number; // updates existing entry in payload for current user, if already existing
+      }
+      dispatch(updateInitiative(newInitiative));
 
-      dispatch(updateInitiative(newInitiative))
+      // --- Update group voting record --- //
+      const groupIndex = currentGroup.remainingVotes.findIndex(
+        (vote) => vote.userId === currentUser._id
+      );
+      const remainingVotes = currentGroup.remainingVotes.map((vote) => {
+        return { userId: vote.userId, votes: vote.votes };
+      });
 
-      /* dispatch(changeReceivedVote({ InitiativeId: props.initiative._id, userId: currentUser._id, number: number }));
-      dispatch(
-         updateVoteCredits({ id: currentGroup._id, usedVotes: usedVotes })
-      );*/
+      let newGroup = {
+        _id: currentGroup._id,
+        remainingVotes: remainingVotes,
+      }; // payload object
+
+      if (groupIndex === -1) {
+        newGroup.remainingVotes.push({
+          userId: currentUser._id,
+          votes: currentGroup.totalVotes - usedVotes,
+        }); // creates new entry in payload for current user, if it doesn't exist yet
+
+      } else {
+        newGroup.remainingVotes[groupIndex].votes =
+          currentGroup.totalVotes - usedVotes; // updates existing entry in payload for current user, if already existing
+      }
+
+      dispatch(updateGroup(newGroup));
     }
   };
 

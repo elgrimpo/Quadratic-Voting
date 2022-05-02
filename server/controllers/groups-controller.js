@@ -25,3 +25,20 @@ export const createGroup = async (req, res) => {
         res.status(409).json({message: error.message})
     }
 }
+
+// UPDATE GROUP
+// /groups/:id
+export const updateGroup = async (req, res) => {
+    const group = req.body;
+    const options = { new: true };
+    try {
+      const updatedGroup = await GroupSchema.findByIdAndUpdate(
+        { _id: req.params.id },
+        group,
+        options
+      );
+      res.status(201).json(updatedGroup);
+    } catch (error) {
+      res.status(409).json({ message: error.message });
+    }
+  };

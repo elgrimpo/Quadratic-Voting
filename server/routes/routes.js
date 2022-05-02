@@ -7,7 +7,7 @@ import {
   updateInitiative,
   deleteInitiative,
 } from "../controllers/initiatives-controller.js";
-import { getGroups, createGroup } from "../controllers/groups-controller.js";
+import { getGroups, createGroup, updateGroup } from "../controllers/groups-controller.js";
 import { getUsers, createUser } from "../controllers/users-controller.js";
 import {
   getCommunities,
@@ -63,17 +63,19 @@ AuthRouter.get("google/", getGoogleAuthentication);
 AuthRouter.get("google/callback/", getGoogleCallback);
 */
 
-// groups
+// communities
 export const CommunityRouter = express.Router();
 
 CommunityRouter.get("/", getCommunities);
 CommunityRouter.post("/", createCommunity); // frontend NOT YET IMPLEMENTED
+
 
 // groups
 export const GroupRouter = express.Router();
 
 GroupRouter.get("/", getGroups);
 GroupRouter.post("/", createGroup); // frontend NOT YET IMPLEMENTED
+GroupRouter.post("/:id", updateGroup);
 
 // initiatives
 export const InitiativeRouter = express.Router();

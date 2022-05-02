@@ -28,17 +28,23 @@ const initialGroups = {
     }
   )
 
+  export const updateGroup = createAsyncThunk(
+    "groups/updateGroup",
+    async (group, thunkAPI) => {
+      try {
+        const response = await api.updateGroup(group);
+        return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+
 /*-------- Slice object ---------- */
 const groupsSlice = createSlice({
     name: 'groups',
     initialState: initialGroups,
-    reducers: {
-        updateVoteCredits: (state, action) => {
-            const index = state.list.findIndex((obj => obj._id === action.payload.id));
-            const usedVotes = action.payload.usedVotes;
-            state.list[index].remainingVotes =state.list[index].totalVotes - usedVotes
-        }
-    },
+    reducers: {},
     extraReducers: {
         [fetchGroups.pending]: (state, action) => {
           state.status = 'loading'
@@ -60,6 +66,19 @@ const groupsSlice = createSlice({
         [createGroup.rejected]: (state, payload) => {
           state.status = 'failed'
         },
+        [updateGroup.pending]: (state, action) => {
+          state.status = "loading";
+        },
+        [updateGroup.fulfilled]: (state, action) => {
+          const index = state.list.findIndex(
+            (group) => group._id === action.payload._id
+          );
+          state.list[index] = action.payload;
+          state.status = "success";
+        },
+        [updateGroup.rejected]: (state, payload) => {
+          state.status = "failed";
+        },
     }
 })
 
@@ -70,6 +89,6 @@ export const selectGroupLoadingStatus = (state) => state.groups.status
 
 /*-------- Exports ---------- */
 
-export const {setCurrentGroup, updateVoteCredits} = groupsSlice.actions
+export const {setCurrentGroup} = groupsSlice.actions
 
 export default groupsSlice.reducer
