@@ -53,7 +53,7 @@ const VoteControl = (props) => {
       let index = initiative?.receivedVotes.findIndex(
         (vote) => vote.userId === currentUser._id
       ); // identifies index of initiative vote record for current user
-      if (index != -1) {
+      if (index !== -1) {
         if (initiative._id === props.initiative._id) {
           const newCount = initiative.receivedVotes[index].votes + number;
           return newCount; // update selected initiative with +1 or -1

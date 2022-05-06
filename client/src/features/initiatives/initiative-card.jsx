@@ -43,7 +43,7 @@ const InitiativeCard = (props) => {
               image={props.initiative.image}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h6" component="div">
                 {props.initiative.title}
               </Typography>
               <Typography
@@ -54,6 +54,7 @@ const InitiativeCard = (props) => {
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                 }}
+                variant="body2"
               >
                 {props.initiative.description}
               </Typography>

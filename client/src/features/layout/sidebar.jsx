@@ -67,8 +67,8 @@ const Sidebar = (props) => {
     >
       {/* ---> Title and Description <--- */}
 
-      <Typography variant="h5">{sidebarContent?.title}</Typography>
-      <Typography>{sidebarContent?.description}</Typography>
+      <Typography variant="h6">{sidebarContent?.title}</Typography>
+      <Typography variant="body2">{sidebarContent?.description}</Typography>
       <Divider sx={{ mt: "16px", mb: "16px" }} />
 
       {/* --->Links <--- */}

@@ -82,7 +82,7 @@ const initiativesSlice = createSlice({
     },
     [deleteInitiative.fulfilled]: (state, action) => {
       state.list = state.list.filter((initiative) => {
-        return initiative._id != action.payload;
+        return initiative._id !== action.payload;
       });
       state.status = "success";
     },
