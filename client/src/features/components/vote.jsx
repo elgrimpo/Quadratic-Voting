@@ -1,6 +1,6 @@
 //React Imports
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useMatch, useParams } from "react-router-dom";
 
 //MUI Imports
 import { Box, Typography, IconButton } from "@mui/material";
@@ -23,6 +23,10 @@ import {
   updateGroup
 } from "../../reducers/groupsSlice";
 import { findById } from "../../utils/find-by-id";
+import { selectCommunities } from "../../reducers/communitiesSlice";
+import Can from "../components/Can";
+import { subject } from "@casl/ability";
+
 
 /* ----------- COMPONENT -------------- */
 
@@ -33,6 +37,12 @@ const VoteControl = (props) => {
   const currentUser = useSelector(selectCurrentUser);
   const groupInitiatives = initiatives.filter(
     (initiative) => initiative.groupID === groupId
+  );  
+  const communities = useSelector(selectCommunities);
+  const communityName = useMatch(":communityName/*").params.communityName;
+
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase()
   );
   const currentGroup = findById(groups, groupId);
   const dispatch = useDispatch();
@@ -78,7 +88,7 @@ const VoteControl = (props) => {
       let newInitiative = {
         _id: props.initiative._id,
         receivedVotes: receivedVotes,
-      }; // payload object
+      }; // payload object TODO: Use Object.create() instead
 
       if (initiativeIndex === -1) {
         newInitiative.receivedVotes.push({
@@ -101,7 +111,7 @@ const VoteControl = (props) => {
       let newGroup = {
         _id: currentGroup._id,
         remainingVotes: remainingVotes,
-      }; // payload object
+      }; // payload object TODO: Use Object.create() instead
 
       if (groupIndex === -1) {
         newGroup.remainingVotes.push({
@@ -120,6 +130,8 @@ const VoteControl = (props) => {
 
   return (
     <Box sx={{ display: "flex" }}>
+      <Can I="vote" a={subject("Community", Object.create(currentCommunity || {waiting: "waiting"}))}>
+     
       <IconButton
         aria-label="delete"
         size="small"
@@ -137,6 +149,7 @@ const VoteControl = (props) => {
       >
         <AddCircleIcon fontSize="large" color="primary" />
       </IconButton>
+      </Can>
     </Box>
   );
 };

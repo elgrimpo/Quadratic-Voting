@@ -1,8 +1,9 @@
 //React Imports
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { subject } from "@casl/ability";
 
 //MUI Imports
 import {
@@ -24,6 +25,7 @@ import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import Can from "../components/Can";
 
 //App Imports
 import { TabNav, Chat, Sidebar, FormCreateInitiative } from "../index";
@@ -35,7 +37,7 @@ import {
 } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { findById } from "../../utils/find-by-id";
-import { border } from "@mui/system";
+
 
 /* ----------- COMPONENT -------------- */
 
@@ -108,8 +110,8 @@ const InitiativeDetails = (props) => {
               {/* Banner image */}
               <img
                 className="banner-image"
-                src={currentInitiative.image}
-                alt={currentInitiative.title.toString()}
+                src={currentInitiative?.image}
+                alt={currentInitiative?.title.toString()}
               />
 
               {/* Back navigation */}
@@ -134,9 +136,14 @@ const InitiativeDetails = (props) => {
                   marginBottom: "10px",
                 }}
               >
-                <Typography variant="h4">{currentInitiative.title}</Typography>
+                <Typography variant="h4">{currentInitiative?.title}</Typography>
               </Box>
-
+              {/* TODO: implement abilitiy*/}
+              <Can
+                I="manage"
+                a={subject("Initiative", Object.create(currentInitiative || {waiting: "waiting"}))}
+              >
+              
               {/* Delete Initiative */}
               <Box
                 style={{
@@ -197,17 +204,18 @@ const InitiativeDetails = (props) => {
                   />
                 </Dialog>
               </Box>
+              </Can>
               {/* Initiative Content */}
               <Box style={{ paddingLeft: 30, paddingRight: 30 }}>
                 <Typography style={{ marginBottom: "30px" }}>
-                  {currentInitiative.text}
+                  {currentInitiative?.text}
                 </Typography>
               </Box>
             </TabPanel>
 
             {/* ---> Chat <--- */}
             <TabPanel value="Chat" style={{ padding: 0 }}>
-              <Chat currentInitiative={currentInitiative.title} />
+              <Chat currentInitiative={currentInitiative?.title} />
             </TabPanel>
           </TabContext>
         </Paper>

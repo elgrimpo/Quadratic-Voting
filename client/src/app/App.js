@@ -13,13 +13,15 @@ import { InitiativesList, InitiativeDetails, Layout, Login } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
 //TODO: remove loading statuses from redux store
 import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
-import { fetchCurrentUser, selectUserLoadingStatus } from "../reducers/usersSlice";
+import { fetchCurrentUser, selectCurrentUser, selectUserLoadingStatus } from "../reducers/usersSlice";
 import {
   selectCommunityLoadingStatus,
   selectCommunities,
 } from "../reducers/communitiesSlice";
 import { selectGroupLoadingStatus } from "../reducers/groupsSlice";
 import { selectGroups } from "../reducers/groupsSlice";
+import { ability } from '../features/components/Can'
+import defineRulesFor from '../config/abilities'
 
 /* ----------- COMPONENT -------------- */
 
@@ -35,6 +37,7 @@ function App(props) {
   // Identify initial Group for redirecting
   const communities = useSelector(selectCommunities);
   const groups = useSelector(selectGroups);
+  const currentUser = useSelector(selectCurrentUser)
   const communityName = useMatch(":communityName/*")?.params.communityName;
   const currentCommunity = communities.find(
     (community) => community.name.toLowerCase() === communityName.toLowerCase()
@@ -48,6 +51,10 @@ function App(props) {
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    ability.update(defineRulesFor(currentUser))}, 
+    [currentUser])
 
   let firstGroupId = communityGroups[0]?._id;
 
