@@ -1,57 +1,27 @@
 //React Imports
-import React, { useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { subject } from "@casl/ability";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 //MUI Imports
-import {
-  Typography,
-  Box,
-  Button,
-  Paper,
-  Dialog,
-  DialogTitle,
-  Snackbar,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import TabContext from "@mui/lab/TabContext";
-import TabPanel from "@mui/lab/TabPanel";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { Typography, Box, Button, Paper } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
-import Can from "../components/Can";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 
 //App Imports
-import { TabNav, Chat, Sidebar, FormCreateInitiative } from "../index";
-import {
-  selectGroupInitiatives,
-  selectInitiatives,
-  removeCurrentInitiativeSelection,
-  deleteInitiative,
-} from "../../reducers/initiativesSlice";
-import { selectGroups } from "../../reducers/groupsSlice";
-import { findById } from "../../utils/find-by-id";
+import { Sidebar } from "../index";
 import { selectCommunities } from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const CommunityDetails = () => {
-  let { groupId, communityName, initiativeId } = useParams();
-  const initiatives = useSelector(selectInitiatives);
-  const groups = useSelector(selectGroups);
-  const currentInitiative = findById(initiatives, initiativeId);
+  let { communityName } = useParams();
   const communities = useSelector(selectCommunities);
   const currentCommunity = communities.find(
     (community) => community.name.toLowerCase() === communityName.toLowerCase()
   );
-
-  const theme = useTheme();
 
   return (
     <Box
@@ -83,10 +53,38 @@ const CommunityDetails = () => {
               paddingLeft: 30,
               paddingRight: 30,
               marginBottom: "10px",
-              marginTop: "30px"
+              marginTop: "30px",
             }}
           >
             <Typography variant="h4">{currentCommunity?.name}</Typography>
+            <Typography variant="h7">{currentCommunity?.headline}</Typography>
+
+            {/* User Actions*/}
+
+            {/* Subscribe */}
+            <Box
+              style={{
+                paddingTop: 10,
+                paddingRight: 30,
+                marginBottom: "30px",
+              }}
+            >
+              <Button
+                variant="outlined"
+                startIcon={<BookmarkIcon />}
+                style={{ marginRight: "10px" }}
+              >
+                Subscribe
+              </Button>
+
+              <Button
+                variant="outlined"
+                startIcon={<GroupAddIcon />}
+                style={{ marginRight: "10px" }}
+              >
+                Become member
+              </Button>
+            </Box>
           </Box>
         </Paper>
       </ThemeProvider>

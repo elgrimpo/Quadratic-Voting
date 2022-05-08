@@ -1,8 +1,7 @@
 // App imports
 import GroupSchema from '../models/groups-model.js'
 
-// GET GROUPS
-// /groups/
+// GET Groups --> /groups/
 export const getGroups = async (req, res) => {
     try {
         const groupSchemas = await GroupSchema.find()
@@ -12,9 +11,8 @@ export const getGroups = async (req, res) => {
     }
 }
 
-// CREATE GROUP
-// /groups/
-// Frontend NOT YET IMPLEMENTED
+// CREATE Group --> /groups/
+// TODO: Frontend NOT YET IMPLEMENTED
 export const createGroup = async (req, res) => {
     const group = req.body
     const newGroup = new GroupSchema(group)
@@ -26,8 +24,7 @@ export const createGroup = async (req, res) => {
     }
 }
 
-// UPDATE GROUP
-// /groups/:id
+// UPDATE GROUP --> /groups/:id
 export const updateGroup = async (req, res) => {
     const group = req.body;
     const options = { new: true };

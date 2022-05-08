@@ -1,7 +1,6 @@
 //React Imports
-import React, { useContext } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
 import {
@@ -12,16 +11,10 @@ import {
   Typography,
   CardActions,
   Grid,
-  Button,
 } from "@mui/material";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 //App Imports
 import { VoteControl } from "../index";
-import {
-  selectGroupInitiatives,
-  setCurrentInitiative,
-} from "../../reducers/initiativesSlice";
 
 
 /* ----------- COMPONENT -------------- */

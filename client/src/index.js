@@ -4,7 +4,7 @@ import App from './app/App';
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material';
-import {darkTheme, lightTheme} from './styles/themeProvider'
+import { darkTheme } from './styles/themeProvider'
 import { Provider } from 'react-redux';
 import {store} from './app/store'
 

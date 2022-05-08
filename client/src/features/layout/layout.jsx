@@ -1,34 +1,20 @@
 //React Imports
-import React, { useEffect, useContext } from "react";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useMatch,
-  matchPath,
-  useLocation,
-  Outlet,
-} from "react-router-dom";
+import React from "react";
+import { Outlet } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
-import { Box, Paper, Drawer } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
+import { Box, Drawer } from "@mui/material";
 
 //App Imports
 import {
   Communities,
-  InitiativesList,
-  InitiativeDetails,
   GroupsNav,
-  Sidebar,
 } from "..";
 
 /* ----------- COMPONENT -------------- */
 
 function Layout(props) {
-  const dispatch = useDispatch();
 
   // Drawer functions
   const drawer = (

@@ -1,8 +1,7 @@
 //React Imports
 import "../styles/App.css";
 import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useMatch } from "react-router-dom";
-
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 //MUI Imports
@@ -10,16 +9,7 @@ import { Box } from "@mui/material";
 
 //App Imports
 import { InitiativesList, InitiativeDetails, Layout, Login, CommunityDetails } from "../features";
-import { fetchInitiatives } from "../reducers/initiativesSlice";
-//TODO: remove loading statuses from redux store
-import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
-import { fetchCurrentUser, selectCurrentUser, selectUserLoadingStatus } from "../reducers/usersSlice";
-import {
-  selectCommunityLoadingStatus,
-  selectCommunities,
-} from "../reducers/communitiesSlice";
-import { selectGroupLoadingStatus } from "../reducers/groupsSlice";
-import { selectGroups } from "../reducers/groupsSlice";
+import { fetchCurrentUser, selectCurrentUser } from "../reducers/usersSlice";
 import { ability } from '../features/components/Can'
 import defineRulesFor from '../config/abilities'
 
@@ -33,18 +23,7 @@ function App(props) {
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
-
-  // Identify initial Group for redirecting
-  const communities = useSelector(selectCommunities);
-  const groups = useSelector(selectGroups);
   const currentUser = useSelector(selectCurrentUser)
-  const communityName = useMatch(":communityName/*")?.params.communityName;
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
-  );
-  const communityGroups = groups.filter(
-    (group) => group.communityId === currentCommunity?._id
-  );
 
 
   //TODO: be checked if actually needed??
@@ -55,8 +34,6 @@ function App(props) {
   useEffect(() => {
     ability.update(defineRulesFor(currentUser))}, 
     [currentUser])
-
-  let firstGroupId = communityGroups[0]?._id;
 
 
   return (

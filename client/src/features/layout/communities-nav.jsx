@@ -1,6 +1,6 @@
 //React Imports
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 //MUI Imports
@@ -19,18 +19,15 @@ import { useTheme } from "@mui/material/styles";
 import LoginIcon from "@mui/icons-material/Login";
 
 //App Imports
-import { logout, selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
+import {  selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
 import {
   selectCommunities,
-  selectCurrentCommunity,
 } from "../../reducers/communitiesSlice";
-import { selectGroups } from "../../reducers/groupsSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
   const theme = useTheme();
-  const dispatch = useDispatch()
   let { communityName } = useParams();
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities);

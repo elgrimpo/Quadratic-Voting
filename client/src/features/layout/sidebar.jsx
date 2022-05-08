@@ -1,31 +1,24 @@
 //React Imports
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 //MUI Imports
 import {
   Box,
   Typography,
-  IconButton,
   Stack,
   Link,
   Divider,
   Avatar,
-  Chip,
 } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import { VoteControl } from "../index";
-import {
-  selectGroupInitiatives,
-  selectInitiatives,
-} from "../../reducers/initiativesSlice";
+import { selectInitiatives } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectUsers, selectCurrentUser } from "../../reducers/usersSlice";
 import { findById } from "../../utils/find-by-id";
@@ -41,10 +34,7 @@ const Sidebar = (props) => {
   const currentUser = useSelector(selectCurrentUser);
   const currentInitiative = findById(initiatives, initiativeId);
   const currentGroup = findById(groups, groupId);
-
   const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
-
-  const owner = users.find((user) => user._id === sidebarContent?.ownerId);
 
   //Remaining Group Votes
   const groupIndex = currentGroup?.remainingVotes.findIndex(
@@ -113,6 +103,8 @@ const Sidebar = (props) => {
               sx={{ width: 48, height: 48 }}
             />
           );
+        } else {
+          return null
         }
       })}
       </Box>

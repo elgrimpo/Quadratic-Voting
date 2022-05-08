@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {channelList} from '../features/groups/channelsData'
+import {channelList} from '../config/channelsData'
 
 const initialChannels = channelList;
 

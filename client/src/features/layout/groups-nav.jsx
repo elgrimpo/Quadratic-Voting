@@ -1,23 +1,16 @@
 //React Imports
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
 
 //MUI Imports
 import {
   Box,
-  Menu,
-  MenuItem,
-  Button,
-  Typography,
-  IconButton,
   List,
   Paper,
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
 import { GroupsSection } from "../index.js";
@@ -46,16 +39,6 @@ function GroupsNav(props) {
   );
   const channels = useSelector(selectChannels);
   const currentChannel = useSelector(selectCurrentChannel);
-
-  // Menu controls TODO: Remove
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const location = useLocation()
 
   return (

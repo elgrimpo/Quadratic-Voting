@@ -1,7 +1,7 @@
 // App imports
 import CommunitySchema from '../models/communities-model.js'
 
-
+// GET Communities --> /communities/
 export const getCommunities = async (req, res) => {
     try {
         const communitySchemas = await CommunitySchema.find()
@@ -11,8 +11,8 @@ export const getCommunities = async (req, res) => {
     }
 }
 
-
-// frontend NOT YET IMPLEMENTED
+// CREATE Community --> /communities/
+// TODO: frontend not yet implemented
 export const createCommunity = async (req, res) => {
     const community = req.body
     const newCommunity = new CommunitySchema(community)

@@ -1,4 +1,6 @@
 
+// TODO: Placeholder Object until this is managed in database
+
 export const channelList = [{
     _id: 0,
     title: '# General'

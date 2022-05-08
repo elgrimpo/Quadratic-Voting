@@ -1,5 +1,5 @@
 //React Imports
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -13,7 +13,6 @@ import {
   Paper,
   Dialog,
   DialogTitle,
-  Snackbar,
   DialogContent,
   DialogContentText,
   DialogActions,
@@ -30,12 +29,9 @@ import Can from "../components/Can";
 //App Imports
 import { TabNav, Chat, Sidebar, FormCreateInitiative } from "../index";
 import {
-  selectGroupInitiatives,
   selectInitiatives,
-  removeCurrentInitiativeSelection,
   deleteInitiative,
 } from "../../reducers/initiativesSlice";
-import { selectGroups } from "../../reducers/groupsSlice";
 import { findById } from "../../utils/find-by-id";
 
 
@@ -44,7 +40,6 @@ import { findById } from "../../utils/find-by-id";
 const InitiativeDetails = (props) => {
   let { groupId, communityName, initiativeId } = useParams();
   const initiatives = useSelector(selectInitiatives);
-  const groups = useSelector(selectGroups);
   const currentInitiative = findById(initiatives, initiativeId);
   const dispatch = useDispatch();
 

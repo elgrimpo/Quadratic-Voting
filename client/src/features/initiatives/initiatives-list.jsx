@@ -1,8 +1,9 @@
 // React/Redux Imports
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Link, useParams } from "react-router-dom";
+import { useMatch, useParams } from "react-router-dom";
+import { subject } from "@casl/ability";
 
 // MUI Imports
 import { Grid, Fab, Dialog, Box, Paper } from "@mui/material";
@@ -16,6 +17,9 @@ import { selectInitiatives } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { lightTheme } from "../../styles/themeProvider";
 import { findById } from "../../utils/find-by-id"
+import Can from "../components/Can";
+import { selectCommunities } from "../../reducers/communitiesSlice.js";
+
 
 /* ----------- COMPONENT -------------- */
 
@@ -26,6 +30,12 @@ const InitiativesList = (props) => {
     initiative.groupId === groupId);
   const groups = useSelector(selectGroups)
   const currentGroup = findById(groups, groupId)
+  // TODO: Put into App.js (dispatch update currentCommunity)
+  const communities = useSelector(selectCommunities);
+  const communityName = useMatch(":communityName/*").params.communityName;
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase()
+  );
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -91,10 +101,11 @@ const InitiativesList = (props) => {
             </Grid>
 
             {/* ---> Button - Create new Initiative <--- */}
-
+            <Can I="vote" a={subject("Community", Object.create(currentCommunity || {waiting: "waiting"}))}> 
             <Fab id="action-button" color="primary" onClick={handleOpen}>
               <AddIcon />
             </Fab>
+            </Can>
 
             <Dialog
               open={open}

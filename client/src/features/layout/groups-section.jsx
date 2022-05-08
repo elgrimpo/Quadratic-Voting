@@ -1,7 +1,6 @@
 //React Imports
 import { Link, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import React, { useContext } from "react";
+import React from "react";
 
 
 //MUI Imports
@@ -17,12 +16,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
-import { removeCurrentInitiativeSelection } from "../../reducers/initiativesSlice";
-import {
-  selectGroups,
-  selectCurrentGroup,
-  setCurrentGroup,
-} from "../../reducers/groupsSlice";
+
 
 /* ----------- COMPONENT -------------- */
 

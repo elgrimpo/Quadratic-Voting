@@ -13,18 +13,15 @@ import {
   getCommunities,
   createCommunity,
 } from "../controllers/communities-controller.js";
-import {
-  getGoogleAuthentication,
-  getGoogleCallback,
-} from "../controllers/auth-controller.js";
 import passport from "passport";
 
 // auth TODO: create routers
 const CLIENT_URL = "http://localhost:3000/phoenix";
 
 export const AuthRouter = express.Router();
+
+// authentication
 AuthRouter.get("/login/success", (req, res) => {
-    console.log(req.user)
     if (req.user) {
       res.status(200).json({
         success: true,
@@ -36,7 +33,7 @@ AuthRouter.get("/login/success", (req, res) => {
         res.status(404).send()
     }
   });
-  
+
   AuthRouter.get("/login/failed", (req, res) => {
     res.status(401).json({
       success: false,
@@ -58,10 +55,6 @@ AuthRouter.get("/login/success", (req, res) => {
       failureRedirect: "/login/failed",
     })
   );
-/* 
-AuthRouter.get("google/", getGoogleAuthentication);
-AuthRouter.get("google/callback/", getGoogleCallback);
-*/
 
 // communities
 export const CommunityRouter = express.Router();

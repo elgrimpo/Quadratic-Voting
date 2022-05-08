@@ -1,31 +1,28 @@
 //React Imports
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useMatch, useParams } from "react-router-dom";
+import { useMatch, useParams } from "react-router-dom";
+import { subject } from "@casl/ability";
 
 //MUI Imports
 import { Box, Typography, IconButton } from "@mui/material";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import {
-  selectCurrentInitiative,
-  selectGroupInitiatives,
   selectInitiatives,
   updateInitiative,
 } from "../../reducers/initiativesSlice";
 import {
-  selectCurrentGroup,
   selectGroups,
   updateGroup
 } from "../../reducers/groupsSlice";
 import { findById } from "../../utils/find-by-id";
 import { selectCommunities } from "../../reducers/communitiesSlice";
 import Can from "../components/Can";
-import { subject } from "@casl/ability";
+
 
 
 /* ----------- COMPONENT -------------- */
@@ -38,9 +35,10 @@ const VoteControl = (props) => {
   const groupInitiatives = initiatives.filter(
     (initiative) => initiative.groupId === groupId
   );  
+
+  // TODO: Create UPDATE "CurrentCommunity" as a dispatch in App.js
   const communities = useSelector(selectCommunities);
   const communityName = useMatch(":communityName/*").params.communityName;
-
   const currentCommunity = communities.find(
     (community) => community.name.toLowerCase() === communityName.toLowerCase()
   );

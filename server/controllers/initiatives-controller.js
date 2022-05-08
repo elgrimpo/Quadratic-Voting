@@ -1,6 +1,8 @@
 // App imports
 import InitiativeSchema from "../models/initiatives-model.js";
 
+
+// GET Initiatives --> /initiatives/
 export const getInitiatives = async (req, res) => {
   try {
     const initiativeSchemas = await InitiativeSchema.find();
@@ -10,6 +12,7 @@ export const getInitiatives = async (req, res) => {
   }
 };
 
+// CREATE Initiative --> /initiatives/
 export const createInitiative = async (req, res) => {
   const initiative = req.body;
   const newInitiative = new InitiativeSchema(initiative);
@@ -21,6 +24,7 @@ export const createInitiative = async (req, res) => {
   }
 };
 
+// UPDATE Initiative --> /initiatives/:id
 export const updateInitiative = async (req, res) => {
   const initiative = req.body;
   const options = { new: true };
@@ -36,6 +40,7 @@ export const updateInitiative = async (req, res) => {
   }
 };
 
+// DELETE Initiative --> /initiatives/:id
 export const deleteInitiative = async (req, res) => {
   InitiativeSchema.findByIdAndRemove(req.params.id)
     .then((initiative) => {

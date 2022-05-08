@@ -1,7 +1,7 @@
 // App imports
 import UserSchema from '../models/users-model.js'
 
-
+// GET Users --> /users/
 export const getUsers = async (req, res) => {
     try {
         const userSchemas = await UserSchema.find()
@@ -11,8 +11,8 @@ export const getUsers = async (req, res) => {
     }
 }
 
-
-// frontend NOT YET IMPLEMENTED
+// Create User --> /users/
+// TODO: frontend NOT YET IMPLEMENTED
 export const createUser = async (req, res) => {
     const user = req.body
     const newUser = new UserSchema(user)
