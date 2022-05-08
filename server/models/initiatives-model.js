@@ -1,24 +1,31 @@
 import mongoose from 'mongoose'
 
+//TODO: Update MongoDB
 const initiativeSchema = new mongoose.Schema({
-    communityID: String,
-    groupID: String,
+    communityId: String,
+    groupId: String,
     title: { type: String, required: true },
-    image: String,
+    image_url: {
+        type: String,
+        default: "https://images.unsplash.com/photo-1564951434112-64d74cc2a2d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+     },
     description: String,
-    status: String,
-    //TODO: remove votes
-    votes: {
-        type: Number,
-        default: 0},
-    contributors: String,
-    website: String,
+    status: {
+        type: String,
+        default: "open"
+        },
+    website: String, // TODO: Convert to Array
     instagram: String,
     twitter: String,
-    //TODO: remove totalVotes ???
-    totalVotes: Number,
-    ownerID: String,
-    receivedVotes: Array,
+    ownerId: String, // TODO: Remove ownerId
+    receivedVotes: [{
+        userId: String,
+        votes: Number
+    }],
+    permissions: [{
+        userId: String,
+        role: String
+    }],
     text: String
 })
 

@@ -1,15 +1,28 @@
 import mongoose from 'mongoose'
 
 const groupSchema = new mongoose.Schema({
-    communityID: String,
-    title: { type: String, required: true },
-    image: String,
+    communityId: String,
+    title: { 
+        type: String, 
+        required: true 
+    },
+    image_url: {
+        type: String,
+        default: "https://images.unsplash.com/photo-1620503374956-c942862f0372?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+     },
     description: String,
     totalVotes: {
         type: Number,
         default: 100},
-    remainingVotes: Array,
-    ownerID: String,
+    remainingVotes: [{
+        userId: String,
+        votes: Number
+    }],
+    ownerId: String, // TODO: remove ownerID
+    permissions: [{
+        userId: String,
+        role: String
+    }],
 })
 
 const GroupSchema = mongoose.model('GroupSchema', groupSchema);

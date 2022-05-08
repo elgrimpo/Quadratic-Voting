@@ -36,7 +36,7 @@ const VoteControl = (props) => {
   const initiatives = useSelector(selectInitiatives);
   const currentUser = useSelector(selectCurrentUser);
   const groupInitiatives = initiatives.filter(
-    (initiative) => initiative.groupID === groupId
+    (initiative) => initiative.groupId === groupId
   );  
   const communities = useSelector(selectCommunities);
   const communityName = useMatch(":communityName/*").params.communityName;

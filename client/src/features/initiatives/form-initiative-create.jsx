@@ -38,16 +38,21 @@ function FormCreateInitiative(props) {
 
   const [formValues, setFormValues] = useState({
     _id: props.content._id,
-    communityID: currentCommunity._id,
-    groupID: currentGroup._id,
+    communityId: currentCommunity._id,
+    groupId: currentGroup._id,
     title: props.content.title,
-    image: props.content.image,
+    image_url: props.content.image_url,
     description: props.content.description,
-    ownerID: currentUser._id,
+    ownerId: currentUser._id, //TODO: Delete
     website: props.content.webiste,
     instagram: props.content.instagram,
     twitter: props.content.twitter,
     text: props.content.text,
+    receivedVotes: [],
+    permissions: [{
+      userId: currentUser._id,
+      role: "admin"
+    }]
   });
 
   const handleInputChange = (e) => {
@@ -96,10 +101,10 @@ function FormCreateInitiative(props) {
 
           <TextField
             id="image-input"
-            name="image"
+            name="image_url"
             label="Image"
             type="string"
-            value={formValues.image}
+            value={formValues.image_url}
             onChange={handleInputChange}
             sx={{
               gridColumn: "span 1",

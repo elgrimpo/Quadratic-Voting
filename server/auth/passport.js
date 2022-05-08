@@ -32,7 +32,7 @@ passport.use(
         const newUser = await new UserSchema({
           googleId: profile.id,
           displayName: profile.displayName,
-          image: profile._json.picture,
+          image_url: profile._json.picture,
         }).save();
         cb(null, newUser);
       } else {

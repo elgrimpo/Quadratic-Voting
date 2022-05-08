@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
-    image: String,
+    image_url: String,
     userName: String,
     googleId: {
         type: String,

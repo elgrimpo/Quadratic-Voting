@@ -87,7 +87,7 @@ const Communities = (props) => {
                   <CardMedia
                     component="img"
                     height="56"
-                    image={community.image}
+                    image={community.logo_url}
                   />
                 </CardActionArea>
               </Card>
@@ -104,7 +104,7 @@ const Communities = (props) => {
             id="avatar"
             style={{ border: `2px solid ${theme.palette.primary.light}` }}
             alt={currentUser._id}
-            src={currentUser.image}
+            src={currentUser.image_url}
             onClick={handleClick}
           />
 

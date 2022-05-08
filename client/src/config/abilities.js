@@ -18,12 +18,12 @@ export default function defineRulesFor(user) {
   can("read", "Initiative"); //not used currently
   can("manage", "Initiative", {
     permissions: {
-      $elemMatch: { role: "admin", userID: user._id },
+      $elemMatch: { role: "admin", userId: user._id },
     },
   });
   can("vote", "Community", {
     permissions: {
-        $elemMatch: { role: "member", userID: user._id },
+        $elemMatch: { role: "member", userId: user._id },
       },
   })
 

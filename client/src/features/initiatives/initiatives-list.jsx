@@ -23,7 +23,7 @@ const InitiativesList = (props) => {
   const groupId = useParams().groupId;
   const initiatives = useSelector(selectInitiatives)
   const groupInitiatives = initiatives.filter((initiative) => 
-    initiative.groupID === groupId);
+    initiative.groupId === groupId);
   const groups = useSelector(selectGroups)
   const currentGroup = findById(groups, groupId)
 
@@ -75,7 +75,7 @@ const InitiativesList = (props) => {
 
             <img
               className="banner-image"
-              src={currentGroup?.image} //to be updated
+              src={currentGroup?.image_url} //to be updated
               alt={currentGroup?.title} //to be updated
             />
 

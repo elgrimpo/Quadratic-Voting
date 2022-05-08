@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 
 //App Imports
-import { InitiativesList, InitiativeDetails, Layout, Login } from "../features";
+import { InitiativesList, InitiativeDetails, Layout, Login, CommunityDetails } from "../features";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
 //TODO: remove loading statuses from redux store
 import { selectInitiativeLoadingStatus } from "../reducers/initiativesSlice";
@@ -43,7 +43,7 @@ function App(props) {
     (community) => community.name.toLowerCase() === communityName.toLowerCase()
   );
   const communityGroups = groups.filter(
-    (group) => group.communityID === currentCommunity?._id
+    (group) => group.communityId === currentCommunity?._id
   );
 
 
@@ -76,7 +76,15 @@ function App(props) {
             />
           }
         >
-          <Route path="" element={<Navigate to={`group/${firstGroupId}`} />} />
+          <Route path="" element={<Navigate to={`overview`} />} />
+
+          {/* ---> Main Content: Community Details <--- */}
+          <Route
+            path="overview"
+            element={
+              <CommunityDetails handleDrawerToggle={handleDrawerToggle} />
+            }
+          />
 
           {/* ---> Main Content: Initiative List <--- */}
           <Route
@@ -85,6 +93,7 @@ function App(props) {
               <InitiativesList handleDrawerToggle={handleDrawerToggle} />
             }
           />
+
 
           {/* ---> Main Content: Initiative Details <--- */}
           <Route

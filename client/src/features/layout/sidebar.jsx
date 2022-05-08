@@ -22,36 +22,47 @@ import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import { VoteControl } from "../index";
-import { selectGroupInitiatives, selectInitiatives } from "../../reducers/initiativesSlice";
+import {
+  selectGroupInitiatives,
+  selectInitiatives,
+} from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectUsers, selectCurrentUser } from "../../reducers/usersSlice";
-import {findById} from "../../utils/find-by-id"
+import { findById } from "../../utils/find-by-id";
 
 /* ----------- COMPONENT -------------- */
 
 const Sidebar = (props) => {
   const theme = useTheme();
-  const {initiativeId, groupId} = useParams();
-  const initiatives = useSelector(selectInitiatives)
-  const groups = useSelector(selectGroups)
+  const { initiativeId, groupId } = useParams();
+  const initiatives = useSelector(selectInitiatives);
+  const groups = useSelector(selectGroups);
   const users = useSelector(selectUsers);
-  const currentUser = useSelector(selectCurrentUser)
-  const currentInitiative = findById(initiatives, initiativeId)
-  const currentGroup = findById(groups, groupId)
- 
+  const currentUser = useSelector(selectCurrentUser);
+  const currentInitiative = findById(initiatives, initiativeId);
+  const currentGroup = findById(groups, groupId);
 
   const sidebarContent = currentInitiative ? currentInitiative : currentGroup;
 
-  const owner = users.find((user) => user._id === sidebarContent?.ownerID);
+  const owner = users.find((user) => user._id === sidebarContent?.ownerId);
 
   //Remaining Group Votes
-  const groupIndex = currentGroup?.remainingVotes.findIndex(vote => vote.userId === currentUser._id)
-  const remainingGroupVotes = groupIndex === -1 ? currentGroup?.totalVotes : currentGroup?.remainingVotes[groupIndex].votes
-  
-  // Initiative Received User Votes
-  const InitiativeIndex = currentInitiative?.receivedVotes.findIndex(vote => vote.userId === currentUser._id)
-  const InitiativeReceivedVotes = InitiativeIndex === -1 ? 0 : currentInitiative?.receivedVotes[InitiativeIndex].votes
+  const groupIndex = currentGroup?.remainingVotes.findIndex(
+    (vote) => vote.userId === currentUser._id
+  );
+  const remainingGroupVotes =
+    groupIndex === -1
+      ? currentGroup?.totalVotes
+      : currentGroup?.remainingVotes[groupIndex].votes;
 
+  // Initiative Received User Votes
+  const InitiativeIndex = currentInitiative?.receivedVotes.findIndex(
+    (vote) => vote.userId === currentUser._id
+  );
+  const InitiativeReceivedVotes =
+    InitiativeIndex === -1
+      ? 0
+      : currentInitiative?.receivedVotes[InitiativeIndex].votes;
 
   return (
     <Stack
@@ -90,12 +101,21 @@ const Sidebar = (props) => {
       {/* ---> Owner <--- */}
 
       <Typography variant="h7">Group admin</Typography>
-      <Avatar
-        style={{ border: `2px solid ${theme.palette.primary.light}` }}
-        alt={owner?._id}
-        src={owner?.image}
-        sx={{ width: 48, height: 48 }}
-      />
+      <Box sx={{display: "flex"}}>
+      {sidebarContent?.permissions.map((permission) => {
+        if (permission.role === "admin") {
+          const owner = users.find((user) => user._id === permission.userId);
+          return (
+            <Avatar
+              style={{ border: `2px solid ${theme.palette.primary.light}`, marginRight:"10px" }}
+              alt={owner?._id}
+              src={owner?.image_url}
+              sx={{ width: 48, height: 48 }}
+            />
+          );
+        }
+      })}
+      </Box>
       <Divider />
 
       {/* ---> Votes <--- */}

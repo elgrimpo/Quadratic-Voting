@@ -40,7 +40,7 @@ const InitiativeCard = (props) => {
             <CardMedia
               component="img"
               height="140"
-              image={props.initiative.image}
+              image={props.initiative.image_url}
             />
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">

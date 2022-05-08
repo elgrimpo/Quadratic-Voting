@@ -110,7 +110,7 @@ const InitiativeDetails = (props) => {
               {/* Banner image */}
               <img
                 className="banner-image"
-                src={currentInitiative?.image}
+                src={currentInitiative?.image_url}
                 alt={currentInitiative?.title.toString()}
               />
 
@@ -138,7 +138,7 @@ const InitiativeDetails = (props) => {
               >
                 <Typography variant="h4">{currentInitiative?.title}</Typography>
               </Box>
-              {/* TODO: implement abilitiy*/}
+              {/* abilitiy */}
               <Can
                 I="manage"
                 a={subject("Initiative", Object.create(currentInitiative || {waiting: "waiting"}))}
