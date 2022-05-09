@@ -184,6 +184,19 @@ body {
 	margin: 8px
 }
 
+#card-text-body {
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+#card-actions {
+	display: flex;
+	justify-content: center
+}
+
 /*------- Sidebar -------*/
 
 #sidebar {
