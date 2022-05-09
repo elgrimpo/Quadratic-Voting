@@ -16,7 +16,7 @@ import {
 import { GroupsSection } from "../index.js";
 
 import { selectGroups } from "../../reducers/groupsSlice";
-import { selectCommunities } from "../../reducers/communitiesSlice";
+import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import {
   selectChannels,
   selectCurrentChannel,
@@ -30,10 +30,8 @@ function GroupsNav(props) {
   const groups = useSelector(selectGroups);
   let { groupId, communityName } = useParams();
   const currentGroup = findById(groups, groupId);
-  const communities = useSelector(selectCommunities);
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
-  );
+  const currentCommunity = useSelector(selectCurrentCommunity)
+
   const communityGroups = groups.filter(
     (group) => group.communityId === currentCommunity._id
   );

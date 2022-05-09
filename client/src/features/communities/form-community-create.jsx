@@ -11,6 +11,7 @@ import { useState } from "react";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 
+
 export default NiceModal.create((props) => {
   // Use a hook to manage the modal state
   const modal = useModal();

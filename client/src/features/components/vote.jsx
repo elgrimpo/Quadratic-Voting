@@ -20,7 +20,7 @@ import {
   updateGroup
 } from "../../reducers/groupsSlice";
 import { findById } from "../../utils/find-by-id";
-import { selectCommunities } from "../../reducers/communitiesSlice";
+import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import Can from "../components/Can";
 
 
@@ -36,12 +36,7 @@ const VoteControl = (props) => {
     (initiative) => initiative.groupId === groupId
   );  
 
-  // TODO: Create UPDATE "CurrentCommunity" as a dispatch in App.js
-  const communities = useSelector(selectCommunities);
-  const communityName = useMatch(":communityName/*").params.communityName;
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
-  );
+  const currentCommunity = useSelector(selectCurrentCommunity)
   const currentGroup = findById(groups, groupId);
   const dispatch = useDispatch();
 

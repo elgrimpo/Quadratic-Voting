@@ -3,6 +3,8 @@ import "../styles/App.css";
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useMatch, useParams } from "react-router-dom";
+
 
 //MUI Imports
 import { Box } from "@mui/material";
@@ -10,6 +12,8 @@ import { Box } from "@mui/material";
 //App Imports
 import { InitiativesList, InitiativeDetails, Layout, Login, CommunityDetails } from "../features";
 import { fetchCurrentUser, selectCurrentUser } from "../reducers/usersSlice";
+import { selectCommunities, updateCurrentCommunity } from "../reducers/communitiesSlice";
+
 import { ability } from '../features/components/Can'
 import defineRulesFor from '../config/abilities'
 
@@ -24,6 +28,11 @@ function App(props) {
     setDrawerOpen(!drawerOpen);
   };
   const currentUser = useSelector(selectCurrentUser)
+  const communities = useSelector(selectCommunities);
+  const communityName = useMatch(":communityName/*").params.communityName;
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase()
+  );
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -32,6 +41,11 @@ function App(props) {
   useEffect(() => {
     ability.update(defineRulesFor(currentUser))}, 
     [currentUser])
+
+  useEffect(() => {
+    dispatch(updateCurrentCommunity(currentCommunity));
+    console.log(currentCommunity)
+  }, [currentCommunity])
 
 
   return (

@@ -3,7 +3,8 @@ import * as api from "../api";
 
 const initialCommunities = {
     status: null,
-    list: []
+    list: [],
+    currentCommunity: {}
   };
 
   export const fetchCommunities = createAsyncThunk(
@@ -19,7 +20,10 @@ const initialCommunities = {
 const communitiesSlice = createSlice({
     name: 'communities',
     initialState: initialCommunities,
-    reducers: {   
+    reducers: {
+      updateCurrentCommunity: (state, action) => {
+        state.currentCommunity = action.payload
+      }   
     },
     extraReducers: {
         [fetchCommunities.pending]: (state, action) => {
@@ -37,9 +41,14 @@ const communitiesSlice = createSlice({
 
 /*-------- Selectors ---------- */
 export const selectCommunities = (state) => state.communities.list;
-export const selectCommunityLoadingStatus = (state) => state.communities.status 
+export const selectCurrentCommunity = (state) => state.communities.currentCommunity;
 
+export const selectCommunityLoadingStatus = (state) => state.communities.status 
+ 
 /*-------- Exports ---------- */
 
+export const {
+  updateCurrentCommunity,
+} = communitiesSlice.actions;
 
 export default communitiesSlice.reducer

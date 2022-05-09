@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 // App imports
 import { lightTheme } from "../../styles/themeProvider";

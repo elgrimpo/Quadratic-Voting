@@ -15,17 +15,14 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 
 //App Imports
 import { Sidebar } from "../index";
-import { selectCommunities } from "../../reducers/communitiesSlice";
+import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const CommunityDetails = () => {
-  let { communityName } = useParams();
-  const communities = useSelector(selectCommunities);
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
-  );
+  const currentCommunity = useSelector(selectCurrentCommunity)
 
+  //TODO: To be moved to communities-nav
   const showCreateCommunity = () => {
     NiceModal.show(CreateCommunity, {name: 'Chris'})
   }

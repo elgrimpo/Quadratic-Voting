@@ -21,19 +21,17 @@ import LoginIcon from "@mui/icons-material/Login";
 //App Imports
 import {  selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
 import {
-  selectCommunities,
+  selectCommunities, selectCurrentCommunity
 } from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
   const theme = useTheme();
-  let { communityName } = useParams();
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities);
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
-  );
+  const currentCommunity = useSelector(selectCurrentCommunity)
+
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   // Menu controls

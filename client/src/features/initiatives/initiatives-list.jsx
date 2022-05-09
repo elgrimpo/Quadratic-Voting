@@ -18,7 +18,7 @@ import { selectGroups } from "../../reducers/groupsSlice";
 import { lightTheme } from "../../styles/themeProvider";
 import { findById } from "../../utils/find-by-id";
 import Can from "../components/Can";
-import { selectCommunities } from "../../reducers/communitiesSlice.js";
+import { selectCommunities, selectCurrentCommunity } from "../../reducers/communitiesSlice.js";
 
 /* ----------- COMPONENT -------------- */
 
@@ -30,15 +30,10 @@ const InitiativesList = (props) => {
   );
   const groups = useSelector(selectGroups);
   const currentGroup = findById(groups, groupId);
-  // TODO: Put into App.js (dispatch update currentCommunity)
-  const communities = useSelector(selectCommunities);
-  const communityName = useMatch(":communityName/*").params.communityName;
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
-  );
+  const currentCommunity = useSelector(selectCurrentCommunity)
 
   const showCreateInitiative = () => {
-    NiceModal.show(FormCreateInitiative, {type: "create", content: "", groupId: groupId, communityName: communityName});
+    NiceModal.show(FormCreateInitiative, {type: "create", content: "", groupId: groupId});
   };
 
   return (

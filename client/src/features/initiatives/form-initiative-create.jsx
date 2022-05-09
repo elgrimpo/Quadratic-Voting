@@ -24,7 +24,7 @@ import {
 } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
-import { selectCommunities } from "../../reducers/communitiesSlice";
+import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import { findById } from "../../utils/find-by-id";
 import { lightTheme } from "../../styles/themeProvider";
 
@@ -34,14 +34,10 @@ import { lightTheme } from "../../styles/themeProvider";
 export default NiceModal.create((props) => {
   
   const groupId = props.groupId
-  const communityName = props.communityName
   const groups = useSelector(selectGroups);
   const currentGroup = findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
-  const communities = useSelector(selectCommunities);
-  const currentCommunity = communities?.find(
-    (community) => community?.name.toLowerCase() === communityName?.toLowerCase()
-  );
+  const currentCommunity = useSelector(selectCurrentCommunity)
   const dispatch = useDispatch();
   const modal = useModal();
   const theme = useTheme();

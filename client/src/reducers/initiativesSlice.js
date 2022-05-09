@@ -114,6 +114,7 @@ export const selectInitiativeLoadingStatus = (state) =>
 
 /*-------- Exports ---------- */
 
+// TODO: Still needed??
 export const {
   setCurrentInitiative,
   removeCurrentInitiativeSelection,
