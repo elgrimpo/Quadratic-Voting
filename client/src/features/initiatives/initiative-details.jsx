@@ -4,6 +4,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { subject } from "@casl/ability";
 import NiceModal from "@ebay/nice-modal-react";
+import { useSnackbar } from 'notistack'
+
+
 
 //MUI Imports
 import {
@@ -45,6 +48,8 @@ const InitiativeDetails = (props) => {
 
   const [value, setValue] = React.useState("Overview");
   const theme = useTheme();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
 
   /* Delete Initiative logic */
   let navigate = useNavigate();
@@ -52,6 +57,9 @@ const InitiativeDetails = (props) => {
   const handleDelete = () => {
     dispatch(deleteInitiative(currentInitiative));
     navigate(`/${communityName}/group/${groupId}`);
+    enqueueSnackbar('Initiative successfully deleted', { 
+      variant: 'success',
+  });
   };
 
   const showConfirmDeletion = () => {

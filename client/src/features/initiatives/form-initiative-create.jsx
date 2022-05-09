@@ -1,6 +1,7 @@
 //React Imports
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useSnackbar } from 'notistack'
 
 //MUI Imports
 import {
@@ -42,6 +43,7 @@ export default NiceModal.create((props) => {
   const modal = useModal();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 
   const [formValues, setFormValues] = useState({
@@ -75,8 +77,15 @@ export default NiceModal.create((props) => {
     event.preventDefault();
     if (props.type === "create") {
       dispatch(createInitiative(formValues));
+      enqueueSnackbar('Initiative successfully created', { 
+        variant: 'success',
+    });
+
     } else if (props.type === "update") {
       dispatch(updateInitiative(formValues));
+      enqueueSnackbar('Initiative successfully created', { 
+        variant: 'success',
+    })
     }
     modal.remove()
   };

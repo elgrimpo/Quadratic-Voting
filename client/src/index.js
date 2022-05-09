@@ -8,6 +8,8 @@ import { darkTheme } from './styles/themeProvider'
 import { Provider } from 'react-redux';
 import {store} from './app/store'
 import NiceModal from "@ebay/nice-modal-react"
+import { SnackbarProvider } from 'notistack';
+
 
 
 ReactDOM.render(
@@ -16,9 +18,14 @@ ReactDOM.render(
     <ThemeProvider theme={darkTheme}>
       <CssBaseline/>
     <React.StrictMode>
+    <SnackbarProvider maxSnack={3} anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+    }}>
     <NiceModal.Provider>
       <App />
     </NiceModal.Provider>
+    </SnackbarProvider>
     </React.StrictMode>
     </ThemeProvider>
   </BrowserRouter>
