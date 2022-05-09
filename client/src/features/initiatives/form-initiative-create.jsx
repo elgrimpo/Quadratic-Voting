@@ -83,7 +83,7 @@ export default NiceModal.create((props) => {
 
     } else if (props.type === "update") {
       dispatch(updateInitiative(formValues));
-      enqueueSnackbar('Initiative successfully created', { 
+      enqueueSnackbar('Initiative successfully updated', { 
         variant: 'success',
     })
     }

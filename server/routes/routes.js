@@ -7,7 +7,7 @@ import {
   updateInitiative,
   deleteInitiative,
 } from "../controllers/initiatives-controller.js";
-import { getGroups, createGroup, updateGroup } from "../controllers/groups-controller.js";
+import { getGroups, createGroup, updateGroup, deleteGroup } from "../controllers/groups-controller.js";
 import { getUsers, createUser } from "../controllers/users-controller.js";
 import {
   getCommunities,
@@ -69,6 +69,7 @@ export const GroupRouter = express.Router();
 GroupRouter.get("/", getGroups);
 GroupRouter.post("/", createGroup); // frontend NOT YET IMPLEMENTED
 GroupRouter.post("/:id", updateGroup);
+GroupRouter.delete("/:id", deleteGroup)
 
 // initiatives
 export const InitiativeRouter = express.Router();

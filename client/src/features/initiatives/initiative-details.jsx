@@ -4,17 +4,10 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { subject } from "@casl/ability";
 import NiceModal from "@ebay/nice-modal-react";
-import { useSnackbar } from 'notistack'
-
-
+import { useSnackbar } from "notistack";
 
 //MUI Imports
-import {
-  Typography,
-  Box,
-  Button,
-  Paper,
-} from "@mui/material";
+import { Typography, Box, Button, Paper } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
@@ -50,16 +43,15 @@ const InitiativeDetails = (props) => {
   const theme = useTheme();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-
   /* Delete Initiative logic */
   let navigate = useNavigate();
 
   const handleDelete = () => {
     dispatch(deleteInitiative(currentInitiative));
     navigate(`/${communityName}/group/${groupId}`);
-    enqueueSnackbar('Initiative successfully deleted', { 
-      variant: 'success',
-  });
+    enqueueSnackbar("Initiative successfully deleted", {
+      variant: "success",
+    });
   };
 
   const showConfirmDeletion = () => {
@@ -76,8 +68,8 @@ const InitiativeDetails = (props) => {
     NiceModal.show(FormCreateInitiative, {
       type: "update",
       content: currentInitiative,
-      groupId: groupId, 
-      communityName: communityName
+      groupId: groupId,
+      communityName: communityName, //TODO: Check if still needed??
     });
   };
 
@@ -142,7 +134,7 @@ const InitiativeDetails = (props) => {
               >
                 <Typography variant="h4">{currentInitiative?.title}</Typography>
               </Box>
-              {/* abilitiy */}
+              {/* Buttons */}
               <Can
                 I="manage"
                 a={subject(
@@ -150,14 +142,22 @@ const InitiativeDetails = (props) => {
                   Object.create(currentInitiative || { waiting: "waiting" })
                 )}
               >
-                {/* Delete Initiative */}
                 <Box
                   style={{
+                    display: "flex",
                     paddingLeft: 30,
                     paddingRight: 30,
                     marginBottom: "30px",
+                    columnGap: "10px",
                   }}
                 >
+                  <Button
+                    variant="outlined"
+                    startIcon={<EditIcon />}
+                    onClick={showInitiativeUpdate}
+                  >
+                    Update
+                  </Button>
                   <Button
                     variant="outlined"
                     startIcon={<DeleteForeverIcon />}
@@ -165,15 +165,6 @@ const InitiativeDetails = (props) => {
                     style={{ marginRight: "10px" }}
                   >
                     Delete
-                  </Button>
-
-                  {/* Update Initiative*/}
-                  <Button
-                    variant="outlined"
-                    startIcon={<EditIcon />}
-                    onClick={showInitiativeUpdate}
-                  >
-                    Update
                   </Button>
                 </Box>
               </Can>

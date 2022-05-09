@@ -14,7 +14,6 @@ const initialGroups = {
     }
   )
   
-  // Frontend NOT YET IMPLEMENTED
   export const createGroup = createAsyncThunk(
     'groups/createGroup',
     async (group, thunkAPI) => {
@@ -32,6 +31,18 @@ const initialGroups = {
     async (group, thunkAPI) => {
       try {
         const response = await api.updateGroup(group);
+        return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+
+  export const deleteGroup = createAsyncThunk(
+    "group/deleteGroup",
+    async (group, thunkAPI) => {
+      try {
+        const response = await api.deleteGroup(group);
         return response.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -76,6 +87,18 @@ const groupsSlice = createSlice({
           state.status = "success";
         },
         [updateGroup.rejected]: (state, payload) => {
+          state.status = "failed";
+        },
+        [deleteGroup.pending]: (state, action) => {
+          state.status = "loading";
+        },
+        [deleteGroup.fulfilled]: (state, action) => {
+          state.list = state.list.filter((group) => {
+            return group._id !== action.payload;
+          });
+          state.status = "success";
+        },
+        [deleteGroup.rejected]: (state, payload) => {
           state.status = "failed";
         },
     }

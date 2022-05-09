@@ -9,6 +9,7 @@ export { default as InitiativeCard } from "./initiatives/initiative-card";
 export { default as Chat } from "./chat/chat";
 export { default as GroupsSection } from "./layout/groups-section";
 export { default as FormCreateInitiative } from "./initiatives/form-initiative-create";
+export { default as FormCreateGroup } from "./groups/form-group-create";
 export { default as VoteControl } from "./components/vote";
 export { default as Login } from "./users/login";
 export { default as CommunityDetails } from "./communities/community-details";

@@ -12,8 +12,9 @@ export const deleteInitiative = (initiative) => axios.delete(`${url}/initiatives
 
 
 export const fetchGroups = () => axios.get(`${url}/groups`)
-export const createGroup = (group) => axios.post(`${url}/groups`, group) // TODO: frontend NOT YET IMPLEMENTED
+export const createGroup = (group) => axios.post(`${url}/groups`, group)
 export const updateGroup = (group) => axios.post(`${url}/groups/${group._id}`, group)
+export const deleteGroup = (group) => axios.delete(`${url}/groups/${group._id}`, group)
 
 export const fetchCurrentUser = () => axios.get(`${url}/auth/login/success`, { withCredentials: true })
 export const fetchUsers = () => axios.get(`${url}/users`)

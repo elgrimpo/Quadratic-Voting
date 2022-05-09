@@ -39,3 +39,26 @@ export const updateGroup = async (req, res) => {
       res.status(409).json({ message: error.message });
     }
   };
+
+  // DELETE GROUP --> /groups/:id
+export const deleteGroup = async (req, res) => {
+  GroupSchema.findByIdAndRemove(req.params.id)
+    .then((group) => {
+      if (!group) {
+        return res.status(404).send({
+          message: "Group not found with id " + req.params.id,
+        });
+      }
+      res.send(req.params.id);
+    })
+    .catch((err) => {
+      if (err.kind === "ObjectId" || err.name === "NotFound") {
+        return res.status(404).send({
+          message: "Initiative not found with id " + req.params.id,
+        });
+      }
+      return res.status(500).send({
+        message: "Could not delete group with id " + req.params.id,
+      });
+    });
+};

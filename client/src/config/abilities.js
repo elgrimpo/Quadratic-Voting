@@ -21,6 +21,12 @@ export default function defineRulesFor(user) {
       },
   })
 
+  can("manage", "Group", {
+    permissions: {
+        $elemMatch: { role: "member" || "admin", userId: user._id },
+      },
+  })
+
   return rules;
 }
 

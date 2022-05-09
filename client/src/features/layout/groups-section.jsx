@@ -1,6 +1,10 @@
 //React Imports
 import { Link, useParams } from "react-router-dom";
 import React from "react";
+import NiceModal from "@ebay/nice-modal-react";
+
+
+
 
 
 //MUI Imports
@@ -16,13 +20,20 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
-
+import { FormCreateGroup } from "../index.js";
 
 /* ----------- COMPONENT -------------- */
 
 function GroupsSection(props) {
 
   let { communityName, groupId } = useParams() 
+
+  const showCreateGroup = () => {
+    NiceModal.show(FormCreateGroup, {
+      type: "create",
+      content: "",
+    });
+  };
 
   return (
     <Box>
@@ -36,7 +47,7 @@ function GroupsSection(props) {
         >
           {props.title}
         </Typography>
-        <IconButton sx={{ color: "primary.main" }}>
+        <IconButton sx={{ color: "primary.main" }} onClick={showCreateGroup}>
           <AddIcon />
         </IconButton>
       </Box>
