@@ -5,6 +5,7 @@
   "dependencies": {
     "@casl/ability": "^5.4.3",
     "@casl/react": "^2.3.0",
+    "@ebay/nice-modal-react": "^1.2.5",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.3.0",

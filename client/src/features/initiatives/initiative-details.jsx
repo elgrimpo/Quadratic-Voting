@@ -25,15 +25,21 @@ import { lightTheme } from "../../styles/themeProvider";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import Can from "../components/Can";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 
 //App Imports
-import { TabNav, Chat, Sidebar, FormCreateInitiative } from "../index";
+import {
+  TabNav,
+  Chat,
+  Sidebar,
+  FormCreateInitiative,
+  ConfirmationDialog,
+} from "../index";
 import {
   selectInitiatives,
   deleteInitiative,
 } from "../../reducers/initiativesSlice";
 import { findById } from "../../utils/find-by-id";
-
 
 /* ----------- COMPONENT -------------- */
 
@@ -60,8 +66,17 @@ const InitiativeDetails = (props) => {
   };
   const handleDelete = () => {
     dispatch(deleteInitiative(currentInitiative));
-    handleDeleteClose();
     navigate(`/${communityName}/group/${groupId}`);
+  };
+
+  const showConfirmDeletion = () => {
+    NiceModal.show(ConfirmationDialog, {
+      title: "Delete Initiative?",
+      content:
+        "This will permanently delete this initiative from the database. Are you sure you want to delete the initiative?",
+      actionText: "Delete",
+      action: () => handleDelete(),
+    });
   };
 
   /* Delete Initiative logic */
@@ -136,69 +151,49 @@ const InitiativeDetails = (props) => {
               {/* abilitiy */}
               <Can
                 I="manage"
-                a={subject("Initiative", Object.create(currentInitiative || {waiting: "waiting"}))}
+                a={subject(
+                  "Initiative",
+                  Object.create(currentInitiative || { waiting: "waiting" })
+                )}
               >
-              
-              {/* Delete Initiative */}
-              <Box
-                style={{
-                  paddingLeft: 30,
-                  paddingRight: 30,
-                  marginBottom: "30px",
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  startIcon={<DeleteForeverIcon />}
-                  onClick={handleDeleteOpen}
-                  style={{ marginRight: "10px" }}
+                {/* Delete Initiative */}
+                <Box
+                  style={{
+                    paddingLeft: 30,
+                    paddingRight: 30,
+                    marginBottom: "30px",
+                  }}
                 >
-                  Delete
-                </Button>
-                <Dialog
-                  open={deleteOpen}
-                  onClose={handleDeleteClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Delete Initiative?"}
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      This will permanently delete this initiative from the
-                      database. Are you sure you want to delete the initiative?
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleDeleteClose}>Cancel</Button>
-                    <Button onClick={handleDelete} autoFocus>
-                      Delete
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DeleteForeverIcon />}
+                    onClick={showConfirmDeletion}
+                    style={{ marginRight: "10px" }}
+                  >
+                    Delete
+                  </Button>
 
-                {/* Update Initiative*/}
-                <Button
-                  variant="outlined"
-                  startIcon={<EditIcon />}
-                  onClick={handleUpdateOpen}
-                >
-                  Update
-                </Button>
-                <Dialog
-                  open={updateOpen}
-                  onClose={handleUpdateClose}
-                  fullScreen={fullScreen}
-                  maxWidth="lg"
-                >
-                  <FormCreateInitiative
-                    setOpen={setUpdateOpen}
-                    type="update"
-                    content={currentInitiative}
-                  />
-                </Dialog>
-              </Box>
+                  {/* Update Initiative*/}
+                  <Button
+                    variant="outlined"
+                    startIcon={<EditIcon />}
+                    onClick={handleUpdateOpen}
+                  >
+                    Update
+                  </Button>
+                  <Dialog
+                    open={updateOpen}
+                    onClose={handleUpdateClose}
+                    fullScreen={fullScreen}
+                    maxWidth="lg"
+                  >
+                    <FormCreateInitiative
+                      setOpen={setUpdateOpen}
+                      type="update"
+                      content={currentInitiative}
+                    />
+                  </Dialog>
+                </Box>
               </Can>
               {/* Initiative Content */}
               <Box style={{ paddingLeft: 30, paddingRight: 30 }}>

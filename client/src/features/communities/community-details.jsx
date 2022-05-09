@@ -2,6 +2,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import NiceModal from '@ebay/nice-modal-react';
+import CreateCommunity from './form-community-create'; // created by above code
+
 
 //MUI Imports
 import { Typography, Box, Button, Paper } from "@mui/material";
@@ -22,6 +25,10 @@ const CommunityDetails = () => {
   const currentCommunity = communities.find(
     (community) => community.name.toLowerCase() === communityName.toLowerCase()
   );
+
+  const showCreateCommunity = () => {
+    NiceModal.show(CreateCommunity, {name: 'Chris'})
+  }
 
   return (
     <Box
@@ -81,6 +88,7 @@ const CommunityDetails = () => {
                 variant="outlined"
                 startIcon={<GroupAddIcon />}
                 style={{ marginRight: "10px" }}
+                onClick={showCreateCommunity}
               >
                 Become member
               </Button>

@@ -7,6 +7,7 @@ import { CssBaseline } from '@mui/material';
 import { darkTheme } from './styles/themeProvider'
 import { Provider } from 'react-redux';
 import {store} from './app/store'
+import NiceModal from "@ebay/nice-modal-react"
 
 
 ReactDOM.render(
@@ -15,7 +16,9 @@ ReactDOM.render(
     <ThemeProvider theme={darkTheme}>
       <CssBaseline/>
     <React.StrictMode>
+    <NiceModal.Provider>
       <App />
+    </NiceModal.Provider>
     </React.StrictMode>
     </ThemeProvider>
   </BrowserRouter>

@@ -25,8 +25,6 @@ function App(props) {
   };
   const currentUser = useSelector(selectCurrentUser)
 
-
-  //TODO: be checked if actually needed??
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);

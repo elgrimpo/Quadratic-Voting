@@ -1,14 +1,15 @@
-export {default as Communities} from './layout/communities-nav'
-export {default as InitiativesList} from './initiatives/initiatives-list'
-export {default as Layout} from './layout/layout'
-export {default as GroupsNav} from './layout/groups-nav'
-export {default as Sidebar} from './layout/sidebar'
-export {default as TabNav} from './layout/tab-nav'
-export {default as InitiativeDetails} from './initiatives/initiative-details'
-export {default as InitiativeCard} from './initiatives/initiative-card'
-export {default as Chat} from './chat/chat'
-export {default as GroupsSection} from './layout/groups-section'
-export {default as FormCreateInitiative} from './initiatives/form-initiative-create'
-export {default as VoteControl} from './components/vote'
-export {default as Login} from './users/login'
-export {default as CommunityDetails} from './communities/community-details'
+export { default as Communities } from "./layout/communities-nav";
+export { default as InitiativesList } from "./initiatives/initiatives-list";
+export { default as Layout } from "./layout/layout";
+export { default as GroupsNav } from "./layout/groups-nav";
+export { default as Sidebar } from "./layout/sidebar";
+export { default as TabNav } from "./layout/tab-nav";
+export { default as InitiativeDetails } from "./initiatives/initiative-details";
+export { default as InitiativeCard } from "./initiatives/initiative-card";
+export { default as Chat } from "./chat/chat";
+export { default as GroupsSection } from "./layout/groups-section";
+export { default as FormCreateInitiative } from "./initiatives/form-initiative-create";
+export { default as VoteControl } from "./components/vote";
+export { default as Login } from "./users/login";
+export { default as CommunityDetails } from "./communities/community-details";
+export { default as ConfirmationDialog } from "./components/dialog-confirmation";
