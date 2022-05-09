@@ -23,19 +23,19 @@ const InitiativeCard = (props) => {
   let { groupId, communityName } = useParams();
 
   return (
-    <Grid item key={props.initiative._id}>
-      <Card style={{ paddingBottom: 10 }}>
+ 
+      <Card id="initiatives-grid-item" variant="outlined">
         <Link
           to={`/${communityName}/group/${groupId}/initiative/${props.initiative._id}`}
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          <CardActionArea>
+          <CardActionArea >
             <CardMedia
               component="img"
               height="140"
               image={props.initiative.image_url}
             />
-            <CardContent>
+            <CardContent >
               <Typography gutterBottom variant="h6" component="div">
                 {props.initiative.title}
               </Typography>
@@ -54,11 +54,10 @@ const InitiativeCard = (props) => {
             </CardContent>
           </CardActionArea>
         </Link>
-        <CardActions style={{ display: "flex", justifyContent: "center" }}>
+        <CardActions style={{ display: "flex", justifyContent: "center"}}>
           <VoteControl initiative={props.initiative} />
         </CardActions>
       </Card>
-    </Grid>
   );
 };
 

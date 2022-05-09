@@ -7,7 +7,7 @@ import CreateCommunity from './form-community-create'; // created by above code
 
 
 //MUI Imports
-import { Typography, Box, Button, Paper } from "@mui/material";
+import { Typography, Box, Button, Paper, Card } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -91,6 +91,14 @@ const CommunityDetails = () => {
               </Button>
             </Box>
           </Box>
+          <Card sx={{ margin: "20px", padding: "20px", backgroundColor: "#ffffff", border: "1px solid #E0E0E0"}} variant="outlined">
+              <Typography variant="h6" sx={{mb: "20px"}}>
+                Overview
+              </Typography>
+              <Typography>
+                {currentCommunity?.description}
+              </Typography>
+          </Card>
         </Paper>
       </ThemeProvider>
       <Box>

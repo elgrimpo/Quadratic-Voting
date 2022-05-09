@@ -56,7 +56,7 @@ const InitiativesList = (props) => {
             overflow: { sm: "visible", md: "scroll", lg: "scroll" },
           }}
         >
-          <Box>
+          <Box >
             <Fab
               id="menu-button"
               color="inherit"
@@ -78,14 +78,14 @@ const InitiativesList = (props) => {
 
             {/* ---> Initiative tiles <--- */}
 
-            <Grid id="initiatives-grid" container spacing={2}>
+            <Box id="initiatives-grid" sx={{maxWidth: { lg: "1000px" },}}>
               {groupInitiatives.map((initiative, index) => (
                 <InitiativeCard
                   key={index + initiative._id}
                   initiative={initiative}
                 />
               ))}
-            </Grid>
+            </Box>
 
             {/* ---> Button - Create new Initiative <--- */}
             <Can

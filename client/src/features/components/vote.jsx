@@ -1,6 +1,6 @@
 //React Imports
 import { useSelector, useDispatch } from "react-redux";
-import { useMatch, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { subject } from "@casl/ability";
 
 //MUI Imports
