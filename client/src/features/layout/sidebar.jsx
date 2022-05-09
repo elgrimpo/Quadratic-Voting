@@ -92,12 +92,13 @@ const Sidebar = (props) => {
 
       <Typography variant="h7">Group admin</Typography>
       <Box sx={{display: "flex"}}>
-      {sidebarContent?.permissions.map((permission) => {
+      {sidebarContent?.permissions.map((permission, index) => {
         if (permission.role === "admin") {
           const owner = users.find((user) => user._id === permission.userId);
           return (
             <Avatar
               style={{ border: `2px solid ${theme.palette.primary.light}`, marginRight:"10px" }}
+              key={index}
               alt={owner?._id}
               src={owner?.image_url}
               sx={{ width: 48, height: 48 }}

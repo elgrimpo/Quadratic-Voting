@@ -53,8 +53,9 @@ function GroupsSection(props) {
             >
               <ListItemButton
                 selected={item._id === groupId}
+                key={item._id}
               >
-                <ListItemText primary={item.title} />
+                <ListItemText primary={item.title} key={item._id}/>
               </ListItemButton>
             </Link>
           ))}

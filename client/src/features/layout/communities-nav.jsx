@@ -67,7 +67,7 @@ const Communities = (props) => {
             id="community-tile"
             key={community._id}
             style={
-              community._id === currentCommunity._id
+              community._id === currentCommunity?._id
                 ? { border: `4px solid ${theme.palette.primary.light}` }
                 : {}
             }
@@ -77,12 +77,13 @@ const Communities = (props) => {
               to={`/${community.name}`} //to be updated
               style={{ textDecoration: "none" }}
             >
-              <Card sx={{ maxWidth: 50, maxHeight: 50 }}>
-                <CardActionArea>
+              <Card sx={{ maxWidth: 50, maxHeight: 50 }} key={community._id}>
+                <CardActionArea key={community._id}>
                   <CardMedia
                     component="img"
                     height="56"
                     image={community.logo_url}
+                    key={community._id}
                   />
                 </CardActionArea>
               </Card>

@@ -49,7 +49,7 @@ const CommunityDetails = () => {
           <img
             className="banner-image"
             src={currentCommunity?.banner_url}
-            alt={currentCommunity?.name.toString()}
+            alt={currentCommunity?.name}
           />
 
           <Box

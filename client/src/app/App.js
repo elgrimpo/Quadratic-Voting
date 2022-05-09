@@ -44,7 +44,6 @@ function App(props) {
 
   useEffect(() => {
     dispatch(updateCurrentCommunity(currentCommunity));
-    console.log(currentCommunity)
   }, [currentCommunity])
 
 
