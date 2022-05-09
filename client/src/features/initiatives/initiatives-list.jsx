@@ -1,35 +1,35 @@
 // React/Redux Imports
 import React from "react";
 import { useSelector } from "react-redux";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useMatch, useParams } from "react-router-dom";
 import { subject } from "@casl/ability";
+import NiceModal from "@ebay/nice-modal-react";
 
 // MUI Imports
-import { Grid, Fab, Dialog, Box, Paper } from "@mui/material";
+import { Grid, Fab, Box, Paper } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 // App Imports
 import { InitiativeCard, FormCreateInitiative, Sidebar } from "../index.js";
 import { selectInitiatives } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { lightTheme } from "../../styles/themeProvider";
-import { findById } from "../../utils/find-by-id"
+import { findById } from "../../utils/find-by-id";
 import Can from "../components/Can";
 import { selectCommunities } from "../../reducers/communitiesSlice.js";
-
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativesList = (props) => {
   const groupId = useParams().groupId;
-  const initiatives = useSelector(selectInitiatives)
-  const groupInitiatives = initiatives.filter((initiative) => 
-    initiative.groupId === groupId);
-  const groups = useSelector(selectGroups)
-  const currentGroup = findById(groups, groupId)
+  const initiatives = useSelector(selectInitiatives);
+  const groupInitiatives = initiatives.filter(
+    (initiative) => initiative.groupId === groupId
+  );
+  const groups = useSelector(selectGroups);
+  const currentGroup = findById(groups, groupId);
   // TODO: Put into App.js (dispatch update currentCommunity)
   const communities = useSelector(selectCommunities);
   const communityName = useMatch(":communityName/*").params.communityName;
@@ -37,16 +37,8 @@ const InitiativesList = (props) => {
     (community) => community.name.toLowerCase() === communityName.toLowerCase()
   );
 
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
-  // Functions - Create initiative Button
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
+  const showCreateInitiative = () => {
+    NiceModal.show(FormCreateInitiative, {type: "create", content: "", groupId: groupId, communityName: communityName});
   };
 
   return (
@@ -58,7 +50,7 @@ const InitiativesList = (props) => {
           md: "1fr 320px",
           sm: "1fr",
         },
-        overflow: 'scroll',
+        overflow: "scroll",
       }}
     >
       <ThemeProvider theme={lightTheme}>
@@ -101,26 +93,27 @@ const InitiativesList = (props) => {
             </Grid>
 
             {/* ---> Button - Create new Initiative <--- */}
-            <Can I="vote" a={subject("Community", Object.create(currentCommunity || {waiting: "waiting"}))}> 
-            <Fab id="action-button" color="primary" onClick={handleOpen}>
-              <AddIcon />
-            </Fab>
-            </Can>
-
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              fullScreen={fullScreen}
-              maxWidth="lg"
+            <Can
+              I="vote"
+              a={subject(
+                "Community",
+                Object.create(currentCommunity || { waiting: "waiting" })
+              )}
             >
-              <FormCreateInitiative setOpen={setOpen} type="create" content=""/>
-            </Dialog>
+              <Fab
+                id="action-button"
+                color="primary"
+                onClick={showCreateInitiative}
+              >
+                <AddIcon />
+              </Fab>
+            </Can>
           </Box>
         </Paper>
       </ThemeProvider>
 
       {/* ---> Sidebar <--- */}
-      <Box >
+      <Box>
         <Sidebar />
       </Box>
     </Box>

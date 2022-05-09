@@ -1,17 +1,21 @@
 //React Imports
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 
 //MUI Imports
 import {
   TextField,
   Button,
-  Box,
   DialogContent,
   DialogTitle,
   DialogActions,
+  Dialog,
+  useMediaQuery,
 } from "@mui/material";
+import NiceModal, { useModal } from '@ebay/nice-modal-react';
+import { ThemeProvider, useTheme } from "@mui/material/styles";
+
+
 
 //App Imports
 import {
@@ -22,19 +26,27 @@ import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import { selectCommunities } from "../../reducers/communitiesSlice";
 import { findById } from "../../utils/find-by-id";
+import { lightTheme } from "../../styles/themeProvider";
+
 
 /* ----------- COMPONENT -------------- */
 
-function FormCreateInitiative(props) {
-  let { groupId, communityName } = useParams();
+export default NiceModal.create((props) => {
+  
+  const groupId = props.groupId
+  const communityName = props.communityName
   const groups = useSelector(selectGroups);
   const currentGroup = findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities);
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
+  const currentCommunity = communities?.find(
+    (community) => community?.name.toLowerCase() === communityName?.toLowerCase()
   );
   const dispatch = useDispatch();
+  const modal = useModal();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
 
   const [formValues, setFormValues] = useState({
     _id: props.content._id,
@@ -65,17 +77,23 @@ function FormCreateInitiative(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     if (props.type === "create") {
       dispatch(createInitiative(formValues));
     } else if (props.type === "update") {
       dispatch(updateInitiative(formValues));
     }
-    props.setOpen(false);
+    modal.remove()
   };
 
   return (
-    <Box>
+    <ThemeProvider theme={lightTheme}>
+
+    <Dialog
+      onClose={() => modal.remove()}
+      open={modal.visible}
+      fullScreen={fullScreen}
+      maxWidth="lg"
+    >
       <DialogTitle>New Initiative</DialogTitle>
       <DialogContent>
         <form
@@ -191,8 +209,8 @@ function FormCreateInitiative(props) {
           </DialogActions>
         </form>
       </DialogContent>
-    </Box>
-  );
-}
+    </Dialog>
+    </ThemeProvider>
 
-export default FormCreateInitiative;
+  );
+});

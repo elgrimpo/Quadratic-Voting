@@ -6,24 +6,22 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  TextField,
 } from "@mui/material";
 
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
-import { useState } from "react";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 
 // App imports
-import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 
+// TODO: Needs to be adjusted for creating a Community
+
 export default NiceModal.create((props) => {
-  // Use a hook to manage the modal state
   const modal = useModal();
-  const theme = useTheme();
 
   const handleAction = () => {
     props.action();
-    modal.hide()
+    modal.remove()
   }
 
   return (

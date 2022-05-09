@@ -2,8 +2,8 @@
 import React from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { subject } from "@casl/ability";
+import NiceModal from "@ebay/nice-modal-react";
 
 //MUI Imports
 import {
@@ -11,11 +11,6 @@ import {
   Box,
   Button,
   Paper,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TabContext from "@mui/lab/TabContext";
@@ -25,7 +20,6 @@ import { lightTheme } from "../../styles/themeProvider";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import Can from "../components/Can";
-import NiceModal, { useModal } from "@ebay/nice-modal-react";
 
 //App Imports
 import {
@@ -50,20 +44,11 @@ const InitiativeDetails = (props) => {
   const dispatch = useDispatch();
 
   const [value, setValue] = React.useState("Overview");
-
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   /* Delete Initiative logic */
   let navigate = useNavigate();
-  const [deleteOpen, setDeleteOpen] = React.useState(false);
-  const [updateOpen, setUpdateOpen] = React.useState(false);
-  const handleDeleteOpen = () => {
-    setDeleteOpen(true);
-  };
-  const handleDeleteClose = () => {
-    setDeleteOpen(false);
-  };
+
   const handleDelete = () => {
     dispatch(deleteInitiative(currentInitiative));
     navigate(`/${communityName}/group/${groupId}`);
@@ -79,12 +64,13 @@ const InitiativeDetails = (props) => {
     });
   };
 
-  /* Delete Initiative logic */
-  const handleUpdateOpen = () => {
-    setUpdateOpen(true);
-  };
-  const handleUpdateClose = () => {
-    setUpdateOpen(false);
+  const showInitiativeUpdate = () => {
+    NiceModal.show(FormCreateInitiative, {
+      type: "update",
+      content: currentInitiative,
+      groupId: groupId, 
+      communityName: communityName
+    });
   };
 
   return (
@@ -177,22 +163,10 @@ const InitiativeDetails = (props) => {
                   <Button
                     variant="outlined"
                     startIcon={<EditIcon />}
-                    onClick={handleUpdateOpen}
+                    onClick={showInitiativeUpdate}
                   >
                     Update
                   </Button>
-                  <Dialog
-                    open={updateOpen}
-                    onClose={handleUpdateClose}
-                    fullScreen={fullScreen}
-                    maxWidth="lg"
-                  >
-                    <FormCreateInitiative
-                      setOpen={setUpdateOpen}
-                      type="update"
-                      content={currentInitiative}
-                    />
-                  </Dialog>
                 </Box>
               </Can>
               {/* Initiative Content */}
