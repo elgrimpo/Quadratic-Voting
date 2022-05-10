@@ -22,7 +22,9 @@ export const store = configureStore({
   }
 });
 
+/*
 store.dispatch(fetchCommunities());
 store.dispatch(fetchGroups());
 store.dispatch(fetchInitiatives());
 store.dispatch(fetchUsers());
+*/

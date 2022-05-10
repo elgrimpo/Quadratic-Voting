@@ -5,7 +5,12 @@ const initialUsers = {
     status: null,
     list: [],
     isLoggedIn: false, 
-    currentUser: []
+    currentUser: {
+      userName: "Guest",
+      subscriptions: [{
+        communityId: "622058d622194df2d949a38c"
+      }]
+    }
   };
 
 export const fetchUsers = createAsyncThunk(

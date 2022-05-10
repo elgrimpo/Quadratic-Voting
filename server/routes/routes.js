@@ -16,7 +16,7 @@ import {
 import passport from "passport";
 
 // auth TODO: create routers
-const CLIENT_URL = "http://localhost:3000/phoenix";
+const CLIENT_URL = "http://localhost:3000/";
 
 export const AuthRouter = express.Router();
 

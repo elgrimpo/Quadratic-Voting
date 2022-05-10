@@ -9,7 +9,6 @@ const CLIENT_URL = "http://localhost:3000/";
 // GET Success --> /auth/login/success
 export const getSuccess = (req, res) => {
   if (req.user) {
-    console.log(req.user);
     res.status(200).json({
       success: true,
       message: "successfull",

@@ -73,7 +73,6 @@ export default NiceModal.create((props) => {
     event.preventDefault();
     if (props.type === "create") {
       dispatch(createGroup(formValues));
-      console.log(formValues)
       enqueueSnackbar("Group successfully created", {
         variant: "success",
       });

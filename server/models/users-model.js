@@ -14,6 +14,13 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    subscriptions: {
+        type: Array,
+        default: [{
+            communityId: "622058d622194df2d949a38c"
+        }
+        ]
     }
 })
 

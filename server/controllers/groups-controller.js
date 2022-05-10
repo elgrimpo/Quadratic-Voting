@@ -3,8 +3,9 @@ import GroupSchema from '../models/groups-model.js'
 
 // GET Groups --> /groups/
 export const getGroups = async (req, res) => {
+  const ids = req.query.subscriptions
     try {
-        const groupSchemas = await GroupSchema.find()
+        const groupSchemas = await GroupSchema.find({ 'communityId':  {$in: ids} })
         res.status(200).json(groupSchemas)
     } catch (error) {
         res.status(404).json({message: error.message})

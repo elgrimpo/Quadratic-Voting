@@ -4,8 +4,9 @@ import InitiativeSchema from "../models/initiatives-model.js";
 
 // GET Initiatives --> /initiatives/
 export const getInitiatives = async (req, res) => {
+  const ids = req.query.subscriptions
   try {
-    const initiativeSchemas = await InitiativeSchema.find();
+    const initiativeSchemas = await InitiativeSchema.find({ 'communityId':  {$in: ids} });
     res.status(200).json(initiativeSchemas);
   } catch (error) {
     res.status(404).json({ message: error.message });

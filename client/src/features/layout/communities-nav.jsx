@@ -1,7 +1,7 @@
 //React Imports
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useMatch, useParams } from "react-router-dom";
 
 //MUI Imports
 import {
@@ -21,16 +21,24 @@ import LoginIcon from "@mui/icons-material/Login";
 //App Imports
 import {  selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
 import {
-  selectCommunities, selectCurrentCommunity
+  selectCommunities, selectCurrentCommunity, updateCurrentCommunity
 } from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
   const theme = useTheme();
+  const dispatch = useDispatch();
+
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities);
-  const currentCommunity = useSelector(selectCurrentCommunity)
+  const communityName = useMatch(":communityName/*")?.params.communityName;
+  const currentCommunity = communities.find(
+    (community) => community.name.toLowerCase() === communityName.toLowerCase() 
+  );
+  useEffect(() => {
+    dispatch(updateCurrentCommunity(currentCommunity));
+  }, [currentCommunity]) 
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 

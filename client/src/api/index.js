@@ -2,16 +2,16 @@ import axios from 'axios'
 
 const url = 'http://localhost:5000'
 
-export const fetchCommunities = () => axios.get(`${url}/communities`)
+export const fetchCommunities = (subscriptions) => axios.get(`${url}/communities`, {params: {subscriptions: subscriptions}})
 export const createCommunity = (community) => axios.post(`${url}/communities`, community) // TODO: frontend NOT YET IMPLEMENTED
 
-export const fetchInitiatives = () => axios.get(`${url}/initiatives`)
+export const fetchInitiatives = (subscriptions) => axios.get(`${url}/initiatives`, {params: {subscriptions: subscriptions}})
 export const createInitiative = (initiative) => axios.post(`${url}/initiatives`, initiative)
 export const updateInitiative = (initiative) => axios.post(`${url}/initiatives/${initiative._id}`, initiative)
 export const deleteInitiative = (initiative) => axios.delete(`${url}/initiatives/${initiative._id}`, initiative)
 
 
-export const fetchGroups = () => axios.get(`${url}/groups`)
+export const fetchGroups = (subscriptions) => axios.get(`${url}/groups`, {params: {subscriptions: subscriptions}})
 export const createGroup = (group) => axios.post(`${url}/groups`, group)
 export const updateGroup = (group) => axios.post(`${url}/groups/${group._id}`, group)
 export const deleteGroup = (group) => axios.delete(`${url}/groups/${group._id}`, group)

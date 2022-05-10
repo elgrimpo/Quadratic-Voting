@@ -8,8 +8,8 @@ const initialInitiatives = {
 
 export const fetchInitiatives = createAsyncThunk(
   "initiatives/getInitiatives",
-  async () => {
-    const response = await api.fetchInitiatives();
+  async (subscriptions) => {
+    const response = await api.fetchInitiatives(subscriptions);
     return response.data;
   }
 );

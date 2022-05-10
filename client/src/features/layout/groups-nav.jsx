@@ -35,7 +35,7 @@ function GroupsNav(props) {
   const currentCommunity = useSelector(selectCurrentCommunity)
 
   const communityGroups = groups.filter(
-    (group) => group.communityId === currentCommunity._id
+    (group) => group.communityId === currentCommunity?._id
   );
   const channels = useSelector(selectChannels);
   const currentChannel = useSelector(selectCurrentChannel);

@@ -12,7 +12,7 @@ import { Box } from "@mui/material";
 //App Imports
 import { InitiativesList, InitiativeDetails, Layout, Login, CommunityDetails } from "../features";
 import { fetchCurrentUser, selectCurrentUser } from "../reducers/usersSlice";
-import { selectCommunities, updateCurrentCommunity } from "../reducers/communitiesSlice";
+import { selectCommunities, updateCurrentCommunity, selectCommunityLoadingStatus, selectCurrentCommunity } from "../reducers/communitiesSlice";
 
 import { ability } from '../features/components/Can'
 import defineRulesFor from '../config/abilities'
@@ -28,11 +28,8 @@ function App(props) {
     setDrawerOpen(!drawerOpen);
   };
   const currentUser = useSelector(selectCurrentUser)
-  const communities = useSelector(selectCommunities);
-  const communityName = useMatch(":communityName/*").params.communityName;
-  const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase()
-  );
+
+  const initialCommunity = useSelector(selectCurrentCommunity)
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -42,16 +39,15 @@ function App(props) {
     ability.update(defineRulesFor(currentUser))}, 
     [currentUser])
 
-  useEffect(() => {
-    dispatch(updateCurrentCommunity(currentCommunity));
-  }, [currentCommunity])
+  const communityStatus = useSelector(selectCommunityLoadingStatus)
 
 
   return (
     <Box sx={{ height: "100 vh" }}>
       <Routes>
-
         {/* ---> Navigation <--- */}
+        {communityStatus === 'success' ?  (<Route path="/" element={<Navigate to={`/${initialCommunity.name}`} replace />} />) : ("") }
+
         <Route path="login" element={<Login />} />
         
         <Route
@@ -60,7 +56,7 @@ function App(props) {
             <Layout
               props={props}
               drawerOpen={drawerOpen}
-              handleDrawerToggle={handleDrawerToggle}
+              handleDrawerToggle={handleDrawerToggle} 
             />
           }
         >

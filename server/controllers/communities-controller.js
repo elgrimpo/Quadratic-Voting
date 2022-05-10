@@ -4,7 +4,8 @@ import CommunitySchema from '../models/communities-model.js'
 // GET Communities --> /communities/
 export const getCommunities = async (req, res) => {
     try {
-        const communitySchemas = await CommunitySchema.find()
+        const ids = req.query.subscriptions
+        const communitySchemas = await CommunitySchema.find({ '_id':  {$in: ids} } )
         res.status(200).json(communitySchemas)
     } catch (error) {
         res.status(404).json({message: error.message})

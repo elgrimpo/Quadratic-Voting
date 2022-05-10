@@ -9,8 +9,8 @@ const initialCommunities = {
 
   export const fetchCommunities = createAsyncThunk(
     'communities/getCommunities',
-    async () => {
-      const response = await api.fetchCommunities()
+    async (subscriptions) => {
+      const response = await api.fetchCommunities(subscriptions)
       return response.data
     }
   )
@@ -31,6 +31,7 @@ const communitiesSlice = createSlice({
         },
         [fetchCommunities.fulfilled]: (state, action) => {
           state.list = action.payload
+          state.currentCommunity = action.payload[0]
           state.status = 'success'
         },
         [fetchCommunities.rejected]: (state, payload) => {
