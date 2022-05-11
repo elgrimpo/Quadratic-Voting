@@ -2,7 +2,9 @@ import axios from 'axios'
 
 const url = 'http://localhost:5000'
 
+//TODO: change naming to "fetchSubscribedCommunities"
 export const fetchCommunities = (subscriptions) => axios.get(`${url}/communities`, {params: {subscriptions: subscriptions}})
+export const fetchAllCommunities = () => axios.get(`${url}/communities/all`)
 export const createCommunity = (community) => axios.post(`${url}/communities`, community) // TODO: frontend NOT YET IMPLEMENTED
 
 export const fetchInitiatives = (subscriptions) => axios.get(`${url}/initiatives`, {params: {subscriptions: subscriptions}})

@@ -14,3 +14,5 @@ export { default as VoteControl } from "./components/vote";
 export { default as Login } from "./users/login";
 export { default as CommunityDetails } from "./communities/community-details";
 export { default as ConfirmationDialog } from "./components/dialog-confirmation";
+export { default as ExploreCommunities } from "./communities/explore-communities";
+export { default as CommunityCard} from "./communities/community-card"

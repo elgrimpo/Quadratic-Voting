@@ -2,9 +2,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import NiceModal from '@ebay/nice-modal-react';
-import CreateCommunity from './form-community-create'; // created by above code
-
+import NiceModal from "@ebay/nice-modal-react";
+import CreateCommunity from "./form-community-create"; // created by above code
 
 //MUI Imports
 import { Typography, Box, Button, Paper, Card } from "@mui/material";
@@ -12,20 +11,49 @@ import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import CheckIcon from "@mui/icons-material/Check";
 
 //App Imports
 import { Sidebar } from "../index";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
+import { selectCurrentUser } from "../../reducers/usersSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const CommunityDetails = () => {
-  const currentCommunity = useSelector(selectCurrentCommunity)
+  const currentCommunity = useSelector(selectCurrentCommunity);
+  const currentUser = useSelector(selectCurrentUser);
 
   //TODO: To be moved to communities-nav
   const showCreateCommunity = () => {
-    NiceModal.show(CreateCommunity, {name: 'Chris'})
-  }
+    NiceModal.show(CreateCommunity, { name: "Chris" });
+  };
+
+  const checkSubscription = () => {
+    const index = currentUser.subscriptions?.findIndex(
+      (subscription) => subscription?.communityId === currentCommunity?._id
+    );
+    if (index === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const isSubscribed = checkSubscription();
+
+  const checkMembership = () => {
+    const index = currentCommunity?.permissions?.findIndex(
+      (permission) => permission?.userId === currentUser?._id
+    );
+    if (index === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const isMember = checkMembership();
 
   return (
     <Box
@@ -73,31 +101,58 @@ const CommunityDetails = () => {
                 marginBottom: "30px",
               }}
             >
-              <Button
-                variant="outlined"
-                startIcon={<BookmarkIcon />}
-                style={{ marginRight: "10px" }}
-              >
-                Subscribe
-              </Button>
+              {isSubscribed ? (
+                <Button
+                  variant="outlined"
+                  startIcon={<CheckIcon />}
+                  style={{ marginRight: "10px" }}
+                >
+                  Subscribed
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  startIcon={<BookmarkIcon />}
+                  style={{ marginRight: "10px" }}
+                >
+                  Subscribe
+                </Button>
+              )}
 
-              <Button
-                variant="outlined"
-                startIcon={<GroupAddIcon />}
-                style={{ marginRight: "10px" }}
-                onClick={showCreateCommunity}
-              >
-                Become member
-              </Button>
+              {isMember ? (
+                <Button
+                  variant="outlined"
+                  startIcon={<CheckIcon />}
+                  style={{ marginRight: "10px" }}
+                  onClick={showCreateCommunity}
+                >
+                  Member
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  startIcon={<GroupAddIcon />}
+                  style={{ marginRight: "10px" }}
+                  onClick={showCreateCommunity}
+                >
+                  Become member
+                </Button>
+              )}
             </Box>
           </Box>
-          <Card sx={{ margin: "20px", padding: "20px", backgroundColor: "#ffffff", border: "1px solid #E0E0E0"}} variant="outlined">
-              <Typography variant="h6" sx={{mb: "20px"}}>
-                Overview
-              </Typography>
-              <Typography>
-                {currentCommunity?.description}
-              </Typography>
+          <Card
+            sx={{
+              margin: "20px",
+              padding: "20px",
+              backgroundColor: "#ffffff",
+              border: "1px solid #E0E0E0",
+            }}
+            variant="outlined"
+          >
+            <Typography variant="h6" sx={{ mb: "20px" }}>
+              Overview
+            </Typography>
+            <Typography>{currentCommunity?.description}</Typography>
           </Card>
         </Paper>
       </ThemeProvider>

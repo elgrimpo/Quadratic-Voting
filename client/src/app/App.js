@@ -10,7 +10,7 @@ import { useMatch, useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 
 //App Imports
-import { InitiativesList, InitiativeDetails, Layout, Login, CommunityDetails } from "../features";
+import { InitiativesList, InitiativeDetails, Layout, Login, CommunityDetails, ExploreCommunities } from "../features";
 import { fetchCurrentUser, selectCurrentUser } from "../reducers/usersSlice";
 import { selectCommunities, updateCurrentCommunity, selectCommunityLoadingStatus, selectCurrentCommunity } from "../reducers/communitiesSlice";
 
@@ -50,6 +50,14 @@ function App(props) {
 
         <Route path="login" element={<Login />} />
         
+        <Route
+          path="explore"
+          element={
+            <ExploreCommunities
+            />
+          }
+        ></Route>
+
         <Route
           path=":communityName"
           element={

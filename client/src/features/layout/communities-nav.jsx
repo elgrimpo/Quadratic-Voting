@@ -1,7 +1,7 @@
 //React Imports
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useMatch, useParams } from "react-router-dom";
+import { Link, useMatch, useNavigate, useParams } from "react-router-dom";
 
 //MUI Imports
 import {
@@ -17,11 +17,14 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import LoginIcon from "@mui/icons-material/Login";
+import ExploreIcon from "@mui/icons-material/Explore";
 
 //App Imports
-import {  selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
+import { selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
 import {
-  selectCommunities, selectCurrentCommunity, updateCurrentCommunity
+  selectCommunities,
+  selectCurrentCommunity,
+  updateCurrentCommunity,
 } from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
@@ -29,16 +32,17 @@ import {
 const Communities = (props) => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities);
   const communityName = useMatch(":communityName/*")?.params.communityName;
   const currentCommunity = communities.find(
-    (community) => community.name.toLowerCase() === communityName.toLowerCase() 
+    (community) => community.name.toLowerCase() === communityName.toLowerCase()
   );
   useEffect(() => {
     dispatch(updateCurrentCommunity(currentCommunity));
-  }, [currentCommunity]) 
+  }, [currentCommunity]);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -53,10 +57,10 @@ const Communities = (props) => {
   };
 
   const handleLogin = () => {
-    window.open("http://localhost:5000/auth/google", "_self")
-  }
-  const handleLogout= () => {
-    window.open("http://localhost:5000/auth/logout", "_self")
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+  const handleLogout = () => {
+    window.open("http://localhost:5000/auth/logout", "_self");
     setAnchorEl(null);
   };
 
@@ -98,6 +102,9 @@ const Communities = (props) => {
             </Link>
           </Box>
         ))}
+        <IconButton aria-label="explore" color="primary" size="large" onClick={() => navigate("/explore")}>
+          <ExploreIcon />
+        </IconButton>
       </Stack>
 
       {/* ---> User profile <--- */}
@@ -133,7 +140,13 @@ const Communities = (props) => {
         </div>
       ) : (
         <div>
-          <IconButton aria-label="login" color="primary" sx={{marginBottom:'16px'}} size="large" onClick={handleLogin}>
+          <IconButton
+            aria-label="login"
+            color="primary"
+            sx={{ marginBottom: "16px" }}
+            size="large"
+            onClick={handleLogin}
+          >
             <LoginIcon fontSize="inherit" />
           </IconButton>
         </div>
