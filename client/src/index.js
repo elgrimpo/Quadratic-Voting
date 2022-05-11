@@ -9,10 +9,6 @@ import { Provider } from 'react-redux';
 import {store} from './app/store'
 import NiceModal from "@ebay/nice-modal-react"
 import { SnackbarProvider } from 'notistack';
-import { fetchCommunities } from './reducers/communitiesSlice';
-import { fetchGroups } from './reducers/groupsSlice';
-import { fetchInitiatives } from './reducers/initiativesSlice';
-import { fetchUsers } from './reducers/usersSlice';
 import {initializeData} from './utils/initialize-data';
 
 

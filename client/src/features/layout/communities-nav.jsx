@@ -1,7 +1,9 @@
 //React Imports
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useMatch, useNavigate, useParams } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
+import NiceModal from "@ebay/nice-modal-react";
+
 
 //MUI Imports
 import {
@@ -23,16 +25,15 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import { selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
 import {
   selectCommunities,
-  selectCurrentCommunity,
   updateCurrentCommunity,
 } from "../../reducers/communitiesSlice";
+import {ExploreCommunities} from "../index"
 
 /* ----------- COMPONENT -------------- */
 
 const Communities = (props) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   const currentUser = useSelector(selectCurrentUser);
   const communities = useSelector(selectCommunities);
@@ -62,6 +63,10 @@ const Communities = (props) => {
   const handleLogout = () => {
     window.open("http://localhost:5000/auth/logout", "_self");
     setAnchorEl(null);
+  };
+
+  const showInitiativeUpdate = () => {
+    NiceModal.show(ExploreCommunities, {});
   };
 
   return (
@@ -102,7 +107,7 @@ const Communities = (props) => {
             </Link>
           </Box>
         ))}
-        <IconButton aria-label="explore" color="primary" size="large" onClick={() => navigate("/explore")}>
+        <IconButton aria-label="explore" color="primary" size="large" onClick={showInitiativeUpdate}>
           <ExploreIcon />
         </IconButton>
       </Stack>

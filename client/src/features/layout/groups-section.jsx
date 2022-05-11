@@ -3,10 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import React from "react";
 import NiceModal from "@ebay/nice-modal-react";
 
-
-
-
-
 //MUI Imports
 import {
   Box,
@@ -25,8 +21,7 @@ import { FormCreateGroup } from "../index.js";
 /* ----------- COMPONENT -------------- */
 
 function GroupsSection(props) {
-
-  let { communityName, groupId } = useParams() 
+  let { communityName, groupId } = useParams();
 
   const showCreateGroup = () => {
     NiceModal.show(FormCreateGroup, {
@@ -55,18 +50,15 @@ function GroupsSection(props) {
       {/* ---> Navigational Sections <--- */}
 
       <List sx={{ paddingTop: 0, mb: "20px" }} dense={true}>
-        <Paper id='groupsection-backgroud' elevation={3}>
+        <Paper id="groupsection-backgroud" elevation={3}>
           {props.items.map((item) => (
             <Link
               key={item._id}
               to={`/${communityName}/group/${item._id}`} //to be updated
               style={{ textDecoration: "none" }}
             >
-              <ListItemButton
-                selected={item._id === groupId}
-                key={item._id}
-              >
-                <ListItemText primary={item.title} key={item._id}/>
+              <ListItemButton selected={item._id === groupId} key={item._id}>
+                <ListItemText primary={item.title} key={item._id} />
               </ListItemButton>
             </Link>
           ))}

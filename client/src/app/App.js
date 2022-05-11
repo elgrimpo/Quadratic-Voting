@@ -3,7 +3,6 @@ import "../styles/App.css";
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useMatch, useParams } from "react-router-dom";
 
 //MUI Imports
 import { Box } from "@mui/material";
@@ -19,8 +18,6 @@ import {
 } from "../features";
 import { fetchCurrentUser, selectCurrentUser } from "../reducers/usersSlice";
 import {
-  selectCommunities,
-  updateCurrentCommunity,
   selectCommunityLoadingStatus,
   selectCurrentCommunity,
 } from "../reducers/communitiesSlice";
@@ -47,7 +44,7 @@ function App(props) {
   useEffect(() => {
     ability.update(defineRulesFor(currentUser));
   }, [currentUser]);
-  
+
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const handleDrawerToggle = () => {

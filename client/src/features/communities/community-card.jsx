@@ -1,7 +1,7 @@
 //React Imports
-import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector  } from "react-redux";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 //MUI Imports
 import {
@@ -11,62 +11,45 @@ import {
   CardActionArea,
   Typography,
   CardActions,
-  Grid,
   Button,
 } from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import CheckIcon from "@mui/icons-material/Check";
 
 //App Imports
-import { VoteControl } from "../index";
-import { selectCurrentUser, updateUser, fetchCurrentUser } from "../../reducers/usersSlice";
-import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
+import {
+  selectCurrentUser,
+  updateUser,
+  fetchCurrentUser,
+} from "../../reducers/usersSlice";
+import { fetchCommunities } from "../../reducers/communitiesSlice";
+import { userActions } from "../../utils";
 
 /* ----------- COMPONENT -------------- */
 
 const CommunityCard = (props) => {
   // Variables
-  const community = props.community
+  const community = props.community;
   const currentUser = useSelector(selectCurrentUser);
-  const currentCommunity = useSelector(selectCurrentCommunity);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
- 
-
-// Functions
-const checkSubscription = (user, community) => {
-  const index = user.subscriptions?.findIndex(
-    (subscription) => subscription?.communityId === community?._id
+  // Functions
+  const isSubscribed = userActions.checkSubscription(
+    currentUser,
+    props.community
   );
-  if (index === -1) {
-    return false;
-  } else {
-    return true;
-  }
-};
-
-
-const isSubscribed = checkSubscription(currentUser, props.community);
-
-const updateSubscription = async (user, community) => {
-  const isSubscribed = checkSubscription(user, community);
-  if (isSubscribed) {
-    const newSubscriptions = user.subscriptions.filter(subscription => subscription.communityId !== community._id)
-    const newUser = {...user, subscriptions: newSubscriptions}      
-    await dispatch(updateUser(newUser))
-  } else {
-    const newSubscriptions = [{communityId: community._id}, ...user.subscriptions]
-    const newUser = {...user, subscriptions: newSubscriptions}      
-    await dispatch(updateUser(newUser))
-
-  }
-  dispatch(fetchCurrentUser());
-
-};
+  const handleSubscriptionUpdate = async () => {
+    const newUser = userActions.updateSubscription(
+      currentUser,
+      props.community
+    );
+    await dispatch(updateUser(newUser));
+    await dispatch(fetchCurrentUser());
+    await dispatch(fetchCommunities(newUser.subscriptions.map((subscription) => {return subscription.communityId})))
+  };
 
   return (
-    <Card id="initiatives-grid-item" variant="outlined" >
+    <Card id="initiatives-grid-item" variant="outlined">
       <Link
         to={`/${community.name}/`}
         style={{ textDecoration: "none", color: "inherit" }}
@@ -88,28 +71,25 @@ const updateSubscription = async (user, community) => {
         </CardActionArea>
       </Link>
       <CardActions id="card-actions">
-      {isSubscribed ? (
-                <Button
-                  variant="outlined"
-                  startIcon={<CheckIcon />}
-                  style={{ marginRight: "10px" }}
-                  onClick={() =>
-                    updateSubscription(currentUser, props.community)
-                  }
-                >
-                  Subscribed
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  startIcon={<BookmarkIcon />}
-                  style={{ marginRight: "10px" }}
-                  onClick={() =>
-                    updateSubscription(currentUser, props.community)}
-                >
-                  Subscribe
-                </Button>
-              )}
+        {isSubscribed ? (
+          <Button
+            variant="outlined"
+            startIcon={<CheckIcon />}
+            style={{ marginRight: "10px" }}
+            onClick={() => handleSubscriptionUpdate()}
+          >
+            Subscribed
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            startIcon={<BookmarkIcon />}
+            style={{ marginRight: "10px" }}
+            onClick={() => handleSubscriptionUpdate()}
+          >
+            Subscribe
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

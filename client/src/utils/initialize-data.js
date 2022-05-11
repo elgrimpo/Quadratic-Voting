@@ -1,11 +1,10 @@
 import { store } from "../app/store";
-import { createStore } from "redux";
 
-import { fetchCommunities, updateCurrentCommunity } from "../reducers/communitiesSlice";
+import { fetchCommunities } from "../reducers/communitiesSlice";
 import { fetchGroups } from "../reducers/groupsSlice";
 import { fetchInitiatives } from "../reducers/initiativesSlice";
-import { fetchCurrentUser, fetchUsers, selectIsLoggedIn } from "../reducers/usersSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { fetchCurrentUser, fetchUsers } from "../reducers/usersSlice";
+
 
 export const initializeData = async () => {
   //const state = store.getState()

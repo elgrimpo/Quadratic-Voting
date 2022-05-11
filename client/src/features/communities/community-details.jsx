@@ -1,7 +1,6 @@
 //React Imports
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NiceModal from "@ebay/nice-modal-react";
 import CreateCommunity from "./form-community-create"; // created by above code
 
@@ -16,11 +15,15 @@ import CheckIcon from "@mui/icons-material/Check";
 //App Imports
 import { Sidebar } from "../index";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
-import { selectCurrentUser } from "../../reducers/usersSlice";
+import { fetchCurrentUser, selectCurrentUser, updateUser } from "../../reducers/usersSlice";
+import { userActions } from "../../utils";
+
 
 /* ----------- COMPONENT -------------- */
 
 const CommunityDetails = () => {
+  const dispatch = useDispatch();
+
   const currentCommunity = useSelector(selectCurrentCommunity);
   const currentUser = useSelector(selectCurrentUser);
 
@@ -40,19 +43,16 @@ const CommunityDetails = () => {
     }
   };
 
- const isSubscribed = checkSubscription(currentUser, currentCommunity);
+ const isSubscribed = userActions.checkSubscription(currentUser, currentCommunity);
 
-  const updateSubscription = (user, community) => {
-    const isSubscribed = checkSubscription(user, community);
-    if (isSubscribed) {
-      //const newSubscriptions = user.subscriptions.filter(subscription => subscription.communityId !== community._id)
-      const newSubscriptions = [{communityId: community._id}, ...user.subscriptions]
-      const newUser = {...user, subscriptions: newSubscriptions}      
-    } else {
-      
-    }
-  };
-
+ const handleSubscriptionUpdate = async () => {
+  const newUser = userActions.updateSubscription(
+    currentUser,
+    currentCommunity
+  );
+  await dispatch(updateUser(newUser));
+  await dispatch(fetchCurrentUser());
+};
  
 
   const checkMembership = () => {
@@ -120,7 +120,7 @@ const CommunityDetails = () => {
                   startIcon={<CheckIcon />}
                   style={{ marginRight: "10px" }}
                   onClick={() =>
-                    updateSubscription(currentUser, currentCommunity)
+                    handleSubscriptionUpdate()
                   }
                 >
                   Subscribed
@@ -130,6 +130,9 @@ const CommunityDetails = () => {
                   variant="contained"
                   startIcon={<BookmarkIcon />}
                   style={{ marginRight: "10px" }}
+                  onClick={() =>
+                    handleSubscriptionUpdate()
+                  }
                 >
                   Subscribe
                 </Button>

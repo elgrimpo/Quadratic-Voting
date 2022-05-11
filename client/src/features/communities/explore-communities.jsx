@@ -1,47 +1,32 @@
 // React/Redux Imports
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useMatch, useNavigate, useParams } from "react-router-dom";
-import { subject } from "@casl/ability";
-import NiceModal from "@ebay/nice-modal-react";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { useSnackbar } from "notistack";
 
 // MUI Imports
-import { Grid, Fab, Box, Paper, Typography, Button, Card } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import MenuIcon from "@mui/icons-material/Menu";
+import {
+  Fab,
+  Box,
+  Typography,
+  Dialog,
+} from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from '@mui/icons-material/Close';
 
 // App Imports
 import {
-  InitiativeCard,
-  FormCreateInitiative,
-  Sidebar,
-  FormCreateGroup,
-  ConfirmationDialog,
   CommunityCard,
 } from "../index.js";
-import { selectInitiatives } from "../../reducers/initiativesSlice";
-import { selectGroups, deleteGroup } from "../../reducers/groupsSlice";
 import { lightTheme } from "../../styles/themeProvider";
-import { findById } from "../../utils/find-by-id";
-import Can from "../components/Can";
-import {
-  selectCommunities,
-  selectCurrentCommunity,
-} from "../../reducers/communitiesSlice.js";
 import * as api from "../../api";
 
 /* ----------- COMPONENT -------------- */
 
-const ExploreCommunities = (props) => {
+export default NiceModal.create((props) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  
+  const modal = useModal();
+
   // API's
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   // Variable
   const [communities, setCommunities] = useState([{}]);
@@ -61,16 +46,27 @@ const ExploreCommunities = (props) => {
     }
   }, []);
 
-
-
   return (
     <ThemeProvider theme={lightTheme}>
-      <Box
+      <Dialog
         style={{
           width: "100%",
-          backgroundColor: "#F8F8F8"
+          backgroundColor: "#F8F8F8",
         }}
+        onClose={() => modal.remove()}
+        open={modal.visible}
+        fullScreen="false"
+        maxWidth="lg"
       >
+        <Fab
+          id="menu-button"
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={() => modal.remove()}
+        >
+          <CloseIcon />
+        </Fab>
         {/* ---> Title <--- */}
         <Box
           sx={{ maxWidth: { lg: "1000px" } }}
@@ -100,9 +96,7 @@ const ExploreCommunities = (props) => {
             </CommunityCard>
           ))}
         </Box>
-      </Box>
+      </Dialog>
     </ThemeProvider>
   );
-};
-
-export default ExploreCommunities;
+});
