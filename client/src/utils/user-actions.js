@@ -1,7 +1,6 @@
 export const userActions = {
-    
+
   checkSubscription: function (user, community) {
-    console.log("function called checkSubscription");
     const index = user.subscriptions?.findIndex(
       (subscription) => subscription?.communityId === community?._id
     );
@@ -12,16 +11,15 @@ export const userActions = {
     }
   },
 
+
+  //TODO: Include subscriptions and Message in response
   updateSubscription: function (user, community) {
-    console.log("function called");
     const isSubscribed = this.checkSubscription(user, community);
     if (isSubscribed) {
       const newSubscriptions = user.subscriptions.filter(
         (subscription) => subscription.communityId !== community._id
       );
       const newUser = { ...user, subscriptions: newSubscriptions };
-      console.log(`isSubscribed`);
-      console.log(newUser);
       return newUser;
     } else {
       const newSubscriptions = [
@@ -29,8 +27,6 @@ export const userActions = {
         ...user.subscriptions,
       ];
       const newUser = { ...user, subscriptions: newSubscriptions };
-      console.log(`!isSubscribed`);
-      console.log(newUser);
       return newUser;
     }
   },

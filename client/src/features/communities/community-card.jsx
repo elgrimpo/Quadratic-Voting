@@ -19,6 +19,7 @@ import CheckIcon from "@mui/icons-material/Check";
 //App Imports
 import {
   selectCurrentUser,
+  selectIsLoggedIn,
   updateUser,
   fetchCurrentUser,
 } from "../../reducers/usersSlice";
@@ -31,6 +32,7 @@ const CommunityCard = (props) => {
   // Variables
   const community = props.community;
   const currentUser = useSelector(selectCurrentUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   // Functions
@@ -39,13 +41,24 @@ const CommunityCard = (props) => {
     props.community
   );
   const handleSubscriptionUpdate = async () => {
-    const newUser = userActions.updateSubscription(
-      currentUser,
-      props.community
-    );
-    await dispatch(updateUser(newUser));
-    await dispatch(fetchCurrentUser());
-    await dispatch(fetchCommunities(newUser.subscriptions.map((subscription) => {return subscription.communityId})))
+    //TODO: FIX
+    if (isLoggedIn) {
+      const newUser = userActions.updateSubscription(
+        currentUser,
+        props.community
+      );
+      await dispatch(updateUser(newUser));
+      await dispatch(fetchCurrentUser());
+      await dispatch(
+        fetchCommunities(
+          newUser.subscriptions.map((subscription) => {
+            return subscription.communityId;
+          })
+        )
+      );
+    } else {
+      window.open("http://localhost:5000/auth/google", "_self");
+    }
   };
 
   return (
