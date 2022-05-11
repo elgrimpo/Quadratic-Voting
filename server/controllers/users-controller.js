@@ -23,3 +23,19 @@ export const createUser = async (req, res) => {
         res.status(409).json({message: error.message})
     }
 }
+
+// UPDATE User --> /users/:id
+export const updateUser = async (req, res) => {
+    const user = req.body;
+    const options = { new: true };
+    try {
+      const userSchemas = await UserSchema.findByIdAndUpdate(
+        { _id: req.params.id },
+        user,
+        options
+      );
+      res.status(201).json(userSchemas);
+    } catch (error) {
+      res.status(409).json({ message: error.message });
+    }
+  };

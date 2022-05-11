@@ -21,4 +21,5 @@ export const deleteGroup = (group) => axios.delete(`${url}/groups/${group._id}`,
 export const fetchCurrentUser = () => axios.get(`${url}/auth/login/success`, { withCredentials: true })
 export const fetchUsers = () => axios.get(`${url}/users`)
 export const createUser = (user) => axios.post(`${url}/users`, user) // TODO: frontend NOT YET IMPLEMENTED
+export const updateUser = (user) => axios.post(`${url}/users/${user._id}`, user)
 export const logout = () => axios.get(`${url}/auth/logout`, { withCredentials: true })

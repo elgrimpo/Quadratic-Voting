@@ -13,7 +13,7 @@ import {
   updateGroup,
   deleteGroup,
 } from "../controllers/groups-controller.js";
-import { getUsers, createUser } from "../controllers/users-controller.js";
+import { getUsers, createUser, updateUser } from "../controllers/users-controller.js";
 import {
   getSubscribedCommunities,
   getAllCommunities,
@@ -76,7 +76,7 @@ CommunityRouter.post("/", createCommunity); // frontend NOT YET IMPLEMENTED
 export const GroupRouter = express.Router();
 
 GroupRouter.get("/", getGroups);
-GroupRouter.post("/", createGroup); // frontend NOT YET IMPLEMENTED
+GroupRouter.post("/", createGroup); 
 GroupRouter.post("/:id", updateGroup);
 GroupRouter.delete("/:id", deleteGroup);
 
@@ -93,3 +93,4 @@ export const UserRouter = express.Router();
 
 UserRouter.get("/", getUsers);
 UserRouter.post("/", createUser); // frontend NOT YET IMPLEMENTED
+UserRouter.post("/:id", updateUser)

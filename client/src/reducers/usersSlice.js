@@ -37,6 +37,18 @@ export const fetchUsers = createAsyncThunk(
     }
   )
 
+  export const updateUser = createAsyncThunk(
+    "users/updateUser",
+    async (user, thunkAPI) => {
+      try {
+        const response = await api.updateInitiative(user);
+        return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+
 
 /*-------- Slice object ---------- */
 const usersSlice = createSlice({
@@ -64,6 +76,19 @@ const usersSlice = createSlice({
           state.currentUser = []
           state.status = 'success'
           state.isLoggedIn = false
+        },
+        [updateUser.pending]: (state, action) => {
+          state.status = "loading";
+        },
+        [updateUser.fulfilled]: (state, action) => {
+          const index = state.list.findIndex(
+            (user) => user._id === action.payload._id
+          );
+          state.list[index] = action.payload;
+          state.status = "success";
+        },
+        [updateUser.rejected]: (state, payload) => {
+          state.status = "failed";
         },
     }
 })
