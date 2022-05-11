@@ -34,16 +34,19 @@ import { lightTheme } from "../../styles/themeProvider";
 
 export default NiceModal.create((props) => {
   
+  // API's
+  const dispatch = useDispatch();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const modal = useModal();
+  const theme = useTheme();
+
+  // Variables
   const groupId = props.groupId
   const groups = useSelector(selectGroups);
   const currentGroup = findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
   const currentCommunity = useSelector(selectCurrentCommunity)
-  const dispatch = useDispatch();
-  const modal = useModal();
-  const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 
   const [formValues, setFormValues] = useState({
@@ -65,6 +68,8 @@ export default NiceModal.create((props) => {
     }]
   });
 
+
+  // Functions
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({

@@ -14,9 +14,15 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
+passport.deserializeUser( async (obj, done) => {
+  try {
+    const id = obj._id;
+    const user = await UserSchema.findById(id) || {};
+    if (!user) done(null, false); // no user found
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }});
 
 // Set up Strategies
 passport.use(

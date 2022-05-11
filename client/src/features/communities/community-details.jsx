@@ -29,9 +29,9 @@ const CommunityDetails = () => {
     NiceModal.show(CreateCommunity, { name: "Chris" });
   };
 
-  const checkSubscription = () => {
-    const index = currentUser.subscriptions?.findIndex(
-      (subscription) => subscription?.communityId === currentCommunity?._id
+  const checkSubscription = (user, community) => {
+    const index = user.subscriptions?.findIndex(
+      (subscription) => subscription?.communityId === community?._id
     );
     if (index === -1) {
       return false;
@@ -40,7 +40,20 @@ const CommunityDetails = () => {
     }
   };
 
-  const isSubscribed = checkSubscription();
+ const isSubscribed = checkSubscription(currentUser, currentCommunity);
+
+  const updateSubscription = (user, community) => {
+    const isSubscribed = checkSubscription(user, community);
+    if (isSubscribed) {
+      //const newSubscriptions = user.subscriptions.filter(subscription => subscription.communityId !== community._id)
+      const newSubscriptions = [{communityId: community._id}, ...user.subscriptions]
+      const newUser = {...user, subscriptions: newSubscriptions}      
+    } else {
+      
+    }
+  };
+
+ 
 
   const checkMembership = () => {
     const index = currentCommunity?.permissions?.findIndex(
@@ -106,6 +119,9 @@ const CommunityDetails = () => {
                   variant="outlined"
                   startIcon={<CheckIcon />}
                   style={{ marginRight: "10px" }}
+                  onClick={() =>
+                    updateSubscription(currentUser, currentCommunity)
+                  }
                 >
                   Subscribed
                 </Button>

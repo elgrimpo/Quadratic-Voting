@@ -38,9 +38,15 @@ import * as api from "../../api";
 
 const ExploreCommunities = (props) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  
+  // API's
   const dispatch = useDispatch();
   let navigate = useNavigate();
+
+  // Variable
   const [communities, setCommunities] = useState([{}]);
+
+  // Functions
   useEffect(async () => {
     let isLoaded = false;
     if (!isLoaded) {
@@ -55,17 +61,14 @@ const ExploreCommunities = (props) => {
     }
   }, []);
 
-  const handleSubscribe = (item) => {
-    // let newUser = Object.Create(currentUser)
-    // user.subscriptions.push({communityId: item._id})
-    // dispatch(updateUser(newUser))
-  };
+
 
   return (
     <ThemeProvider theme={lightTheme}>
       <Box
         style={{
           width: "100%",
+          backgroundColor: "#F8F8F8"
         }}
       >
         {/* ---> Title <--- */}
@@ -74,7 +77,6 @@ const ExploreCommunities = (props) => {
           style={{
             paddingLeft: 30,
             paddingRight: 30,
-
             margin: "80px auto 20px auto",
             textAlign: "center",
           }}

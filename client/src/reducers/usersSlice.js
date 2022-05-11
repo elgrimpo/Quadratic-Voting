@@ -41,8 +41,9 @@ export const fetchUsers = createAsyncThunk(
     "users/updateUser",
     async (user, thunkAPI) => {
       try {
-        const response = await api.updateInitiative(user);
+        const response = await api.updateUser(user);
         return response.data;
+
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
       }
@@ -67,10 +68,17 @@ const usersSlice = createSlice({
         [fetchUsers.rejected]: (state, payload) => {
           state.status = 'failed'
         },
+        [fetchCurrentUser.pending]: (state, action) => {
+          state.status = 'loading'
+        },
         [fetchCurrentUser.fulfilled]: (state, action) => {
           state.currentUser = action.payload
           state.status = 'success'
           state.isLoggedIn = true
+ 
+        },
+        [fetchCurrentUser.rejected]: (state, payload) => {
+          state.status = 'failed'
         },
         [logout.fulfilled]: (state, action) => {
           state.currentUser = []
@@ -78,14 +86,14 @@ const usersSlice = createSlice({
           state.isLoggedIn = false
         },
         [updateUser.pending]: (state, action) => {
-          state.status = "loading";
-        },
+          state.status = "loading";        },
         [updateUser.fulfilled]: (state, action) => {
           const index = state.list.findIndex(
             (user) => user._id === action.payload._id
           );
           state.list[index] = action.payload;
           state.status = "success";
+
         },
         [updateUser.rejected]: (state, payload) => {
           state.status = "failed";

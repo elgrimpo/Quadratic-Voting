@@ -5,58 +5,73 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useMatch, useParams } from "react-router-dom";
 
-
 //MUI Imports
 import { Box } from "@mui/material";
 
 //App Imports
-import { InitiativesList, InitiativeDetails, Layout, Login, CommunityDetails, ExploreCommunities } from "../features";
+import {
+  InitiativesList,
+  InitiativeDetails,
+  Layout,
+  Login,
+  CommunityDetails,
+  ExploreCommunities,
+} from "../features";
 import { fetchCurrentUser, selectCurrentUser } from "../reducers/usersSlice";
-import { selectCommunities, updateCurrentCommunity, selectCommunityLoadingStatus, selectCurrentCommunity } from "../reducers/communitiesSlice";
+import {
+  selectCommunities,
+  updateCurrentCommunity,
+  selectCommunityLoadingStatus,
+  selectCurrentCommunity,
+} from "../reducers/communitiesSlice";
 
-import { ability } from '../features/components/Can'
-import defineRulesFor from '../config/abilities'
+import { ability } from "../features/components/Can";
+import defineRulesFor from "../config/abilities";
 
 /* ----------- COMPONENT -------------- */
 
 function App(props) {
+  // API's
   const dispatch = useDispatch();
 
+  // Variables
+  const currentUser = useSelector(selectCurrentUser);
+  const initialCommunity = useSelector(selectCurrentCommunity);
+  const communityStatus = useSelector(selectCommunityLoadingStatus);
+
+  // Loading functions
+ useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    ability.update(defineRulesFor(currentUser));
+  }, [currentUser]);
+  
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
-  const currentUser = useSelector(selectCurrentUser)
 
-  const initialCommunity = useSelector(selectCurrentCommunity)
-
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    ability.update(defineRulesFor(currentUser))}, 
-    [currentUser])
-
-  const communityStatus = useSelector(selectCommunityLoadingStatus)
-
+ 
 
   return (
     <Box sx={{ height: "100 vh" }}>
       <Routes>
         {/* ---> Navigation <--- */}
-        {communityStatus === 'success' ?  (<Route path="/" element={<Navigate to={`/${initialCommunity.name}`} replace />} />) : ("") }
+        {communityStatus === "success" ? (
+          <Route
+            path="/"
+            element={<Navigate to={`/${initialCommunity.name}`} replace />}
+          />
+        ) : (
+          ""
+        )}
 
         <Route path="login" element={<Login />} />
-        
-        <Route
-          path="explore"
-          element={
-            <ExploreCommunities
-            />
-          }
-        ></Route>
+
+        <Route path="explore" element={<ExploreCommunities />}></Route>
 
         <Route
           path=":communityName"
@@ -64,7 +79,7 @@ function App(props) {
             <Layout
               props={props}
               drawerOpen={drawerOpen}
-              handleDrawerToggle={handleDrawerToggle} 
+              handleDrawerToggle={handleDrawerToggle}
             />
           }
         >
@@ -86,7 +101,6 @@ function App(props) {
             }
           />
 
-
           {/* ---> Main Content: Initiative Details <--- */}
           <Route
             path="group/:groupId/initiative/:initiativeId"
@@ -97,7 +111,7 @@ function App(props) {
         </Route>
       </Routes>
     </Box>
-  )
+  );
 }
 
 export default App;
