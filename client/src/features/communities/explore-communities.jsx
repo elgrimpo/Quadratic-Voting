@@ -50,12 +50,11 @@ export default NiceModal.create((props) => {
     <ThemeProvider theme={lightTheme}>
       <Dialog
         style={{
-          width: "100%",
           backgroundColor: "#F8F8F8",
         }}
         onClose={() => modal.remove()}
         open={modal.visible}
-        fullScreen="false"
+        fullScreen={true}
         maxWidth="lg"
       >
         <Fab
@@ -73,13 +72,14 @@ export default NiceModal.create((props) => {
           style={{
             paddingLeft: 30,
             paddingRight: 30,
-            margin: "80px auto 20px auto",
+            margin: "40px auto 20px auto",
             textAlign: "center",
+
           }}
         >
           <Typography
             variant="h4"
-            style={{ color: "black", marginTop: "80px" }}
+            style={{ color: "black" }}
           >
             Explore Communities
           </Typography>
@@ -91,8 +91,9 @@ export default NiceModal.create((props) => {
             <CommunityCard
               key={`${index} ${community._id}`}
               community={community}
+              onClose={() => modal.remove()}
             >
-              {community.name}
+
             </CommunityCard>
           ))}
         </Box>

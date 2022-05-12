@@ -60,7 +60,7 @@ function App(props) {
         {communityStatus === "success" ? (
           <Route
             path="/"
-            element={<Navigate to={`/${initialCommunity.name}`} replace />}
+            element={<Navigate to={`/${initialCommunity?.name}`} replace />}
           />
         ) : (
           ""

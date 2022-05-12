@@ -17,10 +17,6 @@ import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 
 //App Imports
-import {
-  createInitiative,
-  updateInitiative,
-} from "../../reducers/initiativesSlice";
 import { selectGroups, createGroup, updateGroup } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
@@ -93,7 +89,7 @@ export default NiceModal.create((props) => {
         fullScreen={fullScreen}
         maxWidth="lg"
       >
-        <DialogTitle>New Group</DialogTitle>
+        <DialogTitle>{props.type === "create" ? "New Group" : `Update "${props.content.title}"`}</DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}

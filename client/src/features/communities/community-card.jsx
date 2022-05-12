@@ -1,6 +1,6 @@
 //React Imports
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 //MUI Imports
@@ -21,14 +21,14 @@ import {
   selectCurrentUser,
   selectIsLoggedIn,
   updateUser,
-  fetchCurrentUser,
 } from "../../reducers/usersSlice";
-import { fetchCommunities } from "../../reducers/communitiesSlice";
 import { userActions } from "../../utils";
-
 /* ----------- COMPONENT -------------- */
 
 const CommunityCard = (props) => {
+  // API's
+  let navigate = useNavigate();
+  
   // Variables
   const community = props.community;
   const currentUser = useSelector(selectCurrentUser);
@@ -41,37 +41,41 @@ const CommunityCard = (props) => {
     props.community
   );
   const handleSubscriptionUpdate = async () => {
-    //TODO: FIX
+    //TODO: Trigger snackbar
     if (isLoggedIn) {
-      const newUser = userActions.updateSubscription(
+      const response = userActions.updateSubscription(
         currentUser,
         props.community
       );
-      await dispatch(updateUser(newUser));
-      await dispatch(fetchCurrentUser());
-      await dispatch(
-        fetchCommunities(
-          newUser.subscriptions.map((subscription) => {
-            return subscription.communityId;
-          })
-        )
-      );
+      await dispatch(updateUser(response.newUser));
+      userActions.updateStore(response.newSubscriptions)
     } else {
       window.open("http://localhost:5000/auth/google", "_self");
     }
   };
 
+  const handleNavigate = async () => {
+    if (!isSubscribed) {
+      // adds community and its groups & initiatives to the store without updating the database
+    const response = userActions.updateSubscription(
+      currentUser,
+      props.community
+    );
+    await userActions.updateStore(response.newSubscriptions) 
+    };
+    props.onClose()
+    navigate(`/${props.community.name}/overview`);
+  }
+
   return (
     <Card id="initiatives-grid-item" variant="outlined">
-      <Link
-        to={`/${community.name}/`}
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
+
         <CardActionArea>
           <CardMedia
             component="img"
             height="240px"
             image={community.logo_url}
+            onClick={() => handleNavigate()}
           />
           <CardContent>
             <Typography gutterBottom variant="h6">
@@ -82,13 +86,13 @@ const CommunityCard = (props) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-      </Link>
-      <CardActions id="card-actions">
+
+      <CardActions id="card-actions" style={{marginBottom: "10px"}} > 
         {isSubscribed ? (
           <Button
             variant="outlined"
             startIcon={<CheckIcon />}
-            style={{ marginRight: "10px" }}
+            style={{  }}
             onClick={() => handleSubscriptionUpdate()}
           >
             Subscribed
@@ -97,7 +101,7 @@ const CommunityCard = (props) => {
           <Button
             variant="contained"
             startIcon={<BookmarkIcon />}
-            style={{ marginRight: "10px" }}
+            style={{  }}
             onClick={() => handleSubscriptionUpdate()}
           >
             Subscribe

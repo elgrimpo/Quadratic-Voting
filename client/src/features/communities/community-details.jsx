@@ -32,25 +32,14 @@ const CommunityDetails = () => {
     NiceModal.show(CreateCommunity, { name: "Chris" });
   };
 
-  const checkSubscription = (user, community) => {
-    const index = user.subscriptions?.findIndex(
-      (subscription) => subscription?.communityId === community?._id
-    );
-    if (index === -1) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
  const isSubscribed = userActions.checkSubscription(currentUser, currentCommunity);
 
  const handleSubscriptionUpdate = async () => {
-  const newUser = userActions.updateSubscription(
+  const response = userActions.updateSubscription(
     currentUser,
     currentCommunity
   );
-  await dispatch(updateUser(newUser));
+  await dispatch(updateUser(response.newUser));
   await dispatch(fetchCurrentUser());
 };
  

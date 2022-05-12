@@ -104,7 +104,7 @@ export default NiceModal.create((props) => {
       fullScreen={fullScreen}
       maxWidth="lg"
     >
-      <DialogTitle>New Initiative</DialogTitle>
+      <DialogTitle>{props.type === "create" ? "New Initiative" : `Update "${props.content.title}"`}</DialogTitle>
       <DialogContent>
         <form
           onSubmit={handleSubmit}
