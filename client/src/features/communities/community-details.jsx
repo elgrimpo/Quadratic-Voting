@@ -2,7 +2,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NiceModal from "@ebay/nice-modal-react";
-import CreateCommunity from "./form-community-create"; // created by above code
 
 //MUI Imports
 import { Typography, Box, Button, Paper, Card } from "@mui/material";
@@ -26,11 +25,6 @@ const CommunityDetails = () => {
 
   const currentCommunity = useSelector(selectCurrentCommunity);
   const currentUser = useSelector(selectCurrentUser);
-
-  //TODO: To be moved to communities-nav
-  const showCreateCommunity = () => {
-    NiceModal.show(CreateCommunity, { name: "Chris" });
-  };
 
  const isSubscribed = fx.subscriptions.checkSubscription(currentUser, currentCommunity);
 
@@ -132,7 +126,6 @@ const CommunityDetails = () => {
                   variant="outlined"
                   startIcon={<CheckIcon />}
                   style={{ marginRight: "10px" }}
-                  onClick={showCreateCommunity}
                 >
                   Member
                 </Button>
@@ -141,7 +134,6 @@ const CommunityDetails = () => {
                   variant="contained"
                   startIcon={<GroupAddIcon />}
                   style={{ marginRight: "10px" }}
-                  onClick={showCreateCommunity}
                 >
                   Become member
                 </Button>

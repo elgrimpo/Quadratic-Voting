@@ -20,6 +20,7 @@ import {
 import { useTheme } from "@mui/material/styles";
 import LoginIcon from "@mui/icons-material/Login";
 import ExploreIcon from "@mui/icons-material/Explore";
+import AddIcon from '@mui/icons-material/Add';
 
 //App Imports
 import { selectCurrentUser, selectIsLoggedIn } from "../../reducers/usersSlice";
@@ -27,7 +28,7 @@ import {
   selectCommunities,
   updateCurrentCommunity,
 } from "../../reducers/communitiesSlice";
-import {ExploreCommunities} from "../index"
+import {ExploreCommunities, FormCreateCommunity} from "../index"
 
 /* ----------- COMPONENT -------------- */
 
@@ -65,8 +66,15 @@ const Communities = (props) => {
     setAnchorEl(null);
   };
 
-  const showInitiativeUpdate = () => {
+  const showExploreCommunities = () => {
     NiceModal.show(ExploreCommunities, {});
+  };
+
+  const showCreateCommunity = () => {
+    NiceModal.show(FormCreateCommunity, {
+      type: "create",
+      content: "",
+    });
   };
 
   return (
@@ -107,8 +115,11 @@ const Communities = (props) => {
             </Link>
           </Box>
         ))}
-        <IconButton aria-label="explore" color="primary" size="large" onClick={showInitiativeUpdate}>
+        <IconButton aria-label="explore" color="primary" size="large" onClick={showExploreCommunities}>
           <ExploreIcon />
+        </IconButton>
+        <IconButton aria-label="explore" color="primary" size="large" onClick={showCreateCommunity}>
+          <AddIcon />
         </IconButton>
       </Stack>
 

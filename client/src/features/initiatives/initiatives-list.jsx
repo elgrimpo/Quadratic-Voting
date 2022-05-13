@@ -50,7 +50,7 @@ const InitiativesList = (props) => {
     });
   };
 
-  const showCreateGroup = () => {
+  const showUpdateGroup = () => {
     NiceModal.show(FormCreateGroup, {
       type: "update",
       content: currentGroup,
@@ -167,7 +167,7 @@ const InitiativesList = (props) => {
               )}
             >
                 {/* Update Initiative*/}
-                <Button variant="outlined" onClick={showCreateGroup} startIcon={<EditIcon />}>
+                <Button variant="outlined" onClick={showUpdateGroup} startIcon={<EditIcon />}>
                   Update Group
                 </Button>
                 <Button variant="outlined" onClick={showConfirmDeletion} startIcon={<DeleteForeverIcon />}>

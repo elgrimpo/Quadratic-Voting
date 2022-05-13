@@ -15,6 +15,42 @@ const initialCommunities = {
     }
   )
 
+  export const createCommunity = createAsyncThunk(
+    'communities/createCommunity',
+    async (community, thunkAPI) => {
+      try {
+        const response = await api.createCommunity(community)
+        return response.data
+      } catch(error) {
+        return thunkAPI.rejectWithValue(error.message)
+      }
+    }
+  )
+
+  export const updateCommunity = createAsyncThunk(
+    "communities/updateCommunity",
+    async (community, thunkAPI) => {
+      try {
+        const response = await api.updateCommunity(community);
+        return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+
+  export const deleteCommunity = createAsyncThunk(
+    "communities/deleteCommunity",
+    async (community, thunkAPI) => {
+      try {
+        const response = await api.deleteCommunity(community);
+        return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+
 
 /*-------- Slice object ---------- */
 const communitiesSlice = createSlice({
@@ -36,6 +72,41 @@ const communitiesSlice = createSlice({
         },
         [fetchCommunities.rejected]: (state, payload) => {
           state.status = 'failed'
+        },
+        [createCommunity.pending]: (state, action) => {
+          state.status = 'loading'
+        },
+        [createCommunity.fulfilled]: (state, action) => {
+          state.list.push(action.payload)
+          state.status = 'success'
+        },
+        [createCommunity.rejected]: (state, payload) => {
+          state.status = 'failed'
+        },
+        [updateCommunity.pending]: (state, action) => {
+          state.status = "loading";
+        },
+        [updateCommunity.fulfilled]: (state, action) => {
+          const index = state.list.findIndex(
+            (community) => community._id === action.payload._id
+          );
+          state.list[index] = action.payload;
+          state.status = "success";
+        },
+        [updateCommunity.rejected]: (state, payload) => {
+          state.status = "failed";
+        },
+        [deleteCommunity.pending]: (state, action) => {
+          state.status = "loading";
+        },
+        [deleteCommunity.fulfilled]: (state, action) => {
+          state.list = state.list.filter((community) => {
+            return community._id !== action.payload;
+          });
+          state.status = "success";
+        },
+        [deleteCommunity.rejected]: (state, payload) => {
+          state.status = "failed";
         },
     }
 });

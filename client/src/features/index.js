@@ -4,6 +4,8 @@ export { default as CommunityDetails } from "./communities/community-details";
 export { default as ExploreCommunities } from "./communities/explore-communities";
 export { default as CommunityCard } from "./communities/community-card";
 export { default as CommunitySidebar } from "./communities/community-sidebar";
+export { default as FormCreateCommunity } from "./communities/community-create";
+
 
 // Groups
 export { default as GroupsNav } from "./layout/groups-nav";

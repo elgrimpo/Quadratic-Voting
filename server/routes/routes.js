@@ -48,7 +48,7 @@ export const CommunityRouter = express.Router();
 
 CommunityRouter.get("/", getSubscribedCommunities);
 CommunityRouter.get("/all", getAllCommunities);
-CommunityRouter.post("/", createCommunity); // frontend NOT YET IMPLEMENTED
+CommunityRouter.post("/", createCommunity); 
 
 // groups
 export const GroupRouter = express.Router();

@@ -38,6 +38,7 @@ const initialGroups = {
     }
   );
 
+  //FIXME: "group/deleteGroup" or "groups/deleteGroup"?
   export const deleteGroup = createAsyncThunk(
     "group/deleteGroup",
     async (group, thunkAPI) => {
