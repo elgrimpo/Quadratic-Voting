@@ -13,10 +13,10 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import CheckIcon from "@mui/icons-material/Check";
 
 //App Imports
-import { Sidebar } from "../index";
+import { InitiativeSidebar } from "../index"; //TODO: Create GroupSidebar
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import { fetchCurrentUser, selectCurrentUser, updateUser } from "../../reducers/usersSlice";
-import { userActions } from "../../utils";
+import { fx } from "../../utils";
 
 
 /* ----------- COMPONENT -------------- */
@@ -32,10 +32,10 @@ const CommunityDetails = () => {
     NiceModal.show(CreateCommunity, { name: "Chris" });
   };
 
- const isSubscribed = userActions.checkSubscription(currentUser, currentCommunity);
+ const isSubscribed = fx.subscriptions.checkSubscription(currentUser, currentCommunity);
 
  const handleSubscriptionUpdate = async () => {
-  const response = userActions.updateSubscription(
+  const response = fx.subscriptions.updateSubscription(
     currentUser,
     currentCommunity
   );
@@ -165,7 +165,7 @@ const CommunityDetails = () => {
         </Paper>
       </ThemeProvider>
       <Box>
-        <Sidebar />
+        <InitiativeSidebar />
       </Box>
     </Box>
   );

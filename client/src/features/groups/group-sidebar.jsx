@@ -32,16 +32,9 @@ const GroupSidebar = (props) => {
   const users = useSelector(selectUsers);
   const currentUser = useSelector(selectCurrentUser);
   const currentGroup = fx.data.findById(groups, groupId);
-
   //Remaining Group Votes
   //TODO: Take out functions for Group specific things?
-  const groupIndex = currentGroup?.remainingVotes.findIndex(
-    (vote) => vote.userId === currentUser._id
-  );
-  const remainingGroupVotes =
-    groupIndex === -1
-      ? currentGroup?.totalVotes
-      : currentGroup?.remainingVotes[groupIndex].votes;
+  const remainingGroupVotes = fx.voting.calcGroupRemainingVotes(currentUser, currentGroup)
 
 
   return (

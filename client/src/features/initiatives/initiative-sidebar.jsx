@@ -27,26 +27,8 @@ const InitiativeSidebar = (props) => {
   const currentUser = useSelector(selectCurrentUser);
   const currentInitiative = fx.data.findById(initiatives, initiativeId);
   const currentGroup = fx.data.findById(groups, groupId);
-
-  //Remaining Group Votes
-  // TODO: Put into separate file
-  const groupIndex = currentGroup?.remainingVotes.findIndex(
-    (vote) => vote.userId === currentUser._id
-  );
-  const remainingGroupVotes =
-    groupIndex === -1
-      ? currentGroup?.totalVotes
-      : currentGroup?.remainingVotes[groupIndex].votes;
-
-  // Initiative Received User Votes
-    // TODO: Put into separate file
-  const InitiativeIndex = currentInitiative?.receivedVotes.findIndex(
-    (vote) => vote.userId === currentUser._id
-  );
-  const InitiativeReceivedVotes =
-    InitiativeIndex === -1
-      ? 0
-      : currentInitiative?.receivedVotes[InitiativeIndex].votes;
+  const remainingGroupVotes = fx.voting.calcGroupRemainingVotes(currentUser, currentGroup)
+  const InitiativeReceivedVotes = fx.voting.calcUserInitiativeVotes(currentUser, currentInitiative)
 
   return (
     <Stack

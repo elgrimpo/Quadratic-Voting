@@ -26,7 +26,7 @@ import {
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
-import { findById } from "../../utils/find-by-id";
+import { fx } from "../../utils";
 import { lightTheme } from "../../styles/themeProvider";
 
 
@@ -43,7 +43,7 @@ export default NiceModal.create((props) => {
   // Variables
   const groupId = props.groupId
   const groups = useSelector(selectGroups);
-  const currentGroup = findById(groups, groupId);
+  const currentGroup = fx.data.findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
   const currentCommunity = useSelector(selectCurrentCommunity)
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));

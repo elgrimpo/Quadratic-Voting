@@ -1,1 +1,1 @@
-export {userActions} from "./user-actions";
+export * as fx from "./user-actions";

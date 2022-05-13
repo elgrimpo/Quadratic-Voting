@@ -20,15 +20,16 @@ import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { selectGroups, createGroup, updateGroup } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
-import { findById } from "../../utils/find-by-id";
 import { lightTheme } from "../../styles/themeProvider";
+import { fx } from "../../utils";
+
 
 /* ----------- COMPONENT -------------- */
 
 export default NiceModal.create((props) => {
   const groupId = props.groupId;
   const groups = useSelector(selectGroups);
-  const currentGroup = findById(groups, groupId);
+  const currentGroup = fx.data.findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
   const currentCommunity = useSelector(selectCurrentCommunity);
   const dispatch = useDispatch();

@@ -9,11 +9,11 @@ import { Provider } from 'react-redux';
 import {store} from './app/store'
 import NiceModal from "@ebay/nice-modal-react"
 import { SnackbarProvider } from 'notistack';
-import {initializeData} from './utils/initialize-data';
+import {fx} from './utils/';
 
 
 
-initializeData()
+fx.data.initializeData()
 
 
 ReactDOM.render(

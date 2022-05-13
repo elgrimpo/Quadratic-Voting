@@ -16,11 +16,11 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 
 // App Imports
-import { InitiativeCard, FormCreateInitiative, Sidebar, FormCreateGroup, ConfirmationDialog } from "../index.js";
+import { InitiativeCard, FormCreateInitiative, GroupSidebar, FormCreateGroup, ConfirmationDialog } from "../index.js";
 import { selectInitiatives } from "../../reducers/initiativesSlice";
 import { selectGroups, deleteGroup } from "../../reducers/groupsSlice";
 import { lightTheme } from "../../styles/themeProvider";
-import { findById } from "../../utils/find-by-id";
+import { fx } from "../../utils";
 import Can from "../components/Can";
 import {
   selectCommunities,
@@ -36,7 +36,7 @@ const InitiativesList = (props) => {
     (initiative) => initiative.groupId === groupId
   );
   const groups = useSelector(selectGroups);
-  const currentGroup = findById(groups, groupId);
+  const currentGroup = fx.data.findById(groups, groupId);
   const currentCommunity = useSelector(selectCurrentCommunity);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const dispatch = useDispatch();
@@ -183,7 +183,7 @@ const InitiativesList = (props) => {
 
       {/* ---> Sidebar <--- */}
       <Box>
-        <Sidebar />
+        <GroupSidebar />
       </Box>
     </Box>
   );

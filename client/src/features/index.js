@@ -1,8 +1,10 @@
 export { default as Communities } from "./layout/communities-nav";
 export { default as InitiativesList } from "./initiatives/initiatives-list";
+export { default as InitiativeSidebar } from "./initiatives/initiative-sidebar";
+
 export { default as Layout } from "./layout/layout";
 export { default as GroupsNav } from "./layout/groups-nav";
-export { default as Sidebar } from "./layout/sidebar";
+export { default as GroupSidebar } from "./groups/group-sidebar";
 export { default as TabNav } from "./layout/tab-nav";
 export { default as InitiativeDetails } from "./initiatives/initiative-details";
 export { default as InitiativeCard } from "./initiatives/initiative-card";

@@ -23,7 +23,7 @@ import {
   selectChannels,
   selectCurrentChannel,
 } from "../../reducers/channelsSlice";
-import { findById } from "../../utils/find-by-id";
+import { fx } from "../../utils";
 
 /* ----------- COMPONENT -------------- */
 
@@ -31,7 +31,7 @@ function GroupsNav(props) {
   //state variables
   const groups = useSelector(selectGroups);
   let { groupId, communityName } = useParams();
-  const currentGroup = findById(groups, groupId);
+  const currentGroup = fx.data.findById(groups, groupId);
   const currentCommunity = useSelector(selectCurrentCommunity)
 
   const communityGroups = groups.filter(

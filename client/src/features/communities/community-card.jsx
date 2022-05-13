@@ -22,7 +22,7 @@ import {
   selectIsLoggedIn,
   updateUser,
 } from "../../reducers/usersSlice";
-import { userActions } from "../../utils";
+import { fx } from "../../utils";
 /* ----------- COMPONENT -------------- */
 
 const CommunityCard = (props) => {
@@ -36,19 +36,19 @@ const CommunityCard = (props) => {
   const dispatch = useDispatch();
 
   // Functions
-  const isSubscribed = userActions.checkSubscription(
+  const isSubscribed = fx.subscriptions.checkSubscription(
     currentUser,
     props.community
   );
   const handleSubscriptionUpdate = async () => {
     //TODO: Trigger snackbar
     if (isLoggedIn) {
-      const response = userActions.updateSubscription(
+      const response = fx.subscriptions.updateSubscription(
         currentUser,
         props.community
       );
       await dispatch(updateUser(response.newUser));
-      userActions.updateStore(response.newSubscriptions)
+      fx.data.updateStore(response.newSubscriptions)
     } else {
       window.open("http://localhost:5000/auth/google", "_self");
     }
@@ -57,11 +57,11 @@ const CommunityCard = (props) => {
   const handleNavigate = async () => {
     if (!isSubscribed) {
       // adds community and its groups & initiatives to the store without updating the database
-    const response = userActions.updateSubscription(
+    const response = fx.subscriptions.updateSubscription(
       currentUser,
       props.community
     );
-    await userActions.updateStore(response.newSubscriptions) 
+    await fx.data.updateStore(response.newSubscriptions) 
     };
     props.onClose()
     navigate(`/${props.community.name}/overview`);

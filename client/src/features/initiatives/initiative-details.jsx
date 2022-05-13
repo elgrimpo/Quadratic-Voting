@@ -21,7 +21,7 @@ import Can from "../components/Can";
 import {
   TabNav,
   Chat,
-  Sidebar,
+  InitiativeSidebar,
   FormCreateInitiative,
   ConfirmationDialog,
 } from "../index";
@@ -29,14 +29,14 @@ import {
   selectInitiatives,
   deleteInitiative,
 } from "../../reducers/initiativesSlice";
-import { findById } from "../../utils/find-by-id";
+import { fx } from "../../utils";
 
 /* ----------- COMPONENT -------------- */
 
 const InitiativeDetails = (props) => {
   let { groupId, communityName, initiativeId } = useParams();
   const initiatives = useSelector(selectInitiatives);
-  const currentInitiative = findById(initiatives, initiativeId);
+  const currentInitiative = fx.data.findById(initiatives, initiativeId);
   const dispatch = useDispatch();
 
   const [value, setValue] = React.useState("Overview");
@@ -184,7 +184,7 @@ const InitiativeDetails = (props) => {
         </Paper>
       </ThemeProvider>
       <Box>
-        <Sidebar />
+        <InitiativeSidebar />
       </Box>
     </Box>
   );
