@@ -13,7 +13,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import CheckIcon from "@mui/icons-material/Check";
 
 //App Imports
-import { InitiativeSidebar } from "../index"; //TODO: Create GroupSidebar
+import { CommunitySidebar } from "../index"; //TODO: Create GroupSidebar
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import { fetchCurrentUser, selectCurrentUser, updateUser } from "../../reducers/usersSlice";
 import { fx } from "../../utils";
@@ -165,7 +165,7 @@ const CommunityDetails = () => {
         </Paper>
       </ThemeProvider>
       <Box>
-        <InitiativeSidebar />
+        <CommunitySidebar />
       </Box>
     </Box>
   );
