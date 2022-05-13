@@ -1,5 +1,4 @@
 import passport from "passport";
-import "../auth/passport.js";
 
 // Client URL
 const CLIENT_URL = "http://localhost:3000/";
@@ -15,6 +14,8 @@ export const getSuccess = (req, res) => {
       user: req.user,
       //   cookies: req.cookies
     });
+  } else {
+    res.status(404).send();
   }
 };
 
@@ -32,15 +33,17 @@ export const getLogout = async (req, res) => {
   res.redirect(CLIENT_URL);
 };
 
-// GET Google authentication --> /auth/google
-export const getGoogleAuthentication = async (req, res) => {
-  passport.authenticate("google", { scope: ["profile"] });
+// GET Google authentication --> /auth/google 
+export const getGoogleAuthentication = async (req, res, next) => {
+  const handler = passport.authenticate("google", { scope: ["profile"] });
+  handler(req, res, next)
 };
 
 // GET Google callback function --> /auth/google/callback
-export const getGoogleCallback = async (req, res) => {
-  passport.authenticate("google", {
+export const getGoogleCallback = async (req, res, next) => {
+  const handler = passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
   });
-};
+  handler(req, res, next);
+}; 
