@@ -6,6 +6,7 @@ const initialUsers = {
     list: [],
     isLoggedIn: false, 
     currentUser: {
+      _id:"000",
       userName: "Guest",
       subscriptions: [{
         communityId: "622058d622194df2d949a38c"
