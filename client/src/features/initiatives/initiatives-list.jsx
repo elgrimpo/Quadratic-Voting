@@ -132,13 +132,7 @@ const InitiativesList = (props) => {
               </Typography>
             </Box>
             {/* abilitiy */}
-            <Can
-              I="manage"
-              a={subject(
-                "Group",
-                Object.create(currentCommunity || { waiting: "waiting" })
-              )}
-            >
+            
               {/* Buttons */}
               <Box
                 style={{
@@ -149,6 +143,13 @@ const InitiativesList = (props) => {
                   columnGap: "10px",
                 }}
               >
+                <Can
+              I="create"
+              a={subject(
+                "Initiative",
+                Object.create(currentCommunity || { waiting: "waiting" })
+              )}
+            >
                 <Button
                   variant="contained"
                   startIcon={<AddIcon />}
@@ -156,7 +157,15 @@ const InitiativesList = (props) => {
                 >
                   Create Initiative{" "}
                 </Button>
+                </Can>
 
+                <Can
+              I="manage"
+              a={subject(
+                "Group",
+                Object.create(currentCommunity || { waiting: "waiting" })
+              )}
+            >
                 {/* Update Initiative*/}
                 <Button variant="outlined" onClick={showCreateGroup} startIcon={<EditIcon />}>
                   Update Group
@@ -164,8 +173,9 @@ const InitiativesList = (props) => {
                 <Button variant="outlined" onClick={showConfirmDeletion} startIcon={<DeleteForeverIcon />}>
                   Delete Group
                 </Button>
+               </Can> 
               </Box>
-            </Can>
+            
 
             {/* ---> Initiative tiles <--- */}
 

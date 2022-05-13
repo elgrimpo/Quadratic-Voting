@@ -88,7 +88,7 @@ export const voting = {
     }
   },
   calcGroupRemainingVotes: function (user, group) {
-    const groupIndex = group.remainingVotes.findIndex(
+    const groupIndex = group?.remainingVotes.findIndex(
       (vote) => vote.userId === user._id
     );
     if (groupIndex === -1) {
