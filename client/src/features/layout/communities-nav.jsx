@@ -51,10 +51,10 @@ const Communities = (props) => {
   // Menu controls
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
@@ -132,14 +132,14 @@ const Communities = (props) => {
             style={{ border: `2px solid ${theme.palette.primary.light}` }}
             alt={currentUser._id}
             src={currentUser.image_url}
-            onClick={handleClick}
+            onClick={handleMenuOpen}
           />
 
           <Menu
             id="community-dropdown"
             anchorEl={anchorEl}
             open={open}
-            onClose={handleClose}
+            onClose={handleMenuClose}
             anchorOrigin={{
               vertical: "top",
               horizontal: "left",
@@ -149,8 +149,8 @@ const Communities = (props) => {
               horizontal: "left",
             }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>

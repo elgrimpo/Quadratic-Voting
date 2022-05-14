@@ -2,9 +2,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NiceModal from "@ebay/nice-modal-react";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 //MUI Imports
-import { Typography, Box, Button, Paper, Card, IconButton } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Paper,
+  Card,
+  IconButton,
+  Menu,
+  MenuItem,
+  Divider,
+} from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -12,14 +24,25 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { CommunitySidebar, ConfirmationDialog, FormCreateCommunity } from "../index"; //TODO: Create GroupSidebar
-import { deleteCommunity, selectCurrentCommunity, selectCommunities } from "../../reducers/communitiesSlice";
+import {
+  CommunitySidebar,
+  ConfirmationDialog,
+  FormCreateCommunity,
+} from "../index"; //TODO: Create GroupSidebar
+import {
+  deleteCommunity,
+  selectCurrentCommunity,
+  selectCommunities,
+} from "../../reducers/communitiesSlice";
 import { selectGroups, deleteGroup } from "../../reducers/groupsSlice";
-import { selectInitiatives, deleteInitiative } from "../../reducers/initiativesSlice";
+import {
+  selectInitiatives,
+  deleteInitiative,
+} from "../../reducers/initiativesSlice";
 
 import {
   fetchCurrentUser,
@@ -27,8 +50,6 @@ import {
   updateUser,
 } from "../../reducers/usersSlice";
 import { fx } from "../../utils";
-import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "notistack";
 
 /* ----------- COMPONENT -------------- */
 
@@ -36,21 +57,22 @@ const CommunityDetails = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
+  const theme = useTheme();
 
   const currentCommunity = useSelector(selectCurrentCommunity);
   const communities = useSelector(selectCommunities);
 
   const currentUser = useSelector(selectCurrentUser);
-  const groups = useSelector(selectGroups)
-  const initiatives = useSelector(selectInitiatives)
+  const groups = useSelector(selectGroups);
+  const initiatives = useSelector(selectInitiatives);
   const isSubscribed = fx.subscriptions.checkSubscription(
     currentUser,
     currentCommunity
   );
-  const isMember = fx.subscriptions.checkMembership(currentUser,
-    currentCommunity);
-
+  const isMember = fx.subscriptions.checkMembership(
+    currentUser,
+    currentCommunity
+  );
 
   const handleSubscriptionUpdate = async () => {
     const response = fx.subscriptions.updateSubscription(
@@ -61,8 +83,8 @@ const CommunityDetails = () => {
     await dispatch(fetchCurrentUser());
   };
 
-  
   const showCommunityUpdate = () => {
+    handleMenuClose();
     NiceModal.show(FormCreateCommunity, {
       type: "update",
       content: currentCommunity,
@@ -70,18 +92,25 @@ const CommunityDetails = () => {
   };
 
   const handleDelete = () => {
-    const communityGroups = groups.filter(group => group.communityId === currentCommunity._id)
-    const communityInitiatives = initiatives.filter(initiative => initiative.communityId === currentCommunity._id)
-    communityGroups.forEach(group => dispatch(deleteGroup(group)))
-    communityInitiatives.forEach(initiative => dispatch(deleteInitiative(initiative)))
+    const communityGroups = groups.filter(
+      (group) => group.communityId === currentCommunity._id
+    );
+    const communityInitiatives = initiatives.filter(
+      (initiative) => initiative.communityId === currentCommunity._id
+    );
+    communityGroups.forEach((group) => dispatch(deleteGroup(group)));
+    communityInitiatives.forEach((initiative) =>
+      dispatch(deleteInitiative(initiative))
+    );
     dispatch(deleteCommunity(currentCommunity));
     navigate(`/${communities[0].name}/overview`);
     enqueueSnackbar("Community successfully deleted", {
       variant: "success",
     });
-  }
+  };
 
   const showConfirmDeletion = () => {
+    handleMenuClose();
     NiceModal.show(ConfirmationDialog, {
       title: "Delete Community?",
       content:
@@ -91,6 +120,14 @@ const CommunityDetails = () => {
     });
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Box
@@ -175,24 +212,52 @@ const CommunityDetails = () => {
                   Become member
                 </Button>
               )}
-
-              <Button
+              <IconButton
                 variant="outlined"
-                startIcon={<EditIcon />}
                 style={{ marginRight: "10px" }}
-                onClick={showCommunityUpdate}
+                onClick={handleMenuOpen}
+                color="primary"
               >
-                Update Community
-              </Button>
-              <Button
-                variant="outlined"
-                startIcon={<DeleteForeverIcon />}
-                style={{ marginRight: "10px" }}
-                onClick={showConfirmDeletion}
-              >
-                Delete Community
-              </Button>
+                <MoreHorizIcon />
+              </IconButton>
 
+              {/*--- Manage Community Buttons---*/}
+              <Menu
+                id="manage-dropdown"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleMenuClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <MenuItem>
+                  <Button
+                    variant="text"
+                    startIcon={<EditIcon />}
+                    style={{ marginRight: "10px" }}
+                    onClick={showCommunityUpdate}
+                  >
+                    Update Community
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    variant="text"
+                    color="error"
+                    startIcon={<DeleteForeverIcon />}
+                    style={{ marginRight: "10px" }}
+                    onClick={showConfirmDeletion}
+                  >
+                    Delete Community
+                  </Button>
+                </MenuItem>
+              </Menu>
             </Box>
           </Box>
           <Card
@@ -204,7 +269,7 @@ const CommunityDetails = () => {
             }}
             variant="outlined"
           >
-            <Typography variant="h6" sx={{ mb: "20px" }}>
+            <Typography variant="h6" sx={{ mb: "10px" }}>
               Overview
             </Typography>
             <Typography>{currentCommunity?.description}</Typography>
