@@ -13,7 +13,6 @@ export const getGroups = async (req, res) => {
 }
 
 // CREATE Group --> /groups/
-// TODO: Frontend NOT YET IMPLEMENTED
 export const createGroup = async (req, res) => {
     const group = req.body
     const newGroup = new GroupSchema(group)
@@ -55,7 +54,7 @@ export const deleteGroup = async (req, res) => {
     .catch((err) => {
       if (err.kind === "ObjectId" || err.name === "NotFound") {
         return res.status(404).send({
-          message: "Initiative not found with id " + req.params.id,
+          message: "Group not found with id " + req.params.id,
         });
       }
       return res.status(500).send({

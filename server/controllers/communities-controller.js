@@ -23,7 +23,6 @@ export const getAllCommunities = async (req, res) => {
 }
 
 // CREATE Community --> /communities/
-// TODO: frontend not yet implemented
 export const createCommunity = async (req, res) => {
     const community = req.body
     const newCommunity = new CommunitySchema(community)
@@ -34,3 +33,40 @@ export const createCommunity = async (req, res) => {
         res.status(409).json({message: error.message})
     }
 }
+
+export const updateCommunity = async (req, res) => {
+    const community = req.body;
+    const options = { new: true };
+    try {
+      const updatedCommunity = await CommunitySchema.findByIdAndUpdate(
+        { _id: req.params.id },
+        community,
+        options
+      );
+      res.status(201).json(updatedCommunity);
+    } catch (error) {
+      res.status(409).json({ message: error.message });
+    }
+  };
+
+  export const deleteCommunity = async (req, res) => {
+    CommunitySchema.findByIdAndRemove(req.params.id)
+      .then((community) => {
+        if (!community) {
+          return res.status(404).send({
+            message: "Community not found with id " + req.params.id,
+          });
+        }
+        res.send(req.params.id);
+      })
+      .catch((err) => {
+        if (err.kind === "ObjectId" || err.name === "NotFound") {
+          return res.status(404).send({
+            message: "Community not found with id " + req.params.id,
+          });
+        }
+        return res.status(500).send({
+          message: "Could not delete community with id " + req.params.id,
+        });
+      });
+  };

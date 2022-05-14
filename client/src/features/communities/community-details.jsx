@@ -4,52 +4,93 @@ import { useDispatch, useSelector } from "react-redux";
 import NiceModal from "@ebay/nice-modal-react";
 
 //MUI Imports
-import { Typography, Box, Button, Paper, Card } from "@mui/material";
+import { Typography, Box, Button, Paper, Card, IconButton } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import CheckIcon from "@mui/icons-material/Check";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+
 
 //App Imports
-import { CommunitySidebar } from "../index"; //TODO: Create GroupSidebar
-import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
-import { fetchCurrentUser, selectCurrentUser, updateUser } from "../../reducers/usersSlice";
-import { fx } from "../../utils";
+import { CommunitySidebar, ConfirmationDialog, FormCreateCommunity } from "../index"; //TODO: Create GroupSidebar
+import { deleteCommunity, selectCurrentCommunity, selectCommunities } from "../../reducers/communitiesSlice";
+import { selectGroups, deleteGroup } from "../../reducers/groupsSlice";
+import { selectInitiatives, deleteInitiative } from "../../reducers/initiativesSlice";
 
+import {
+  fetchCurrentUser,
+  selectCurrentUser,
+  updateUser,
+} from "../../reducers/usersSlice";
+import { fx } from "../../utils";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 /* ----------- COMPONENT -------------- */
 
 const CommunityDetails = () => {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
 
   const currentCommunity = useSelector(selectCurrentCommunity);
+  const communities = useSelector(selectCommunities);
+
   const currentUser = useSelector(selectCurrentUser);
-
- const isSubscribed = fx.subscriptions.checkSubscription(currentUser, currentCommunity);
-
- const handleSubscriptionUpdate = async () => {
-  const response = fx.subscriptions.updateSubscription(
+  const groups = useSelector(selectGroups)
+  const initiatives = useSelector(selectInitiatives)
+  const isSubscribed = fx.subscriptions.checkSubscription(
     currentUser,
     currentCommunity
   );
-  await dispatch(updateUser(response.newUser));
-  await dispatch(fetchCurrentUser());
-};
- 
+  const isMember = fx.subscriptions.checkMembership(currentUser,
+    currentCommunity);
 
-  const checkMembership = () => {
-    const index = currentCommunity?.permissions?.findIndex(
-      (permission) => permission?.userId === currentUser?._id
+
+  const handleSubscriptionUpdate = async () => {
+    const response = fx.subscriptions.updateSubscription(
+      currentUser,
+      currentCommunity
     );
-    if (index === -1) {
-      return false;
-    } else {
-      return true;
-    }
+    await dispatch(updateUser(response.newUser));
+    await dispatch(fetchCurrentUser());
   };
 
-  const isMember = checkMembership();
+  
+  const showCommunityUpdate = () => {
+    NiceModal.show(FormCreateCommunity, {
+      type: "update",
+      content: currentCommunity,
+    });
+  };
+
+  const handleDelete = () => {
+    const communityGroups = groups.filter(group => group.communityId === currentCommunity._id)
+    const communityInitiatives = initiatives.filter(initiative => initiative.communityId === currentCommunity._id)
+    communityGroups.forEach(group => dispatch(deleteGroup(group)))
+    communityInitiatives.forEach(initiative => dispatch(deleteInitiative(initiative)))
+    dispatch(deleteCommunity(currentCommunity));
+    navigate(`/${communities[0].name}/overview`);
+    enqueueSnackbar("Community successfully deleted", {
+      variant: "success",
+    });
+  }
+
+  const showConfirmDeletion = () => {
+    NiceModal.show(ConfirmationDialog, {
+      title: "Delete Community?",
+      content:
+        "This will permanently delete this community as well as its groups and initiatives from the database. Are you sure you want to delete the community?",
+      actionText: "Delete",
+      action: () => handleDelete(),
+    });
+  };
+
 
   return (
     <Box
@@ -102,9 +143,7 @@ const CommunityDetails = () => {
                   variant="outlined"
                   startIcon={<CheckIcon />}
                   style={{ marginRight: "10px" }}
-                  onClick={() =>
-                    handleSubscriptionUpdate()
-                  }
+                  onClick={() => handleSubscriptionUpdate()}
                 >
                   Subscribed
                 </Button>
@@ -113,9 +152,7 @@ const CommunityDetails = () => {
                   variant="contained"
                   startIcon={<BookmarkIcon />}
                   style={{ marginRight: "10px" }}
-                  onClick={() =>
-                    handleSubscriptionUpdate()
-                  }
+                  onClick={() => handleSubscriptionUpdate()}
                 >
                   Subscribe
                 </Button>
@@ -138,6 +175,24 @@ const CommunityDetails = () => {
                   Become member
                 </Button>
               )}
+
+              <Button
+                variant="outlined"
+                startIcon={<EditIcon />}
+                style={{ marginRight: "10px" }}
+                onClick={showCommunityUpdate}
+              >
+                Update Community
+              </Button>
+              <Button
+                variant="outlined"
+                startIcon={<DeleteForeverIcon />}
+                style={{ marginRight: "10px" }}
+                onClick={showConfirmDeletion}
+              >
+                Delete Community
+              </Button>
+
             </Box>
           </Box>
           <Card

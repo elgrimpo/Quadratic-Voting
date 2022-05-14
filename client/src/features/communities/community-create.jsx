@@ -17,13 +17,20 @@ import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 
 //App Imports
-import { selectGroups, createGroup, updateGroup } from "../../reducers/groupsSlice";
+import {
+  selectGroups,
+  createGroup,
+  updateGroup,
+} from "../../reducers/groupsSlice";
 import { selectCurrentUser, updateUser } from "../../reducers/usersSlice";
-import { createCommunity, selectCurrentCommunity, updateCommunity } from "../../reducers/communitiesSlice";
+import {
+  createCommunity,
+  selectCurrentCommunity,
+  updateCommunity,
+} from "../../reducers/communitiesSlice";
 import { lightTheme } from "../../styles/themeProvider";
 import { fx } from "../../utils";
 import { useNavigate } from "react-router-dom";
-
 
 /* ----------- COMPONENT -------------- */
 
@@ -69,30 +76,37 @@ export default NiceModal.create((props) => {
     event.preventDefault();
     if (props.type === "create") {
       dispatch(createCommunity(formValues)).then((community) => {
-       
-        const newCommunity = community.payload
-        const response = fx.subscriptions.updateSubscription(currentUser, newCommunity)
-      
-        dispatch(updateUser(response.newUser));
-        dispatch(createGroup({
-          communityId: newCommunity._id,
-          ownerId: currentUser._id,
-          title: "Tesst",
-          permissions: [{
-            userId: currentUser._id,
-            role: "admin"
-          }]
-        }))
-        navigate(`/${newCommunity.name}/overview`);
-        fx.data.updateStore(response.newSubscriptions)
+        const newCommunity = community.payload;
+        const response = fx.subscriptions.updateSubscription(
+          currentUser,
+          newCommunity
+        );
 
-      })
+        dispatch(updateUser(response.newUser));
+        dispatch(
+          createGroup({
+            communityId: newCommunity._id,
+            ownerId: currentUser._id,
+            title: "General",
+            permissions: [
+              {
+                userId: currentUser._id,
+                role: "admin",
+              },
+            ],
+          })
+        );
+        navigate(`/${newCommunity.name}/overview`);
+        fx.data.updateStore(response.newSubscriptions);
+      });
       enqueueSnackbar("Community successfully created", {
         variant: "success",
-      })
-
+      });
     } else if (props.type === "update") {
-      dispatch(updateCommunity(formValues));
+      dispatch(updateCommunity(formValues)).then((community) => {
+        const newCommunity = community.payload;
+        navigate(`/${newCommunity.name}/overview`);
+      });
       enqueueSnackbar("Community successfully updated", {
         variant: "success",
       });
@@ -108,7 +122,11 @@ export default NiceModal.create((props) => {
         fullScreen={fullScreen}
         maxWidth="lg"
       >
-        <DialogTitle>{props.type === "create" ? "Create Community" : `Update "${props.content.title}"`}</DialogTitle>
+        <DialogTitle>
+          {props.type === "create"
+            ? "Create Community"
+            : `Update "${props.content.name}"`}
+        </DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}

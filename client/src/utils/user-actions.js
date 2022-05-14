@@ -72,6 +72,16 @@ export const subscriptions = {
       message: message,
     };
   },
+  checkMembership: function (user, community) {
+    const index = community?.permissions?.findIndex(
+      (permission) => permission?.userId === user?._id
+    );
+    if (index === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  },
 };
 
 export const voting = {

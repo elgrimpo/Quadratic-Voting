@@ -22,6 +22,8 @@ import {
   getSubscribedCommunities,
   getAllCommunities,
   createCommunity,
+  updateCommunity,
+  deleteCommunity,
 } from "../controllers/communities-controller.js";
 import {
   getFail,
@@ -49,6 +51,8 @@ export const CommunityRouter = express.Router();
 CommunityRouter.get("/", getSubscribedCommunities);
 CommunityRouter.get("/all", getAllCommunities);
 CommunityRouter.post("/", createCommunity); 
+CommunityRouter.post("/:id", updateCommunity)
+CommunityRouter.delete("/:id", deleteCommunity)
 
 // groups
 export const GroupRouter = express.Router();
