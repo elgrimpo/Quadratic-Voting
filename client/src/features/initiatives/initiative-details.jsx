@@ -20,7 +20,7 @@ import Can from "../components/Can";
 //App Imports
 import {
   TabNav,
-  Chat,
+  ChatWindow,
   InitiativeSidebar,
   FormCreateInitiative,
   ConfirmationDialog,
@@ -30,6 +30,7 @@ import {
   deleteInitiative,
 } from "../../reducers/initiativesSlice";
 import { fx } from "../../utils";
+//import NewChat from "../chat/chat";
 
 /* ----------- COMPONENT -------------- */
 
@@ -82,6 +83,9 @@ const InitiativeDetails = (props) => {
           md: "1fr 320px",
           sm: "1fr",
         },
+        overflow: "scroll",
+        height: "100%"
+
       }}
     >
       <ThemeProvider theme={lightTheme}>
@@ -92,13 +96,13 @@ const InitiativeDetails = (props) => {
             overflow: { sm: "visible", md: "scroll", lg: "scroll" },
           }}
         >
-          <TabContext value={value}>
+          <TabContext value={value} >
             {/* ---> Tabs <--- */}
 
             <TabNav
               setValue={setValue}
               handleDrawerToggle={props.handleDrawerToggle}
-            />
+       />
 
             {/* ---> Initiative Overview <--- */}
 
@@ -177,8 +181,8 @@ const InitiativeDetails = (props) => {
             </TabPanel>
 
             {/* ---> Chat <--- */}
-            <TabPanel value="Chat" style={{ padding: 0 }}>
-              <Chat currentInitiative={currentInitiative?.title} />
+            <TabPanel value="Chat" style={{ padding: "0px", height: "calc(100vh - 48px)"}}>
+            <ChatWindow />
             </TabPanel>
           </TabContext>
         </Paper>

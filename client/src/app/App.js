@@ -1,4 +1,5 @@
 //React Imports
+import "stream-chat-react/dist/css/index.css";
 import "../styles/App.css";
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -51,7 +52,7 @@ function App(props) {
     setDrawerOpen(!drawerOpen);
   };
 
- 
+ console.log(process.env.REACT_APP_STREAMCHAT_API_KEY)
 
   return (
     <Box sx={{ height: "100 vh" }}>
@@ -69,7 +70,6 @@ function App(props) {
         <Route path="login" element={<Login />} />
 
         <Route path="explore" element={<ExploreCommunities />}></Route>
-
         <Route
           path=":communityName"
           element={

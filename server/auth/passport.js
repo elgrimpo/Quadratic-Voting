@@ -2,12 +2,14 @@ import passport from "passport";
 import UserSchema from "../models/users-model.js";
 import mongoose from "mongoose";
 import GoogleOAuth from "passport-google-oauth20";
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 const GoogleStrategy = GoogleOAuth.Strategy;
 
 // ID's and Secrets
-const GOOGLE_CLIENT_ID =
-  "732241602052-m94ll4444r5k2d4kdcovcbugv1onic50.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 //Serialize and Deserialize Users
 passport.serializeUser((user, done) => {

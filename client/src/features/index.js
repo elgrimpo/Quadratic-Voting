@@ -18,7 +18,7 @@ export { default as InitiativeSidebar } from "./initiatives/initiative-sidebar";
 export { default as TabNav } from "./layout/tab-nav";
 export { default as InitiativeDetails } from "./initiatives/initiative-details";
 export { default as InitiativeCard } from "./initiatives/initiative-card";
-export { default as Chat } from "./chat/chat";
+export { default as ChatWindow } from "./chat/chat";
 export { default as FormCreateInitiative } from "./initiatives/form-initiative-create";
 
 // Users
@@ -27,6 +27,10 @@ export { default as Login } from "./users/login";
 // Layout
 export { default as Layout } from "./layout/layout";
 export { default as GroupsSection } from "./layout/groups-section";
+export {default as ChannelSection } from "./layout/channel-section"
+export {default as GroupChannelList } from "./layout/channel-list"
+
+
 
 // Components
 export { default as VoteControl } from "./components/vote";

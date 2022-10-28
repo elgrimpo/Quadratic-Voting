@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 //App Imports
-import { GroupsSection, FormCreateGroup } from "../index.js";
+import { GroupsSection, FormCreateGroup, ChannelSection } from "../index.js";
 
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
@@ -24,6 +24,7 @@ import {
   selectCurrentChannel,
 } from "../../reducers/channelsSlice";
 import { fx } from "../../utils";
+import ChannelList from "./channel-section.jsx";
 
 /* ----------- COMPONENT -------------- */
 
@@ -73,10 +74,7 @@ function GroupsNav(props) {
 
       {/* ---> Channel Selection <--- */}
 
-      <GroupsSection
-        items={channels}
-        title="Channels"
-        currentItem={currentChannel}
+      <ChannelSection
       />
     </Box>
   );

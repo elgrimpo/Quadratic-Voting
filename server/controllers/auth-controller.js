@@ -3,8 +3,6 @@ import passport from "passport";
 // Client URL
 const CLIENT_URL = "http://localhost:3000/";
 
-// TODO: routes currently not referring to this document!
-
 // GET Success --> /auth/login/success
 export const getSuccess = (req, res) => {
   if (req.user) {

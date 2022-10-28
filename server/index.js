@@ -6,6 +6,7 @@ import passport from "passport";
 import session from "express-session";
 import cookieSession from 'cookie-session'
 import './auth/passport.js'
+import * as dotenv from 'dotenv'
 
 // App imports
 import {
@@ -15,6 +16,9 @@ import {
   UserRouter,
   AuthRouter,
 } from "./routes/routes.js";
+
+
+dotenv.config()
 
 const app = express();
 
@@ -43,8 +47,7 @@ app.use("/users", UserRouter);
 //app.use(bodyParser.json({limit: '30mb', extended: true}))
 //app.use(bodyParser.urlencoded({limit: '30mb', extended: true}))
 
-const CONNECTION_URL =
-  "mongodb+srv://elgrimpo:ChenTriMau12@cluster0.eyuyn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.MONGODB_CONNECTION_URL
 const PORT = process.env.PORT || 5000;
 
 mongoose

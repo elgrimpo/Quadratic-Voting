@@ -135,7 +135,7 @@ body {
 #menu-icon {
 	margin-right: 16px;
 	position:fixed ;
-	top: 16px;
+	top: 0px;
 	left: 16px;
 	z-index: 1;
 }
@@ -207,4 +207,24 @@ body {
 .link-icon {
 	margin-right: 8px; 
 	vertical-align: bottom;
+}
+
+.str-chat-channel.messaging .str-chat__main-panel {
+	padding: 0px; 
+	height: 100%;
+}
+
+/* Not needed? */
+.messaging.str-chat .str-chat__header-livestream {
+	border-radius: 0px;
+	box-shadow: none;
+border-bottom: 1px solid #C7C7C7}
+
+
+.str-chat-channel {
+	height: 100%;
+}
+
+.messaging.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
+	padding-top: 0px;
 }
