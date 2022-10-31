@@ -1,8 +1,6 @@
 import passport from "passport";
 import * as dotenv from 'dotenv'
 dotenv.config()
-import express from "express";
-
 
 // Client URL
 const CLIENT_URL = "http://localhost:3000/";
@@ -50,7 +48,7 @@ export const getGoogleCallback = async (req, res, next) => {
   handler(req, res, next);
 }; 
 
-export const getChatToken = (res) => {
+export const getChatToken = (req, res) => {
   const token = process.env.STREAMCHAT_API_KEY
   res.status(200).json(token)
 }
