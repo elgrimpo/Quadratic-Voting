@@ -82,7 +82,13 @@ const usersSlice = createSlice({
           state.status = 'failed'
         },
         [logout.fulfilled]: (state, action) => {
-          state.currentUser = []
+          state.currentUser = {
+            _id:"000",
+            userName: "Guest",
+            subscriptions: [{
+              communityId: "622058d622194df2d949a38c"
+            }]
+          }
           state.status = 'success'
           state.isLoggedIn = false
         },

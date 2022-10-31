@@ -1,43 +1,36 @@
 import React from "react";
+import {
+  Box,
+  List,
+  ListItemButton,
+  ListItemText,
+  Paper,
+  Typography,
+  Link,
+} from "@mui/material";
 
-const GroupChannelList = ({
+const GroupChannelList = (props) => {
 
-  children,
-  error = false,
-  loading,
-  type,
+  
 
-}) => {
-  if (error) {
-    return type === "group" ? (
-      <div >
-        <p >
-          Connection error, please wait a moment and try again.
-        </p>
-      </div>
-    ) : null;
+  if (props.error) {
+    return null;
   }
 
-  if (loading) {
+  if (props.loading) {
     return (
-      <div >
-        <p >
-          {type === "group" ? "Channels" : "Messages"} loading...
-        </p>
+      <div>
+        <p>loading...</p>
       </div>
     );
   }
 
   return (
-    <div >
-      <div >
-        <p >
-          {type === "group" ? "Channels" : "Direct Messages"}
-        </p>
-        <p>add channel</p>
-      </div>
-      {children}
-    </div>
+    <List sx={{ paddingTop: 0, mb: "20px" }} dense={true}>
+      <Paper id="groupsection-backgroud" elevation={3}>
+        {props.children}
+      </Paper>
+    </List>
   );
 };
 

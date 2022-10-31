@@ -54,11 +54,15 @@ function GroupsSection(props) {
           {props.items.map((item) => (
             <Link
               key={item._id}
-              to={`/${communityName}/group/${item._id}`} //to be updated
+              to={`/${communityName}/group/${item._id}`} //TODO: to be updated
               style={{ textDecoration: "none" }}
             >
               <ListItemButton selected={item._id === groupId} key={item._id}>
-                <ListItemText primary={item.title} key={item._id} />
+                <ListItemText
+                  id="main-nav-items"
+                  primary={item.title}
+                  key={item._id}
+                />
               </ListItemButton>
             </Link>
           ))}
