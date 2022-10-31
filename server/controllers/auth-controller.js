@@ -1,4 +1,8 @@
 import passport from "passport";
+import * as dotenv from 'dotenv'
+dotenv.config()
+import express from "express";
+
 
 // Client URL
 const CLIENT_URL = "http://localhost:3000/";
