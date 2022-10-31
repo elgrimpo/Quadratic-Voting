@@ -27,6 +27,7 @@ import {
 
 import { ability } from "../features/components/Can";
 import defineRulesFor from "../config/abilities";
+import axios from "axios";
 
 /* ----------- COMPONENT -------------- */
 
@@ -55,9 +56,8 @@ function App(props) {
 
     // Initiating chat
     const initChat = async () => {
-      const client = await new StreamChat(
-        process.env.REACT_APP_STREAMCHAT_API_KEY
-      );
+      const token = await axios.get("http://localhost:5000/auth/chattoken");
+      const client = new StreamChat(token.data);
       setChatClient(client);
       await chatClient?.disconnectUser();
       await client.connectUser(

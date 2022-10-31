@@ -45,3 +45,8 @@ export const getGoogleCallback = async (req, res, next) => {
   });
   handler(req, res, next);
 }; 
+
+export const getChatToken = (res) => {
+  const token = process.env.STREAMCHAT_API_KEY
+  res.status(200).json(token)
+}
