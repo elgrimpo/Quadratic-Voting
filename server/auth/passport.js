@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import GoogleOAuth from "passport-google-oauth20";
 import * as dotenv from 'dotenv'
 dotenv.config()
+import express from 'express'
 
 const GoogleStrategy = GoogleOAuth.Strategy;
 

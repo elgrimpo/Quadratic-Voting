@@ -1,4 +1,4 @@
-import express from "express";
+
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -7,6 +7,8 @@ import session from "express-session";
 import cookieSession from 'cookie-session'
 import './auth/passport.js'
 import * as dotenv from 'dotenv'
+dotenv.config()
+import express from 'express'
 
 // App imports
 import {
@@ -18,7 +20,6 @@ import {
 } from "./routes/routes.js";
 
 
-dotenv.config()
 
 const app = express();
 
