@@ -227,6 +227,9 @@ body {
 	box-shadow: none;
 border-bottom: 1px solid #C7C7C7}
 
+.str-chat{
+	height: auto;
+}
 
 .str-chat-channel {
 	height: 100%;
@@ -242,4 +245,9 @@ border-bottom: 1px solid #C7C7C7}
 
 .str-chat-channel-list {
 	width: 100%;
+}
+
+.css-1dra5k3-MuiTypography-root {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
