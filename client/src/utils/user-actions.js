@@ -60,7 +60,7 @@ export const subscriptions = {
         { communityId: community._id },
         ...user.subscriptions,
       ];
-      message = "Successfully unsubscribed";
+      message = "Successfully subscribed";
     }
     const subscriptionArray = newSubscriptions.map((subscription) => {
       return subscription.communityId;
@@ -72,6 +72,7 @@ export const subscriptions = {
       message: message,
     };
   },
+
   checkMembership: function (user, community) {
     const index = community?.permissions?.findIndex(
       (permission) => permission?.userId === user?._id
@@ -188,3 +189,48 @@ export const voting = {
     );
   },
 };
+
+export const channels = {
+  checkSubscription: function (user, channel) {
+    const index = user.channelSubscriptions?.findIndex(
+      (subscription) => subscription?.channelId === channel?.cid
+    );
+    if (index === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+
+  updateSubscription: function (user, channel) {
+    const isSubscribed = this.checkSubscription(user, channel);
+    let newUser;
+    let newSubscriptions;
+    let message;
+    if (isSubscribed) {
+      newSubscriptions = user.channelSubscriptions.filter(
+        (subscription) => subscription.channelId !== channel.cid
+      );
+      message = "Successfully unsubscribed";
+    } else {
+      newSubscriptions = [
+        { channelId: channel.cid },
+        ...user.channelSubscriptions,
+      ];
+      message = "Successfully subscribed";
+    }
+    const subscriptionArray = newSubscriptions.map((subscription) => {
+      return subscription.channelId;
+    });
+    newUser = { ...user, channelSubscriptions: newSubscriptions };
+    return {
+      newUser: newUser,
+      newSubscriptions: subscriptionArray,
+      message: message,
+    };
+  },
+
+
+}
+
+

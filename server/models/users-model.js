@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
             communityId: "622058d622194df2d949a38c"
         }
         ]
+    },
+    channelSubscriptions: {
+        type: Array,
     }
 })
 

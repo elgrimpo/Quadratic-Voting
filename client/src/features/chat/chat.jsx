@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { StreamChat } from "stream-chat";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  Chat,
   Channel,
-  ChannelHeader,
-  ChannelList,
-  LoadingIndicator,
   MessageInput,
   MessageList,
   Thread,
   Window,
-  useChatContext
+  useChatContext,
 } from "stream-chat-react";
-import { selectCurrentUser } from "../../reducers/usersSlice";
-import { useSelector } from "react-redux";
-
-
 
 import "stream-chat-react/dist/css/index.css";
 import { useParams } from "react-router-dom";
 import { selectInitiatives } from "../../reducers/initiativesSlice";
 import { fx } from "../../utils";
 
+import { Button, Box, Typography, Card } from "@mui/material";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import CheckIcon from "@mui/icons-material/Check";
+
+import { selectCurrentUser, updateUser } from "../../reducers/usersSlice";
 
 const ChatWindow = () => {
+  const dispatch = useDispatch();
+
   const currentUser = useSelector(selectCurrentUser);
-  let { groupId, communityName, initiativeId } = useParams();
+  let { initiativeId } = useParams();
   const initiatives = useSelector(selectInitiatives);
   const currentInitiative = fx.data.findById(initiatives, initiativeId);
   const { client, setActiveChannel } = useChatContext();
@@ -39,7 +38,6 @@ const ChatWindow = () => {
         root.style.setProperty("--primary-color-alpha", `${color}1A`);
       }
     };
-
     window.addEventListener("message", (event) =>
       handleColorChange(event.data)
     );
@@ -57,14 +55,50 @@ const ChatWindow = () => {
     members: [currentUser._id],
   });
 
+  const isSubscribed = fx.channels.checkSubscription(currentUser, channel);
+
+  const handleSubscriptionUpdate = async () => {
+    // TODO: Add / remove user as member to channel
+    const response = fx.channels.updateSubscription(currentUser, channel);
+    dispatch(updateUser(response.newUser));
+  };
+
   return (
-      <Channel channel={channel}>
-        <Window>
-          <MessageList />
-          <MessageInput />
-        </Window>
-        <Thread />
-      </Channel>
+    <Channel channel={channel}>
+      <Window>
+        <Card
+        style={{
+          paddingTop: 20,
+          paddingLeft: 30,
+          paddingBottom: 20,
+          border: "1px solid #E0E0E0",
+        }}
+        variant="outlined">
+          <Typography variant="h6">{currentInitiative.title}</Typography>
+          {isSubscribed ? (
+            <Button
+              variant="outlined"
+              startIcon={<CheckIcon />}
+              style={{ marginRight: "10px", marginTop: "10px" }}
+              onClick={() => handleSubscriptionUpdate()}
+            >
+              Subscribed
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              startIcon={<BookmarkIcon />}
+              style={{ marginRight: "10px", marginTop: "10px" }}              onClick={() => handleSubscriptionUpdate()}
+            >
+              Subscribe
+            </Button>
+          )}
+        </Card>
+        <MessageList />
+        <MessageInput />
+      </Window>
+      <Thread />
+    </Channel>
   );
 };
 

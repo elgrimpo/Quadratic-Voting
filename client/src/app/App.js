@@ -82,7 +82,7 @@ function App(props) {
       setChatClient(null);
       setBusy(true);
     };
-  }, [currentUser]);
+  }, []);
 
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
