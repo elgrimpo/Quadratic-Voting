@@ -19,15 +19,22 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import CheckIcon from "@mui/icons-material/Check";
 
 import { selectCurrentUser, updateUser } from "../../reducers/usersSlice";
+import {
+  deleteCommunity,
+  selectCurrentCommunity,
+  selectCommunities,
+} from "../../reducers/communitiesSlice";
 
 const ChatWindow = () => {
   const dispatch = useDispatch();
+  const currentCommunity = useSelector(selectCurrentCommunity);
 
   const currentUser = useSelector(selectCurrentUser);
-  let { initiativeId } = useParams();
+  let { initiativeId, communityId } = useParams();
   const initiatives = useSelector(selectInitiatives);
   const currentInitiative = fx.data.findById(initiatives, initiativeId);
   const { client, setActiveChannel } = useChatContext();
+
 
   //TODO: Check what this is doing exactly
   useEffect(() => {
@@ -49,12 +56,13 @@ const ChatWindow = () => {
   }, []);
 
   //TODO: Apart from the "Messaging" type, should there be an "Initiative" and "Group" type?
-  const channel = client.channel("messaging", currentInitiative._id, {
+  const channel = client.channel("initiative", currentInitiative._id, {
     // add as many custom fields as you'd like
     name: currentInitiative.title,
     members: [currentUser._id],
+    communityId: currentCommunity._id
   });
-
+console.log(channel)
   const isSubscribed = fx.channels.checkSubscription(currentUser, channel);
 
   const handleSubscriptionUpdate = async () => {

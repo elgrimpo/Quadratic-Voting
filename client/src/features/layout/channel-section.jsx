@@ -15,14 +15,16 @@ import {
 
 //App imports
 import GroupChannelList from "./channel-list";
+import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 
 
 const ChannelSection = () => {
   const { client, setActiveChannel } = useChatContext();
   const currentUser = useSelector(selectCurrentUser)
-
+  const currentCommunity = useSelector(selectCurrentCommunity)
   const filters = {
-    cid: { $in: currentUser.channelSubscriptions?.map(item => {return item.channelId}) }
+    cid: { $in: currentUser.channelSubscriptions?.map(item => {return item.channelId}) },
+    communityId: currentCommunity?._id
   }
   
   const CustomPreview = ({ displayTitle }) => {

@@ -49,10 +49,13 @@ function App(props) {
     setBusy(false);
   }, [dispatch]);
 
+  useEffect(() => { 
+    ability.update(defineRulesFor(currentUser));
+  },[currentUser])
+
   useEffect(() => {
     setBusy(true);
     //Loading user permissions
-    ability.update(defineRulesFor(currentUser));
 
     // Initiating chat
     const initChat = async () => {
