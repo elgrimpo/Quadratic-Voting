@@ -19,9 +19,9 @@ const GroupChannelList = (props) => {
 
   if (props.loading) {
     return (
-      <div>
-        <p>loading...</p>
-      </div>
+      <Paper id="groupsection-backgroud" elevation={3}>
+     <Typography variant="body2" style={{padding: "8px 16px 8px 16px"}}>Loading...</Typography>
+    </Paper>
     );
   }
 

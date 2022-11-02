@@ -7,10 +7,8 @@ import { useSelector } from "react-redux";
 //MUI Imports
 import {
   Box,
-  List,
   ListItemButton,
   ListItemText,
-  Paper,
   Typography,
   Link,
 } from "@mui/material";
@@ -18,8 +16,15 @@ import {
 //App imports
 import GroupChannelList from "./channel-list";
 
+
 const ChannelSection = () => {
   const { client, setActiveChannel } = useChatContext();
+  const currentUser = useSelector(selectCurrentUser)
+
+  const filters = {
+    cid: { $in: currentUser.channelSubscriptions?.map(item => {return item.channelId}) }
+  }
+  
   const CustomPreview = ({ displayTitle }) => {
     return (
       <Link
@@ -51,25 +56,11 @@ const ChannelSection = () => {
         List={(listProps) => <GroupChannelList {...listProps} type="group" />}
         Preview={CustomPreview}
         style={{size: "100%"}}
+        filters={filters}
+        //onSelect={(channel) => /* navigate to channel screen */ }
       />
     </Box>
   );
 };
-
-/* TODO: User within ChannelList
-        filters={{}}
-        channelRenderFilterFn={() => {}}
-        
-        List={(listProps) => (
-            <GroupChannelList 
-            {... listProps} 
-            type="group"/>
-        )} 
-
-
-
-
-        
-        */
 
 export default ChannelSection;
