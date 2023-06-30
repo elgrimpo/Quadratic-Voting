@@ -49,7 +49,7 @@ app.use("/users", UserRouter);
 //app.use(bodyParser.urlencoded({limit: '30mb', extended: true}))
 
 const CONNECTION_URL = process.env.MONGODB_CONNECTION_URL
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true })

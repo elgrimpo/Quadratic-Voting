@@ -59,10 +59,10 @@ const Communities = (props) => {
   };
 
   const handleLogin = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open("http://localhost:8000/auth/google", "_self");
   };
   const handleLogout = () => {
-    window.open("http://localhost:5000/auth/logout", "_self");
+    window.open("http://localhost:8000/auth/logout", "_self");
     setAnchorEl(null);
   };
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:5000'
+const url = 'http://localhost:8000'
 
 //TODO: change naming to "fetchSubscribedCommunities"
 export const fetchCommunities = (subscriptions) => axios.get(`${url}/communities`, {params: {subscriptions: subscriptions}})

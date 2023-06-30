@@ -59,7 +59,7 @@ function App(props) {
 
     // Initiating chat
     const initChat = async () => {
-      const token = await axios.get("http://localhost:5000/auth/chattoken");
+      const token = await axios.get("http://localhost:8000/auth/chattoken");
       const client = new StreamChat(token.data);
       setChatClient(client);
       await chatClient?.disconnectUser();
