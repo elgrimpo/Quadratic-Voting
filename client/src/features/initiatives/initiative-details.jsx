@@ -5,6 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { subject } from "@casl/ability";
 import NiceModal from "@ebay/nice-modal-react";
 import { useSnackbar } from "notistack";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
+
 
 //MUI Imports
 import { Typography, Box, Button, Paper } from "@mui/material";
@@ -174,9 +177,12 @@ const InitiativeDetails = (props) => {
               </Can>
               {/* Initiative Content */}
               <Box style={{ paddingLeft: 30, paddingRight: 30 }}>
-                <Typography style={{ marginBottom: "30px" }}>
-                  {currentInitiative?.text}
-                </Typography>
+              <ReactQuill 
+  value={currentInitiative?.text} 
+  readOnly={true} 
+  theme={"bubble"}
+
+/>
               </Box>
             </TabPanel>
 

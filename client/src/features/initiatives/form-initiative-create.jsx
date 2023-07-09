@@ -1,7 +1,9 @@
 //React Imports
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useSnackbar } from 'notistack'
+import { useSnackbar } from "notistack";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 //MUI Imports
 import {
@@ -13,10 +15,8 @@ import {
   Dialog,
   useMediaQuery,
 } from "@mui/material";
-import NiceModal, { useModal } from '@ebay/nice-modal-react';
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
-
-
 
 //App Imports
 import {
@@ -29,11 +29,9 @@ import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import { fx } from "../../utils";
 import { lightTheme } from "../../styles/themeProvider";
 
-
 /* ----------- COMPONENT -------------- */
 
 export default NiceModal.create((props) => {
-  
   // API's
   const dispatch = useDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -41,13 +39,12 @@ export default NiceModal.create((props) => {
   const theme = useTheme();
 
   // Variables
-  const groupId = props.groupId
+  const groupId = props.groupId;
   const groups = useSelector(selectGroups);
   const currentGroup = fx.data.findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
-  const currentCommunity = useSelector(selectCurrentCommunity)
+  const currentCommunity = useSelector(selectCurrentCommunity);
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
 
   const [formValues, setFormValues] = useState({
     _id: props.content._id,
@@ -62,12 +59,13 @@ export default NiceModal.create((props) => {
     twitter: props.content.twitter,
     text: props.content.text,
     receivedVotes: [],
-    permissions: [{
-      userId: currentUser._id,
-      role: "admin"
-    }]
+    permissions: [
+      {
+        userId: currentUser._id,
+        role: "admin",
+      },
+    ],
   });
-
 
   // Functions
   const handleInputChange = (e) => {
@@ -82,145 +80,138 @@ export default NiceModal.create((props) => {
     event.preventDefault();
     if (props.type === "create") {
       dispatch(createInitiative(formValues));
-      enqueueSnackbar('Initiative successfully created', { 
-        variant: 'success',
-    });
-
+      enqueueSnackbar("Initiative successfully created", {
+        variant: "success",
+      });
     } else if (props.type === "update") {
       dispatch(updateInitiative(formValues));
-      enqueueSnackbar('Initiative successfully updated', { 
-        variant: 'success',
-    })
+      enqueueSnackbar("Initiative successfully updated", {
+        variant: "success",
+      });
     }
-    modal.remove()
+    modal.remove();
   };
 
   return (
     <ThemeProvider theme={lightTheme}>
-
-    <Dialog
-      onClose={() => modal.remove()}
-      open={modal.visible}
-      fullScreen={fullScreen}
-      maxWidth="lg"
-    >
-      <DialogTitle>{props.type === "create" ? "New Initiative" : `Update "${props.content.title}"`}</DialogTitle>
-      <DialogContent>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr, 1fr, 1fr",
-            alignItems: "center",
-          }}
-        >
-          <TextField
-            id="title-input"
-            name="title"
-            label="Title"
-            type="string"
-            value={formValues.title}
-            onChange={handleInputChange}
-            sx={{
-              gridColumn: "span 1",
-              margin: 1,
-            }}
-          />
-
-          <TextField
-            id="image-input"
-            name="image_url"
-            label="Image"
-            type="string"
-            value={formValues.image_url}
-            onChange={handleInputChange}
-            sx={{
-              gridColumn: "span 1",
-              margin: 1,
-            }}
-          />
-
-          <TextField
-            id="website-input"
-            name="website"
-            label="Website"
-            type="string"
-            value={formValues.website}
-            onChange={handleInputChange}
-            sx={{
-              gridColumn: "span 1",
-              margin: 1,
-            }}
-          />
-
-          <TextField
-            id="instagram-input"
-            name="instagram"
-            label="Instagram"
-            type="string"
-            value={formValues.instagram}
-            onChange={handleInputChange}
-            sx={{
-              gridColumn: "span 1",
-              margin: 1,
-            }}
-          />
-
-          <TextField
-            id="twitter-input"
-            name="twitter"
-            label="Twitter"
-            type="string"
-            value={formValues.twitter}
-            onChange={handleInputChange}
-            sx={{
-              gridColumn: "span 1",
-              margin: 1,
-            }}
-          />
-
-          <TextField
-            id="description-input"
-            name="description"
-            label="Short summary"
-            type="string"
-            value={formValues.description}
-            onChange={handleInputChange}
-            multiline
-            rows={4}
-            sx={{
-              gridColumn: "span 3",
-              margin: 1,
-            }}
-          />
-
-          <TextField
-            id="text-input"
-            name="text"
-            label="Content"
-            type="string"
-            value={formValues.text}
-            onChange={handleInputChange}
-            multiline
-            rows={8}
-            sx={{
-              margin: 1,
-              gridColumn: "span 3",
-            }}
-          />
-          <DialogActions
-            sx={{
-              gridColumn: "span 3",
+      <Dialog
+        onClose={() => modal.remove()}
+        open={modal.visible}
+        fullScreen={fullScreen}
+        maxWidth="lg"
+      >
+        <DialogTitle>
+          {props.type === "create"
+            ? "New Initiative"
+            : `Update "${props.content.title}"`}
+        </DialogTitle>
+        <DialogContent>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr, 1fr, 1fr",
+              alignItems: "center",
             }}
           >
-            <Button variant="contained" type="submit">
-              {props.type === "create" ? "Submit" : "Update"}
-            </Button>
-          </DialogActions>
-        </form>
-      </DialogContent>
-    </Dialog>
-    </ThemeProvider>
+            <TextField
+              id="title-input"
+              name="title"
+              label="Title"
+              type="string"
+              value={formValues.title}
+              onChange={handleInputChange}
+              sx={{
+                gridColumn: "span 1",
+                margin: 1,
+              }}
+            />
 
+            <TextField
+              id="image-input"
+              name="image_url"
+              label="Image"
+              type="string"
+              value={formValues.image_url}
+              onChange={handleInputChange}
+              sx={{
+                gridColumn: "span 1",
+                margin: 1,
+              }}
+            />
+
+            <TextField
+              id="website-input"
+              name="website"
+              label="Website"
+              type="string"
+              value={formValues.website}
+              onChange={handleInputChange}
+              sx={{
+                gridColumn: "span 1",
+                margin: 1,
+              }}
+            />
+
+            <TextField
+              id="instagram-input"
+              name="instagram"
+              label="Instagram"
+              type="string"
+              value={formValues.instagram}
+              onChange={handleInputChange}
+              sx={{
+                gridColumn: "span 1",
+                margin: 1,
+              }}
+            />
+
+            <TextField
+              id="twitter-input"
+              name="twitter"
+              label="Twitter"
+              type="string"
+              value={formValues.twitter}
+              onChange={handleInputChange}
+              style={{
+                gridColumn: "span 1",
+                margin: 1,
+              }}
+            />
+
+            <TextField
+              id="description-input"
+              name="description"
+              label="Short summary"
+              type="string"
+              value={formValues.description}
+              onChange={handleInputChange}
+              multiline
+              rows={4}
+              sx={{
+                gridColumn: "span 3",
+                margin: 1,
+              }}
+            />
+
+            <ReactQuill
+              value={formValues.text}
+              onChange={(text) => setFormValues({ ...formValues, text })}
+              style={{height: '400px', gridColumn: "span 3", margin: '8px 8px 50px 8px'}}
+            />
+
+            <DialogActions
+              sx={{
+                gridColumn: "span 3",
+              }}
+            >
+              <Button variant="contained" type="submit">
+                {props.type === "create" ? "Submit" : "Update"}
+              </Button>
+            </DialogActions>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </ThemeProvider>
   );
 });
