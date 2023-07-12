@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { StreamChat } from "stream-chat";
-import { useChatContext, Chat } from "stream-chat-react";
 
 //MUI Imports
 import { Box } from "@mui/material";
@@ -49,43 +48,12 @@ function App(props) {
     setBusy(false);
   }, [dispatch]);
 
+
+    //Loading user permissions
   useEffect(() => { 
     ability.update(defineRulesFor(currentUser));
   },[currentUser])
 
-  useEffect(() => {
-    setBusy(true);
-    //Loading user permissions
-
-    // Initiating chat
-    const initChat = async () => {
-      const token = await axios.get("http://localhost:8000/auth/chattoken");
-      const client = new StreamChat(token.data);
-      setChatClient(client);
-      await chatClient?.disconnectUser();
-      await client.connectUser(
-        {
-          id: currentUser._id,
-          name: currentUser.name,
-          image: currentUser.image,
-        },
-        //TODO: Change devToken
-        client.devToken(currentUser._id)
-      );
-
-      setBusy(false);
-    };
-
-    initChat();
-
-    // Disconnect chat when unmounting
-
-    return () => {
-      chatClient?.disconnectUser();
-      setChatClient(null);
-      setBusy(true);
-    };
-  }, []);
 
   // Drawer functions
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -98,7 +66,6 @@ function App(props) {
   }
 
   return (
-    <Chat client={chatClient}>
       <Box sx={{ height: "100 vh" }}>
         <Routes>
           {/* ---> Navigation <--- */}
@@ -152,7 +119,6 @@ function App(props) {
           </Route>
         </Routes>
       </Box>
-    </Chat>
   );
 }
 

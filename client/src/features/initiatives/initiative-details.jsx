@@ -185,11 +185,6 @@ const InitiativeDetails = (props) => {
 />
               </Box>
             </TabPanel>
-
-            {/* ---> Chat <--- */}
-            <TabPanel value="Chat" style={{ padding: "0px", height: "calc(100vh - 48px)"}}>
-            <ChatWindow />
-            </TabPanel>
           </TabContext>
         </Paper>
       </ThemeProvider>

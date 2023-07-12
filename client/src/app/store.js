@@ -3,7 +3,6 @@ import initiativesReducer from '../reducers/initiativesSlice'
 import groupsReducer from '../reducers/groupsSlice'
 import usersReducer from '../reducers/usersSlice'
 import communitiesReducer from '../reducers/communitiesSlice'
-import channelsReducer from '../reducers/channelsSlice'
 import {fetchInitiatives} from '../reducers/initiativesSlice'
 import {fetchGroups} from '../reducers/groupsSlice'
 import {fetchUsers} from '../reducers/usersSlice'
@@ -17,9 +16,7 @@ export const store = configureStore({
     initiatives: initiativesReducer,
     groups: groupsReducer,
     users: usersReducer,
-    communities: communitiesReducer,
-    channels: channelsReducer,
-  }
+    communities: communitiesReducer,  }
 });
 
 /*

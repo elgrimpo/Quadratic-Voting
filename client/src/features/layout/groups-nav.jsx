@@ -15,16 +15,11 @@ import {
 } from "@mui/material";
 
 //App Imports
-import { GroupsSection, FormCreateGroup, ChannelSection } from "../index.js";
+import { GroupsSection, FormCreateGroup } from "../index.js";
 
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
-import {
-  selectChannels,
-  selectCurrentChannel,
-} from "../../reducers/channelsSlice";
 import { fx } from "../../utils";
-import ChannelList from "./channel-section.jsx";
 
 /* ----------- COMPONENT -------------- */
 
@@ -38,8 +33,6 @@ function GroupsNav(props) {
   const communityGroups = groups.filter(
     (group) => group.communityId === currentCommunity?._id
   );
-  const channels = useSelector(selectChannels);
-  const currentChannel = useSelector(selectCurrentChannel);
   const location = useLocation()
 
 
@@ -70,11 +63,6 @@ function GroupsNav(props) {
         items={communityGroups}
         title="Groups"
         currentItem={currentGroup}
-      />
-
-      {/* ---> Channel Selection <--- */}
-
-      <ChannelSection
       />
     </Box>
   );
