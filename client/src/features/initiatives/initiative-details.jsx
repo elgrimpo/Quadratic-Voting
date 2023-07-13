@@ -12,8 +12,6 @@ import 'react-quill/dist/quill.bubble.css';
 //MUI Imports
 import { Typography, Box, Button, Paper } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import TabContext from "@mui/lab/TabContext";
-import TabPanel from "@mui/lab/TabPanel";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -99,17 +97,8 @@ const InitiativeDetails = (props) => {
             overflow: { sm: "visible", md: "scroll", lg: "scroll" },
           }}
         >
-          <TabContext value={value} >
-            {/* ---> Tabs <--- */}
-
-            <TabNav
-              setValue={setValue}
-              handleDrawerToggle={props.handleDrawerToggle}
-       />
 
             {/* ---> Initiative Overview <--- */}
-
-            <TabPanel value="Overview" style={{ padding: 0 }}>
               {/* Banner image */}
               <img
                 className="banner-image"
@@ -184,8 +173,6 @@ const InitiativeDetails = (props) => {
 
 />
               </Box>
-            </TabPanel>
-          </TabContext>
         </Paper>
       </ThemeProvider>
       <Box>
