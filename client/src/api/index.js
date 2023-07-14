@@ -15,7 +15,7 @@ export const updateInitiative = (initiative) => axios.post(`${url}/initiatives/$
 export const deleteInitiative = (initiative) => axios.delete(`${url}/initiatives/${initiative._id}`, initiative)
 
 
-export const fetchGroups = (subscriptions) => axios.get(`${url}/groups`, {params: {subscriptions: subscriptions}})
+export const fetchGroups = (filters) => axios.get(`${url}/groups`, {params: filters})
 export const createGroup = (group) => axios.post(`${url}/groups`, group)
 export const updateGroup = (group) => axios.post(`${url}/groups/${group._id}`, group)
 export const deleteGroup = (group) => axios.delete(`${url}/groups/${group._id}`, group)

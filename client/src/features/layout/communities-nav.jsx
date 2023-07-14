@@ -29,6 +29,8 @@ import {
   updateCurrentCommunity,
 } from "../../reducers/communitiesSlice";
 import {ExploreCommunities, FormCreateCommunity} from "../index"
+import { fetchGroups } from "../../reducers/groupsSlice";
+
 
 /* ----------- COMPONENT -------------- */
 
@@ -44,6 +46,7 @@ const Communities = (props) => {
   );
   useEffect(() => {
     dispatch(updateCurrentCommunity(currentCommunity));
+    dispatch(fetchGroups({communityId: currentCommunity?._id}));
   }, [currentCommunity]);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -99,7 +102,7 @@ const Communities = (props) => {
           >
             <Link
               key={community._id}
-              to={`/${community.name}`} //to be updated
+              to={`/${community.name}`} //TODO: to be updated
               style={{ textDecoration: "none" }}
             >
               <Card sx={{ maxWidth: 50, maxHeight: 50 }} key={community._id}>

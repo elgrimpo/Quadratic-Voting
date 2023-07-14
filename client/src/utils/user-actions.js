@@ -12,8 +12,8 @@ export const data = {
   initializeData: async function () {
     //const state = store.getState()
 
-    await store.dispatch(fetchCurrentUser()); //TODO: Fetch only users that are admins
-    await store.dispatch(fetchUsers());
+    await store.dispatch(fetchCurrentUser()); 
+    await store.dispatch(fetchUsers()); //TODO: Fetch only users that are admins
 
     const subscriptions = store
       .getState()
@@ -21,7 +21,7 @@ export const data = {
         return subscription.communityId;
       });
     await store.dispatch(fetchCommunities(subscriptions));
-    await store.dispatch(fetchGroups(subscriptions));
+    await store.dispatch(fetchGroups({communityId: store.getState().communities.currentCommunity._id}));
     await store.dispatch(fetchInitiatives(subscriptions));
   },
 

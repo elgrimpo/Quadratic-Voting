@@ -3,13 +3,21 @@ import GroupSchema from '../models/groups-model.js'
 
 // GET Groups --> /groups/
 export const getGroups = async (req, res) => {
-  const ids = req.query.subscriptions
+  const filters = req.query
+  let query = {};
+  console.log(filters)
+  if (Object.keys(filters).length > 0) {
+  if(filters.communityId) {
+    query.communityId = filters.communityId
+  }
+
     try {
-        const groupSchemas = await GroupSchema.find({ 'communityId':  {$in: ids} })
+        const groupSchemas = await GroupSchema.find(query)
         res.status(200).json(groupSchemas)
     } catch (error) {
         res.status(404).json({message: error.message})
     }
+  } 
 }
 
 // CREATE Group --> /groups/

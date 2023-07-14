@@ -8,8 +8,8 @@ const initialGroups = {
   
   export const fetchGroups = createAsyncThunk(
     'groups/getGroups',
-    async (subscriptions) => {
-      const response = await api.fetchGroups(subscriptions)
+    async (filters) => {
+      const response = await api.fetchGroups(filters)
       return response.data
     }
   )
