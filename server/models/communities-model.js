@@ -10,11 +10,10 @@ const communitySchema = new mongoose.Schema({
     },
     headline: String,
     description: String,
-    permissions: [{
-        userId: String,
+    members: [{
+        user_id: String,
         role: String
     }],
-    ownerId: String,
     createdAt: {
         type: Date,
         default: Date.now
@@ -25,3 +24,107 @@ const communitySchema = new mongoose.Schema({
 const CommunitySchema = mongoose.model('CommunitySchema', communitySchema);
 
 export default CommunitySchema
+
+//TODO: REMOVE
+/*
+db.communityschemas.update(
+    { "members.userId": { $exists: true } }, 
+    [
+      {
+        $set: { 
+          "members": {
+            $map: {
+              input: "$members",
+              as: "member",
+              in: {
+                user_id: "$$member.userId",
+                role: "$$member.role"
+              }  
+            }
+          }
+        }
+      },
+      { 
+        $unset: { "members.$.userId": "" } 
+      }
+    ],
+    { multi: true }
+  )
+
+  db.initiativeschemas.update(
+    { "permissions.userId": { $exists: true } },
+    [{
+      $set: {
+        permissions: {
+          $map: {
+            input: "$permissions",
+            in: {
+              user_id: "$$this.userId",
+              role: "$$this.role"
+            }
+          }
+        }
+      }
+    }],
+    { multi: true }
+  )
+
+// rename permissions to members
+db.initiativeschemas.updateMany(
+    {},
+      {
+        $rename: { "permissions": "members" }
+      }
+  )
+
+// add new array entry
+db.initiativeschemas.updateMany({}, 
+      {
+        $push: {
+          members: {
+            user_id: "new", 
+            role: "owner"
+          }
+        }
+      }
+      )
+
+// change entry userId with ownerId
+db.initiativeschemas.aggregate([
+    {
+      $match: {
+        "members.user_id": "new"
+      }
+    },
+    {
+      $addFields: {
+        "members": {
+          $map: {
+            input: "$members",
+            as: "member",
+            in: {
+              $mergeObjects: [
+                "$$member",
+                {
+                  $cond: [
+                    {$eq: ["$$member.user_id", "new"]},
+                    {user_id: "$ownerId"},
+                    {}
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      $out: "initiativeschemas"
+    }
+  ])
+
+  // Remove ownerId from collection
+  db.groupschemas.getCollection().updateSchema(
+    {$unset: {ownerId: ""}}
+  )
+  */

@@ -18,9 +18,8 @@ const groupSchema = new mongoose.Schema({
         userId: String,
         votes: Number
     }],
-    ownerId: String, // TODO: remove ownerID
-    permissions: [{
-        userId: String,
+    members: [{
+        user_id: String,
         role: String
     }],
 })

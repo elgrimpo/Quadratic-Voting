@@ -55,11 +55,10 @@ export default NiceModal.create((props) => {
     banner_url: props.content.banner_url,
     headline: props.content.headline,
     description: props.content.description,
-    ownerId: currentUser._id,
-    permissions: [
+    members: [
       {
-        userId: currentUser._id,
-        role: "admin",
+        user_id: currentUser._id,
+        role: "owner",
       },
     ],
   });
@@ -86,12 +85,11 @@ export default NiceModal.create((props) => {
         dispatch(
           createGroup({
             communityId: newCommunity._id,
-            ownerId: currentUser._id,
             title: "General",
-            permissions: [
+            members: [
               {
-                userId: currentUser._id,
-                role: "admin",
+                user_id: currentUser._id,
+                role: "owner",
               },
             ],
           })

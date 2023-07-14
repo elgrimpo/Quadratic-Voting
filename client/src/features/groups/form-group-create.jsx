@@ -44,16 +44,15 @@ export default NiceModal.create((props) => {
     title: props.content.title,
     image_url: props.content.image_url,
     description: props.content.description,
-    ownerId: currentUser._id,
     website: props.content.webiste,
     instagram: props.content.instagram,
     twitter: props.content.twitter,
     totalVotes: props.content.totalVotes,
     remainingVotes: [],
-    permissions: [
+    members: [
       {
-        userId: currentUser._id,
-        role: "admin",
+        user_id: currentUser._id,
+        role: "owner",
       },
     ],
   });

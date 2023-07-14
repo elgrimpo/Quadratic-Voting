@@ -17,13 +17,12 @@ const initiativeSchema = new mongoose.Schema({
     website: String, // TODO: Convert to Array
     instagram: String,
     twitter: String,
-    ownerId: String, // TODO: Remove ownerId
     receivedVotes: [{
         userId: String,
         votes: Number
     }],
-    permissions: [{
-        userId: String,
+    members: [{
+        user_id: String,
         role: String
     }],
     text: String

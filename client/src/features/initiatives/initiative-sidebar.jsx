@@ -68,9 +68,9 @@ const InitiativeSidebar = (props) => {
 
       <Typography variant="h7">Group admin</Typography>
       <Box sx={{ display: "flex" }}>
-        {currentInitiative?.permissions.map((permission, index) => {
-          if (permission.role === "admin") {
-            const owner = users.find((user) => user._id === permission.userId);
+        {currentInitiative?.members.map((member, index) => {
+          if (member.role === "admin" || member.role === "owner") {
+            const owner = users.find((user) => user._id === member.user_id);
             return (
               <Avatar
                 style={{

@@ -75,9 +75,9 @@ const GroupSidebar = (props) => {
 
       <Typography variant="h7">Group admin</Typography>
       <Box sx={{display: "flex"}}>
-      {currentGroup?.permissions.map((permission, index) => {
-        if (permission.role === "admin") {
-          const owner = users.find((user) => user._id === permission.userId);
+      {currentGroup?.members.map((member, index) => {
+        if (member.role === "admin" || member.role === "owner") {
+          const owner = users.find((user) => user._id === member.user_id);
           return (
             <Avatar
               style={{ border: `2px solid ${theme.palette.primary.light}`, marginRight:"10px" }}

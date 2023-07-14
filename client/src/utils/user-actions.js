@@ -74,8 +74,8 @@ export const subscriptions = {
   },
 
   checkMembership: function (user, community) {
-    const index = community?.permissions?.findIndex(
-      (permission) => permission?.userId === user?._id
+    const index = community?.members?.findIndex(
+      (member) => member?.user_id === user?._id
     );
     if (index === -1) {
       return false;
