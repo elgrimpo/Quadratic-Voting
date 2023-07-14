@@ -70,7 +70,7 @@ const InitiativeSidebar = (props) => {
       <Box sx={{ display: "flex" }}>
         {currentInitiative?.members.map((member, index) => {
           if (member.role === "admin" || member.role === "owner") {
-            const owner = users.find((user) => user._id === member.user_id);
+            const owner = users.find((user) => user._id === member.userId);
             return (
               <Avatar
                 style={{

@@ -57,7 +57,7 @@ export default NiceModal.create((props) => {
     description: props.content.description,
     members: [
       {
-        user_id: currentUser._id,
+        userId: currentUser._id,
         role: "owner",
       },
     ],
@@ -88,7 +88,7 @@ export default NiceModal.create((props) => {
             title: "General",
             members: [
               {
-                user_id: currentUser._id,
+                userId: currentUser._id,
                 role: "owner",
               },
             ],

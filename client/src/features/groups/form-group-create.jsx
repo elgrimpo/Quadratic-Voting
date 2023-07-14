@@ -51,7 +51,7 @@ export default NiceModal.create((props) => {
     remainingVotes: [],
     members: [
       {
-        user_id: currentUser._id,
+        userId: currentUser._id,
         role: "owner",
       },
     ],

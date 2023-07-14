@@ -1,7 +1,10 @@
 import mongoose from 'mongoose'
-
+const Schema = mongoose.Schema
 const groupSchema = new mongoose.Schema({
-    communityId: String,
+    communityId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
     title: { 
         type: String, 
         required: true 
@@ -15,13 +18,17 @@ const groupSchema = new mongoose.Schema({
         type: Number,
         default: 100},
     remainingVotes: [{
-        userId: String,
+        userId: Schema.Types.ObjectId,
         votes: Number
     }],
     members: [{
-        user_id: String,
+        userId: Schema.Types.ObjectId,
         role: String
     }],
+    createdAt: {
+        type: Date,
+        default: Date.now
+    } 
 })
 
 const GroupSchema = mongoose.model('GroupSchema', groupSchema);

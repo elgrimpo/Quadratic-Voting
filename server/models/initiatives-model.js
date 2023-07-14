@@ -1,9 +1,10 @@
 import mongoose from 'mongoose'
 
+const Schema = mongoose.Schema
 //TODO: Update MongoDB
 const initiativeSchema = new mongoose.Schema({
-    communityId: String,
-    groupId: String,
+    communityId: Schema.Types.ObjectId,
+    groupId: Schema.Types.ObjectId,
     title: { type: String, required: true },
     image_url: {
         type: String,
@@ -18,11 +19,11 @@ const initiativeSchema = new mongoose.Schema({
     instagram: String,
     twitter: String,
     receivedVotes: [{
-        userId: String,
+        userId: Schema.Types.ObjectId,
         votes: Number
     }],
     members: [{
-        user_id: String,
+        userId: Schema.Types.ObjectId,
         role: String
     }],
     text: String
@@ -32,3 +33,28 @@ const initiativeSchema = new mongoose.Schema({
 const InitiativeSchema = mongoose.model('InitiativeSchema', initiativeSchema);
 
 export default InitiativeSchema
+
+/*
+db.initiativeschemas.updateMany(
+    {}, 
+    [{
+      $set: {
+        groupId: {
+          $toObjectId: "$groupId"  
+        }
+      }
+    }]
+  )
+
+
+  db.groupschemas.updateMany(
+  {},
+    {
+      $set: {
+        "members.$[].userId": {
+          $toObjectId: "$members.$.userId"
+        }
+      }
+    }
+)
+  */

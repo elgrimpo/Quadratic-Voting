@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+const Schema = mongoose.Schema
 const userSchema = new mongoose.Schema({
     image_url: String,
     userName: String,
@@ -17,7 +18,7 @@ const userSchema = new mongoose.Schema({
     },
     subscriptions: {
         type: Array,
-        default: [{
+        default: [{ //TODO: change to objectId
             communityId: "622058d622194df2d949a38c"
         }
         ]

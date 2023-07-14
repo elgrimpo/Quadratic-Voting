@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-
+const Schema = mongoose.Schema
 const communitySchema = new mongoose.Schema({
     name: { type: String, required: true },
     logo_url: String,
@@ -11,7 +11,7 @@ const communitySchema = new mongoose.Schema({
     headline: String,
     description: String,
     members: [{
-        user_id: String,
+        userId: Schema.Types.ObjectId,
         role: String
     }],
     createdAt: {
@@ -124,7 +124,32 @@ db.initiativeschemas.aggregate([
   ])
 
   // Remove ownerId from collection
-  db.groupschemas.getCollection().updateSchema(
-    {$unset: {ownerId: ""}}
+db.initiativeschemas.updateMany(
+  {},
+    {
+      $unset: {
+        status: ""  
+      }
+    }
+)
+ 
+
+
+db.initiativeschemas.update(
+    { "members.userId": { $exists: true } },
+    [{
+      $set: {
+        members: {
+          $map: {
+            input: "$members",
+            in: {
+              userId: {$toObjectId: "$$this.userId"},
+              role: "$$this.role"
+            }
+          }
+        }
+      }
+    }],
+    { multi: true }
   )
-  */
+   */
