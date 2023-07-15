@@ -33,28 +33,3 @@ const initiativeSchema = new mongoose.Schema({
 const InitiativeSchema = mongoose.model('InitiativeSchema', initiativeSchema);
 
 export default InitiativeSchema
-
-/*
-db.initiativeschemas.updateMany(
-    {}, 
-    [{
-      $set: {
-        groupId: {
-          $toObjectId: "$groupId"  
-        }
-      }
-    }]
-  )
-
-
-  db.groupschemas.updateMany(
-  {},
-    {
-      $set: {
-        "members.$[].userId": {
-          $toObjectId: "$members.$.userId"
-        }
-      }
-    }
-)
-  */
