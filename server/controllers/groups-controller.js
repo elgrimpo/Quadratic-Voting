@@ -5,12 +5,10 @@ import GroupSchema from '../models/groups-model.js'
 export const getGroups = async (req, res) => {
   const filters = req.query
   let query = {};
-  console.log(filters)
   if (Object.keys(filters).length > 0) {
   if(filters.communityId) {
     query.communityId = filters.communityId
   }
-
     try {
         const groupSchemas = await GroupSchema.find(query)
         res.status(200).json(groupSchemas)
