@@ -4,13 +4,20 @@ import InitiativeSchema from "../models/initiatives-model.js";
 
 // GET Initiatives --> /initiatives/
 export const getInitiatives = async (req, res) => {
-  const ids = req.query.subscriptions
-  try {
-    const initiativeSchemas = await InitiativeSchema.find({ 'communityId':  {$in: ids} });
-    res.status(200).json(initiativeSchemas);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
+  const filters = req.query
+
+  let query = {};
+  if (Object.keys(filters).length > 0) {
+    if (filters.groupId) {
+      query.groupId = filters.groupId;
+    }
+    try {
+      const initiativeSchemas = await InitiativeSchema.find(query);
+      res.status(200).json(initiativeSchemas);
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
+} 
 };
 
 // CREATE Initiative --> /initiatives/

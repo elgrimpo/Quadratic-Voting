@@ -9,7 +9,7 @@ export const createCommunity = (community) => axios.post(`${url}/communities`, c
 export const updateCommunity = (community) => axios.post(`${url}/communities/${community._id}`, community) // TODO: BACKEND
 export const deleteCommunity = (community) => axios.delete(`${url}/communities/${community._id}`, community) // TODO: BACKEND
 
-export const fetchInitiatives = (subscriptions) => axios.get(`${url}/initiatives`, {params: {subscriptions: subscriptions}})
+export const fetchInitiatives = (filters) => axios.get(`${url}/initiatives`, {params: filters})
 export const createInitiative = (initiative) => axios.post(`${url}/initiatives`, initiative)
 export const updateInitiative = (initiative) => axios.post(`${url}/initiatives/${initiative._id}`, initiative)
 export const deleteInitiative = (initiative) => axios.delete(`${url}/initiatives/${initiative._id}`, initiative)

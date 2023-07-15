@@ -21,8 +21,6 @@ export const data = {
         return subscription.communityId;
       });
     await store.dispatch(fetchCommunities(subscriptions));
-    await store.dispatch(fetchGroups({communityId: store.getState().communities.currentCommunity._id}));
-    await store.dispatch(fetchInitiatives(subscriptions));
   },
 
   updateStore: async function (communities_ids) {

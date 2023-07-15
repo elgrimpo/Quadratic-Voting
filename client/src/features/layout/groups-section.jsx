@@ -2,7 +2,8 @@
 import { Link, useParams } from "react-router-dom";
 import React from "react";
 import NiceModal from "@ebay/nice-modal-react";
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 //MUI Imports
 import {
   Box,
@@ -17,10 +18,12 @@ import AddIcon from "@mui/icons-material/Add";
 
 //App Imports
 import { FormCreateGroup } from "../index.js";
+import { fetchInitiatives } from "../../reducers/initiativesSlice";
 
 /* ----------- COMPONENT -------------- */
 
 function GroupsSection(props) {
+  const dispatch = useDispatch();
   let { communityName, groupId } = useParams();
 
   const showCreateGroup = () => {
@@ -29,6 +32,10 @@ function GroupsSection(props) {
       content: "",
     });
   };
+
+  useEffect(() => {
+    dispatch(fetchInitiatives({groupId: groupId}));
+  }, [groupId]);
 
   return (
     <Box>

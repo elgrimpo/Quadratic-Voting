@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
 import NiceModal from "@ebay/nice-modal-react";
 
-
 //MUI Imports
 import {
   Box,
@@ -30,9 +29,6 @@ function GroupsNav(props) {
   const currentGroup = fx.data.findById(groups, groupId);
   const currentCommunity = useSelector(selectCurrentCommunity)
 
-  const communityGroups = groups.filter(
-    (group) => group.communityId === currentCommunity?._id
-  );
   const location = useLocation()
 
 
@@ -60,7 +56,7 @@ function GroupsNav(props) {
       {/* ---> Group Selection <--- */}
 
       <GroupsSection
-        items={communityGroups}
+        items={groups}
         title="Groups"
         currentItem={currentGroup}
       />
