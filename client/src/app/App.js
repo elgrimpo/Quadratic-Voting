@@ -1,5 +1,4 @@
 //React Imports
-import "stream-chat-react/dist/css/index.css";
 import "../styles/App.css";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
