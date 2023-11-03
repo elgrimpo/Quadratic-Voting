@@ -30,8 +30,7 @@ import {
   getGoogleAuthentication,
   getGoogleCallback,
   getLogout,
-  getSuccess,
-  getChatToken
+  getSuccess
 } from "../controllers/auth-controller.js";
 
 const CLIENT_URL = "http://localhost:3000/";
@@ -44,7 +43,6 @@ AuthRouter.get("/login/failed", getFail);
 AuthRouter.get("/logout", getLogout);
 AuthRouter.get("/google", getGoogleAuthentication);
 AuthRouter.get("/google/callback", getGoogleCallback);
-AuthRouter.get("/chattoken", getChatToken)
 
 // communities
 export const CommunityRouter = express.Router();
