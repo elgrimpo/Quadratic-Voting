@@ -32,7 +32,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://quadratic-voting.onrender.com/", "https://steady-pixie-391ae4.netlify.app/"],
+    origin: ["http://localhost:3000", "https://quadratic-voting.onrender.com", "https://steady-pixie-391ae4.netlify.app"],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
