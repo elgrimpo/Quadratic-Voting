@@ -11,7 +11,7 @@ import { Box, Button } from "@mui/material";
 const Login = () => {
 
   const handleClick = () => {
-    window.open("http://localhost:8000/auth/google", "_self");
+    window.open("https://quadratic-voting.onrender.com/auth/google", "_self");
   };
 
   return (

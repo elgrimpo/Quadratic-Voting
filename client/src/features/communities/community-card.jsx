@@ -50,7 +50,7 @@ const CommunityCard = (props) => {
       await dispatch(updateUser(response.newUser));
       fx.data.updateStore(response.newSubscriptions)
     } else {
-      window.open("http://localhost:8000/auth/google", "_self");
+      window.open("https://quadratic-voting.onrender.com/auth/google", "_self");
     }
   };
 
