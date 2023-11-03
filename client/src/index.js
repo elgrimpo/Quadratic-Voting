@@ -10,8 +10,7 @@ import { store } from "./app/store";
 import NiceModal from "@ebay/nice-modal-react";
 import { SnackbarProvider } from "notistack";
 import { fx } from "./utils/";
-import { StreamChat } from "stream-chat";
-import { Chat } from "stream-chat-react";
+
 
 fx.data.initializeData();
 

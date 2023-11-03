@@ -15,7 +15,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Divider,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
@@ -25,7 +24,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { useTheme } from "@mui/material/styles";
 
 //App Imports
 import {
@@ -56,8 +54,7 @@ import { fx } from "../../utils";
 const CommunityDetails = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const theme = useTheme();
+  const { enqueueSnackbar } = useSnackbar();
 
   const currentCommunity = useSelector(selectCurrentCommunity);
   const communities = useSelector(selectCommunities);

@@ -2,7 +2,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
-import NiceModal from "@ebay/nice-modal-react";
 
 //MUI Imports
 import {
@@ -14,7 +13,7 @@ import {
 } from "@mui/material";
 
 //App Imports
-import { GroupsSection, FormCreateGroup } from "../index.js";
+import { GroupsSection } from "../index.js";
 
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";

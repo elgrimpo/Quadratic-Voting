@@ -17,26 +17,22 @@ import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 
 //App Imports
-import { selectGroups, createGroup, updateGroup } from "../../reducers/groupsSlice";
+import { createGroup, updateGroup } from "../../reducers/groupsSlice";
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import { lightTheme } from "../../styles/themeProvider";
-import { fx } from "../../utils";
 
 
 /* ----------- COMPONENT -------------- */
 
 export default NiceModal.create((props) => {
-  const groupId = props.groupId;
-  const groups = useSelector(selectGroups);
-  const currentGroup = fx.data.findById(groups, groupId);
   const currentUser = useSelector(selectCurrentUser);
   const currentCommunity = useSelector(selectCurrentCommunity);
   const dispatch = useDispatch();
   const modal = useModal();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [formValues, setFormValues] = useState({
     _id: props.content._id,

@@ -4,7 +4,6 @@ import "../styles/App.css";
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { StreamChat } from "stream-chat";
 
 //MUI Imports
 import { Box } from "@mui/material";
@@ -26,14 +25,12 @@ import {
 
 import { ability } from "../features/components/Can";
 import defineRulesFor from "../config/abilities";
-import axios from "axios";
 
 /* ----------- COMPONENT -------------- */
 
 function App(props) {
   // API's
   const dispatch = useDispatch();
-  const [chatClient, setChatClient] = useState(null);
 
   // Variables
   const [isBusy, setBusy] = useState(true);

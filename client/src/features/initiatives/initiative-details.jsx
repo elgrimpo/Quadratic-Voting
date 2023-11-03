@@ -12,7 +12,7 @@ import 'react-quill/dist/quill.bubble.css';
 //MUI Imports
 import { Typography, Box, Button, Paper } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme } from "../../styles/themeProvider";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,8 +20,6 @@ import Can from "../components/Can";
 
 //App Imports
 import {
-  TabNav,
-  ChatWindow,
   InitiativeSidebar,
   FormCreateInitiative,
   ConfirmationDialog,
@@ -40,10 +38,7 @@ const InitiativeDetails = (props) => {
   const initiatives = useSelector(selectInitiatives);
   const currentInitiative = fx.data.findById(initiatives, initiativeId);
   const dispatch = useDispatch();
-
-  const [value, setValue] = React.useState("Overview");
-  const theme = useTheme();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   /* Delete Initiative logic */
   let navigate = useNavigate();

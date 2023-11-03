@@ -35,6 +35,7 @@ function GroupsSection(props) {
 
   useEffect(() => {
     dispatch(fetchInitiatives({groupId: groupId}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupId]);
 
   return (

@@ -1,7 +1,6 @@
 // React/Redux Imports
 import React, { useEffect, useState } from "react";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
-import { useSnackbar } from "notistack";
 
 // MUI Imports
 import {
@@ -23,7 +22,6 @@ import * as api from "../../api";
 /* ----------- COMPONENT -------------- */
 
 export default NiceModal.create((props) => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const modal = useModal();
 
   // API's
@@ -32,7 +30,8 @@ export default NiceModal.create((props) => {
   const [communities, setCommunities] = useState([{}]);
 
   // Functions
-  useEffect(async () => {
+  useEffect(() => {
+    async function fetchData() {
     let isLoaded = false;
     if (!isLoaded) {
       try {
@@ -43,7 +42,8 @@ export default NiceModal.create((props) => {
       } catch (err) {
         console.error(err);
       }
-    }
+    }}
+    fetchData();
   }, []);
 
   return (

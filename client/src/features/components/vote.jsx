@@ -1,5 +1,5 @@
 //React Imports
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { subject } from "@casl/ability";
 
@@ -13,9 +13,8 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { selectCurrentUser } from "../../reducers/usersSlice";
 import {
   selectInitiatives,
-  updateInitiative,
 } from "../../reducers/initiativesSlice";
-import { selectGroups, updateGroup } from "../../reducers/groupsSlice";
+import { selectGroups } from "../../reducers/groupsSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 import Can from "../components/Can";
 import { fx } from "../../utils";

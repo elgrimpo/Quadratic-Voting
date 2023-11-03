@@ -34,7 +34,7 @@ import { lightTheme } from "../../styles/themeProvider";
 export default NiceModal.create((props) => {
   // API's
   const dispatch = useDispatch();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const modal = useModal();
   const theme = useTheme();
 

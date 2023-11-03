@@ -47,6 +47,7 @@ const Communities = (props) => {
   useEffect(() => {
     dispatch(updateCurrentCommunity(currentCommunity));
     dispatch(fetchGroups({communityId: currentCommunity?._id}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCommunity]);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);

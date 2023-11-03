@@ -1,14 +1,14 @@
 // React/Redux Imports
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useMatch, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { subject } from "@casl/ability";
 import NiceModal from "@ebay/nice-modal-react";
 import { useSnackbar } from "notistack";
 
 
 // MUI Imports
-import { Grid, Fab, Box, Paper, Typography, Button } from "@mui/material";
+import {  Fab, Box, Paper, Typography, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import MenuIcon from "@mui/icons-material/Menu";
 import { ThemeProvider } from "@mui/material/styles";
@@ -23,7 +23,6 @@ import { lightTheme } from "../../styles/themeProvider";
 import { fx } from "../../utils";
 import Can from "../components/Can";
 import {
-  selectCommunities,
   selectCurrentCommunity,
 } from "../../reducers/communitiesSlice.js";
 
@@ -38,7 +37,7 @@ const InitiativesList = (props) => {
   const groups = useSelector(selectGroups);
   const currentGroup = fx.data.findById(groups, groupId);
   const currentCommunity = useSelector(selectCurrentCommunity);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   let navigate = useNavigate();
 

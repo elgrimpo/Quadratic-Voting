@@ -17,8 +17,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { VoteControl } from "../index";
-import { selectInitiatives } from "../../reducers/initiativesSlice";
 import { selectGroups } from "../../reducers/groupsSlice";
 import { selectUsers, selectCurrentUser } from "../../reducers/usersSlice";
 import { fx } from "../../utils";

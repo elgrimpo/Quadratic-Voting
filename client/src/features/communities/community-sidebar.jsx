@@ -1,6 +1,5 @@
 //React Imports
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 //MUI Imports
 import {
@@ -17,27 +16,16 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { useTheme } from "@mui/material/styles";
 
 //App Imports
-import { VoteControl } from "../index";
-import { selectInitiatives } from "../../reducers/initiativesSlice";
-import { selectGroups } from "../../reducers/groupsSlice";
-import { selectUsers, selectCurrentUser } from "../../reducers/usersSlice";
-import { fx } from "../../utils";
+import { selectUsers } from "../../reducers/usersSlice";
 import { selectCurrentCommunity } from "../../reducers/communitiesSlice";
 
 /* ----------- COMPONENT -------------- */
 
 const CommunitySidebar = (props) => {
   const theme = useTheme();
-  const { groupId } = useParams();
-  const groups = useSelector(selectGroups);
   const users = useSelector(selectUsers);
-  const currentUser = useSelector(selectCurrentUser);
-  const currentGroup = fx.data.findById(groups, groupId);
   const currentCommunity = useSelector(selectCurrentCommunity);
 
-  //Remaining Group Votes
-  //TODO: Take out functions for Group specific things?
-  const remainingGroupVotes = fx.voting.calcGroupRemainingVotes(currentUser, currentGroup)
 
 
   return (
