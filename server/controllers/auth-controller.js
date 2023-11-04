@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 // Client URL
-const CLIENT_URL = "https://steady-pixie-391ae4.netlify.app/";
+const CLIENT_URL = "https://steady-pixie-391ae4.netlify.app";
 
 // GET Success --> /auth/login/success
 export const getSuccess = (req, res) => {
