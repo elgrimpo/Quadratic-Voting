@@ -33,8 +33,6 @@ import {
   getSuccess
 } from "../controllers/auth-controller.js";
 
-const CLIENT_URL = "http://localhost:3000/";
-
 export const AuthRouter = express.Router();
 
 // authentication
