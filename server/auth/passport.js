@@ -33,7 +33,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: "https://quadratic-voting.onrender.com/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       const user = await UserSchema.findOne({ googleId: profile.id });
